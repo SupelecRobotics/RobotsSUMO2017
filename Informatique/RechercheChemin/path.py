@@ -35,26 +35,9 @@ class Path :
         newPath.append(currNode)            # the new path has the same end as the old one
         return newPath
     # end of findShortcut method
-        
-        
-        pathIter = iter(self._path)
-        startNode = next(pathIter)
-        currentNode = next(pathIter)
-        lastNode = None
-        for lastNode in self._path :
-            pass                        # lastNode is now the last item of _path
-        
-        while currentNode != lastNode :
-            nextNode = next(pathIter)
-            if self._isClear(startNode, nextNode, matrix) :
-                self._path.remove(currentNode)              # if the area between startNode and nextNode is clear, then currentNode can be bypassed
-            else :
-                startNode = currentNode                     # if an obstacle is met, we restart from the curent node
-            # end if
-            currentNode = nextNode      # then we iterate
-        # end while
-    # end of shortcut method
-            
+    
+    
+    
     def _isClear(self, nodeA, nodeB, matrix) :
         """nodeA, nodeB : (int,int), matrix : list[list[int]]
         Verifies the rectangle between nodeA and nodeB is free of obstacle
