@@ -19,20 +19,20 @@ class Path :
         """matrix : list[list[int]]
         Selects nodes in the path to form longer segments without crossing obstacles.
         """
+        if len(self.path) <= 2 :
+            return                          # if there is one segment or less, there is nothing to do
         startNode = self.path[0]
         prevNode = startNode
-        newPath = [startNode]       # the new path has the same beginning as the old one
+        newPath = [startNode]               # the new path has the same beginning as the old one
         
-        for currNode in self.path :
+        for currNode in self.path[1:] :
             if not self._isClear(startNode, currNode, matrix) :     # we check the rectangular area between startNode and currNode for obstacles
-            # when an obstacle is met, the path between startNode and prevNode is clear
-                if prevNode != self.path[0] :   # under some circumstances, the first node could be duplicated
-                    newPath.append(prevNode)
-                startNode = prevNode            # the process is repeated, starting from the latest node in the new path
+                newPath.append(prevNode)    # when an obstacle is met, the path between startNode and prevNode is clear
+                startNode = prevNode        # the process is repeated, starting from the latest node in the new path
             # end if
             prevNode = currNode             # prevNode is always one step behind currNode
         # end for
-        newPath.append(currNode)    # the new path has the same end as the old one
+        newPath.append(currNode)            # the new path has the same end as the old one
         return newPath
     # end of findShortcut method
         

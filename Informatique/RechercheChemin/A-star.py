@@ -92,6 +92,7 @@ class AStar :
         Generator, iterates the free neighbors of 'node'.
         Yields a tuple : neighbor(int,int), distance(float).
         """
+        # TO DO : the diagonal movements could be ignored (when used with Path.findShortcut)
         xNode, yNode = node
         for i in xrange(-1, 2) :
             for j in xrange(-1, 2) :
