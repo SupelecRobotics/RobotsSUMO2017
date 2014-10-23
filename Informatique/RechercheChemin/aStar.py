@@ -24,8 +24,6 @@ class AStar :
         self._gScore = None         # dict : cost from start to node along best known path
         self._fScore = None         # dict : estimated cost from start to goal through node
         self._cameFrom = None       # dict : predecessor of node in best known path from start
-        
-        self._SQRT2 = math.sqrt(2)  # constant
     # end of __init__ method
     
     def aStar(self, start, goal) :
@@ -50,11 +48,11 @@ class AStar :
             self._openSet.remove(current)
             self._closedSet.add(current)        # 'current' is moved to closedSet
             
-            for neighbor, dist in self.neighborNodes(current) :
+            for neighbor in self.neighborNodes(current) :
                 if neighbor in self._closedSet :
                     continue                    # nodes already explored cannot be improved
                 # end if
-                newGScore = self._gScore[current] + dist    # cost from start to 'neighbor' through 'current'
+                newGScore = self._gScore[current] + 1    # cost from start to 'neighbor' through 'current'
                     # if the neighbor node is unexplored or if the cost to reach it is lowered
                 if neighbor not in self._openSet or newGScore < self._gScore[neighbor] :
                     self._gScore[neighbor] = newGScore
@@ -90,27 +88,18 @@ class AStar :
     def neighborNodes(self, node) :
         """node : (int, int)
         Generator, iterates the free neighbors of 'node'.
-        Yields a tuple : neighbor(int,int), distance(float).
+        Yields a tuple : neighbor(int,int)
         """
-        # TO DO : the diagonal movements could be ignored (when used with Path.findShortcut)
-        xNode, yNode = node
-        for i in xrange(-1, 2) :
-            for j in xrange(-1, 2) :
-                x = xNode + i
-                y = yNode + j
-                if i == 0 and j == 0 :          # if we are on the node we do nothing
-                    continue
-                elif self._matrix[x][y] == 0 :  # if we are on a block we do nothing
-                    continue
-                else :
-                    if i*j == 0 :
-                        yield ((x, y), 1)               # along a horizontal or vertical the distance is 1
-                    else :
-                        #yield ((x, y), self._SQRT2)     # along a diagonal the distance is sqrt(2)
-                        pass
-                    # end if
-                # end if
-            # end for
+        x, y = node
+        nodeList = [
+            (x+1, y),
+            (x-1, y),
+            (x, y+1),
+            (x, y-1) ]
+        for n in nodeList :
+            if self._matrix[x][y] != 0 :  # if we are on a block we do nothing
+                yield n 
+            # end if
         # end for
     # end of neighborNodes method
     
@@ -129,17 +118,11 @@ class AStar :
     
     def heuristicEstimate(self, node1, node2) :
         """node : (int, int)
-        Travel is along horizontals, verticals and 45° diagonals.
+        Uses Manhattan distances
         """
         x1, y1 = node1
         x2, y2 = node2
-        xDist = math.fabs(x1 - x2)
-        yDist = math.fabs(y1 - y2)
-        if xDist < yDist :
-            return xDist * (self._SQRT2 - 1) + yDist
-        else :
-            return xDist + yDist * (self._SQRT2 - 1)
-        # end if
+        return math.fabs(x1 - x2) + math.fabs(y1 - y2)
     # end of heuristicEstimate method
     
     
