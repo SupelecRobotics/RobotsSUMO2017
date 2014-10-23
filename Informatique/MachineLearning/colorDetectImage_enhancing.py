@@ -15,7 +15,7 @@ end = False
 
 cv2.namedWindow('Color Detection')
 
-#Définition de deux formes géométriques (des croix ici)
+#Définition de deux formes géométriques (des croix ici) qui servent aux fonctions d'affinage
 erodeElement = cv2.getStructuringElement(cv2.MORPH_CROSS,(3,3))
 dilatedElement = cv2.getStructuringElement(cv2.MORPH_CROSS,(7,7))
 
