@@ -96,9 +96,9 @@ class AStar :
             (x-1, y),
             (x, y+1),
             (x, y-1) ]
-        for n in nodeList :
-            if self._matrix[x][y] != 0 :  # if we are on a block we do nothing
-                yield n 
+        for u,v in nodeList :
+            if self._matrix[u][v] != 0 :  # if we are on a block we do nothing
+                yield (u,v)
             # end if
         # end for
     # end of neighborNodes method
