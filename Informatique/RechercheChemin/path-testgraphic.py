@@ -37,7 +37,17 @@ class Pathfinding():
             
     def printMatrix(self):
         for line in self.matrix:
-            print line
+            s = ""
+            for cell in line :
+                if cell == 0 :
+                    s += "##"
+                elif cell == 1 :
+                    s += "  "
+                else :
+                    s += "x "
+            # end for
+            print s
+        # end for
             
 
 
