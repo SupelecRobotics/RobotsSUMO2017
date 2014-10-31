@@ -9,6 +9,7 @@ import math
 
 class AStar :
     """Implements the A* algorithm on an unweighted map with obstacles.
+    Throughout this classes, "nodes" will be tuples (int, int).
     """
     
     def __init__(self, matrix) :
@@ -24,12 +25,16 @@ class AStar :
         self._gScore = None         # dict : cost from start to node along best known path
         self._fScore = None         # dict : estimated cost from start to goal through node
         self._cameFrom = None       # dict : predecessor of node in best known path from start
+        
+        self._straightDist = 10     # constants
+        self._diagonalDist = 14
     # end of __init__ method
     
     def aStar(self, start, goal) :
         """start : (int,int), goal : (int,int)
         Returns True if successful, False if not.
         """
+        # 'start' should be the DESTINATION and 'goal' should be the CURRENT POSITION to avoid suboptimal path
         self._openSet = set([start])
         self._closedSet = set()
         self._gScore = {}
@@ -38,6 +43,7 @@ class AStar :
         
         self._gScore[start] = 0
         self._fScore[start] = self.heuristicEstimate(start, goal)
+        self._cameFrom[start] = start
         
         while len(self._openSet) != 0 :         # if openSet is empty then there is no path
             
@@ -52,13 +58,14 @@ class AStar :
                 if neighbor in self._closedSet :
                     continue                    # nodes already explored cannot be improved
                 # end if
-                newGScore = self._gScore[current] + 1    # cost from start to 'neighbor' through 'current'
+                newGScore = self.getGScore(neighbor, current)
+                
                     # if the neighbor node is unexplored or if the cost to reach it is lowered
                 if neighbor not in self._openSet or newGScore < self._gScore[neighbor] :
                     self._gScore[neighbor] = newGScore
                     self._fScore[neighbor] = newGScore + self.heuristicEstimate(neighbor, goal)
                     self._cameFrom[neighbor] = current
-                    if neighbor not in self._closedSet :
+                    if neighbor not in self._openSet :
                         self._openSet.add(neighbor)
                     # end if
                 #end if
@@ -73,6 +80,7 @@ class AStar :
         If unsuccessful, returns None.
         """
         if self.aStar(start, goal) :
+            del self._cameFrom[start]   # we remove the auto-reference of start so that the following loop can end
             path = [goal]
             node = goal
             while node in self._cameFrom :
@@ -88,7 +96,7 @@ class AStar :
     def neighborNodes(self, node) :
         """node : (int, int)
         Generator, iterates the free neighbors of 'node'.
-        Yields a tuple : neighbor(int,int)
+        Yields neighbor nodes.
         """
         x, y = node
         nodeList = [
@@ -103,8 +111,25 @@ class AStar :
         # end for
     # end of neighborNodes method
     
+    def getGScore(self, newNode, baseNode) :
+        """node, prevNode : (int, int)
+        baseNode must be the node newNode was discovered from.
+        Determines whether the best path to newNode bypasses baseNode in diagonal and returns the suitable path length
+        """
+        prevNode = self._cameFrom[baseNode]
+        newX, newY = newNode
+        prevX, prevY = prevNode
+        distX = math.fabs(newX - prevX)
+        distY = math.fabs(newY - prevY)
+        if distX == 1 and distY == 1 :   # the best path goes diagonally from prevNode to newNode and bypasses baseNode
+            return self._gScore[prevNode] + self._diagonalDist
+        else :
+            return self._gScore[baseNode] + self._straightDist
+        # end if
+    # end of getGScore method
+    
     def getLowestNode(self) :
-        """Returns the element of openSet with the lowest fScore."""
+        """Returns the node in openSet with the lowest fScore."""
         lowestScore = float("inf")
         lowestNode = None
         for node in self._openSet :
@@ -117,12 +142,18 @@ class AStar :
     # end of lowestInSet method
     
     def heuristicEstimate(self, node1, node2) :
-        """node : (int, int)
+        """node1, node2 : (int, int)
         Uses Manhattan distances
         """
         x1, y1 = node1
         x2, y2 = node2
-        return math.fabs(x1 - x2) + math.fabs(y1 - y2)
+        distX = math.fabs(x1 - x2)
+        distY = math.fabs(y1 - y2)
+        if distX > distY :
+            return (distY * self._diagonalDist) + ((distX - distY) * self._straightDist)
+        else :
+            return (distX * self._diagonalDist) + ((distY - distX) * self._straightDist)
+        # end if
     # end of heuristicEstimate method
     
     
