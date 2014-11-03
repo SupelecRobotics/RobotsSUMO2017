@@ -1,5 +1,5 @@
 ﻿# Programme qui projette la position de la souris sur la photo de la table
-# (en perspective donc) par rapport à une vue en 2D de la table
+# (en perspective donc) par rapport à une vue de dessus, en 2D
 # Les points de repère pris comme références pour la transformation de perspective
 # sont les deux coins opposés de la table et les deux coins visibles de l'escalier
 
