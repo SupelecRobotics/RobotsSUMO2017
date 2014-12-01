@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1417113625 source:c:\users\robin\prog\opencv\projection\main.cpp
+	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/calib3d/calib3d.hpp>
+	<iostream>
+
