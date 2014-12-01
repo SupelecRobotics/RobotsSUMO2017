@@ -57,7 +57,6 @@ class AStar :
             for neighbor in self.neighborNodes(current) :
                 if neighbor in self._closedSet :
                     continue                    # nodes already explored cannot be improved
-                # end if
                 newGScore = self.getGScore(neighbor, current)
                 
                     # if the neighbor node is unexplored or if the cost to reach it is lowered
@@ -67,10 +66,6 @@ class AStar :
                     self._cameFrom[neighbor] = current
                     if neighbor not in self._openSet :
                         self._openSet.add(neighbor)
-                    # end if
-                #end if
-            # end for
-        # end while
         return False
     # end of aStar method
     
@@ -86,11 +81,9 @@ class AStar :
             while node in self._cameFrom :
                 node = self._cameFrom[node]
                 path.insert(0, node)
-            # end while
             return path
         else :
             return None
-        # end if
     # end of constructPath method
     
     def neighborNodes(self, node) :
@@ -107,8 +100,6 @@ class AStar :
         for u,v in nodeList :
             if self._matrix[u][v] != 0 :  # if we are on a block we do nothing
                 yield (u,v)
-            # end if
-        # end for
     # end of neighborNodes method
     
     def getGScore(self, newNode, baseNode) :
@@ -125,7 +116,6 @@ class AStar :
             return self._gScore[prevNode] + self._diagonalDist
         else :
             return self._gScore[baseNode] + self._straightDist
-        # end if
     # end of getGScore method
     
     def getLowestNode(self) :
@@ -136,24 +126,18 @@ class AStar :
             if self._fScore[node] < lowestScore :
                 lowestNode = node
                 lowestScore = self._fScore[node]
-            # end if
-        # end for
         return lowestNode
     # end of lowestInSet method
     
     def heuristicEstimate(self, node1, node2) :
         """node1, node2 : (int, int)
-        Uses Manhattan distances
+        Uses Euclid distances
         """
         x1, y1 = node1
         x2, y2 = node2
-        distX = math.fabs(x1 - x2)
-        distY = math.fabs(y1 - y2)
-        if distX > distY :
-            return (distY * self._diagonalDist) + ((distX - distY) * self._straightDist)
-        else :
-            return (distX * self._diagonalDist) + ((distY - distX) * self._straightDist)
-        # end if
+        distX = x1 - x2
+        distY = y1 - y2
+        return math.sqrt(distX*distX + distY*distY)
     # end of heuristicEstimate method
     
     
