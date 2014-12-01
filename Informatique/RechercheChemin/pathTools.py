@@ -87,10 +87,10 @@ class Path :
         x, y = node
         xA, yA = nodeA
         xB, yB = nodeB
-        dx1 = x - xA    #
-        dy1 = y - yA    #
-        dx2 = xB - xA   #
-        dy2 = yB - yA   # coordinates from nodeA
+        dx1 = float(x-xA)   #
+        dy1 = float(y-yA)   #
+        dx2 = float(xB-xA)  #
+        dy2 = float(yB-yA)  # coordinates from nodeA
         if dx2 == 0 and dy2 == 0 :
             return dx1*dx1 + dy1*dy1    # if nodeA and nodeB are joined : Euclid distance to node
         else :
