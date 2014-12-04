@@ -8,6 +8,9 @@ struct CallbackParam
     bool srcPointPlaced;
     TablePicture *tablePict;
     cv::Point lastSrcPoint;
+    cv::Scalar colorLastSrcPoint;
+    cv::Mat tableWithPoints;
+    cv::Mat pictWithPoints;
 };
 
 struct DrawCallbackParam

@@ -30,6 +30,8 @@ void TablePicture::srcCallback(int event, int x, int y, int, void* vParam)
     {
         param->srcPointPlaced = true;
         param->lastSrcPoint = Point2f(x, y);
+        param->colorLastSrcPoint = Scalar(rand()%256, rand()%256, rand()%256);
+        circle(param->pictWithPoints, param->lastSrcPoint, 4, param->colorLastSrcPoint, 2);
     }
 }
 
@@ -41,6 +43,7 @@ void TablePicture::dstCallback(int event, int x, int y, int, void* vParam)
     {
         param->srcPointPlaced = false;
         param->tablePict->addRefPoint(param->lastSrcPoint, Point2f(x, y));
+        circle(param->tableWithPoints, Point2f(x, y), 4, param->colorLastSrcPoint, 2);
     }
 }
 
@@ -66,6 +69,8 @@ void TablePicture::calibrate(Mat table)
 
     param.srcPointPlaced = false;
     param.tablePict = this;
+    param.tableWithPoints = table.clone();
+    param.pictWithPoints = pict.clone();
 
     namedWindow(name);
     setMouseCallback(name, TablePicture::srcCallback, &param);
@@ -75,8 +80,8 @@ void TablePicture::calibrate(Mat table)
 
     while(key != 'n' || refPointSrc.size() < 4)
     {
-        imshow(name, pict);
-        imshow("Table", table);
+        imshow(name, param.pictWithPoints);
+        imshow("Table", param.tableWithPoints);
         key = waitKey(10);
     }
 
