@@ -15,3 +15,12 @@
 	<iostream>
 	"tablePicture.h"
 
+1417127679 source:c:\users\robin\prog\robotssumo2017\informatique\machinelearning\cpp\calibrationandprojection\main.cpp
+	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/calib3d/calib3d.hpp>
+	<iostream>
+	"tablePicture.h"
+
+1417694611 c:\users\robin\prog\robotssumo2017\informatique\machinelearning\cpp\calibrationandprojection\tablepicture.h
+
