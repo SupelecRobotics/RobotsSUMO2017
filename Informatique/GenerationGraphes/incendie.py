@@ -6,6 +6,7 @@ Created on Mon Nov 03 23:08:08 2014
 
 import random
 
+import math
 
 class fireball :
     """Implements a fireball !
@@ -90,7 +91,7 @@ class fireball :
         b = b and (y >= 0) and (y < d)
         b = b and (self.forest[x][y] == 0)
         return b
-    # end of canBurn method
+    # end of canBurn
 
     def isBurned(self, point) :
         """couple of int -> bool
@@ -105,8 +106,22 @@ class fireball :
         
         b = b and (self.forest[x][y] == 2)
         return b
-    # end of isBurned method
+    # end of isBurned
 
+    def isInTheForest(self, point)  :
+        """couple of int -> bool
+        return true if "point" is in the forest
+        """
+        b = True
+        (x, y) = point
+        (c, d) = self.size
+
+        b = b and (x >= 0) and (x < c)
+        b = b and (y >= 0) and (y < d)
+        
+        return b
+    # end of isInTheForest
+    
     def getBurnedNeighboors(self, center) :
         """couple of int -> List of couple of int
         returns the List of neighboors of center that are already burned
@@ -284,13 +299,90 @@ class fireball :
         self.enlargeYourPenis(length)
         self.enclose()
     # end of readyToUse
-        
 
+    def summonEfreet(self) :
+        """void -> void
+        burn the whole forest
+        """
+        newForest = [[]]
+        (x, y) = self.size
+        for i in range(0, x) :
+            for j in range (0, y) :
+                newForest[i].append(2)
+
+            if (i < x ) :
+                newForest.append([])
+        self.forest = newForest
+    # end of summonEfreet
+
+    def popRectangle(self, point1, point2)  :
+        """couple of int, couple of int -> void
+        set obstacles in the rectangle delimited by "point1" and "point2"
+        """
+        (x1, y1) = point1
+        (x2, y2) = point2
+
+        minx = min(x1, x2)
+        maxx = max(x1, x2)
+        miny = min(y1, y2)
+        maxy = max(y1, y2)
+
+        for x in range(minx, maxx + 1)  :
+            for y in range(miny, maxy + 1)  :
+                if(self.isInTheForest((x,y))) :
+                    self.forest[x][y] = 0
+    # end of popRectangle
+    
+    def popCircle(self, center, radius) :
+        """couple of int, int -> void
+        set obstacles in the disc defined by "center" and "radius"
+        """
+        (x, y) = center
+
+        for i in range(x - radius - 1, x + radius + 1) :
+            for j in range(y - radius - 1, y + radius + 1)  :
+                if(self.isInTheForest((i, j)) and ( math.sqrt((i - x)*(i - x) + (j - y)*(j - y)) <= radius)) :
+                    self.forest[i][j] = 0
+    # end of popCircle
+
+    def unZoom(self, factor)    :
+        """int -> void
+        replaces the forest by a forest "factor" times less big, and change obstacles in the same way
+        """
+        (l, w) = self.size
+        newLength = l / factor + 1
+        newWidth = w / factor + 1
+        newForest = [[]]
+        for i in range(0, newLength) :
+            for j in range (0, newWidth) :
+                newForest[i].append(2)
+
+            if (i < newLength ) :
+                newForest.append([])
+
+        
+        for x in range(0, newLength )    :
+            for y in range(0, newWidth ) :
+                b = False
+                for i in range(x * factor, (x + 1) * factor + 1)    :
+                    for j in range(y * factor, (y + 1) * factor + 1)    :
+                        if(self.isInTheForest((i, j)))    :
+                            b = b or (self.forest[i][j] == 0)
+                if(b)   :
+                    newForest[x][y] = 0
+                else :
+                    newForest[x][y] = 2
+
+        self.size = (newLength, newWidth)
+
+        self.forest = newForest
+    # end of unZoom                 
+                    
 # end of fireball
 
 
 
-print " "
+"""print " "
 
 
 size = (100, 100)
@@ -301,7 +393,11 @@ superTest = fireball(size, 520, (5, 10), (0, 99), (0, 99))
 
 superTest.readyToUse(3)
 
-superTest.displayForest()
+superTest.summonEfreet()
+
+superTest.popCircle((10, 10), 4)
+
+superTest.displayForest()"""
 
 
 
