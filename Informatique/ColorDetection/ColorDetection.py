@@ -12,7 +12,7 @@ import cv2
 def nothing(x):
     pass
 
-cap =cv2.VideoCapture(0) # capture the video from web cam
+cap = cv2.VideoCapture(0) # capture the video from web cam
 
 if  not cap.isOpened():  # if not success, exit program
     print("Cannot open the web cam")
@@ -42,6 +42,8 @@ cv2.createTrackbar("HighS", "Control", iHighS, 255, nothing);
 cv2.createTrackbar("LowV", "Control", iLowV, 255, nothing); # Value (0 - 255)
 cv2.createTrackbar("HighV", "Control", iHighV, 255, nothing);
 
+cv2.createTrackbar("Resolution", "Control", 5, 10, nothing); # erode, dilate size
+
 while True:
     # Capture frame-by-frame
     ret, imgOriginal = cap.read()
@@ -53,15 +55,17 @@ while True:
     # lowe_HSV= [LowH,LowS,LowV]  upper_HSV = [HighH,HighS,HighV]    
     lower_HSV = np.array([cv2.getTrackbarPos('LowH','Control'),cv2.getTrackbarPos('LowS','Control'),cv2.getTrackbarPos('LowV','Control')])
     upper_HSV = np.array([cv2.getTrackbarPos('HighH','Control'),cv2.getTrackbarPos('HighS','Control'),cv2.getTrackbarPos('HighV','Control')])  
-    imgThresholded = cv2.inRange(imgHSV, lower_HSV, upper_HSV) #Threshold the image
-
+    s = cv2.getTrackbarPos("Resolution", "Control")+1  # erode, dilate size
+    
+    imgThresholded = cv2.inRange(imgHSV, lower_HSV, upper_HSV) #Threshold the image    
+    
     # morphological opening (remove small objects from the foreground)
-    imgThresholded = cv2.erode(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)) );
-    imgThresholded = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)) ); 
+    imgThresholded = cv2.erode(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (s, s)) );
+    imgThresholded = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (s, s)) ); 
 
     # morphological closing (fill small holes in the foreground)
-    imgThresholded = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)) ); 
-    imgThresholded = cv2.erode(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)) );
+    imgThresholded = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (s, s)) ); 
+    imgThresholded = cv2.erode(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (s, s)) );
 
     cv2.imshow("Thresholded Image", imgThresholded); # show the thresholded image
     cv2.imshow("Original", imgOriginal); # show the original image
