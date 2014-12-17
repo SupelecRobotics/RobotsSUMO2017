@@ -11,6 +11,7 @@ import cv2
 class ColorDetection:
     
     # used in cv2.createTrackBar
+    @staticmethod
     def nothing(x):
         pass
     
@@ -108,18 +109,18 @@ class ColorDetection:
         cv2.createTrackbar("LowV", "Control", iLowV, 255, ColorDetection.nothing); # Value (0 - 255)
         cv2.createTrackbar("HighV", "Control", iHighV, 255, ColorDetection.nothing);
         
-        cv2.createTrackbar("Resolution", "Control", 5, 10, ColorDetection.nothing); # erode, dilate size
+        cv2.createTrackbar("Resolution", "Control", 5, 10, ColorDetection.nothing); # erode, dilate size        
         
         while True:
             # initialization 
             imgHSV = imgOriginal
-            imgThresholded = imgOriginal    
+            imgThresholded = imgOriginal
             
             imgHSV = cv2.cvtColor(imgOriginal, cv2.COLOR_BGR2HSV) # Convert the captured frame from BGR to HSV  
             # lowe_HSV= [LowH,LowS,LowV]  upper_HSV = [HighH,HighS,HighV]    
             lower_HSV = np.array([cv2.getTrackbarPos('LowH','Control'),cv2.getTrackbarPos('LowS','Control'),cv2.getTrackbarPos('LowV','Control')])
             upper_HSV = np.array([cv2.getTrackbarPos('HighH','Control'),cv2.getTrackbarPos('HighS','Control'),cv2.getTrackbarPos('HighV','Control')])  
-            s = cv2.getTrackbarPos("Resolution", "Control")+1  # erode, dilate size
+            s = cv2.getTrackbarPos("Resolution", "Control")+1  # erode, dilate size          
             
             imgThresholded = cv2.inRange(imgHSV, lower_HSV, upper_HSV) #Threshold the image    
             
@@ -127,10 +128,10 @@ class ColorDetection:
             imgThresholded = cv2.erode(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (s, s)) );
             imgThresholded = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (s, s)) ); 
         
-            # morphological closing (fill small holes in the foreground)
+            # morphological closing (fill small holecv2.createTrackbar("Resolution", "Control", 5, 10, ColorDetection.nothing);s in the foreground)
             imgThresholded = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (s, s)) ); 
             imgThresholded = cv2.erode(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (s, s)) );
-        
+
             cv2.imshow("Thresholded Image", imgThresholded); # show the thresholded image
             cv2.imshow("Original", imgOriginal); # show the original image
         
