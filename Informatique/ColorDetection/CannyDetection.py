@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Dec 17 09:26:47 2014
+Created on Wed Dec 17 23:51:20 2014
 
 @author: Darkpudding
 """
@@ -8,7 +8,7 @@ Created on Wed Dec 17 09:26:47 2014
 import numpy as np
 import cv2
 
-class ShapeDetection:
+class CannyDetection:
 
     # used in cv2.createTrackBar
     @staticmethod
@@ -20,13 +20,13 @@ class ShapeDetection:
            
         # set up the HSV color of our objects   
         cv2.namedWindow('Reglage Couleur')
-        cv2.createTrackbar("LowH", "Reglage Couleur", 0, 179, ShapeDetection.nothing); # Hue (0 - 179)
-        cv2.createTrackbar("HighH", "Reglage Couleur", 179, 179, ShapeDetection.nothing);
-        cv2.createTrackbar("LowS", "Reglage Couleur", 0, 255, ShapeDetection.nothing); # Saturation (0 - 255)
-        cv2.createTrackbar("HighS", "Reglage Couleur", 255, 255, ShapeDetection.nothing);
-        cv2.createTrackbar("LowV", "Reglage Couleur", 0, 255, ShapeDetection.nothing); # Value (0 - 255)
-        cv2.createTrackbar("HighV", "Reglage Couleur", 255, 255, ShapeDetection.nothing);
-        cv2.createTrackbar("Resolution", "Reglage Couleur", 5, 10, ShapeDetection.nothing); # erode, dilate size        
+        cv2.createTrackbar("LowH", "Reglage Couleur", 0, 179, CannyDetection.nothing); # Hue (0 - 179)
+        cv2.createTrackbar("HighH", "Reglage Couleur", 179, 179, CannyDetection.nothing);
+        cv2.createTrackbar("LowS", "Reglage Couleur", 0, 255, CannyDetection.nothing); # Saturation (0 - 255)
+        cv2.createTrackbar("HighS", "Reglage Couleur", 255, 255, CannyDetection.nothing);
+        cv2.createTrackbar("LowV", "Reglage Couleur", 0, 255, CannyDetection.nothing); # Value (0 - 255)
+        cv2.createTrackbar("HighV", "Reglage Couleur", 255, 255, CannyDetection.nothing);
+        cv2.createTrackbar("Resolution", "Reglage Couleur", 5, 10, CannyDetection.nothing); # erode, dilate size        
         
         imgThresholded = imgOriginal.copy()       
         
@@ -64,32 +64,17 @@ class ShapeDetection:
         cv2.namedWindow('Control') # create a window called "Control"
         
         # Create trackbars in "Control" window
-        cv2.createTrackbar("Precision", "Control", 5, 20, ShapeDetection.nothing);       
-        cv2.createTrackbar("i", "Control", 28,255, ShapeDetection.nothing);
-        cv2.createTrackbar("canny1", "Control", 0,255, ShapeDetection.nothing);
-        cv2.createTrackbar("canny2", "Control", 28,255, ShapeDetection.nothing);                
+        cv2.createTrackbar("i", "Control", 28,255, CannyDetection.nothing);
+        cv2.createTrackbar("canny1", "Control", 0,255, CannyDetection.nothing);
+        cv2.createTrackbar("canny2", "Control", 28,255, CannyDetection.nothing);                
         
         while True:         
             
-            p = cv2.getTrackbarPos("Precision", "Control")+1
-            i = cv2.getTrackbarPos("i", "Control")+1
+            i = cv2.getTrackbarPos("i", "Control")
             t1 = cv2.getTrackbarPos("canny1", "Control")
             t2 = cv2.getTrackbarPos("canny2", "Control")
                 
-            # create image of shapes by gradient method
-            imgShape = cv2.morphologyEx(imgOriginal, cv2.MORPH_GRADIENT, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (p, p)))
-            imgShape = cv2.bilateralFilter(imgShape,9,75,75)
-            
-            # convert into grayscale 
-            imgShape = cv2.cvtColor(imgShape, cv2.COLOR_BGR2GRAY)
-            # filtre -> denosing
-            imgShape = cv2.bilateralFilter(imgShape, 11, 17, 17)
-            # find edges
-            imgT = cv2.Canny(imgShape, t1, t2)
-            # imgShape = cv2.fastNlMeansDenoising(imgShape)  # trop lent
-                      
-            # threshold
-            #_, imgT = cv2.threshold(imgShape, i, 255, cv2.THRESH_BINARY)                        
+            imgT = cv2.Canny(imgOriginal, t1, t2)
             
             # Tous les contours
             imgContours = imgT.copy()
@@ -97,7 +82,7 @@ class ShapeDetection:
             imgContours = imgOriginal.copy()            
             cv2.drawContours(imgContours, contours, -1, (0,255,0), 2)
             # Intersection des cotours avec les zones de couleur choisie
-            imgThresholded1 = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (i, i)) )            
+            imgThresholded1 = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (i+1, i+1)) )            
             imgContoursColor = cv2.bitwise_and(imgT,imgThresholded1)            
             contoursColor,_ = cv2.findContours(imgContoursColor,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)            
             imgContoursColor = imgOriginal.copy()            
@@ -105,8 +90,6 @@ class ShapeDetection:
             
             cv2.imshow("Contours", imgContours);
             cv2.imshow("ContoursColor", imgContoursColor);
-            # cv2.imshow("thresh", imgT);
-            # cv2.imshow("Image of shapes", imgShape); # show the image of shapes
             # cv2.imshow("Original", imgOriginal); # show the original image
         
             if cv2.waitKey(30) == 27: # wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
