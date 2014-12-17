@@ -112,9 +112,6 @@ class ColorDetection:
         cv2.createTrackbar("Resolution", "Control", 5, 10, ColorDetection.nothing); # erode, dilate size        
         
         while True:
-            # initialization 
-            imgHSV = imgOriginal
-            imgThresholded = imgOriginal
             
             imgHSV = cv2.cvtColor(imgOriginal, cv2.COLOR_BGR2HSV) # Convert the captured frame from BGR to HSV  
             # lowe_HSV= [LowH,LowS,LowV]  upper_HSV = [HighH,HighS,HighV]    
