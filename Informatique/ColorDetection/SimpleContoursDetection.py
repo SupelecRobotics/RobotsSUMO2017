@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Dec 17 23:51:20 2014
+Created on Sat Jan 03 01:38:43 2015
 
 @author: Darkpudding
 """
@@ -8,7 +8,7 @@ Created on Wed Dec 17 23:51:20 2014
 import numpy as np
 import cv2
 
-class CannyDetection:
+class SimpleContoursDetection:
 
     # used in cv2.createTrackBar
     @staticmethod
@@ -20,13 +20,13 @@ class CannyDetection:
            
         # set up the HSV color of our objects   
         cv2.namedWindow('Reglage Couleur')
-        cv2.createTrackbar("LowH", "Reglage Couleur", 0, 179, CannyDetection.nothing); # Hue (0 - 179)
-        cv2.createTrackbar("HighH", "Reglage Couleur", 179, 179, CannyDetection.nothing);
-        cv2.createTrackbar("LowS", "Reglage Couleur", 0, 255, CannyDetection.nothing); # Saturation (0 - 255)
-        cv2.createTrackbar("HighS", "Reglage Couleur", 255, 255, CannyDetection.nothing);
-        cv2.createTrackbar("LowV", "Reglage Couleur", 0, 255, CannyDetection.nothing); # Value (0 - 255)
-        cv2.createTrackbar("HighV", "Reglage Couleur", 255, 255, CannyDetection.nothing);
-        cv2.createTrackbar("Resolution", "Reglage Couleur", 5, 10, CannyDetection.nothing); # erode, dilate size        
+        cv2.createTrackbar("LowH", "Reglage Couleur", 0, 179, SimpleContoursDetection.nothing); # Hue (0 - 179)
+        cv2.createTrackbar("HighH", "Reglage Couleur", 179, 179, SimpleContoursDetection.nothing);
+        cv2.createTrackbar("LowS", "Reglage Couleur", 0, 255, SimpleContoursDetection.nothing); # Saturation (0 - 255)
+        cv2.createTrackbar("HighS", "Reglage Couleur", 255, 255, SimpleContoursDetection.nothing);
+        cv2.createTrackbar("LowV", "Reglage Couleur", 0, 255, SimpleContoursDetection.nothing); # Value (0 - 255)
+        cv2.createTrackbar("HighV", "Reglage Couleur", 255, 255, SimpleContoursDetection.nothing);
+        cv2.createTrackbar("Resolution", "Reglage Couleur", 5, 10, SimpleContoursDetection.nothing); # erode, dilate size        
         
         imgThresholded = imgOriginal.copy()       
         
@@ -64,17 +64,11 @@ class CannyDetection:
         cv2.namedWindow('Control') # create a window called "Control"
         
         # Create trackbars in "Control" window
-        cv2.createTrackbar("e", "Control", 0,255, CannyDetection.nothing);
-        cv2.createTrackbar("rogner", "Control", 28,255, CannyDetection.nothing);
-        cv2.createTrackbar("canny1", "Control", 0,255, CannyDetection.nothing);
-        cv2.createTrackbar("canny2", "Control", 28,255, CannyDetection.nothing);                
+        cv2.createTrackbar("e", "Control", 0,200, SimpleContoursDetection.nothing);
         
         while True:         
             
             e = cv2.getTrackbarPos("e", "Control") # TEST
-            i = cv2.getTrackbarPos("rogner", "Control")
-            t1 = cv2.getTrackbarPos("canny1", "Control")
-            t2 = cv2.getTrackbarPos("canny2", "Control")
             
             # Contours simple
             imgContours = imgThresholded.copy()
@@ -82,19 +76,24 @@ class CannyDetection:
             imgContours = imgOriginal.copy()            
             cv2.drawContours(imgContours, contours, -1, (0,255,0), 2)
             for cnt in contours :
-                approx = cv2.approxPolyDP(cnt,e+1,True) # TEST
-                cv2.drawContours(imgContours, approx, -1, (0,0,255), 2) # TEST
-            
-            # Intersection de Contours Canny avec imgT, puis rogner
-            imgT = cv2.Canny(imgOriginal, t1, t2)
-            imgThresholded1 = cv2.dilate(imgThresholded, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (i+1, i+1)) )           
-            imgContoursColor = cv2.bitwise_and(imgT,imgThresholded1)  
-            contoursColor,_ = cv2.findContours(imgContoursColor,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  
-            imgContoursColor = imgOriginal.copy()            
-            cv2.drawContours(imgContoursColor, contoursColor, -1, (0,255,0), 2)            
+                # 1- polynomial approximation
+                # approx = cv2.approxPolyDP(cnt,e+1,True) 
+                # cv2.drawContours(imgContours, approx, -1, (0,0,255), 2
+                
+                # 2- rectangular approximation
+                x,y,w,h = cv2.boundingRect(cnt)
+                # detection de cylindres superposes
+                rect = np.array([[[x,y]],[[x,y+h]],[[x+w,y+h]],[[x+w,y]]])
+                score = cv2.matchShapes(cnt,rect,cv2.cv.CV_CONTOURS_MATCH_I1, 0)
+                cv2.putText(imgContours,str(score), (x+w/2,y+h/2), cv2.FONT_HERSHEY_PLAIN, 1, 255)
+                if score < 0.01*(e+1) :
+                    cv2.rectangle(imgContours,(x,y),(x+w,y+h),(0,0,255),2)
+                else :
+                    cv2.rectangle(imgContours,(x,y+h/2),(x+w/2,y+h),(255,0,0),2)
+                    cv2.rectangle(imgContours,(x+w/2,y),(x+w,y+h/2),(255,0,0),2)
+
             
             cv2.imshow("Contours Simple", imgContours);
-            cv2.imshow("Intersection Canny-Couleur + rogner", imgContoursColor);
             # cv2.imshow("Original", imgOriginal); # show the original image
         
             if cv2.waitKey(30) == 27: # wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
