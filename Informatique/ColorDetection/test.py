@@ -10,6 +10,6 @@ import ColorDetection as cd
 import ShapeDetection as sd
 import CannyDetection as canny
 
-# cd.ColorDetection.runImage(cv2.imread('test1.jpg'))
-# sd.ShapeDetection.runImage(cv2.imread('test1.jpg'))
+#cd.ColorDetection.runImage(cv2.imread('test1.jpg'))
+#sd.ShapeDetection.runImage(cv2.imread('test1.jpg'))
 canny.CannyDetection.runImage(cv2.imread('test1.jpg'))
