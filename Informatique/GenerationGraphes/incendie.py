@@ -8,23 +8,26 @@ import random
 
 import math
 
-class fireball :
-    """Implements a fireball !
+from carte import Map
+
+class Fireball(Map) :
+    """Implements a Fireball !
     value / status
     0 : not burned already
     1 : burning
     2 : burned
     """
 
-
-
     def __init__(self, size, violence, rangeNumber, rangeX, rangeY) :
         """Constructor of the class
         size : couple of int (size of the map)
+        forest : matrix of couple of int (the map)
         violence : int (probability of burning a neighboor point)
         rangeNumber : couple of int (range of the number of fire seats)
         rangeX : couple of int (range of x coordinates of fire seats)
         rangeY : couple of int (range of y coordinates of fire seats)
+        startingPoints : list of couple of int (first fire seats)
+        fireZone : list of couple of int (contains coordinates of each burning point)
         """
         
         random.seed()
@@ -79,7 +82,7 @@ class fireball :
 
         self.fireZone = startingPoints
     # end of empireStrikesBack
-    
+
     def canBurn(self, point) :
         """couple of int -> bool
         return true if "point" is in the forest, and not already burned
@@ -107,20 +110,6 @@ class fireball :
         b = b and (self.forest[x][y] == 2)
         return b
     # end of isBurned
-
-    def isInTheForest(self, point)  :
-        """couple of int -> bool
-        return true if "point" is in the forest
-        """
-        b = True
-        (x, y) = point
-        (c, d) = self.size
-
-        b = b and (x >= 0) and (x < c)
-        b = b and (y >= 0) and (y < d)
-        
-        return b
-    # end of isInTheForest
     
     def getBurnedNeighboors(self, center) :
         """couple of int -> List of couple of int
@@ -194,27 +183,7 @@ class fireball :
         return (self.fireZone == [])
     # end of isFinished
 
-    def displayForest(self) :
-        """void -> void
-        displays the forest
-        """
-        for i in self.forest :
-            s = ""
-            for j in i :
-                a = str(j)
-                if (j == 2) :
-                    a = " "
-                s = s + a + " "
 
-            print s
-    # end of displayForest
-
-    def getForest(self) :
-        """void -> List of list of couple of int
-        returns the forest
-        """
-        return self.forest
-    # end of getForest
 
     def getCloseBurnedNeighboorsInForest(self, forest, center, length) :
         """List of list of couple of int, couple of int, int -> list of list of couple of int
@@ -239,49 +208,36 @@ class fireball :
         return vect
     #end of getCloseBurnedNeighboorsInForest
                         
+    
+##    def enlargeYourPenis2(self, length, obstacleRate)  :
+##        """int, int -> void
+##        modifies the forest and enlarge each obstacles of "length"
+##        """
+##        newForest = [[]]
+##        (x, y) = self.size
+##        for i in range(0, x) :
+##            for j in range (0, y) :
+##                newForest[i].append(0)
+##
+##            if (i < x ) :
+##                newForest.append([])
+##
+##        for i in range(0, x) :
+##            for j in range(0, y) :
+##                newForest[i][j] = self.forest[i][j]
+##        
+##        for i in range(0, x) :
+##            for j in range(0, y) :
+##                if (self.forest[i][j] <= 0 and self.forest[i][j] >= obstacleRate) :
+##                    
+##                    vect = self.getCloseBurnedNeighboorsInForest(newForest, (i, j), length)
+##                    for point in vect :
+##                        (a, b) = point
+##                        newForest[a][b] = 0
+##        self.forest = newForest
+##    # end of enlargeYourPenis2
+##    """
 
-    def enlargeYourPenis(self, length)  :
-        """int -> void
-        modifies the forest and enlarge each obstacles of "length"
-        """
-        newForest = [[]]
-        (x, y) = self.size
-        for i in range(0, x) :
-            for j in range (0, y) :
-                newForest[i].append(0)
-
-            if (i < x ) :
-                newForest.append([])
-
-        for i in range(0, x) :
-            for j in range(0, y) :
-                newForest[i][j] = self.forest[i][j]
-        
-        for i in range(0, x) :
-            for j in range(0, y) :
-                if (self.forest[i][j] == 0) :
-                    
-                    vect = self.getCloseBurnedNeighboorsInForest(newForest, (i, j), length)
-                    for point in vect :
-                        (a, b) = point
-                        newForest[a][b] = 0
-
-        self.forest = newForest
-    # end of enlargeYourPenis
-
-    def enclose(self)   :
-        """void -> void
-        set obstacles on the merge of the forest
-        """
-        (x, y) = self.size
-        for j in range(0, y) :
-            self.forest[0][j] = 0
-            self.forest[x - 1][j] = 0
-        
-        for i in range(1, x - 1) :
-            self.forest[i][0] = 0
-            self.forest[i][y - 1] = 0
-    # end of enclose
 
     def allumerLeFeu(self) :
         """void -> void
@@ -291,13 +247,13 @@ class fireball :
             self.nextState()
     # end of allumerLeFeu
 
-    def readyToUse(self, length) :
-        """int -> void
-        run the fire and enclose the map
+    def readyToUse(self, length, obstacleRate) :
+        """int, int -> void
+        run the fire and enclose the map with obstacles at "obstacleRate"
         """
         self.allumerLeFeu()
-        self.enlargeYourPenis(length)
-        self.enclose()
+        self.enlargeYourPenis(length, obstacleRate)
+        self.enclose(0)
     # end of readyToUse
 
     def summonEfreet(self) :
@@ -315,70 +271,11 @@ class fireball :
         self.forest = newForest
     # end of summonEfreet
 
-    def popRectangle(self, point1, point2)  :
-        """couple of int, couple of int -> void
-        set obstacles in the rectangle delimited by "point1" and "point2"
-        """
-        (x1, y1) = point1
-        (x2, y2) = point2
 
-        minx = min(x1, x2)
-        maxx = max(x1, x2)
-        miny = min(y1, y2)
-        maxy = max(y1, y2)
 
-        for x in range(minx, maxx + 1)  :
-            for y in range(miny, maxy + 1)  :
-                if(self.isInTheForest((x,y))) :
-                    self.forest[x][y] = 0
-    # end of popRectangle
-    
-    def popCircle(self, center, radius) :
-        """couple of int, int -> void
-        set obstacles in the disc defined by "center" and "radius"
-        """
-        (x, y) = center
-
-        for i in range(x - radius - 1, x + radius + 1) :
-            for j in range(y - radius - 1, y + radius + 1)  :
-                if(self.isInTheForest((i, j)) and ( math.sqrt((i - x)*(i - x) + (j - y)*(j - y)) <= radius)) :
-                    self.forest[i][j] = 0
-    # end of popCircle
-
-    def unZoom(self, factor)    :
-        """int -> void
-        replaces the forest by a forest "factor" times less big, and change obstacles in the same way
-        """
-        (l, w) = self.size
-        newLength = l / factor + 1
-        newWidth = w / factor + 1
-        newForest = [[]]
-        for i in range(0, newLength) :
-            for j in range (0, newWidth) :
-                newForest[i].append(2)
-
-            if (i < newLength ) :
-                newForest.append([])
-
-        
-        for x in range(0, newLength )    :
-            for y in range(0, newWidth ) :
-                b = False
-                for i in range(x * factor, (x + 1) * factor + 1)    :
-                    for j in range(y * factor, (y + 1) * factor + 1)    :
-                        if(self.isInTheForest((i, j)))    :
-                            b = b or (self.forest[i][j] == 0)
-                if(b)   :
-                    newForest[x][y] = 0
-                else :
-                    newForest[x][y] = 2
-
-        self.size = (newLength, newWidth)
-
-        self.forest = newForest
-    # end of unZoom                 
+                  
                     
-# end of fireball
+# end of Fireball
 
 
 
@@ -387,15 +284,15 @@ class fireball :
 
 size = (100, 100)
 
-superTest = fireball(size, 520, (5, 10), (0, 99), (0, 99))
+superTest = Fireball(size, 520, (5, 10), (0, 99), (0, 99))
 
 #superTest.empireStrikesBack([(1, 1)])
 
-superTest.readyToUse(3)
+superTest.readyToUse(3, 0)
 
 superTest.summonEfreet()
 
-superTest.popCircle((10, 10), 4)
+superTest.popCircle((10, 10), 4, -1)
 
 superTest.displayForest()"""
 
