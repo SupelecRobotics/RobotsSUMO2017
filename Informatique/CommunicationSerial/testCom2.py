@@ -23,10 +23,10 @@ satVitesse = 0x12
 inputByteString = chr(d) + chr(theta) + chr(satVitesse)
  
 while True: # boucle répétée jusqu'à l'interruption du programme
-    ser.write('5')
+#    ser.write('5')
+    ser.write(inputByteString)
     print(ser.readline()) #on affiche la réponse
     
-    ser.write(inputByteString)
     time.sleep(1) # on attend pendant 1 seconde 
     
     #d : 2 byte
