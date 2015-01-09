@@ -24,7 +24,7 @@ inputByteString = chr(d) + chr(theta) + chr(satVitesse)
  
 while True: # boucle répétée jusqu'à l'interruption du programme
 #    ser.write('5')
-    ser.write(inputByteString)
+    ser.write(inputByteString.decode('hex'))
     print(ser.readline()) #on affiche la réponse
     
     time.sleep(1) # on attend pendant 1 seconde 
