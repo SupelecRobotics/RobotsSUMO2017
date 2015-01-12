@@ -65,38 +65,38 @@ class Cell :
         yield (self.x + 1, self.y)
         yield (self.x - 1, self.y)
     
-    def lineCoords(self, x, y, threshold) :
-        """ x, y : int, threshold : float
-            yields : (int,int) (coordinates of cells close to the line between self and (x,y))
-        """
-        fX = 1 if self.x <= x else -1   # used to fall back to a situation where
-        fY = 1 if self.y <= y else -1   # self.x < x and self.y < y
-        dX = fX*(x - self.x)
-        dY = fY*(y - self.y)
-        if dX == 0 :
-            for v in xrange(dY+1) :
-                yield self.x, self.y + fY*v
-        elif dY == 0 :
-            for u in xrange(dX+1) :
-                yield self.x + fX*u, self.y
-        else :
-            a = float(dY)/float(dX)
-            b = threshold * math.sqrt(1 + a*a)
-            for u in xrange(dX+1) :
-                vMin = int(max(0, math.ceil(a*u-b)))
-                vMax = int(min(dY, math.floor(a*u+b)))
-                for v in xrange(vMin, vMax+1):
-                    yield self.x + fX*u, self.y + fY*v
+#    def lineCoords(self, x, y, threshold) :
+#        """ x, y : int, threshold : float
+#            yields : (int,int) (coordinates of cells close to the line between self and (x,y))
+#        """
+#        fX = 1 if self.x <= x else -1   # used to fall back to a situation where
+#        fY = 1 if self.y <= y else -1   # self.x < x and self.y < y
+#        dX = fX*(x - self.x)
+#        dY = fY*(y - self.y)
+#        if dX == 0 :
+#            for v in xrange(dY+1) :
+#                yield self.x, self.y + fY*v
+#        elif dY == 0 :
+#            for u in xrange(dX+1) :
+#                yield self.x + fX*u, self.y
+#        else :
+#            a = float(dY)/float(dX)
+#            b = threshold * math.sqrt(1 + a*a)
+#            for u in xrange(dX+1) :
+#                vMin = int(max(0, math.ceil(a*u-b)))
+#                vMax = int(min(dY, math.floor(a*u+b)))
+#                for v in xrange(vMin, vMax+1):
+#                    yield self.x + fX*u, self.y + fY*v
     
 
 class AStar :
     """ Implements the A* algorithm on an unweighed 2D grid with obstacles
     """
     
-    def __init__(self, start, goal, matrix, threshold) :
-        """ start : (float,float), goal : (int,int), matrix : [[int]], threshold : int >0
-            'matrix' represents the grid : -threshold to 0 is an obstacle, anything else is a free cell
-            the grid must be bordered with 0s
+    def __init__(self, start, goal, matrix) :
+        """ start, goal : (float,float), matrix : [[bool]]
+            'matrix' represents the grid : False is an obstacle, True is a free cell
+            the grid must be bordered with Falses
         """
         # for testing :
         self.turnCount = 0
@@ -105,7 +105,7 @@ class AStar :
         self.start = start
         self.goal = goal
         self.pathEnd = None
-        self.blockMat = [ [ (0 if matrix[x][y] <= 0 and matrix[x][y] >= -threshold else 1) for y in xrange(len(matrix[x])) ] for x in xrange(len(matrix)) ]
+        self.blockMat = matrix
         self.cellMat = [ [ None for y in xrange(len(matrix[x])) ] for x in xrange(len(matrix)) ]
         self.openSet = []
         for x in xrange(int(math.floor(self.start[0])), 1+int(math.ceil(self.start[0]))) :
@@ -126,7 +126,7 @@ class AStar :
                 return True
             current.state = Cell.IN_CLOSED_SET
             for neighbor in self.neighbors(current) :
-                newGScore = self.getGScore(neighbor, current)
+                newGScore = current.gScore + current.dist(neighbor.x, neighbor.y)
                 if neighbor.state == Cell.INIT or neighbor.gScore > newGScore :
                     neighbor.gScore = newGScore
                     neighbor.fScore = newGScore + self.heuristicEstimate(neighbor)
@@ -135,15 +135,16 @@ class AStar :
             self.turnCount += 1
         return False
     
-    def buildPath(self) :
-        """ endOfPath : (int,int)
-            returns : [(int,int)] (path between 'start' and 'goal', using shortcuts)
-        """
-        if self.pathEnd == None :
-            return None
-        else :
-            
-            return path
+#    def buildPath(self) :
+#        """ endOfPath : (int,int)
+#            returns : [(int,int)] (path between 'start' and 'goal', using shortcuts)
+#        """
+#        if self.pathEnd == None :
+#            return None
+#        else :
+#            sp = PathSimplifier(self.blockMat)
+#            path = self.buildCompletePath()
+#            return sp.simplifyPath(path)
     
     def buildCompletePath(self) :
         """ endOfPath : (int,int)
@@ -152,12 +153,16 @@ class AStar :
         if self.pathEnd == None :
             return None
         else :
-            path = [self.start, self.goal]
+            path = [self.pathEnd]
             current = self.cellMat[self.pathEnd[0]][self.pathEnd[1]]
             while current.origin != None :
                 current = current.origin
                 coord = (current.x, current.y)
-                path.insert(1,coord)
+                path.insert(0,coord)
+            if self.start != path[0] :
+                path.insert(0, self.start)
+            if self.goal != self.pathEnd :
+                path.append(self.goal)
             return path
     
     def addToOpenSet(self, cell) :
@@ -185,55 +190,35 @@ class AStar :
             yields : Cell (neighbor of 'cell' that are not IN_CLOSED_SET, nor obstacles)
         """
         for x,y in cell.neighbors() :
-            cell = self.cellMat[x][y]
-            if cell == None : 
-                if self.blockMat[x][y] != 0 :
+            ncell = self.cellMat[x][y]
+            if ncell == None : 
+                if self.blockMat[x][y] :
                     yield Cell(x,y)
                 else :
                     pass
-            elif cell.state == Cell.IN_OPEN_SET :
-                yield cell.copy()
+            elif ncell.state == Cell.IN_OPEN_SET :
+                yield ncell.copy()
             else :
                 pass
     
-    def isLineClear(self, cellA, cellB) :
-        """ cellA, cellB : Cell
-            returns : bool (whether the straight path between 'cellA' and 'cellB' is free of obstacles)
-        """
-        for x,y in cellA.lineCoords(cellB.x, cellB.y, 1) :
-            if self.blockMat[x][y] == 0 :
-                return False
-        return True
-    
-    def getGScore(self, cell, origin) :
-        """ cell, origin : Cell
-        """
-        steps = 4
-        newGScore = 0
-        i = origin
-        while i != None and steps > 0 :
-            newGScore = i.gScore + i.dist(cell.x, cell.y)
-            i = i.origin
-            steps -= 1
-        return newGScore
+#    def getGScore(self, cell, origin) :
+#        """ cell, origin : Cell
+#        """
+#        newGScore = origin.gScore + origin.dist(cell.x, cell.y)
+#        return newGScore
     
     def heuristicEstimate(self, cell) :
         """ cell : Cell
         """
-        return cell.dist(self.goal[0], self.goal[1])
+        return 1.5 * cell.dist(self.goal[0], self.goal[1])
     
     def isGoal(self, cell) :
-        xRange = xrange(int(self.goal[0]), int(1+math.ceil(self.goal[0])))
-        yRange = xrange(int(self.goal[1]), int(1+math.ceil(self.goal[1])))
-        if cell.x in xRange and cell.y in yRange :
+        dx = abs(cell.x - self.goal[0])
+        dy = abs(cell.y - self.goal[1])
+        if dx < 1 and dy < 1 :
             return True
         else :
             return False
-
-
-
-
-
 
 
 
