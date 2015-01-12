@@ -4,7 +4,7 @@ Created on Mon Nov 03 23:08:08 2014
 @author: christianhamelain
 """
 
-from incendieCopie import fireball 
+from incendie import fireball 
 
 
 size = (200, 300)
