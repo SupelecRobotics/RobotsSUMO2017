@@ -156,9 +156,9 @@ class Map   :
         """
         vect = []
         (x, y) = center
-        for i in range(x - length, x + length) :
+        for i in range(x - length, x + length + 1) :
             a = length - abs(i - x)
-            for j in range(y - a, y + a) :
+            for j in range(y - a, y + a + 1) :
                     
                 b = True
                 (c, d) = self.size
@@ -198,7 +198,7 @@ class Map   :
                     vect = self.getCloseFreeNeighboorsInForest(newForest, (i, j), length)
                     for point in vect :
                         (a, b) = point
-                        newForest[a][b] = self.forest[i][j]
+                        newForest[a][b] = self.forest[i][j] - 1
         self.forest = newForest
     # end of enlargeYourPenis
 
