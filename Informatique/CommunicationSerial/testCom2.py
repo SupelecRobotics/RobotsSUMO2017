@@ -24,15 +24,16 @@ t1 = theta >> 8
 t2 = theta - (t1 << 8)
 satVitesse = 120    #saturation vitesse : 1 byte max
 
-inputByteString = chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
+inputByteString = chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse) + '\n'
 x = bytearray(b'128 132 139 2 0 0')
  
 while True: # boucle répétée jusqu'à l'interruption du programme
 #    ser.write('5')
     ser.write(inputByteString)
+    print("Envoi Byte String")
     print(ser.readline()) #on affiche la réponse
     
-    ser.write(x)
+    ser.write('5\n')
     print(ser.readline())
     
-    time.sleep(1) # on attend pendant 1 seconde 
+    time.sleep(2) # on attend pendant 1 seconde 
