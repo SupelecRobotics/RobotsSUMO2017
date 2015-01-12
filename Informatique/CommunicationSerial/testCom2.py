@@ -16,9 +16,13 @@ import time # pour le délai d'attente entre les messages
  
 ser = serial.Serial('/dev/ttyACM0', 9600)
 time.sleep(4) #on attend un peu, pour que l'Arduino soit prêt.
-d = 0x004F
-theta = 0x00FF
-satVitesse = 0x12
+d = 400             #distance : 2 byte max
+d1 = d >> 8
+d2 = d - d1 << 8
+theta = 300         #theta : 2 byte max
+t1 = theta >> 8
+t2 = theta - t1 << 8
+satVitesse = 120    #saturation vitesse : 1 byte max
 
 inputByteString = chr(d) + chr(theta) + chr(satVitesse)
 x = bytearray(b'128 132 139 2 0 0')
@@ -32,7 +36,3 @@ while True: # boucle répétée jusqu'à l'interruption du programme
     print(ser.readline())
     
     time.sleep(1) # on attend pendant 1 seconde 
-    
-    #d : 2 byte
-    #theta : 2 byte
-    #saturation vitesse : 1 byte
