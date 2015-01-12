@@ -24,7 +24,7 @@ t1 = theta >> 8
 t2 = theta - t1 << 8
 satVitesse = 120    #saturation vitesse : 1 byte max
 
-inputByteString = chr(d) + chr(theta) + chr(satVitesse)
+inputByteString = chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
 x = bytearray(b'128 132 139 2 0 0')
  
 while True: # boucle répétée jusqu'à l'interruption du programme
