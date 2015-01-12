@@ -21,11 +21,15 @@ theta = 0x00FF
 satVitesse = 0x12
 
 inputByteString = chr(d) + chr(theta) + chr(satVitesse)
+x = bytearray(b'128 132 139 2 0 0')
  
 while True: # boucle répétée jusqu'à l'interruption du programme
 #    ser.write('5')
-    ser.write(inputByteString.decode('hex'))
+    ser.write(inputByteString)
     print(ser.readline()) #on affiche la réponse
+    
+    ser.write(x)
+    print(ser.readline())
     
     time.sleep(1) # on attend pendant 1 seconde 
     
