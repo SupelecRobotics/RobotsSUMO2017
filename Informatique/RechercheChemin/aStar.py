@@ -65,29 +65,6 @@ class Cell :
         yield (self.x + 1, self.y)
         yield (self.x - 1, self.y)
     
-#    def lineCoords(self, x, y, threshold) :
-#        """ x, y : int, threshold : float
-#            yields : (int,int) (coordinates of cells close to the line between self and (x,y))
-#        """
-#        fX = 1 if self.x <= x else -1   # used to fall back to a situation where
-#        fY = 1 if self.y <= y else -1   # self.x < x and self.y < y
-#        dX = fX*(x - self.x)
-#        dY = fY*(y - self.y)
-#        if dX == 0 :
-#            for v in xrange(dY+1) :
-#                yield self.x, self.y + fY*v
-#        elif dY == 0 :
-#            for u in xrange(dX+1) :
-#                yield self.x + fX*u, self.y
-#        else :
-#            a = float(dY)/float(dX)
-#            b = threshold * math.sqrt(1 + a*a)
-#            for u in xrange(dX+1) :
-#                vMin = int(max(0, math.ceil(a*u-b)))
-#                vMax = int(min(dY, math.floor(a*u+b)))
-#                for v in xrange(vMin, vMax+1):
-#                    yield self.x + fX*u, self.y + fY*v
-    
 
 class AStar :
     """ Implements the A* algorithm on an unweighed 2D grid with obstacles
@@ -135,18 +112,7 @@ class AStar :
             self.turnCount += 1
         return False
     
-#    def buildPath(self) :
-#        """ endOfPath : (int,int)
-#            returns : [(int,int)] (path between 'start' and 'goal', using shortcuts)
-#        """
-#        if self.pathEnd == None :
-#            return None
-#        else :
-#            sp = PathSimplifier(self.blockMat)
-#            path = self.buildCompletePath()
-#            return sp.simplifyPath(path)
-    
-    def buildCompletePath(self) :
+    def buildPath(self) :
         """ endOfPath : (int,int)
             returns : [(int,int)] (path between 'start' and 'goal')
         """
@@ -169,9 +135,9 @@ class AStar :
         """ cell : Cell
         """
         if cell.state == Cell.IN_OPEN_SET :
-            self.cellMat[cell.x][cell.y].state = Cell.REMOVED
-        else :
-            cell.state = Cell.IN_OPEN_SET
+            cell.state = Cell.REMOVED
+            cell = cell.copy()
+        cell.state = Cell.IN_OPEN_SET
         self.cellMat[cell.x][cell.y] = cell
         heapq.heappush(self.openSet, cell)
         self.cellCount += 1
@@ -190,22 +156,15 @@ class AStar :
             yields : Cell (neighbor of 'cell' that are not IN_CLOSED_SET, nor obstacles)
         """
         for x,y in cell.neighbors() :
-            ncell = self.cellMat[x][y]
-            if ncell == None : 
-                if self.blockMat[x][y] :
-                    yield Cell(x,y)
-                else :
-                    pass
-            elif ncell.state == Cell.IN_OPEN_SET :
-                yield ncell.copy()
-            else :
+            if not self.blockMat[x][y] :            # if obstacle : no neighbor
                 pass
-    
-#    def getGScore(self, cell, origin) :
-#        """ cell, origin : Cell
-#        """
-#        newGScore = origin.gScore + origin.dist(cell.x, cell.y)
-#        return newGScore
+            else :
+                if self.cellMat[x][y] == None :     # if void neighbor : new cell
+                    yield Cell(x,y)
+                elif self.cellMat[x][y].state == Cell.IN_OPEN_SET : # if neighbor in open set : return it
+                    yield self.cellMat[x][y]
+                else :                              # if neighbor in closed set : don't return it
+                    pass
     
     def heuristicEstimate(self, cell) :
         """ cell : Cell
@@ -219,8 +178,4 @@ class AStar :
             return True
         else :
             return False
-
-
-
-
 

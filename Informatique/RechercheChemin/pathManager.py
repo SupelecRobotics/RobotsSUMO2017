@@ -27,7 +27,7 @@ class PathManager :
         """
         a = AStar(start, goal, self.thresholdMap)
         a.aStar()
-        p = a.buildCompletePath()
+        p = a.buildPath()
         print p
         if p == None :
             self.path == None

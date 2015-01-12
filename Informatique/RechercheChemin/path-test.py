@@ -10,7 +10,7 @@ import aStarOld
 import pathManager
 import time
 
-"""
+""
 matrix = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -47,24 +47,24 @@ print p
 print t2 - t1
 print t3 - t2
 
-for x in xrange(len(a.cellMat)) :
-    s = ""
-    for y in xrange(len(a.cellMat[x])) :
-        if not a.blockMat[x][y]  :
-            s += "# "
-        else :
-            c = a.cellMat[x][y]
-            if c == None :
-                s += "  "
-            elif (x,y) in p :
-                s += "@ "
-            elif c.state == aStar.Cell.IN_OPEN_SET :
-                s += "o "
-            elif c.state == aStar.Cell.IN_CLOSED_SET :
-                s += "x "
-            else :
-                s += "  "
-    print s
+#for x in xrange(len(a.cellMat)) :
+#    s = ""
+#    for y in xrange(len(a.cellMat[x])) :
+#        if not a.blockMat[x][y]  :
+#            s += "# "
+#        else :
+#            c = a.cellMat[x][y]
+#            if c == None :
+#                s += "  "
+#            elif (x,y) in p :
+#                s += "@ "
+#            elif c.state == aStar.Cell.IN_OPEN_SET :
+#                s += "o "
+#            elif c.state == aStar.Cell.IN_CLOSED_SET :
+#                s += "x "
+#            else :
+#                s += "  "
+#    print s
 
 
 
@@ -110,7 +110,7 @@ print p
 print t2 - t1
 print t3 - t2
 
-"""
+""
 
 a = aStar.AStar(f.forest)
 print time.clock()
