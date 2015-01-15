@@ -71,7 +71,7 @@ class AStar :
     """
     
     def __init__(self, start, goal, matrix) :
-        """ start, goal : (float,float), matrix : [[bool]]
+        """ start : (float,float), goal : (float,float,float), matrix : [[bool]]
             'matrix' represents the grid : False is an obstacle, True is a free cell
             the grid must be bordered with Falses
         """
@@ -80,7 +80,8 @@ class AStar :
         self.cellCount = 0
         
         self.start = start
-        self.goal = goal
+        self.goal = goal[0:2]
+        self.goalRadius = goal[2]
         self.pathEnd = None
         self.blockMat = matrix
         self.cellMat = [ [ None for y in xrange(len(matrix[x])) ] for x in xrange(len(matrix)) ]
@@ -134,7 +135,7 @@ class AStar :
     def addToOpenSet(self, cell) :
         """ cell : Cell
         """
-        if cell.state == Cell.IN_OPEN_SET :
+        if cell.state == Cell.IN_OPEN_SET : # if cell is already in openSet : mark it as 'removed' and add a copy
             cell.state = Cell.REMOVED
             cell = cell.copy()
         cell.state = Cell.IN_OPEN_SET
@@ -159,7 +160,7 @@ class AStar :
             if not self.blockMat[x][y] :            # if obstacle : no neighbor
                 pass
             else :
-                if self.cellMat[x][y] == None :     # if void neighbor : new cell
+                if self.cellMat[x][y] == None :     # if void neighbor : create a new cell
                     yield Cell(x,y)
                 elif self.cellMat[x][y].state == Cell.IN_OPEN_SET : # if neighbor in open set : return it
                     yield self.cellMat[x][y]
@@ -172,10 +173,5 @@ class AStar :
         return 1.5 * cell.dist(self.goal[0], self.goal[1])
     
     def isGoal(self, cell) :
-        dx = abs(cell.x - self.goal[0])
-        dy = abs(cell.y - self.goal[1])
-        if dx < 1 and dy < 1 :
-            return True
-        else :
-            return False
+        return cell.dist(self.goal[0], self.goal[1]) <= self.goalRadius
 

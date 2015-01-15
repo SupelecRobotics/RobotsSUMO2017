@@ -10,7 +10,7 @@ import aStarOld
 import pathManager
 import time
 
-""
+"""
 matrix = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -23,12 +23,12 @@ matrix = [
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
-threshold = 0
+threshold = 10
 
 mat = [ [ (matrix[x][y] > 0 or matrix[x][y] < -threshold) for y in xrange(len(matrix[x])) ] for x in xrange(len(matrix)) ]
 
 start = (1,1)
-goal = (8,14)
+goal = (8, 14, 0)
 
 #a = aStar.AStar(start, goal, mat)
 #
@@ -82,7 +82,7 @@ for i in xrange(side) :
     m[side-1][i] = 0
 
 begin = (1,1)
-end = (40,60)
+end = (40,30,0)
 
 #t0 = time.clock()
 #a = aStar.AStar(begin, end, m)
@@ -110,7 +110,7 @@ print p
 print t2 - t1
 print t3 - t2
 
-""
+"""
 
 a = aStar.AStar(f.forest)
 print time.clock()

@@ -23,7 +23,7 @@ class PathManager :
         self.thresholdMap = [ [ (self.baseMap[x][y] > 0 or self.baseMap[x][y] < -threshold) for y in xrange(len(self.baseMap[x])) ] for x in xrange(len(self.baseMap)) ]
     
     def findPath(self, start, goal) :
-        """ start, goal : (float,float)
+        """ start : (float,float), goal : (float,float,float)
         """
         a = AStar(start, goal, self.thresholdMap)
         a.aStar()
@@ -32,6 +32,7 @@ class PathManager :
         if p == None :
             self.path == None
         else :
+            dist = 0
             l = len(p)
             current = l-1
             self.path = [p[current]]
@@ -41,6 +42,8 @@ class PathManager :
                     i += 1
                 current = i
                 self.path.insert(0,p[current])
+                dist += math.sqrt( (self.path[0][0]-self.path[1][0])**2 + (self.path[0][1]-self.path[1][1])**2 )
+            print dist
     
     def distFromLine(self, point, pointA, pointB) :
         """ point, pointA, pointB : (float,float)
