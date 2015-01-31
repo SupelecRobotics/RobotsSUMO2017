@@ -17,7 +17,7 @@ tableTopViewOriginal = cv2.imread('schema_table.png')
 cv2.namedWindow('Colors', cv2.WINDOW_NORMAL)
 cv2.namedWindow('Match max', cv2.WINDOW_NORMAL)
 
-refImg = cv2.imread('cylinderReference2.png')
+refImg = cv2.imread('cylinderReference3.png')
 refImg = cv2.cvtColor(refImg, cv2.COLOR_BGR2GRAY)
 refContours,_ = cv2.findContours(refImg,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 
@@ -67,11 +67,13 @@ while(cap.isOpened() and not end):
             x,y,w,h = cv2.boundingRect(cnt)
             if(cv2.matchShapes(cnt, refContours[0], 1, 1) < matchMax and w > W_CONTOUR_MIN and h > H_CONTOUR_MIN):
                 cv2.drawContours(frame, [cnt], -1, (255, 0, 0))
-                dst = cv2.perspectiveTransform(np.float32([[x,y]]).reshape(-1,1,2),M)
+                dst = cv2.perspectiveTransform(np.float32([[x,y + h/2]]).reshape(-1,1,2),M)
                 cv2.circle(tableTopView,(int(dst[0][0][0]),int(dst[0][0][1])), 4, (0, 0, 255), 2)
-        
+
+
+        finalFrame = cv2.bitwise_and(frame,frame,mask = eroded)
         cv2.imshow('Camera', frame)
-        cv2.imshow('Mask', eroded)
+        cv2.imshow('Selection', finalFrame)
         cv2.imshow('Top view', tableTopView)
 
     if(cv2.waitKey(1) & 0xFF == ord('q')):
