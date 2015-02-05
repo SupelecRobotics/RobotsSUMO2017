@@ -35,7 +35,7 @@ final = np.empty_like(table)
 while(not end):
 
     cv2.imshow('Table',img)
-    cv2.imshow('Top',final)
+    cv2.imshow('Top View',final)
 
     if(cv2.waitKey(1) & 0xFF == ord('q')):
         end = True
