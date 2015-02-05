@@ -7,6 +7,7 @@ Created on Thu Dec 11 21:34:28 2014
 
 import math
 import heapq
+import util
 
 class Cell :
     """ Implements one grid cell, with relevants attributes, for use in the AStar class
@@ -53,9 +54,7 @@ class Cell :
         """ x, y : float
             returns : float (euclid distance between self and (x,y))
         """
-        dX = float(self.x - x)
-        dY = float(self.y - y)
-        return math.sqrt(dX*dX + dY*dY)
+        return util.dist((self.x,self.y), (x,y))
     
     def neighbors(self) :
         """ yields : (int,int) (coordinates of side-adjacent cells)
@@ -128,8 +127,8 @@ class AStar :
                 path.insert(0,coord)
             if self.start != path[0] :
                 path.insert(0, self.start)
-            if self.goal != self.pathEnd :
-                path.append(self.goal)
+            #if self.goal != self.pathEnd :
+                #path.append(self.goal)
             return path
     
     def addToOpenSet(self, cell) :

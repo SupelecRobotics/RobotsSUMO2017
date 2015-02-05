@@ -5,6 +5,7 @@ Created on Thu Jan  8 21:52:30 2015
 @author: antoinemarechal
 """
 import math
+import util
 from aStar import AStar
 
 class PathManager :
@@ -42,20 +43,8 @@ class PathManager :
                     i += 1
                 current = i
                 self.path.insert(0,p[current])
-                dist += math.sqrt( (self.path[0][0]-self.path[1][0])**2 + (self.path[0][1]-self.path[1][1])**2 )
+                dist += util.dist(self.path[0], self.path[1])
             print dist
-    
-    def distFromLine(self, point, pointA, pointB) :
-        """ point, pointA, pointB : (float,float)
-            returns float : square of the orthogonal distance between point and the segment [pointA,pointB]
-        """
-        x = float(point[0] - pointA[0])
-        y = float(point[1] - pointA[1])
-        x0 = float(pointB[0] - pointA[0])
-        y0 = float(pointB[1] - pointA[1])
-        a = x0*x0 + y0*y0
-        b = x*y0 - x0*y
-        return b*b/a
         
     def isLineClear(self, pointA, pointB) :
         """ pointA, pointB : (float,float)
@@ -72,7 +61,7 @@ class PathManager :
             yMax = int(math.ceil(max(pointA[1], pointB[1])))
             for x in xrange(xMin, 1+xMax) :
                 for y in xrange(yMin, 1+yMax) :
-                    if not self.thresholdMap[x][y] and self.distFromLine((x,y), pointA, pointB) < threshold :
+                    if not self.thresholdMap[x][y] and util.height((x,y), pointA, pointB) < threshold :
                         return False
             return True
         
