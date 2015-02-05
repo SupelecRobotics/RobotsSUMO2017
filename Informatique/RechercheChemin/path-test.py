@@ -99,16 +99,16 @@ end = (40,30,0)
 #t4 = time.clock()
 #print t4 - t3
 
-t1 = time.clock()
+#t1 = time.clock()
 pm = pathManager.PathManager(m)
 pm.setThreshold(0)
-t2 = time.clock()
+#t2 = time.clock()
 pm.findPath(begin, end)
 p = pm.path
-t3 = time.clock()
-print p
-print t2 - t1
-print t3 - t2
+#t3 = time.clock()
+#print p
+#print t2 - t1
+#print t3 - t2
 
 """
 

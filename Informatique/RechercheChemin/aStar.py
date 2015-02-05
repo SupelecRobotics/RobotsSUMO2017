@@ -8,6 +8,7 @@ Created on Thu Dec 11 21:34:28 2014
 import math
 import heapq
 import util
+import time
 
 #class Cell :
 #    """ Implements one grid cell, with relevants attributes, for use in the AStar class
@@ -96,6 +97,8 @@ class AStar :
                 self.gScoreMat[x][y] = gScore
                 self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
                 self.addToOpenSet(x,y)
+        self.t0 = time.clock()
+        self.t = self.t0
     
     def aStar(self) :
         """ runs the A* algorithm
@@ -114,6 +117,9 @@ class AStar :
                     self.prevMat[x1][y1] = (x0,y0)
                     self.addToOpenSet(x1,y1)
             self.turnCount += 1
+            t = time.clock()
+            print "from astar : " + str(1000*(t - self.t0))+ " -- " + str(1000*(t - self.t))
+            self.t = t
         return False
     
     def buildPath(self) :

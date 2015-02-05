@@ -5,6 +5,7 @@ Created on Thu Jan  8 21:52:30 2015
 @author: antoinemarechal
 """
 import math
+import time
 import util
 from aStar import AStar
 
@@ -16,6 +17,7 @@ class PathManager :
         self.thresholdMap = [[ ]]
         self.setThreshold(0)
         self.path = []
+        self.t0 = time.clock()
         
     def setThreshold(self, threshold) :
         """ threshold : int
@@ -26,10 +28,13 @@ class PathManager :
     def findPath(self, start, goal) :
         """ start : (float,float), goal : (float,float,float)
         """
+        self.printTime()
         a = AStar(start, goal, self.thresholdMap)
+        self.printTime()
         a.aStar()
         p = a.buildPath()
-        print p
+        self.printTime()
+        #print p
         if p == None :
             self.path == None
         else :
@@ -45,6 +50,7 @@ class PathManager :
                 self.path.insert(0,p[current])
                 dist += util.dist(self.path[0], self.path[1])
             print dist
+        self.printTime()
         
     def isLineClear(self, pointA, pointB) :
         """ pointA, pointB : (float,float)
@@ -64,4 +70,9 @@ class PathManager :
                     if not self.thresholdMap[x][y] and util.height((x,y), pointA, pointB) < threshold :
                         return False
             return True
+    
+    def printTime(self) :
+        t = time.clock()
+        print "from pm : " + str(1000*(t - self.t0))
+        self.t0 = t
         
