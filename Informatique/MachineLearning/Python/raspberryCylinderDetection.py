@@ -53,7 +53,6 @@ while(cap.isOpened() and not end):
                               cv2.getTrackbarPos('Vmax', 'Colors')])
         
         matchMax = cv2.getTrackbarPos('MatchMax', 'Match max')/float(1000)
-        
 
         cropped = cv2.inRange(hsvFrame, color_min, color_max)
         eroded = cv2.erode(cropped, cross)
