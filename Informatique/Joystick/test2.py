@@ -32,11 +32,12 @@ cond = True
 while (cond):
     g_keys = pygame.event.get()
 
-    for event in g_keys:   
-        for i in range(0, _joystick.get_numaxes()-1):
-            print "axis"
-            string = ""
-            if (_joystick.get_axis(i)):
-                string += (str(i) + " : " + str(_joystick.get_axis(i)))
-            print string
+    for event in g_keys:  
+        if (event==JOYAXISMOTION):
+            for i in range(0, _joystick.get_numaxes()-1):
+                print "axis"
+                string = ""
+                if (_joystick.get_axis(i)):
+                    string += (str(i) + " : " + str(_joystick.get_axis(i)))
+                print string
     time.sleep(1)

@@ -26,8 +26,7 @@ satVitesse = 120    #saturation vitesse : 1 byte max
 
 # 00000001 10010000   00000001  00101100  01111000
 # 1 144 1 44 120
-inputByteString = chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse) + '\n'
-x = bytearray(b'128 132 139 2 0 0')
+inputByteString = chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)# + '\n'
  
 while True: # boucle répétée jusqu'à l'interruption du programme
 #    ser.write('5')
