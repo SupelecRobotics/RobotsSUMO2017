@@ -5,7 +5,7 @@ Created on Thu Jan  8 21:52:30 2015
 @author: antoinemarechal
 """
 import math
-import time
+import timeit
 import util
 from aStar import AStar
 
@@ -17,7 +17,7 @@ class PathManager :
         self.thresholdMap = [[ ]]
         self.setThreshold(0)
         self.path = []
-        self.t0 = time.clock()
+        self.t0 = timeit.default_timer()
         
     def setThreshold(self, threshold) :
         """ threshold : int
@@ -72,7 +72,7 @@ class PathManager :
             return True
     
     def printTime(self) :
-        t = time.clock()
+        t = timeit.default_timer()
         print "from pm : " + str(1000*(t - self.t0))
         self.t0 = t
         
