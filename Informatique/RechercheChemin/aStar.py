@@ -85,19 +85,39 @@ class AStar :
         self.pathEnd = None
         height = len(matrix)
         width = len(matrix[0])
-        self.mat = [ [ (matrix[x][y], 1, float('inf'), float('inf'), None) for y in xrange(width) ] for x in xrange(height) ]
-#        self.blockMat = matrix
-#        self.statusMat = [ [ 1 for y in xrange(width) ] for x in xrange(height) ]    # 1 = inexplored, 0 = in open set, -1 = in closed set
-#        self.gScoreMat = [ [ float('inf') for y in xrange(width) ] for x in xrange(height) ]
-#        self.fScoreMat = [ [ float('inf') for y in xrange(width) ] for x in xrange(height) ]
-#        self.prevMat = [ [ None for y in xrange(width) ] for x in xrange(height) ]
-#        self.openSet = []
-        #for x in xrange(int(math.floor(self.start[0])), 1+int(math.ceil(self.start[0]))) :
-        #    for y in xrange(int(math.floor(self.start[1])), 1+int(math.ceil(self.start[1]))) :
-        #        gScore = util.dist(self.start, (x,y))
-        #        self.gScoreMat[x][y] = gScore
-        #        self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
-        #        self.addToOpenSet(x,y)
+        maximum = float(height+width)   # no distance within the matrix can be superior to this
+        t0 = timeit.default_timer()
+        #1
+        self.blockMat = matrix
+        t1 = timeit.default_timer()
+        print 1000 * (t1-t0)
+        t0 = timeit.default_timer()
+        #2
+        self.statusMat = [ [ 1 for y in xrange(width) ] for x in xrange(height) ]    # 1 = inexplored, 0 = in open set, -1 = in closed set
+        t1 = timeit.default_timer()
+        print 1000 * (t1-t0)
+        t0 = timeit.default_timer()
+        #3
+        self.gScoreMat = [ [ maximum for y in xrange(width) ] for x in xrange(height) ]
+        t1 = timeit.default_timer()
+        print 1000 * (t1-t0)
+        t0 = timeit.default_timer()
+        #4
+        self.fScoreMat = [ [ maximum for y in xrange(width) ] for x in xrange(height) ]
+        t1 = timeit.default_timer()
+        print 1000 * (t1-t0)
+        t0 = timeit.default_timer()
+        #5
+        self.prevMat = [ [ None for y in xrange(width) ] for x in xrange(height) ]
+        t1 = timeit.default_timer()
+        print 1000 * (t1-t0)
+        self.openSet = []
+        for x in xrange(int(math.floor(self.start[0])), 1+int(math.ceil(self.start[0]))) :
+            for y in xrange(int(math.floor(self.start[1])), 1+int(math.ceil(self.start[1]))) :
+                gScore = util.dist(self.start, (x,y))
+                self.gScoreMat[x][y] = gScore
+                self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
+                self.addToOpenSet(x,y)
         self.t0 = timeit.default_timer()
         self.t = self.t0
     
