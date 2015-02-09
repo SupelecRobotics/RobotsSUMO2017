@@ -118,11 +118,11 @@ class AStar :
         """ runs the A* algorithm
             returns : bool (success)
         """
-        t0 = timeit.default_timer()
+        #t0 = timeit.default_timer()
         for x0, y0 in self.lowestCell() :
             #print 1000*(timeit.default_timer()-t0)
             #print "top"
-            t0 = timeit.default_timer()
+            #t0 = timeit.default_timer()
             if self.isGoal((x0,y0)) :    # the algorithm ends if 'goal' is reached
                 self.pathEnd = (x0, y0)
                 return True
@@ -162,33 +162,33 @@ class AStar :
     def addToOpenSet(self, x, y) :
         """ cell : Cell
         """
-        t0 = timeit.default_timer()
+        #t0 = timeit.default_timer()
         self.statusMat[x][y] = 0
         item = (self.fScoreMat[x][y], self.cellCount, x, y)
         heapq.heappush(self.openSet, item)
         self.cellCount += 1
-        t1 = timeit.default_timer()
+        #t1 = timeit.default_timer()
         #print "from astar:addToOPenSet : " + str(1000*(t1-t0))
     
     def lowestCell(self) :
         """ yields : Cell
             pop cells from openSet until finding a non-removed one
         """
-        t0 = timeit.default_timer()
+        #t0 = timeit.default_timer()
         while len(self.openSet) > 0 :
             a, b, x, y = heapq.heappop(self.openSet)
             if self.statusMat[x][y] == 0 and self.fScoreMat[x][y] == a :
-                t1 = timeit.default_timer()
+                #t1 = timeit.default_timer()
                 #print "from astar:lowestCell : " + str(1000*(t1-t0))
                 yield (x,y)
-                t0 = timeit.default_timer()
+                #t0 = timeit.default_timer()
     
     def neighbors(self, x0, y0) :
         """ cell : Cell
             yields : Cell (neighbor of 'cell' that are not IN_CLOSED_SET, nor obstacles)
         """
         for x, y in [(x0,y0+1), (x0,y0-1), (x0+1,y0), (x0-1,y0)] :
-            t0 = timeit.default_timer()
+            #t0 = timeit.default_timer()
             if self.blockMat[x][y] and self.statusMat[x][y] >= 0 :
                 #t1 = timeit.default_timer()
                 #print "from astar:neigbors : " + str(1000*(t1-t0))

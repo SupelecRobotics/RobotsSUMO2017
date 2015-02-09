@@ -43,3 +43,8 @@ t0 = timeit.default_timer()
 print a.aStar()
 t1 = timeit.default_timer()
 print 1000 * (t1-t0)
+
+t0 = timeit.default_timer()
+p = a.buildPath()
+t1 = timeit.default_timer()
+print 1000 * (t1-t0)
