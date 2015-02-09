@@ -120,26 +120,26 @@ class AStar :
         """
         t0 = timeit.default_timer()
         for x0, y0 in self.lowestCell() :
-            print 1000*(timeit.default_timer()-t0)
-            print "top"
+            #print 1000*(timeit.default_timer()-t0)
+            #print "top"
             t0 = timeit.default_timer()
             if self.isGoal((x0,y0)) :    # the algorithm ends if 'goal' is reached
                 self.pathEnd = (x0, y0)
                 return True
-            print 1000*(timeit.default_timer()-t0)
+            #print 1000*(timeit.default_timer()-t0)
             self.statusMat[x0][y0] = -1
-            print 1000*(timeit.default_timer()-t0)
+            #print 1000*(timeit.default_timer()-t0)
             for x1, y1 in self.neighbors(x0, y0) :
-                print str(x1) + ", " + str(y1)
-                print 1000*(timeit.default_timer()-t0)
+                #print str(x1) + ", " + str(y1)
+                #print 1000*(timeit.default_timer()-t0)
                 newGScore = self.gScoreMat[x0][y0] + util.dist((x0,y0), (x1,y1))
-                print 1000*(timeit.default_timer()-t0)
+                #print 1000*(timeit.default_timer()-t0)
                 if self.statusMat[x1][y1] == 1 or self.gScoreMat[x1][y1] > newGScore :
                     self.gScoreMat[x1][y1] = newGScore
                     self.fScoreMat[x1][y1] = newGScore + self.heuristicEstimate((x1,y1))
                     self.prevMat[x1][y1] = (x0,y0)
                     self.addToOpenSet(x1,y1)
-                print 1000*(timeit.default_timer()-t0)
+                #print 1000*(timeit.default_timer()-t0)
             self.turnCount += 1
         return False
     
