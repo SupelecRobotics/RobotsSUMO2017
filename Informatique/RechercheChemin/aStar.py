@@ -189,16 +189,10 @@ class AStar :
         """
         for x, y in [(x0,y0+1), (x0,y0-1), (x0+1,y0), (x0-1,y0)] :
             t0 = timeit.default_timer()
-            if not self.blockMat[x][y] :            # if obstacle : no neighbor
-                pass
-            else :
-                if self.statusMat[x][y] >= 0 :
-                    t1 = timeit.default_timer()
-                    #print "from astar:neigbors : " + str(1000*(t1-t0))
-                    yield (x,y)
-                    t0 = timeit.default_timer()
-                else :
-                    pass
+            if self.blockMat[x][y] and self.statusMat[x][y] >= 0 :
+                #t1 = timeit.default_timer()
+                #print "from astar:neigbors : " + str(1000*(t1-t0))
+                yield (x,y)
     
     def heuristicEstimate(self, cell) :
         """ cell : Cell
