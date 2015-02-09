@@ -85,29 +85,24 @@ class AStar :
         self.pathEnd = None
         height = len(matrix)
         width = len(matrix[0])
-        maximum = float(height+width)   # no distance within the matrix can be superior to this
+        maximum = float('inf')
         t0 = timeit.default_timer()
-        #1
         self.blockMat = matrix
         t1 = timeit.default_timer()
         print 1000 * (t1-t0)
         t0 = timeit.default_timer()
-        #2
         self.statusMat = [ [ 1 for y in xrange(width) ] for x in xrange(height) ]    # 1 = inexplored, 0 = in open set, -1 = in closed set
         t1 = timeit.default_timer()
         print 1000 * (t1-t0)
         t0 = timeit.default_timer()
-        #3
         self.gScoreMat = [ [ maximum for y in xrange(width) ] for x in xrange(height) ]
         t1 = timeit.default_timer()
         print 1000 * (t1-t0)
         t0 = timeit.default_timer()
-        #4
         self.fScoreMat = [ [ maximum for y in xrange(width) ] for x in xrange(height) ]
         t1 = timeit.default_timer()
         print 1000 * (t1-t0)
         t0 = timeit.default_timer()
-        #5
         self.prevMat = [ [ None for y in xrange(width) ] for x in xrange(height) ]
         t1 = timeit.default_timer()
         print 1000 * (t1-t0)

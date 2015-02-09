@@ -24,7 +24,7 @@ matrix = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 """
 side = 62
-matrix = [[True]*side]*side
+matrix = [[True for x in xrange(side) ] for y in xrange(side) ]
 for i in xrange(side) :
     matrix[0][i] = False
     matrix[side-1][i] = False
@@ -36,5 +36,10 @@ goal = (60,40,0)
 
 t0 = timeit.default_timer()
 a = aStar.AStar(start, goal, matrix)
+t1 = timeit.default_timer()
+print 1000 * (t1-t0)
+
+t0 = timeit.default_timer()
+print a.aStar()
 t1 = timeit.default_timer()
 print 1000 * (t1-t0)
