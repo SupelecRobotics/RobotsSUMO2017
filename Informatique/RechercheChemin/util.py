@@ -33,4 +33,4 @@ def angle(A,B) :
     """
     dX = float(A[0] - B[0])
     dY = float(A[1] - B[1])
-    return atan2(dY, dX)
+    return math.atan2(dY, dX)

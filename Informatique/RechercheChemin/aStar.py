@@ -85,18 +85,19 @@ class AStar :
         self.pathEnd = None
         height = len(matrix)
         width = len(matrix[0])
+        #self.mat = [ [ (matrix[x][y], 1, float('inf'), float('inf'), None) for y in xrange(width) ] for x in xrange(height) ]
         self.blockMat = matrix
         self.statusMat = [ [ 1 for y in xrange(width) ] for x in xrange(height) ]    # 1 = inexplored, 0 = in open set, -1 = in closed set
         self.gScoreMat = [ [ float('inf') for y in xrange(width) ] for x in xrange(height) ]
         self.fScoreMat = [ [ float('inf') for y in xrange(width) ] for x in xrange(height) ]
         self.prevMat = [ [ None for y in xrange(width) ] for x in xrange(height) ]
         self.openSet = []
-        for x in xrange(int(math.floor(self.start[0])), 1+int(math.ceil(self.start[0]))) :
-            for y in xrange(int(math.floor(self.start[1])), 1+int(math.ceil(self.start[1]))) :
-                gScore = util.dist(self.start, (x,y))
-                self.gScoreMat[x][y] = gScore
-                self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
-                self.addToOpenSet(x,y)
+        #for x in xrange(int(math.floor(self.start[0])), 1+int(math.ceil(self.start[0]))) :
+        #    for y in xrange(int(math.floor(self.start[1])), 1+int(math.ceil(self.start[1]))) :
+        #        gScore = util.dist(self.start, (x,y))
+        #        self.gScoreMat[x][y] = gScore
+        #        self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
+        #        self.addToOpenSet(x,y)
         self.t0 = timeit.default_timer()
         self.t = self.t0
     
