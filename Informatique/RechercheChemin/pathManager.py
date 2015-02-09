@@ -28,12 +28,12 @@ class PathManager :
     def findPath(self, start, goal) :
         """ start : (float,float), goal : (float,float,float)
         """
-        self.printTime()
+        #self.printTime()
         a = AStar(start, goal, self.thresholdMap)
-        self.printTime()
+        #self.printTime()
         a.aStar()
         p = a.buildPath()
-        self.printTime()
+        #self.printTime()
         #print p
         if p == None :
             self.path == None
@@ -49,8 +49,8 @@ class PathManager :
                 current = i
                 self.path.insert(0,p[current])
                 dist += util.dist(self.path[0], self.path[1])
-            print dist
-        self.printTime()
+            #print dist
+        #self.printTime()
         
     def isLineClear(self, pointA, pointB) :
         """ pointA, pointB : (float,float)

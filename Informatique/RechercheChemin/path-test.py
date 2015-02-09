@@ -48,3 +48,17 @@ t0 = timeit.default_timer()
 p = a.buildPath()
 t1 = timeit.default_timer()
 print 1000 * (t1-t0)
+
+matrix = [[1 for x in xrange(side) ] for y in xrange(side) ]
+for i in xrange(side) :
+    matrix[0][i] = 0
+    matrix[side-1][i] = 0
+    matrix[i][0] = 0
+    matrix[i][side-1] = 0
+
+pm = pathManager.PathManager(matrix)
+
+t0 = timeit.default_timer()
+pm.findPath(start, goal)
+t1 = timeit.default_timer()
+print 1000 * (t1-t0)
