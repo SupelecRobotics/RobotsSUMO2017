@@ -10,7 +10,7 @@ import sys
 import time
 from pygame.locals import *
 
-#ser = serial.Serial('/dev/tty.usbserial', 9600)
+#ser = serial.Serial('COM32', 9600)
 
 pygame.init()
 pygame.joystick.init()
@@ -29,13 +29,15 @@ while (cond):
     for event in g_keys:  
         if (event.type == pygame.JOYAXISMOTION):
             string = ""
-            for i in range(0, _joystick.get_numaxes()-1):
+            for i in range(0, 2):
                 if (_joystick.get_axis(i)):
-                    string += ";"
+                    if (i==0): string += "x"
+                    else: string+="y"
                     temp = int(_joystick.get_axis(i)*999)
                     if (temp >= 0):
-                        string += "+"
+                        string += "+"            
                     string += str(temp)
+                    string += ";"
             print string
             #ser.write(string)
-    time.sleep(2)
+    time.sleep(0.2)
