@@ -10,7 +10,7 @@ import sys
 import time
 from pygame.locals import *
 
-#ser = serial.Serial('COM32', 9600)
+ser = serial.Serial('COM32', 9600)
 
 pygame.init()
 pygame.joystick.init()
@@ -39,5 +39,12 @@ while (cond):
                     string += str(temp)
                     string += ";"
             print string
-            #ser.write(string)
+            ser.write(string)
+        if (event.type == pygame.JOYBUTTONDOWN):
+            if (_joystick.get_button(0)):
+                ser.write("x+254;y+254;");
+                print _joystick.get_button(0)
+            if (_joystick.get_button(1)):
+                ser.write("x-254;y-254;");
+                print _joystick.get_button(1)
     time.sleep(0.2)
