@@ -14,7 +14,7 @@ def nothing(x):
 
 erodeElement = cv2.getStructuringElement(cv2.MORPH_CROSS,(2,2))
 
-img = cv2.imread('tablePict2.JPG') #Ouverture de l'image
+img = cv2.imread('gobelet.jpg') #Ouverture de l'image
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 end = False
 
