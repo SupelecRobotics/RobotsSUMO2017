@@ -59,7 +59,7 @@ def cropFrameAddContours(frame, mask, contours):
     cv2.drawContours(cropped, contours, -1, (255, 0, 0))
     return cropped
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('http://10.13.152.226:8554/')
 end = False
 
 cylinderFinder = ImageProcessor.CylinderFinder()
@@ -72,7 +72,8 @@ while(cap.isOpened() and not end):
     cylinderFinder.setParam(param)
 
     if(ret):
-        _,mask,validContours = cylinderFinder.process(frame)
+        hsvFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        _,mask,validContours = cylinderFinder.process(hsvFrame)
         finalFrame = cropFrameAddContours(frame, mask, validContours)
         cv2.imshow('Result', finalFrame)
         

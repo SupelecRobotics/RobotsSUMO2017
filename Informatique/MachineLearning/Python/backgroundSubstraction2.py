@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('http://10.13.152.226:8554')
 
 fgbg = cv2.BackgroundSubtractorMOG()
 
