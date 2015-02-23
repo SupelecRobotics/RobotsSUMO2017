@@ -29,8 +29,8 @@ def height(A, B, C) :
 
 def angle(A,B) :
     """ A, B : (float,float) or (int,int)
-        result : float = angle between the line (AB) and horizontal
+        result : float = angle between lines (OA) and (OB)
     """
-    dX = float(A[0] - B[0])
-    dY = float(A[1] - B[1])
-    return math.atan2(dY, dX)
+    a1 = math.atan2(A[1], A[0])
+    a2 = math.atan2(B[1], B[0])
+    return a2 - a1

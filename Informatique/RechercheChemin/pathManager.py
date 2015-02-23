@@ -26,8 +26,10 @@ class PathManager :
         self.thresholdMap = [ [ (self.baseMap[x][y] > 0 or self.baseMap[x][y] < -threshold) for y in xrange(len(self.baseMap[x])) ] for x in xrange(len(self.baseMap)) ]
     
     def findPath(self, start, goal) :
-        """ start : (float,float), goal : (float,float,float)
+        """ start : (float,float), goal : (float,float,float) or (float,float)
         """
+        if len(goal) == 2 :
+            goal = goal + (0,)
         #self.printTime()
         a = AStar(start, goal, self.thresholdMap)
         #self.printTime()
@@ -38,7 +40,7 @@ class PathManager :
         if p == None :
             self.path == None
         else :
-            dist = 0
+            #dist = 0
             l = len(p)
             current = l-1
             self.path = [p[current]]
@@ -48,7 +50,7 @@ class PathManager :
                     i += 1
                 current = i
                 self.path.insert(0,p[current])
-                dist += util.dist(self.path[0], self.path[1])
+                #dist += util.dist(self.path[0], self.path[1])
             #print dist
         #self.printTime()
         
@@ -71,8 +73,34 @@ class PathManager :
                         return False
             return True
     
-    def printTime(self) :
-        t = timeit.default_timer()
-        print "from pm : " + str(1000*(t - self.t0))
-        self.t0 = t
-        
+    def getPathLength(self) :
+        lastPoint = None
+        length = 0
+        for x,y in self.path :
+            if lastPoint != None :
+                length += util.dist(lastPoint, (x,y))
+            lastPoint = (x,y)
+        return length
+    
+    def getPathDuration(self, linSpeed, angSpeed) :
+        lastPoint = None
+        lastSegment = None
+        duration = 0
+        for x,y in self.path :
+            if lastPoint != None :
+                duration += util.dist(lastPoint, (x,y)) / linSpeed
+                dX = x - lastPoint[0]
+                dY = y - lastPoint[1]
+                if lastSegment != None :
+                    a = (180/math.pi) * util.angle(lastSegment, (dX,dY))
+                    a = abs(a)
+                    if a > 90 :
+                        a = 180 - a
+                    duration += a / angSpeed
+                lastSegment = (dX,dY)
+            lastPoint = (x,y)
+        return duration
+
+
+
+
