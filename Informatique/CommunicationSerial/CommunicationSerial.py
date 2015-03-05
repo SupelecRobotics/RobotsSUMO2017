@@ -17,7 +17,8 @@ class CommunicationSerial :
         #self.serVideo = serial.Serial(ser2, 9600)
         time.sleep(3)
         
-    def envoiMoteurCapteur(self, commande, d=0, theta=0):
+    def envoiMoteurCapteur(self, d=0, theta=0):
+        commande = 0
         if (d<0):
            d = -d + 32768
         d1 = d >> 8
@@ -29,6 +30,20 @@ class CommunicationSerial :
         satVitesse = 200    #saturation vitesse : 1 byte max
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
+        print self.serMoteurCapteur.write(inputByteString)
+        print("Envoi Byte String")
+        print(self.serMoteurCapteur.readline())
+        time.sleep(0.5)
+        
+    def stop(self):
+        inputByteString = chr(1)
+        print self.serMoteurCapteur.write(inputByteString)
+        print("Envoi Byte String")
+        print(self.serMoteurCapteur.readline())
+        time.sleep(0.5)
+        
+    def getInfos(self):
+        inputByteString = chr(2)
         print self.serMoteurCapteur.write(inputByteString)
         print("Envoi Byte String")
         print(self.serMoteurCapteur.readline())

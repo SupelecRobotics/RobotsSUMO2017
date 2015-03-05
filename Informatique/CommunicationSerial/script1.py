@@ -8,12 +8,12 @@ import CommunicationSerial as com
 
 com = com.CommunicationSerial('/dev/ttyACM0','/dev/ttyACM0')
 
-com.envoiMoteurCapteur(0,40,0)
-com.envoiMoteurCapteur(0,0,200)
-com.envoiMoteurCapteur(0,40,0)
-com.envoiMoteurCapteur(0,0,200)
+com.envoiMoteurCapteur(40,0)
+com.envoiMoteurCapteur(0,200)
+com.envoiMoteurCapteur(40,0)
+com.envoiMoteurCapteur(0,200)
 
-com.envoiMoteurCapteur(0,0,-200)
-com.envoiMoteurCapteur(0,-40,0)
-com.envoiMoteurCapteur(0,0,-200)
-com.envoiMoteurCapteur(0,-40,0)
+com.envoiMoteurCapteur(0,-200)
+com.envoiMoteurCapteur(-40,0)
+com.envoiMoteurCapteur(0,-200)
+com.envoiMoteurCapteur(-40,0)
