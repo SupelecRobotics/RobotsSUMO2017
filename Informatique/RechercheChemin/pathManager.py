@@ -12,35 +12,37 @@ from aStar import AStar
 class PathManager :
     
     def __init__(self, matrix) :
-        
-        self.baseMap = matrix
-        self.thresholdMap = [[ ]]
-        self.setThreshold(0)
+        """ matrix : [[int]]
+            'matrix' represents the grid :
+            - positives are always free spaces
+            - 0s are always obstacle
+            - negatives are either free spaces or obstacle, depending on the threshold
+        """
+        self.baseMap = matrix       # base integer matrix
+        self.thresholdMap = [[ ]]   # bool matrix for use by the AStar class
+        self.setThreshold(0)        # default threshold is 0
         self.path = []
-        self.t0 = timeit.default_timer()
         
     def setThreshold(self, threshold) :
         """ threshold : int
-            
+            constructs thresholdMap from baseMap : 
+            values between 0 and -threshold are obstacles (False), other values are free spaces (True)
         """
         self.thresholdMap = [ [ (self.baseMap[x][y] > 0 or self.baseMap[x][y] < -threshold) for y in xrange(len(self.baseMap[x])) ] for x in xrange(len(self.baseMap)) ]
     
     def findPath(self, start, goal) :
         """ start : (float,float), goal : (float,float,float) or (float,float)
+            uses the AStar class to find the shortest path between 'start' and 'goal'
+            then simplifies the path to obtain straight lines as long as possible
         """
         if len(goal) == 2 :
-            goal = goal + (0,)
-        #self.printTime()
+            goal = goal + (0,)  # default value of 'goalRadius' is 0
         a = AStar(start, goal, self.thresholdMap)
-        #self.printTime()
         a.aStar()
         p = a.buildPath()
-        #self.printTime()
-        #print p
         if p == None :
             self.path == None
         else :
-            #dist = 0
             l = len(p)
             current = l-1
             self.path = [p[current]]
@@ -50,15 +52,13 @@ class PathManager :
                     i += 1
                 current = i
                 self.path.insert(0,p[current])
-                #dist += util.dist(self.path[0], self.path[1])
-            #print dist
-        #self.printTime()
         
     def isLineClear(self, pointA, pointB) :
         """ pointA, pointB : (float,float)
-            returns boolean : whether there is no obstacle near the segment [pointA,pointB]
+            returns : bool (line is clear)
+            checks there is no obstacle near the segment [pointA,pointB]
         """ 
-        threshold = 1
+        threshold = 0.6
         
         if pointA == pointB :
             return True
@@ -74,6 +74,9 @@ class PathManager :
             return True
     
     def getPathLength(self) :
+        """ returns : float
+            sums the length of each segment of 'self.path'
+        """
         lastPoint = None
         length = 0
         for x,y in self.path :
@@ -83,6 +86,10 @@ class PathManager :
         return length
     
     def getPathDuration(self, linSpeed, angSpeed) :
+        """ linSpeed : float, angSpeed : float
+            returns : float
+            sums the duration of each segment and each rotation
+        """
         lastPoint = None
         lastSegment = None
         duration = 0

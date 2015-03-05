@@ -9,7 +9,8 @@ import math
 
 def dist(A, B) :
     """ A, B : (float,float) or (int,int)
-        result : float = euclid distance separating the points A and B
+        result : float
+        calculates the euclid distance between points A and B
     """
     dX = float(A[0] - B[0])
     dY = float(A[1] - B[1])
@@ -17,7 +18,8 @@ def dist(A, B) :
 
 def height(A, B, C) :
     """ A, B, C : (float,float) or (int,int)
-        result : float = square of height of triangle (ABC) from point A
+        result : float
+        calculates the height (squared) of the triangle (ABC) from point A
     """
     x = float(A[0] - C[0])
     y = float(A[1] - C[1])
@@ -29,7 +31,8 @@ def height(A, B, C) :
 
 def angle(A,B) :
     """ A, B : (float,float) or (int,int)
-        result : float = angle between lines (OA) and (OB)
+        result : float
+        calculates the angle AÔB
     """
     a1 = math.atan2(A[1], A[0])
     a2 = math.atan2(B[1], B[0])

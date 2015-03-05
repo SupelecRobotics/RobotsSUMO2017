@@ -8,146 +8,75 @@ Created on Thu Dec 11 21:34:28 2014
 import math
 import heapq
 import util
-import timeit
-
-#class Cell :
-#    """ Implements one grid cell, with relevants attributes, for use in the AStar class
-#    """
-#    count = 0   # number of instances
-#    INIT, IN_OPEN_SET, IN_CLOSED_SET, REMOVED = xrange(4)    # constants
-#    
-#    def __init__(self, x, y) :
-#        """ x, y : int, isFree : bool
-#        """
-#        self.state = Cell.INIT
-#        self.x = x
-#        self.y = y
-#        self.gScore = float('inf')
-#        self.fScore = float('inf')
-#        self.origin = None
-#        self.id = Cell.count    # constant
-#        Cell.count += 1
-#    
-#    def __lt__(self, other) :
-#        """ other : Cell
-#            returns : bool (compares fScore, then gScore (inverse), then id)
-#            implemented for use in a HeapQueue
-#        """
-#        if self.fScore == other.fScore :
-#            if self.gScore == other.gScore :
-#                return self.id < other.id
-#            else :
-#                return self.gScore > other.gScore
-#        else :
-#            return self.fScore < other.fScore
-#    
-#    def copy(self) :
-#        """ returns : Cell (with identical attributes, except id)
-#        """
-#        new = Cell(self.x, self.y)
-#        new.state = self.state
-#        new.gScore = self.gScore
-#        new.fScore = self.fScore
-#        new.origin = self.origin
-#        return new
-#    
-#    def dist(self, x, y) :
-#        """ x, y : float
-#            returns : float (euclid distance between self and (x,y))
-#        """
-#        return util.dist((self.x,self.y), (x,y))
-#    
-#    def neighbors(self) :
-#        """ yields : (int,int) (coordinates of side-adjacent cells)
-#        """
-#        yield (self.x, self.y + 1)
-#        yield (self.x, self.y - 1)
-#        yield (self.x + 1, self.y)
-#        yield (self.x - 1, self.y)
-#    
+#import timeit
 
 class AStar :
     """ Implements the A* algorithm on an unweighed 2D grid with obstacles
     """
     
     def __init__(self, start, goal, matrix) :
-        """ start : (float,float), goal : (float,float,float), matrix : [[bool]]
-            'matrix' represents the grid : False is an obstacle, True is a free cell
+        """ start : (float,float) coordinates of the starting point
+            goal : (float,float,float) coordinates of the center, and radius, of the target circle
+            matrix : [[bool]]
+            'matrix' represents the grid : False is an obstacle, True is a free space
             the grid must be bordered with Falses
         """
-        # for testing :
-        self.turnCount = 0
-        self.cellCount = 0
         
+        # variables related to the beginning and the ending of the path
         self.start = start
         self.goal = goal[0:2]
         self.goalRadius = goal[2]
         self.pathEnd = None
+        
+        self.cellCount = 0  # number of points added to openSet
+        
+        # matrix registering informations for each point
         height = len(matrix)
         width = len(matrix[0])
         maximum = float('inf')
-#        t0 = timeit.default_timer()
         self.blockMat = matrix
-#        t1 = timeit.default_timer()
-#        print 1000 * (t1-t0)
-#        t0 = timeit.default_timer()
-        self.statusMat = [ [ 1 for y in xrange(width) ] for x in xrange(height) ]    # 1 = inexplored, 0 = in open set, -1 = in closed set
-#        t1 = timeit.default_timer()
-#        print 1000 * (t1-t0)
-#        t0 = timeit.default_timer()
+        self.statusMat = [ [ 1 for y in xrange(width) ] for x in xrange(height) ]       # 1 = inexplored, 0 = in open set, -1 = in closed set
         self.gScoreMat = [ [ maximum for y in xrange(width) ] for x in xrange(height) ]
-#        t1 = timeit.default_timer()
-#        print 1000 * (t1-t0)
-#        t0 = timeit.default_timer()
         self.fScoreMat = [ [ maximum for y in xrange(width) ] for x in xrange(height) ]
-#        t1 = timeit.default_timer()
-#        print 1000 * (t1-t0)
-#        t0 = timeit.default_timer()
-        self.prevMat = [ [ None for y in xrange(width) ] for x in xrange(height) ]
-#        t1 = timeit.default_timer()
-#        print 1000 * (t1-t0)
-        self.openSet = []
-        for x in xrange(int(math.floor(self.start[0])), 1+int(math.ceil(self.start[0]))) :
-            for y in xrange(int(math.floor(self.start[1])), 1+int(math.ceil(self.start[1]))) :
-                gScore = util.dist(self.start, (x,y))
-                self.gScoreMat[x][y] = gScore
-                self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
-                self.addToOpenSet(x,y)
+        self.preMat = [ [ None for y in xrange(width) ] for x in xrange(height) ]
+        self.openSet = []                                                               # used as a sorted queue
+        
+        # initialisation of the starting point(s)
+        x, y = start
+        startX = [x] if isinstance(x, int) else [int(x), 1+int(x)]
+        startY = [y] if isinstance(y, int) else [int(y), 1+int(y)]
+        for x in startX :
+            for y in startY :
+                if self.blockMat[x][y] :
+                    gScore = util.dist(self.start, (x,y))
+                    self.gScoreMat[x][y] = gScore
+                    self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
+                    self.addToOpenSet(x,y)
     
     def aStar(self) :
         """ runs the A* algorithm
             returns : bool (success)
         """
-        #t0 = timeit.default_timer()
         for x0, y0 in self.lowestCell() :
-            #print 1000*(timeit.default_timer()-t0)
-            #print "top"
-            #t0 = timeit.default_timer()
-            if self.isGoal((x0,y0)) :    # the algorithm ends if 'goal' is reached
+            if self.isGoal((x0,y0)) :   # the algorithm ends if the goal condition is reached
                 self.pathEnd = (x0, y0)
                 return True
-            #print 1000*(timeit.default_timer()-t0)
             self.statusMat[x0][y0] = -1
-            #print 1000*(timeit.default_timer()-t0)
             for x1, y1 in self.neighbors(x0, y0) :
-                #print str(x1) + ", " + str(y1)
-                #print 1000*(timeit.default_timer()-t0)
                 newGScore = self.gScoreMat[x0][y0] + util.dist((x0,y0), (x1,y1))
-                #print 1000*(timeit.default_timer()-t0)
                 if self.statusMat[x1][y1] == 1 or self.gScoreMat[x1][y1] > newGScore :
                     self.gScoreMat[x1][y1] = newGScore
                     self.fScoreMat[x1][y1] = newGScore + self.heuristicEstimate((x1,y1))
                     self.prevMat[x1][y1] = (x0,y0)
                     self.addToOpenSet(x1,y1)
-                #print 1000*(timeit.default_timer()-t0)
             self.turnCount += 1
         return False
     
     def buildPath(self) :
-        """ endOfPath : (int,int)
-            returns : [(int,int)] (path between 'start' and 'goal')
+        """ returns : [(int,int)]
+            reconstructs the path found by self.aStar() if it has been run
         """
-        if self.pathEnd == None :
+        if self.pathEnd == None :   # if self.aStar() has not been run
             return None
         else :
             path = [self.pathEnd]
@@ -160,45 +89,45 @@ class AStar :
             return path
     
     def addToOpenSet(self, x, y) :
-        """ cell : Cell
+        """ x, y : int
+            no return
+            adds the coordinates (x,y) to self.openSet with the fScore as priority
         """
-        #t0 = timeit.default_timer()
         self.statusMat[x][y] = 0
-        item = (self.fScoreMat[x][y], self.cellCount, x, y)
+        item = (self.fScoreMat[x][y], self.cellCount, x, y) # fScore : priority, cellCount : secondary priority to avoid ties
         heapq.heappush(self.openSet, item)
         self.cellCount += 1
-        #t1 = timeit.default_timer()
-        #print "from astar:addToOPenSet : " + str(1000*(t1-t0))
     
     def lowestCell(self) :
-        """ yields : Cell
-            pop cells from openSet until finding a non-removed one
+        """ yields : (x,y)
+            pop items from openSet until finding one that match the current fScore of its coordinates
         """
         #t0 = timeit.default_timer()
         while len(self.openSet) > 0 :
             a, b, x, y = heapq.heappop(self.openSet)
             if self.statusMat[x][y] == 0 and self.fScoreMat[x][y] == a :
-                #t1 = timeit.default_timer()
-                #print "from astar:lowestCell : " + str(1000*(t1-t0))
                 yield (x,y)
-                #t0 = timeit.default_timer()
     
     def neighbors(self, x0, y0) :
-        """ cell : Cell
-            yields : Cell (neighbor of 'cell' that are not IN_CLOSED_SET, nor obstacles)
+        """ x0, y0 : int
+            yields : (int,int)
+            finds the neighbors of a point that are not in the closed set, or an obstacle
         """
         for x, y in [(x0,y0+1), (x0,y0-1), (x0+1,y0), (x0-1,y0)] :
-            #t0 = timeit.default_timer()
             if self.blockMat[x][y] and self.statusMat[x][y] >= 0 :
-                #t1 = timeit.default_timer()
-                #print "from astar:neigbors : " + str(1000*(t1-t0))
                 yield (x,y)
     
-    def heuristicEstimate(self, cell) :
-        """ cell : Cell
+    def heuristicEstimate(self, point) :
+        """ point : (int,int)
+            returns : float
+            the heuristic function is 1.5 times the distance between 'point' and the goal
         """
-        return 1.5 * util.dist(cell, self.goal)
+        return 1.5 * util.dist(point, self.goal)
     
-    def isGoal(self, cell) :
-        return util.dist(cell, self.goal) <= self.goalRadius
+    def isGoal(self, point) :
+        """ point : (int,int)
+            returns : bool (goal condition reached)
+            the goal condition is : being in the circle of center 'self.goal' and radius 'self.goalRadius'
+        """
+        return util.dist(point, self.goal) <= self.goalRadius
 
