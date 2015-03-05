@@ -13,11 +13,11 @@ time.sleep(3)
 
 def envoi(commande, d=0, theta=0):
     if (d<0):
-       d = d + 32768
+       d = -d + 32768
     d1 = d >> 8
     d2 = d - (d1 << 8)
     if (theta<0): 
-       theta += 32768
+       theta = -theta + 32768
     t1 = theta >> 8
     t2 = theta - (t1 << 8)
     satVitesse = 200    #saturation vitesse : 1 byte max
