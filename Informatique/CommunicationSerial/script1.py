@@ -4,16 +4,16 @@ Created on Thu Mar 05 22:28:05 2015
 
 @author: Fabien
 """
-import CommunicationSerial
+import CommunicationSerial as com
 
-com = CommunicationSerial('/dev/ttyACM0','/dev/ttyACM0')
+com = com.CommunicationSerial('/dev/ttyACM0','/dev/ttyACM0')
 
-com.envoiMoteurCapteur(0,100,0)
-com.envoiMoteurCapteur(0,0,450)
-com.envoiMoteurCapteur(0,100,0)
-com.envoiMoteurCapteur(0,0,450)
+com.envoiMoteurCapteur(0,40,0)
+com.envoiMoteurCapteur(0,0,200)
+com.envoiMoteurCapteur(0,40,0)
+com.envoiMoteurCapteur(0,0,200)
 
-com.envoiMoteurCapteur(0,0,-450)
-com.envoiMoteurCapteur(0,-100,0)
-com.envoiMoteurCapteur(0,0,-450)
-com.envoiMoteurCapteur(0,-100,0)
+com.envoiMoteurCapteur(0,0,-200)
+com.envoiMoteurCapteur(0,-40,0)
+com.envoiMoteurCapteur(0,0,-200)
+com.envoiMoteurCapteur(0,-40,0)
