@@ -37,7 +37,7 @@ class CylinderFinder:
     def process(self,frame):
         cropped = cv2.inRange(frame, self.param["colorMin"], self.param["colorMax"])
         eroded = cv2.erode(cropped, self.cross)
-        contours,_ = cv2.findContours(eroded,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+        contours,_ = cv2.findContours(eroded.copy(),cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 
         cylindersCoords = np.empty([0,2],float)
         validContours = []

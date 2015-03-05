@@ -5,19 +5,23 @@ import numpy as np
 import cv2
 import ImageProcessor
 import PerspectiveTransformer
-import display
 
-cap = cv2.VideoCapture("http://10.17.152.226:12345") #Ouverture de la caméra
+def drawCircles(table, points):
+    tableWithCircles = table.copy()
+    for i in range(0, points.shape[0]):
+        cv2.circle(tableWithCircles,(int(points[i][0][0]),int(points[i][0][1])),5,(255,255,255),2)
+    return tableWithCircles
+
+cap = cv2.VideoCapture('http://10.13.152.226:8554/') #Ouverture de la caméra
 end = False
 
 cylinderFinder = ImageProcessor.CylinderFinder()
-cylinderFinder.calibrate(cap)
+cylinderFinder.loadParam()
 
 perspectiveTransformer = PerspectiveTransformer.PerspectiveTransformer()
-perspectiveTransformer.calibrate()
+perspectiveTransformer.loadParamFromFile()
 
-displayManager = display.DisplayManager()
-
+table = cv2.imread('schema_table.png')
 
 while(cap.isOpened() and not end):
     ret,frame = cap.read()
@@ -28,13 +32,10 @@ while(cap.isOpened() and not end):
         cylinderFrameCoords,selectionMask,contours = cylinderFinder.process(hsvFrame)
         
         cylinderTableCoords = perspectiveTransformer.transform(cylinderFrameCoords)
+        
+        final = drawCircles(table, cylinderTableCoords)
 
-        displayManager.displayTable(cylinderTableCoords) #Temporaire
-
-        displayManager.displayContoursDetection(frame, contours, selectionMask) #Temporaire
-
-        # TODO : Envoi des coordonnées au robot
-        # ...
+        cv2.imshow('Final', final)
 
     if(cv2.waitKey(1) & 0xFF == ord('q')):
         end = True

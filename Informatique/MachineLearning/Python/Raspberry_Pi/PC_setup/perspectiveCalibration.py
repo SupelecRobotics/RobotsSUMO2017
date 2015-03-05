@@ -46,14 +46,14 @@ def camCallback(event,x,y,flags,param):
 def saveParam(ptsList):
     with open('PerspectiveTransformer.dat', 'w') as file:
         pickler = pickle.Pickler(file)
-        pickler.dump((ptsList.tablePoints, ptsList.camPoints))
+        pickler.dump((ptsList.camPoints,ptsList.tablePoints))
         
 def loadParam(ptsList):
     with open('PerspectiveTransformer.dat', 'r') as file:
         depickler = pickle.Unpickler(file)
         ptsList.tablePoints,ptsList.camPoints = depickler.load()
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('http://10.13.152.226:8554/')
 end = False
 table = cv2.imread('schema_table.png')
 
