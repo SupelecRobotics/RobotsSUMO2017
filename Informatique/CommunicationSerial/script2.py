@@ -5,8 +5,11 @@ Created on Fri Mar 06 00:46:02 2015
 @author: Fabien
 """
 
-import CommunicationSerial
+import time
+import CommunicationSerial as com
 
-com = CommunicationSerial('/dev/ttyACM0','/dev/ttyACM0')
+com = com.CommunicationSerial('/dev/ttyACM0','/dev/ttyACM0')
 
-com.getInfos(2)
+com.envoiMoteurCapteur(100,0)
+time.sleep(2)
+com.getInfos()
