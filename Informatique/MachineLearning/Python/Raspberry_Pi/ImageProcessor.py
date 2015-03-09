@@ -12,8 +12,8 @@ class CylinderFinder:
 
     def __init__(self):
         
-        self.wMin = 10 #Temporaire
-        self.hMin = 10 #Temporaire
+        self.wMin = 20 #Temporaire
+        self.hMin = 20 #Temporaire
         self.cross = cv2.getStructuringElement(cv2.MORPH_CROSS,(3,3))
 
         refImg = cv2.imread('cylinderReference3.png')
