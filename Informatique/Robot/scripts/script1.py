@@ -4,9 +4,8 @@ Created on Thu Mar 05 22:28:05 2015
 
 @author: Fabien
 """
-from Robot import CommunicationSerial
-
-import CommunicationSerial as com
+#from communication import CommunicationSerial as com
+from ..communication import CommunicationSerial as com
 
 com = com.CommunicationSerial('/dev/ttyACM0','/dev/ttyACM0')
 

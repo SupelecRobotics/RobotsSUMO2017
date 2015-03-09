@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 05 22:28:05 2015
+from CommunicationSerial import CommunicationSerial as com
 
-@author: Fabien
-"""
-from Robot import CommunicationSerial
-
-import CommunicationSerial as com
-
-com = com.CommunicationSerial('/dev/ttyACM0','/dev/ttyACM0')
+com = com('/dev/ttyACM0','/dev/ttyACM0')
 
 com.envoiMoteurCapteur(200,0)
 com.envoiMoteurCapteur(0,900)
