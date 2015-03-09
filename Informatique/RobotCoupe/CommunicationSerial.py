@@ -52,9 +52,9 @@ class CommunicationSerial :
         returnedString2 = self.serMoteurCapteur.read()
         returnedString3 = self.serMoteurCapteur.read()
         returnedString4 = self.serMoteurCapteur.read()
-        print returnedString
-        print returnedString2
-        print returnedString3
-        print returnedString4
+        print returnedString.encode('hex')
+        print returnedString2.encode('hex')
+        print returnedString3.encode('hex')
+        print returnedString4.encode('hex')
         return returnedString
         time.sleep(0.5)
