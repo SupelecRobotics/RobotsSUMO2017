@@ -54,5 +54,6 @@ robomoviesForest.popRectangle((16,59),(24,60),0)
 robomoviesForest.enlargeYourPenis(3, -1)
 
 
-robomoviesForest.displayForest()
+#robomoviesForest.displayForest()
+
 
