@@ -48,9 +48,13 @@ class CommunicationSerial :
         print("Envoi Byte String")
 #        returnedString = self.serMoteurCapteur.readline()
 #        r = self.serMoteurCapteur.read()
-        returnedString = ""
-        for i in range(0,16):
-            returnedString += self.serMoteurCapteur.read()
+        returnedString = ""#self.serMoteurCapteur.readline()
+        for i in range(0,10):
+            r = self.serMoteurCapteur.read()
+            returnedString += r.encode('hex')
+#            print int(r.encode('hex'),16)
+#            print r.encode('hex')
+	re = self.serMoteurCapteur.readline()
 #        returnedString = self.serMoteurCapteur.read()
 #        returnedString2 = self.serMoteurCapteur.read()
 #        returnedString3 = self.serMoteurCapteur.read()
