@@ -14,11 +14,6 @@ import pathManager
 import util
 import robomoviesMapV2
 
-ligne = raw_input("pouet")
-
-
-
-print(ligne[1])
 
 class Trajectoire :
 
