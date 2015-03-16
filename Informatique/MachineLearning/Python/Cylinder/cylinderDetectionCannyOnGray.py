@@ -17,6 +17,7 @@ end = False
 erodeElement = cv2.getStructuringElement(cv2.MORPH_CROSS,(3,3))
     
 grayFrame = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+grayFrame = cv2.GaussianBlur(grayFrame, (5,5), 0)
 
 while(not end):
 

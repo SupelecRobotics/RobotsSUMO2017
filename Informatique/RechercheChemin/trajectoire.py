@@ -10,15 +10,10 @@ import math
 ##
 ##import os
 
-import pathManager
+from pathManager import PathManager
 import util
-import robomoviesMapV2
+from robomoviesMapV2 import *
 
-ligne = raw_input("pouet")
-
-
-
-print(ligne[1])
 
 class Trajectoire :
 
@@ -52,11 +47,18 @@ class Trajectoire :
 
     def vaVoirLaBasSiJySuis(self, point) :
 
-        pouet = new PathManager(robomoviesForest.getForest())
+        pouet = PathManager(robomoviesForest.getForest())
         pouet.setThreshold(4)
         (x, y) = point
         pouet.findPath(self.position[0],(x, y, 0))
+
+        print "path"
+        print pouet.path
         
         return self.wololo(pouet.path)
 
 
+traj = Trajectoire((20, 20), 0, True)
+
+print traj.vaVoirLaBasSiJySuis((5, 8))
+    
