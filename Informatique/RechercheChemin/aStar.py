@@ -38,7 +38,7 @@ class AStar :
         self.statusMat = [ [ 1 for y in xrange(width) ] for x in xrange(height) ]       # 1 = inexplored, 0 = in open set, -1 = in closed set
         self.gScoreMat = [ [ maximum for y in xrange(width) ] for x in xrange(height) ]
         self.fScoreMat = [ [ maximum for y in xrange(width) ] for x in xrange(height) ]
-        self.preMat = [ [ None for y in xrange(width) ] for x in xrange(height) ]
+        self.prevMat = [ [ None for y in xrange(width) ] for x in xrange(height) ]
         self.openSet = []                                                               # used as a sorted queue
         
         # initialisation of the starting point(s)
@@ -69,7 +69,6 @@ class AStar :
                     self.fScoreMat[x1][y1] = newGScore + self.heuristicEstimate((x1,y1))
                     self.prevMat[x1][y1] = (x0,y0)
                     self.addToOpenSet(x1,y1)
-            self.turnCount += 1
         return False
     
     def buildPath(self) :
