@@ -11,7 +11,7 @@ import math
 ##import os
 
 from pathManager import PathManager
-import util
+from util import *
 from robomoviesMapV2 import *
 
 
@@ -24,6 +24,10 @@ class Trajectoire :
         
         self.currentWay = []
 
+        self.facteurDistance = 50
+
+        self.facteurDegre = 10
+
     def wololo(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
 
@@ -33,10 +37,13 @@ class Trajectoire :
         way = []
         
         for coor in path[1:] :
-            dist = dist((x0,y0), coor)
-            angle = angle0 + angle((x0, y0), coor)
-            way.append(dist, angle, orientation)
-            angle0 = angle
+            (x0, y0) = coor0
+            (x, y) = coor
+            distance = dist(coor0, coor)
+            ang = - angle0 + angle((0, 1), (x - x0, y - y0))
+            ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
+            way.append((distance*self.facteurDistance, ang*180/math.pi*self.facteurDegre, orientation)) 
+            angle0 = ang
             coor0 = coor
 
         self.currentWay = way
@@ -54,11 +61,24 @@ class Trajectoire :
 
         print "path"
         print pouet.path
+
+        wolo = self.wololo(pouet.path)
+
+        for coor in pouet.path :
+            (x, y) = coor
+            robomoviesForest.forest[x][y] = -8
+
+        robomoviesForest.displayForest()
         
-        return self.wololo(pouet.path)
+        return wolo
+
+#robomoviesForest.displayForest()
+
+traj = Trajectoire((20, 5), 0, True)
+
+pouet = traj.vaVoirLaBasSiJySuis((6, 50))
+
+print pouet
 
 
-traj = Trajectoire((20, 20), 0, True)
-
-print traj.vaVoirLaBasSiJySuis((5, 8))
     
