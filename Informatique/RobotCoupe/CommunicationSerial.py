@@ -46,22 +46,29 @@ class CommunicationSerial :
         inputByteString = chr(2)
         print(self.serMoteurCapteur.write(inputByteString))
         print("Envoi Byte String")
-#        returnedString = self.serMoteurCapteur.readline()
-#        r = self.serMoteurCapteur.read()
-        returnedString = ""#self.serMoteurCapteur.readline()
+        returned = ""
         for i in range(0,10):
             r = self.serMoteurCapteur.read()
-            returnedString += r.encode('hex')
-#            print int(r.encode('hex'),16)
-#            print r.encode('hex')
-	re = self.serMoteurCapteur.readline()
-#        returnedString = self.serMoteurCapteur.read()
-#        returnedString2 = self.serMoteurCapteur.read()
-#        returnedString3 = self.serMoteurCapteur.read()
-#        returnedString4 = self.serMoteurCapteur.read()
-#        print returnedString.encode('hex')
-#        print returnedString2.encode('hex')
-#        print returnedString3.encode('hex')
-#        print returnedString4.encode('hex')
-        return returnedString
+            returned += r.encode('hex')
+        re = self.serMoteurCapteur.readline()
+#        return returnedString
+        
+        l = []
+        k = 0
+        # while k < returned.length
+        while k < 19:
+            if k < 12:
+                print returned[k:k+4]
+                r = int(returned[k:k+4],16)
+                if r > 32767:
+                    r -= 65536
+                k += 4
+            else:
+                print returned[k:k+2]
+                r = int(returned[k:k+2],16)
+                if r > 32767:
+                    r -= 65536
+                k += 2
+            l.append(r)        
+        return l
         time.sleep(0.5)
