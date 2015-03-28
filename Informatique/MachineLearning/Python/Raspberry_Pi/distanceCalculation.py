@@ -5,8 +5,8 @@ import ImageProcessor
 import CameraUndistorter
 
 FOCAL_LENGHT = 3.6 #mm
-REAL_HEIGHT = 70
-REAL_WIDTH = 56
+REAL_HEIGHT = 65
+REAL_WIDTH = 65
 SENSOR_HEIGHT = 2.74 #mm
 SENSOR_WIDTH = 3.76
 
@@ -17,8 +17,8 @@ def getDistanceW(objW, imageW):
      return FOCAL_LENGHT * REAL_WIDTH * imageW / (objW * SENSOR_WIDTH)
 
 
-cylinderFinder = ImageProcessor.CylinderFinder()
-cylinderFinder.loadParam()
+tennisBallFinder = ImageProcessor.TennisBallFinder()
+tennisBallFinder.loadParam()
 
 undistorter = CameraUndistorter.CameraUndistorter()
 undistorter.loadParam()
@@ -39,14 +39,14 @@ while(cap.isOpened() and not end):
         imageW = frame.shape[:2][1]
         dstHSV = cv2.cvtColor(dst, cv2.COLOR_BGR2HSV)
 
-        _,_,contours = cylinderFinder.process(dstHSV)
+        _,_,contours = tennisBallFinder.process(dstHSV)
 
         if(len(contours) > 0):
             objH = cv2.boundingRect(contours[0])[3]
             objW = cv2.boundingRect(contours[0])[2]
             distance1 = getDistanceH(objH, imageH)
             distance2 = getDistanceW(objW, imageW)
-            print distance2
+            print str(distance2) + " / " + str(distance1)
             cv2.drawContours(dst, contours, -1, (255, 0, 0))
         
         

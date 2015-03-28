@@ -3,17 +3,14 @@
 
 import numpy as np
 import cv2
-import ImageProcessor
 import PerspectiveTransformer
 import CameraUndistorter
 
-def drawCircles(table, points):
-    if(points.size == 0):
-        return table
-    tableWithCircles = table.copy()
-    for i in range(0, points.shape[0]):
-        cv2.circle(tableWithCircles,(int(points[i][0][0]),int(points[i][0][1])),5,(255,255,255),2)
-    return tableWithCircles
+def drawCircleProj(event,x,y,flags,param):
+    if event == cv2.EVENT_MOUSEMOVE:
+        dst = perspectiveTransformer.transform(np.float32([[x,y]]).reshape(-1,1,2))
+        final[:] = table
+        cv2.circle(final,(int(dst[0][0][0]),int(dst[0][0][1])), 4, (0, 0, 255), 2)
 
 undistorter = CameraUndistorter.CameraUndistorter()
 undistorter.loadParam()
@@ -21,28 +18,21 @@ undistorter.loadParam()
 cap = cv2.VideoCapture('http://10.13.152.226:8554/') #Ouverture de la caméra
 end = False
 
-cylinderFinder = ImageProcessor.CylinderFinder()
-cylinderFinder.loadParam()
-
 perspectiveTransformer = PerspectiveTransformer.PerspectiveTransformer()
 perspectiveTransformer.loadParamFromFile()
 
 table = cv2.imread('schema_table.png')
+final = table.copy()
+cv2.namedWindow('Cam')
+cv2.setMouseCallback('Cam',drawCircleProj)
 
 while(cap.isOpened() and not end):
     ret,frame = cap.read()
 
     if(ret):
         frame = undistorter.undistort(frame)
-        hsvFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        
-        cylinderFrameCoords,selectionMask,contours = cylinderFinder.process(hsvFrame)
 
-        if(cylinderFrameCoords.size > 0):
-            cylinderTableCoords = perspectiveTransformer.transform(cylinderFrameCoords)
-            print cylinderTableCoords
-            final = drawCircles(table, cylinderTableCoords)
-
+        cv2.imshow('Cam',frame)
         cv2.imshow('Final', final)
 
     if(cv2.waitKey(1) & 0xFF == ord('q')):

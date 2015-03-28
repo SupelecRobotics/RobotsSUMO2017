@@ -52,7 +52,7 @@ def saveParam(ptsList):
 def loadParam(ptsList):
     with open('PerspectiveTransformer.dat', 'r') as file:
         depickler = pickle.Unpickler(file)
-        ptsList.tablePoints,ptsList.camPoints = depickler.load()
+        ptsList.camPoints,ptsList.tablePoints = depickler.load()
 
 undistorter = CameraUndistorter.CameraUndistorter()
 undistorter.loadParam()
