@@ -87,8 +87,8 @@ class CylinderFinder:
             self.param = depickler.load()
 
     def process(self,frame):
-
-        if(len(self.param["roi"]) >= 3):
+	
+        if(len(self.param["roi"]) >= 3):	    
             roiMask = np.empty((frame.shape[0], frame.shape[1]), np.uint8)         
             cv2.fillPoly(roiMask, np.array([self.param["roi"]]), (255,255,255))
             frame = cv2.bitwise_and(frame, frame, mask = roiMask)
