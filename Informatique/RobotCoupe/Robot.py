@@ -22,6 +22,8 @@ class Robot :
         self.c2 = 0
         self.c3 = 0
         self.c4 = 0
+        #time
+        self.time = 0
         time.sleep(3)
         
     def bouge(self,d,theta):
@@ -39,5 +41,5 @@ class Robot :
         
     def printPosition(self):
         self.updatePosition()
-        print "x : " + self.x + " , y : " + self.y + " , theta : " + self.theta
-        print "Capteurs : " + self.c1 + " ; " + self.c2 + " ; " + self.c3 + " ; " + self.c4 
+        print "x : " + str(self.x) + " , y : " + str(self.y) + " , theta : " + str(self.theta)
+        print "Capteurs : " + str(self.c1) + " ; " + str(self.c2) + " ; " + str(self.c3) + " ; " + str(self.c4) 
