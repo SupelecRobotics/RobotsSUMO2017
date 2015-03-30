@@ -6,6 +6,7 @@ Created on Mon Mar 30 14:49:22 2015
 """
 
 from Robot import Robot
+import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM0')
 robot.printPosition()
