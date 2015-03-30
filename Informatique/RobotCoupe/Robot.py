@@ -36,8 +36,8 @@ class Robot :
             self.updatePosition()
             coor = (self.x, self.y)
             (x, y) = point
-            distance = dist((x0, y0), point)
-            ang = - angle0 + angle((0, 1), (x - x0, y - y0))
+            distance = dist(coor, point)
+            ang = - self.theta + angle((0, 1), (x - self.x, y - self.y))
             ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
             self.com.envoiMoteurCapteur(distance,ang)
         
