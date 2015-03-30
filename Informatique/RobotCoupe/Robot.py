@@ -7,6 +7,7 @@ Created on Tue Mar 17 19:39:38 2015
 import time
 from util import *
 from CommunicationSerial import CommunicationSerial as com
+from trajectoire import trajectoire as traj
 
 class Robot :
     """ Simulates the Robot
@@ -44,7 +45,7 @@ class Robot :
 #            time.sleep(0.5)
         
     def allerA(self, point):
-        trajectoire = trajectoire((self.x, self.y), self.theta, True)
+        trajectoire = traj((self.x, self.y), self.theta, True)
         for commande in trajectoire.ordersTo(point):
             (d, theta, align) = commande
             self.bouge(d,theta)
