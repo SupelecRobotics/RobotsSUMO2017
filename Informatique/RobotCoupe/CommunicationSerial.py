@@ -58,13 +58,13 @@ class CommunicationSerial :
         # while k < returned.length
         while k < 19:
             if k < 12:
-                print returned[k:k+4]
+#                print returned[k:k+4]
                 r = int(returned[k:k+4],16)
                 if r > 32767:
                     r -= 65536
                 k += 4
             else:
-                print returned[k:k+2]
+#                print returned[k:k+2]
                 r = int(returned[k:k+2],16)
                 if r > 32767:
                     r -= 65536
