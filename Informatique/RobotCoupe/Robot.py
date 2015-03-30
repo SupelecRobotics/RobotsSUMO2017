@@ -39,9 +39,20 @@ class Robot :
             distance = dist(coor, point)
             ang = - self.theta + angle((x, 0), (x - self.x, y - self.y))
             ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
-            print int(distance*50)
+            print int(distance)
             print int(ang*10)
             self.com.envoiMoteurCapteur(int(distance),int(ang*10)) #envoi d'entiers
+            time.sleep(0.5)
+            
+    def bougeDroit(self,point):
+        coor = (0,0)
+        while dist(coor,point) > 10:
+            self.printPosition()
+            coor = (self.x, self.y)
+            (x, y) = point
+            distance = dist(coor, point)
+            print int(distance)
+            self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
             time.sleep(0.5)
         
     def updatePosition(self):
