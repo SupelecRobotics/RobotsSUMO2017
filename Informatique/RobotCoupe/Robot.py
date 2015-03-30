@@ -46,7 +46,9 @@ class Robot :
         
     def allerA(self, point):
         trajectoire = traj((self.x, self.y), self.theta, True)
+        print trajectoire.ordersTo(point)
         for commande in trajectoire.ordersTo(point):
+            print commande
             (d, theta, align) = commande
             self.bouge(d,theta)
             time.sleep(1)
