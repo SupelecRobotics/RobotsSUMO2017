@@ -30,23 +30,29 @@ class Robot :
     def bouge(self,d,theta):
         self.com.envoiMoteurCapteur(d,theta)
         
-    def bougeBest(self,point):
-        coor = (0,0)
-        while dist(coor,point) > 3:
-            self.printPosition()
-            coor = (self.x, self.y)
-            (x, y) = point
-            distance = dist(coor, point)
-            ang = - self.theta + angle((x, 0), (x - self.x, y - self.y))
-            ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
-            print int(distance)
-            print int(ang*10)
-            self.com.envoiMoteurCapteur(int(distance),int(ang*10)) #envoi d'entiers
-            time.sleep(0.5)
+#    def bougeAngle(self,angle):
+#        while self.theta - angle > 3:
+#            self.printPosition()
+#            coor = (self.x, self.y)
+#            (x, y) = point
+#            distance = dist(coor, point)
+#            ang = - self.theta + angle((x, 0), (x - self.x, y - self.y))
+#            ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
+#            print int(distance)
+#            print int(ang*10)
+#            self.com.envoiMoteurCapteur(int(distance),int(ang*10)) #envoi d'entiers
+#            time.sleep(0.5)
+        
+    def allerA(self, point):
+        trajectoire = trajectoire((self.x, self.y), self.theta, True)
+        for commande in trajectoire.ordersTo(point):
+            (d, theta, align) = commande
+            self.bouge(d,theta)
+            time.sleep(1)
             
     def bougeDroit(self,point):
         coor = (0,0)
-        while dist(coor,point) > 10:
+        while dist(coor,point) > 3:
             self.printPosition()
             coor = (self.x, self.y)
             (x, y) = point

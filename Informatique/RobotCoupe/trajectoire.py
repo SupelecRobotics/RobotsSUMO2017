@@ -52,7 +52,7 @@ class Trajectoire :
 
     
 
-    def vaVoirLaBasSiJySuis(self, point) :
+    def ordersTo(self, point) :
 
         pouet = PathManager(robomoviesForest.getForest())
         pouet.setThreshold(4)
@@ -76,7 +76,7 @@ class Trajectoire :
 
 traj = Trajectoire((20, 5), 0, True)
 
-pouet = traj.vaVoirLaBasSiJySuis((6, 50))
+pouet = traj.ordersTo((6, 50))
 
 print pouet
 
