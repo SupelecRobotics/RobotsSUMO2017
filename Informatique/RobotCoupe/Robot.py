@@ -5,6 +5,7 @@ Created on Tue Mar 17 19:39:38 2015
 @author: Fabien
 """
 import time
+from util import *
 from CommunicationSerial import CommunicationSerial as com
 
 class Robot :
@@ -28,6 +29,17 @@ class Robot :
         
     def bouge(self,d,theta):
         self.com.envoiMoteurCapteur(d,theta)
+        
+    def bougeBest(self,point):
+        coor = (0,0)
+        while dist(coor,coorF) > 10:
+            self.updatePosition()
+            coor = (self.x, self.y)
+            (x, y) = point
+            distance = dist((x0, y0), point)
+            ang = - angle0 + angle((0, 1), (x - x0, y - y0))
+            ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
+            self.com.envoiMoteurCapteur(distance,ang)
         
     def updatePosition(self):
         string = self.com.getInfos()
