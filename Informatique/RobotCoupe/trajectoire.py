@@ -80,7 +80,9 @@ class Trajectoire :
             angle0 = ang
             coor0 = coor
 
-        ang = - angle0 + angleArrivee
+        (x0, y0) = path[-2]
+        (x1, y1) = path[-1]
+        ang = - angle((1, 0), (x1 - x0, y1 - y0)) + angleArrivee
         ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
         way.append((0, ang*180/math.pi*self.facteurDegre, orientation)) 
         
