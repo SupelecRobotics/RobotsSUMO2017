@@ -64,8 +64,8 @@ class Trajectoire :
         (x, y) = (y/self.facteurDistance, x/self.facteurDistance)
         pathMan.findPath(self.position[0],(x, y, 0))
 
-        print "path"
-        print pathMan.path
+#        print "path"
+#        print pathMan.path
 
         way = self.chemin(pathMan.path)
 
@@ -79,11 +79,11 @@ class Trajectoire :
 
 #robomoviesForest.displayForest()
 
-traj = Trajectoire((1500, 1000), 0, True)
-
-pouet = traj.ordersTo((1500, 1200))
-
-print pouet
+#traj = Trajectoire((1500, 1000), 0, True)
+#
+#pouet = traj.ordersTo((1500, 1200))
+#
+#print pouet
 
 
     

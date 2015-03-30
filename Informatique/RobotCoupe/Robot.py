@@ -46,6 +46,7 @@ class Robot :
         
     def allerA(self, point):
         trajectoire = traj((self.x, self.y), self.theta, True)
+        print "debut"
         print trajectoire.ordersTo(point)
         for commande in trajectoire.ordersTo(point):
             print commande
