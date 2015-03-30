@@ -37,7 +37,7 @@ class Robot :
             coor = (self.x, self.y)
             (x, y) = point
             distance = dist(coor, point)
-            ang = - self.theta + angle((0, 1), (x - self.x, y - self.y))
+            ang = - self.theta + angle((x, 0), (x - self.x, y - self.y))
             ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
             print int(distance)
             print int(ang*10)
