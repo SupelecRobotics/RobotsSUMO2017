@@ -68,17 +68,17 @@ class Trajectoire :
             (x, y) = coor
             robomoviesForest.forest[x][y] = -8
 
-        robomoviesForest.displayForest()
+#        robomoviesForest.displayForest()
         
         return wolo
 
 #robomoviesForest.displayForest()
 
-traj = Trajectoire((20, 5), 0, True)
-
-pouet = traj.ordersTo((6, 50))
-
-print pouet
+#traj = Trajectoire((20, 5), 0, True)
+#
+#pouet = traj.ordersTo((6, 50))
+#
+#print pouet
 
 
     

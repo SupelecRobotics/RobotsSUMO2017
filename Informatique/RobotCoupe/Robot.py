@@ -16,8 +16,8 @@ class Robot :
     def __init__(self, ser1, ser2) :
         self.com = com(ser1,ser2)
         #position physique
-        self.x = 0
-        self.y = 0
+        self.x = 20
+        self.y = 5
         self.theta = 0
         # capteurs
         self.c1 = 0
