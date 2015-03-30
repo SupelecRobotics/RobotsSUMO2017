@@ -7,7 +7,7 @@ Created on Tue Mar 17 19:39:38 2015
 import time
 from util import *
 from CommunicationSerial import CommunicationSerial as com
-from trajectoire import trajectoire as traj
+from trajectoire import Trajectoire as traj
 
 class Robot :
     """ Simulates the Robot
