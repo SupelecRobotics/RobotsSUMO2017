@@ -32,13 +32,15 @@ class Robot :
         
     def bougeBest(self,point):
         coor = (0,0)
-        while dist(coor,point) > 10:
+        while dist(coor,point) > 100:
             self.printPosition()
             coor = (self.x, self.y)
             (x, y) = point
             distance = dist(coor, point)
             ang = - self.theta + angle((0, 1), (x - self.x, y - self.y))
             ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
+            print int(distance)
+            print int(ang*10)
             self.com.envoiMoteurCapteur(int(distance),int(ang*10)) #envoi d'entiers
             time.sleep(1)
         
