@@ -19,16 +19,18 @@ class Trajectoire :
 
 
     def __init__(self, coordinates, angle, orientation) :
-
-        self.position = [coordinates, angle, orientation]
+        
+        (x,y) = coordinates
         
         self.currentWay = []
 
-        self.facteurDistance = 50
+        self.facteurDistance = 50.0
 
-        self.facteurDegre = 10
+        self.facteurDegre = 10.0
+        
+        self.position = [(x/self.facteurDistance, y/self.facteurDistance), angle/self.facteurDegre, orientation]
 
-    def wololo(self, path) :
+    def chemin(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
 
         coor0 = self.position[0]
@@ -54,23 +56,23 @@ class Trajectoire :
 
     def ordersTo(self, point) :
 
-        pouet = PathManager(robomoviesForest.getForest())
-        pouet.setThreshold(4)
+        pathMan = PathManager(robomoviesForest.getForest())
+        pathMan.setThreshold(4)
         (x, y) = point
-        pouet.findPath(self.position[0],(x, y, 0))
+        pathMan.findPath(self.position[0],(x, y, 0))
 
         print "path"
-        print pouet.path
+        print pathMan.path
 
-        wolo = self.wololo(pouet.path)
+        way = self.chemin(pathMan.path)
 
-        for coor in pouet.path :
+        for coor in pathMan.path :
             (x, y) = coor
             robomoviesForest.forest[x][y] = -8
 
 #        robomoviesForest.displayForest()
         
-        return wolo
+        return way
 
 #robomoviesForest.displayForest()
 
