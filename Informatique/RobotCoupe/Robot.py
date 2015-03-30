@@ -32,7 +32,7 @@ class Robot :
         
     def bougeBest(self,point):
         coor = (0,0)
-        while dist(coor,coorF) > 10:
+        while dist(coor,point) > 10:
             self.updatePosition()
             coor = (self.x, self.y)
             (x, y) = point
