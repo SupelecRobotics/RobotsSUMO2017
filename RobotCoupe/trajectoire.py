@@ -28,7 +28,7 @@ class Trajectoire :
 
         self.facteurDegre = 10.0
         
-        self.position = [(y/self.facteurDistance, x/self.facteurDistance), angle/self.facteurDegre, orientation]
+        self.position = [(y/self.facteurDistance, x/self.facteurDistance), angle/self.facteurDegre*math.pi/180, orientation]
 
 #        print self.position
 
@@ -44,7 +44,9 @@ class Trajectoire :
             (x0, y0) = coor0
             (x, y) = coor
             distance = dist(coor0, coor)
-            ang = - angle0 + angle((1, 0), (x - x0, y - y0))
+            ang = - angle0 + angle((0, 1), (x - x0, y - y0))
+            print angle0
+            print angle((0, 1), (x - x0, y - y0))
             ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
             way.append((0, ang*180/math.pi*self.facteurDegre, orientation)) 
             way.append((distance*self.facteurDistance, 0, orientation)) 
@@ -118,11 +120,11 @@ class Trajectoire :
 
 #robomoviesForest.displayForest()
 
-traj = Trajectoire((1500, 1000), 90, True)
-
-pouet = traj.ordersTo((1600, 1000))
-
-print pouet
+#traj = Trajectoire((1500, 1000), 0, True)
+#
+#pouet = traj.ordersTo((1500, 900))
+#
+#print pouet
 
 
     
