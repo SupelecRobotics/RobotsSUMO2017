@@ -73,7 +73,7 @@ while(cap.isOpened() and not end):
     ret,frame = cap.read()
 
     if(ret):
-        frame = undistorter.undistort(frame)
+        #frame = undistorter.undistort(frame)
         tableWithCircles,frameWithCircles = ptsList.draw(table,frame)
         cv2.imshow('Cam',frameWithCircles)
         cv2.imshow('Table',tableWithCircles)

@@ -30,7 +30,7 @@ while(cap.isOpened() and not end):
     ret,frame = cap.read()
 
     if(ret):
-        frame = undistorter.undistort(frame)
+        #frame = undistorter.undistort(frame)
 
         cv2.imshow('Cam',frame)
         cv2.imshow('Final', final)

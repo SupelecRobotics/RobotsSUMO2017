@@ -2,6 +2,24 @@ import serial
 import RPi.GPIO as GPIO
 import time
 
+def convertNbTo4Char(nb):
+    strNb = str(int(round(nb)))
+
+    l = len(strNb)
+    if(l < 4):
+        zeros = ""
+        for i in range(l, 4):
+            zeros += "0"
+        strNb = zeros + strNb
+
+    return strNb
+
+def sendCoords(blueTSer, objectType, coords):
+     for i in range(0, len(coords)):
+        msg = "a" + str(i) + convertNbTo4Char(coords[i][0]) + convertNbTo4Char(coords[i][1])
+        blueTSer.write(msg)
+    
+
 def bluetoothInit():
     pinEN = 18
      

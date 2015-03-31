@@ -1,7 +1,7 @@
 import pickle
 import cv2
 import numpy as np
-import ImageProcessor
+import RobotsFinder
 import CameraUndistorter
 
 def nothing(x):
@@ -15,12 +15,12 @@ def mouseCallback(event,x,y,flags,param):
             param["roi"].pop()
 
 def saveParam(param):
-    with open('CylinderFinder.dat', 'w') as file:
+    with open('RobotsFinder.dat', 'w') as file:
         pickler = pickle.Pickler(file)
         pickler.dump(param)
 
 def loadParam():
-    with open('CylinderFinder.dat', 'r') as file:
+    with open('RobotsFinder.dat', 'r') as file:
         depickler = pickle.Unpickler(file)
         param = depickler.load()
         return param
@@ -72,7 +72,7 @@ def cropFrameAddContours(frame, mask, contours, roiPts):
 cap = cv2.VideoCapture('http://10.13.152.226:8554/')
 end = False
 
-cylinderFinder = ImageProcessor.CylinderFinder()
+robotsFinder = RobotsFinder.RobotsFinder()
 
 undistorter = CameraUndistorter.CameraUndistorter()
 undistorter.loadParam()
@@ -86,15 +86,15 @@ cv2.setMouseCallback('Result', mouseCallback, param)
 while(cap.isOpened() and not end):
     ret,frame = cap.read()
     readParamsFromTrackbars(param)
-    cylinderFinder.setParam(param)
+    robotsFinder.setParam(param)
 
     if(ret):
         #frame = undistorter.undistort(frame)
-        frame = cv2.GaussianBlur(frame, (5,5), 0)
         hsvFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        _,mask,validContours = cylinderFinder.process(hsvFrame)
+        _,mask,validContours = robotsFinder.process(hsvFrame)
         finalFrame = cropFrameAddContours(frame, mask, validContours, param["roi"])
-        cv2.imshow('Result', finalFrame)       
+        cv2.imshow('Result', finalFrame)
+        
         
     key = cv2.waitKey(1) & 0xFF
     if(key == ord('q')):
