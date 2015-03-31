@@ -46,7 +46,8 @@ class Trajectoire :
             distance = dist(coor0, coor)
             ang = - angle0 + angle((1, 0), (x - x0, y - y0))
             ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
-            way.append((distance*self.facteurDistance, ang*180/math.pi*self.facteurDegre, orientation)) 
+            way.append((0, ang*180/math.pi*self.facteurDegre, orientation)) 
+            way.append((distance*self.facteurDistance, 0, orientation)) 
             angle0 = ang
             coor0 = coor
 
@@ -117,11 +118,11 @@ class Trajectoire :
 
 #robomoviesForest.displayForest()
 
-#traj = Trajectoire((1500, 1000), 0, True)
-#
-#pouet = traj.ordersTo((1500, 1200))
-#
-#print pouet
+traj = Trajectoire((1500, 1000), 90, True)
+
+pouet = traj.ordersTo((1600, 1000))
+
+print pouet
 
 
     
