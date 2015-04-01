@@ -28,7 +28,7 @@ class Trajectoire :
 
         self.facteurDegre = 10.0
         
-        self.position = [(y/self.facteurDistance, x/self.facteurDistance), angle/self.facteurDegre*math.pi/180, orientation]
+        self.position = [( (2000-y)/self.facteurDistance, x/self.facteurDistance), angle/self.facteurDegre*math.pi/180, orientation]
 
 #        print self.position
 
@@ -45,8 +45,8 @@ class Trajectoire :
             (x, y) = coor
             distance = dist(coor0, coor)
             ang = - angle0 + angle((0, 1), (x - x0, y - y0))
-            print angle0
-            print angle((0, 1), (x - x0, y - y0))
+#            print angle0
+#            print angle((0, 1), (x - x0, y - y0))
             ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
             way.append((0, ang*180/math.pi*self.facteurDegre, orientation)) 
             way.append((distance*self.facteurDistance, 0, orientation)) 
@@ -62,7 +62,7 @@ class Trajectoire :
         pathMan = PathManager(robomoviesForest.getForest())
         pathMan.setThreshold(4)
         (x, y) = point
-        (x, y) = (y/self.facteurDistance, x/self.facteurDistance)
+        (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
         pathMan.findPath(self.position[0],(x, y, 0))
 
         path = pathMan.path
@@ -102,7 +102,7 @@ class Trajectoire :
         pathMan = PathManager(robomoviesForest.getForest())
         pathMan.setThreshold(4)
         (x, y) = point
-        (x, y) = (y/self.facteurDistance, x/self.facteurDistance)
+        (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
         pathMan.findPath(self.position[0],(x, y, 0))
 
 #        print "path"
@@ -120,11 +120,11 @@ class Trajectoire :
 
 #robomoviesForest.displayForest()
 
-#traj = Trajectoire((1500, 1000), 0, True)
-#
-#pouet = traj.ordersTo((1500, 900))
-#
-#print pouet
+traj = Trajectoire((1500, 1000), 0, True)
+
+pouet = traj.ordersTo((1600, 1100))
+
+print pouet
 
 
     
