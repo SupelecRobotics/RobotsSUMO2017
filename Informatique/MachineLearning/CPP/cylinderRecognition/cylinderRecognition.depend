@@ -1,6 +1,0 @@
-# depslib dependency file v1.0
-1418681662 source:c:\users\robin\prog\robotssumo2017\informatique\machinelearning\cpp\cylinderrecognition\main.cpp
-	<opencv2/core/core.hpp>
-	<opencv2/highgui/highgui.hpp>
-	<opencv2/imgproc/imgproc.hpp>
-
