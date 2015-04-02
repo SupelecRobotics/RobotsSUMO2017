@@ -32,6 +32,7 @@ class CommunicationSerial :
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
         self.serMoteurCapteur.write(inputByteString)
 #        print("Envoi Byte String")
+        self.serMoteurCapteur.readline()
 #        print(self.serMoteurCapteur.readline())
         time.sleep(0.5)
         
