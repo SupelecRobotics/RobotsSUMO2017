@@ -103,6 +103,7 @@ class Trajectoire :
         pathMan.setThreshold(4)
         (x, y) = point
         (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
+        print (x,y)
         pathMan.findPath(self.position[0],(x, y, 0))
 
 #        print "path"
