@@ -32,7 +32,7 @@ def height(A, B, C) :
 def angle(A,B) :
     """ A, B : (float,float) or (int,int)
         result : float
-        calculates the angle AÔB
+        calculates the angle AÔB in radians
     """
     a1 = math.atan2(A[1], A[0])
     a2 = math.atan2(B[1], B[0])

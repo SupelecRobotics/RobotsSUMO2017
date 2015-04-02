@@ -8,7 +8,6 @@ Created on Thu Dec 11 21:34:28 2014
 import math
 import heapq
 import util
-#import timeit
 
 class AStar :
     """ Implements the A* algorithm on an unweighed 2D grid with obstacles

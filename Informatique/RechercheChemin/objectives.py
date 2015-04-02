@@ -9,22 +9,77 @@ import util
 import pathManager
 
 class Objective :
-    """ Implement an objective for the robot, with location and priority
+    """ Implement an objective for the robot
+        THIS CLASS IS FUCKING ABSTRACT DON'T YOU EVER THINK OF IMPLEMENTING IT
     """
     
-    def __init__(self, goal, priority) :
-        """ goal : (int,int), priority : int
+    def __init__(self, priority, script) :
+        """ priority : int, script : int
+            AGAIN THIS CLASS IS ABSTRACT YOU BETTER NOT CALL THIS CONSTRUCTOR
         """
-        self.goal = goal
         self.priority = priority
+        self.script = script
         self.isComplete = False
     
-    def value(self, position) :
-        """ position : (int,int)
-            returns : int
-        """
-        return util.dist(self.goal[:2], position) - self.priority
+    # METHODS DEFINED IN ALL DERIVED CLASSES
     
+    # def value(self, position) : 
+    #   position : (float,float)
+    #   returns : int
+    
+    # def getPath(self, position, pm) :
+    #   position : (int,int)
+    #   pm : PathManager
+    #   returns : float, [(float,float)]
+
+class FixedObjective(Objective) :
+    """ The objective is to be on a given point (at a given orientation?)
+    """
+    
+    def __init__(self, goal, priority, script) :
+        """ goal : (int,int), priority : int, script : int
+        """
+        Objective.__init__(self, priority, script)
+        self.goal = goal
+    
+    def value(self, position) :
+        return util.dist(self.goal, position) - self.priority
+    
+    def getPath(self, position, pm) :
+        goal = self.goal + (0,) 
+        pm.findPath(position, goal)
+        dist = pm.getPathLength() - self.priority
+        path = pm.path
+        return dist, path
+    
+class MobileObjective(Objective) :
+    """ The objective is to face a given point at a given distance
+    """
+    
+    def __init__(self, goal, distance, priority, script) :
+        """ goal : (float,float), distance : float, priority : int, script : int
+        """
+        Objective.__init__(self, priority, script)
+        self.goal = goal            # may be accessed directly
+        self.distance = distance
+    
+    def value(self, position) :
+        return util.dist(self.goal, position) - self.distance - self.priority
+    
+    def getPath(self, position, pm) :
+        goal = self.goal + (self.distance+2,)
+        pm.findPath(position, goal)
+        
+        path = pm.path
+        endPoint = path[len(path)-1]
+        f = lambda a,b : b + (a-b)*self.distance/util.dist(endPoint, self.goal)
+        newEndPoint = (f(endPoint[0],self.goal[0]), f(endPoint[1],self.goal[1]))
+        path.append(newEndPoint)
+        
+        dist = pm.getPathLength()
+        return dist, path
+
+        
 
 class PriorityManager :
     """ Implements a list of 'Objective' instances
