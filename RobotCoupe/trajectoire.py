@@ -120,12 +120,12 @@ class Trajectoire :
         return way
 
 #robomoviesForest.displayForest()
-
-traj = Trajectoire((250, 1000), 0, True)
-
-pouet = traj.ordersTo((350, 500))
-
-print pouet
+#
+#traj = Trajectoire((250, 1000), 0, True)
+#
+#pouet = traj.ordersTo((350, 500))
+#
+#print pouet
 
 
     

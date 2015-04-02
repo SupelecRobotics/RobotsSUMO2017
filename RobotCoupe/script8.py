@@ -10,8 +10,9 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM0')
 
-robot.printPosition()
+
 while (True):
+    robot.printPosition()
     d = raw_input('Enter a distance: ')
     theta = raw_input('Enter an angle: ')
     robot.bouge(0,int(theta))
