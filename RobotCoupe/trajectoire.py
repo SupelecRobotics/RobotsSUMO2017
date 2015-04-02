@@ -120,9 +120,9 @@ class Trajectoire :
 
 #robomoviesForest.displayForest()
 
-traj = Trajectoire((1500, 1000), 0, True)
+traj = Trajectoire((250, 1000), 0, True)
 
-pouet = traj.ordersTo((1600, 1100))
+pouet = traj.ordersTo((350, 500))
 
 print pouet
 
