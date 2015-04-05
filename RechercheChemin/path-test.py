@@ -15,18 +15,38 @@ import random
 ""
 matrix = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 8, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 6, 8, 6, 1, 1, 0],
-    [0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
-    [0, 1, 1, 6, 1, 1, 1, 8, 3, 1, 1, 0, 1, 1, 1, 0],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 8, 0],
-    [0, 1, 1, 1, 1, 1, 6, 1, 1, 1, 1, 0, 1, 1, 1, 0],
-    [0, 8, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0],
-    [0, 1, 1, 1, 1, 1, 6, 8, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 2, 1, 1, 0, 8, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 0],
+    [0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0],
+    [0, 1, 1, 2, 2, 1, 2, 1, 4, 1, 1, 0, 1, 1, 8, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1, 1, 2, 1, 1, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
-pm = pathManager.PathManager(matrix)
+pm = objectives.PriorityManager()
+pm.matrix = matrix
+pm.threshold = 0
+pm.position = (1,1)
 
-obj = objectives.MobileObjective((4,8), 1, 0)
-d, p = obj.getPath((8,14), pm)
+objF1 = objectives.FixedObjective((1,5), 0, 0)
+objF2 = objectives.FixedObjective((8,9), 0, 1)
+objF3 = objectives.FixedObjective((4,14), 5, 2)
+
+objM1 = objectives.MobileObjective((4,8), 2, 2, 3)
+objM2 = objectives.MobileObjective((2,12), 1, 0, 4)
+
+pm.add(objF1)
+pm.add(objF2)
+pm.add(objF3)
+pm.add(objM1)
+pm.add(objM2)
+
+while len(pm.list) > 0 :
+    obj, point = pm.getNextPoint()
+    print obj.script
+    pm.position = point
+
+
 

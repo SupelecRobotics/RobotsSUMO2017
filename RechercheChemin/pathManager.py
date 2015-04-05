@@ -4,10 +4,11 @@ Created on Thu Jan  8 21:52:30 2015
 
 @author: antoinemarechal
 """
+
+import aStar
 import math
-import timeit
 import util
-from aStar import AStar
+
 
 class PathManager :
     
@@ -37,7 +38,7 @@ class PathManager :
         """
         if len(goal) == 2 :
             goal = goal + (0,)  # default value of 'goalRadius' is 0
-        a = AStar(start, goal, self.thresholdMap)
+        a = aStar.AStar(start, goal, self.thresholdMap)
         a.aStar()
         p = a.buildPath()
         if p == None :

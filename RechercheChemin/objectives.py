@@ -10,7 +10,7 @@ import pathManager
 
 class Objective :
     """ Implement an objective for the robot
-        THIS CLASS IS FUCKING ABSTRACT DON'T YOU EVER THINK OF IMPLEMENTING IT
+        THIS CLASS IS FUCKING ABSTRACT DON'T YOU EVER THINK OF INSTANTIATING IT
     """
     
     def __init__(self, priority, script) :
@@ -73,8 +73,9 @@ class MobileObjective(Objective) :
         path = pm.path
         endPoint = path[len(path)-1]
         f = lambda a,b : b + (a-b)*self.distance/util.dist(endPoint, self.goal)
-        newEndPoint = (f(endPoint[0],self.goal[0]), f(endPoint[1],self.goal[1]))
-        path.append(newEndPoint)
+        endX = round(f(endPoint[0],self.goal[0]), 3)
+        endY = round(f(endPoint[1],self.goal[1]), 3)
+        path.append((endX, endY))
         
         dist = pm.getPathLength()
         return dist, path
@@ -94,7 +95,7 @@ class PriorityManager :
         self.threshold = 0      # may be accessed directly
         self.position = (0,0)   # may be accessed directly
         
-    def addObjective(self, obj) :
+    def add(self, obj) :
         """ obj : Objective
             adds 'obj' to the list if it's not already in it
         """
@@ -102,7 +103,7 @@ class PriorityManager :
             obj.isComplete = False
             self.list.append(obj)
         
-    def delObjective(self, obj) :
+    def remove(self, obj) :
         """ obj : Objective
             removes 'obj' from the list if it's in it
         """
@@ -119,16 +120,15 @@ class PriorityManager :
         pm.setThreshold(self.threshold)
         sortedList = sorted(self.list, key = lambda o : o.value(self.position))
         #print sortedList
-        minObj = None
         minDist = float('inf')
         minPath = None
+        minObj = None
         for obj in sortedList[:3] :
-            pm.findPath(self.position, obj.goal)
-            dist = pm.getPathLength() - obj.priority
+            dist, path = obj.getPath(self.position, pm)
             if dist < minDist :
                 minDist = dist
+                minPath = path
                 minObj = obj
-                minPath = pm.path
         return minObj, minPath
     
     def getObjectives(self) :
@@ -141,6 +141,8 @@ class PriorityManager :
         """
         obj, path = self.getBestObjective()
         print path
+        if len(path) <= 2 :
+            self.remove(obj)
         return obj, path[1]
     
     

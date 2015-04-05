@@ -41,21 +41,27 @@ class AStar :
         self.openSet = []                                                               # used as a sorted queue
         
         # initialisation of the starting point(s)
-        x, y = start
-        startX = [x] if isinstance(x, int) else [int(x), 1+int(x)]
-        startY = [y] if isinstance(y, int) else [int(y), 1+int(y)]
-        for x in startX :
-            for y in startY :
-                if self.blockMat[x][y] :
-                    gScore = util.dist(self.start, (x,y))
-                    self.gScoreMat[x][y] = gScore
-                    self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
-                    self.addToOpenSet(x,y)
+        if self.isGoal(self.start) :
+            self.pathEnd = self.start   # if starting point fulfills the goal condition
+        else :
+            x, y = start
+            startX = [x] if isinstance(x, int) else [int(x), 1+int(x)]
+            startY = [y] if isinstance(y, int) else [int(y), 1+int(y)]
+            for x in startX :
+                for y in startY :
+                    if self.blockMat[x][y] :
+                        gScore = util.dist(self.start, (x,y))
+                        self.gScoreMat[x][y] = gScore
+                        self.fScoreMat[x][y] = gScore + self.heuristicEstimate((x,y))
+                        self.addToOpenSet(x,y)
     
     def aStar(self) :
         """ runs the A* algorithm
             returns : bool (success)
         """
+        if self.pathEnd != None :   # if starting point fulfills the goal condition
+            return True
+        
         for x0, y0 in self.lowestCell() :
             if self.isGoal((x0,y0)) :   # the algorithm ends if the goal condition is reached
                 self.pathEnd = (x0, y0)
@@ -76,6 +82,8 @@ class AStar :
         """
         if self.pathEnd == None :   # if self.aStar() has not been run
             return None
+        elif self.pathEnd == self.start :   # if starting point fulfills the goal condition
+            return [self.start]
         else :
             path = [self.pathEnd]
             x, y = self.pathEnd
@@ -127,5 +135,5 @@ class AStar :
             returns : bool (goal condition reached)
             the goal condition is : being in the circle of center 'self.goal' and radius 'self.goalRadius'
         """
-        return util.dist(point, self.goal) <= self.goalRadius
+        return round(util.dist(point, self.goal), 3) <= self.goalRadius
 
