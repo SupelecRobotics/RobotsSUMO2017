@@ -5,6 +5,11 @@ Created on Thu Dec 11 21:34:28 2014
 @author: antoinemarechal
 """
 
+# ASTAR POUR LES NULS
+# 1) créer un objet AStar en précisant le point de départ, d'arrivée, et la matrice (booléens)
+# 2) appeler la méthode aStar : renvoie True si un chemin est trouvé
+# 3) appeler la méthode buildPath : renvoie le chemin trouvé (chemin pas-par-pas)
+
 import math
 import heapq
 import util

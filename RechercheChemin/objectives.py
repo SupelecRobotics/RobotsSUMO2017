@@ -5,6 +5,32 @@ Created on Mon Feb 23 22:52:00 2015
 @author: antoinemarechal
 """
 
+# PRIORITYMANAGER POUR LES NULS
+
+# A) POUR CREER UN OBJECTIF "FIXE"
+#   ce type d'objectif a pour but de se trouver exactement sur un point
+#   il est adapté aux objectifs se trouvant à proximité d'un mur et dont la localisation ne change pas 
+#   1) créer un objet FixedObjective en précisant le point d'arrivée (coordonnées entières)
+#   préciser également la priorité et le numéro du script associé à l'objectif
+
+# B) POUR CREER UN OBJECTIF "MOBILE"
+#   ce type d'objectif a pour but de se trouver face à un point, à une distance précise
+#   il est adapté aux objectifs pouvant être approchés de tous côtés et dont la localisation peut changer
+#   1) créer un objet MobileObjective en précisant le point d'arrivée (coordonnées quelconques) et la distance à atteindre
+#   préciser également la priorité et le numéro du script associé à l'objectif
+
+# C) POUR UTILISER LE GESTIONNAIRE D'OBJECTIFS
+#   1) créer des objets de type FixedObjective et/ou MobileObjective (voir ci-dessus)
+#   2) créer un objet de type PriorityManager
+#   3) appeler la méthode add pour ajouter chaque objectif
+#   4) modifier les attributs matrix, threshold, position en fonction de la situation actuelle
+#   5) pour obtenir le chemin vers l'objectif optimal : appeler la méthode getBestObjective
+#   6) pour obtenir le chemin reliant tout les objectifs, point par point (conseillé) :
+#       a) appeler la méthode getNextPoint : renvoie le prochain objectif et le premier point
+#       b) pour vérifier si l'objectif est atteint, regarder l'attribut isComplete
+#       c) modifier l'attribut position pour refléter le déplacement
+#       d) recommencer à a)
+
 import util
 import pathManager
 
@@ -131,16 +157,12 @@ class PriorityManager :
                 minObj = obj
         return minObj, minPath
     
-    def getObjectives(self) :
-        while len(self.list) > 0 :
-            yield self.getBestObjective()
-    
     def getNextPoint(self) :
         """ returns : Objective, (int,int)
             finds the best objective and the first point of the path to take
         """
         obj, path = self.getBestObjective()
-        print path
+        #print path
         if len(path) <= 2 :
             self.remove(obj)
         return obj, path[1]

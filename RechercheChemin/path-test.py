@@ -43,9 +43,12 @@ pm.add(objF3)
 pm.add(objM1)
 pm.add(objM2)
 
+print pm.position
 while len(pm.list) > 0 :
     obj, point = pm.getNextPoint()
-    print obj.script
+    print point
+    if obj.isComplete :
+        print obj.script
     pm.position = point
 
 

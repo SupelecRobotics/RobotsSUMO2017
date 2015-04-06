@@ -5,6 +5,12 @@ Created on Thu Jan  8 21:52:30 2015
 @author: antoinemarechal
 """
 
+# PATHMANAGER POUR LES NULS
+# 1) créer un objet PathManager en précisant la matrice (entiers)
+# 2) si besoin, appeler la méthode setThreshold pour préciser les valeurs considérées comme des obstacles
+# 3) appeler la méthode findPath en précisant le point de départ et d'arrivée
+# 4) le chemin trouvé est l'attribut path
+
 import aStar
 import math
 import util
