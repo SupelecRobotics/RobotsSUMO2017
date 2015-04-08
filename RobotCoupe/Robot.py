@@ -58,7 +58,7 @@ class Robot :
         coor = (self.x,self.y)
         while dist(coor,point) > 5:
             self.printPosition()
-            (distance, angle)  = orderToPoint(point)
+            (distance, angle)  = self.orderToPoint(point)
             coor = (self.x, self.y)
             self.com.envoiMoteurCapteur(0,int(angle))
             self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
