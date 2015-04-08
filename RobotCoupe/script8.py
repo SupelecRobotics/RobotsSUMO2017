@@ -19,5 +19,5 @@ while (True):
 #    robot.bouge(int(d),0)
     x = raw_input('Enter x : ')
     y = raw_input('Enter y : ')
-    robot.bougeToPoint((x,y))
+    robot.bougeToPoint((int(x),int(y)))
     time.sleep(1)
