@@ -48,23 +48,30 @@ class Robot :
         trajectoire = traj((self.x, self.y), self.theta, True)
         print point
         print "debut"
-        print trajectoire.ordersTo(point)
-        for commande in trajectoire.ordersTo(point):
-            print commande
-            (d, theta, align) = commande
-            self.bouge(int(d),int(theta))
+        print trajectoire.orderToPoint(point)
+        for point in trajectoire.orderToPoint(point):
+            print point
+            bougeToPoint(point)
             time.sleep(1)
             
-    def bougeDroit(self,point):
-        coor = (0,0)
-        while dist(coor,point) > 3:
+    def bougeToPoint(self,point):
+        coor = (self.x,self.y)
+        while dist(coor,point) > 5:
             self.printPosition()
+            (distance, angle)  = orderToPoint(point)
             coor = (self.x, self.y)
-            (x, y) = point
-            distance = dist(coor, point)
-            print int(distance)
+            self.com.envoiMoteurCapteur(0,int(angle))
             self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
             time.sleep(0.5)
+            
+    def orderToPoint(self, point):
+        (x0, y0) = (self.x,self.y)
+        (x, y) = point
+        distance = dist((x0,y0), point)
+        print angle((1, 0), (x - x0, y - y0))*180/math.pi
+        ang = - 0 + angle((1, 0), (x - x0, y - y0))*180/math.pi
+        ang = (ang + 180) % (360)  - 180     # ang dans [-180, 180]
+        return (distance, ang)
         
     def updatePosition(self):
         string = self.com.getInfos()

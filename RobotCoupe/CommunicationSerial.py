@@ -38,9 +38,9 @@ class CommunicationSerial :
         
     def stop(self):
         inputByteString = chr(1)
-        print(self.serMoteurCapteur.write(inputByteString))
-        print("Envoi Byte String")
-        print(self.serMoteurCapteur.readline())
+        self.serMoteurCapteur.write(inputByteString)
+#        print("Envoi Byte String")
+        self.serMoteurCapteur.readline()
         time.sleep(0.5)
         
     def getInfos(self):
