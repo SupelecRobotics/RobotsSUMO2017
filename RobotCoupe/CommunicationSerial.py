@@ -36,6 +36,25 @@ class CommunicationSerial :
 #        print(self.serMoteurCapteur.readline())
         time.sleep(0.5)
         
+    def envoiMoteurCapteurSat(self, d=0, theta=0, satVitesse=0):
+        commande = 0
+        if (d<0):
+           d = -d + 32768
+        d1 = d >> 8
+        d2 = d - (d1 << 8)
+        if (theta<0): 
+            theta = -theta + 32768
+        t1 = theta >> 8
+        t2 = theta - (t1 << 8)
+        satV = satVitesse >> 8    #saturation vitesse : 1 byte max
+        
+        inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satV)
+        self.serMoteurCapteur.write(inputByteString)
+#        print("Envoi")
+        self.serMoteurCapteur.readline()
+#        print(self.serMoteurCapteur.readline())
+        time.sleep(0.5)
+        
     def stop(self):
         inputByteString = chr(1)
         self.serMoteurCapteur.write(inputByteString)
