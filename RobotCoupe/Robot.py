@@ -49,16 +49,14 @@ class Robot :
         print point
         print "debut"
         print trajectoire.orderToPoint(point)
-        for point in trajectoire.orderToPoint(point):
+        for point in trajectoire.pointPath(point):
             print point
             self.bougeToPoint(point)
             time.sleep(1)
             
     def bougeToPoint(self,point):
         coor = (self.x,self.y)
-        print coor
-        print point
-        while dist(coor,point) > 5.0:
+        while dist(coor,point) > 5:
             self.printPosition()
             (distance, angle)  = orderToPoint(point)
             coor = (self.x, self.y)
