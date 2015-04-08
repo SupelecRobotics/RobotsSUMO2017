@@ -140,7 +140,7 @@ class Trajectoire :
         return pth
         
     def orderToPoint(self, point):
-        (x0, y0) = (500,1000)
+        (x0, y0) = (450,1000)
         (x, y) = point
         distance = dist((x0,y0), point)
         print angle((1, 0), (x - x0, y - y0))*180/math.pi
@@ -150,13 +150,13 @@ class Trajectoire :
 
 #robomoviesForest.displayForest()
 #
-#traj = Trajectoire((250, 1000), 0, True)
-#
-#pouet = traj.pointPath((1500, 350))
-#commande = traj.orderToPoint((700,1700))
-#
-#print pouet
-#print commande
+traj = Trajectoire((250, 1000), 0, True)
+
+pouet = traj.pointPath((600, 800))
+commande = traj.orderToPoint((700,1700))
+
+print pouet
+print commande
 
 
     
