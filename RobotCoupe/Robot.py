@@ -63,10 +63,16 @@ class Robot :
             if (distance > 500): distance = 500
             print (distance, angle)
             coor = (self.x, self.y)
-            self.com.envoiMoteurCapteur(0,int(angle))
-            time.sleep(0.1)
-            self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
-            time.sleep(0.1)
+            if (distance > 150):
+                self.com.envoiMoteurCapteur(0,int(angle))
+                time.sleep(0.1)
+                self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
+                time.sleep(0.1)
+            else:
+                self.com.envoiMoteurCapteurSat(0,int(angle),100)
+                time.sleep(0.1)
+                self.com.envoiMoteurCapteurSat(int(distance),0,100) #envoi d'entiers
+                time.sleep(0.1)
             
     def orderToPoint(self, point):
         (x0, y0) = (self.x,self.y)
