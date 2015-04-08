@@ -55,11 +55,11 @@ class Robot :
             time.sleep(1)
             
     def bougeToPoint(self,point):
-        coor = (self.x,self.y)
+        coor = (int(self.x),int(self.y))
         while dist(coor,point) > 5:
             self.printPosition()
             (distance, angle)  = orderToPoint(point)
-            coor = (self.x, self.y)
+            coor = (int(self.x), int(self.y))
             self.com.envoiMoteurCapteur(0,int(angle))
             self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
             time.sleep(0.5)
