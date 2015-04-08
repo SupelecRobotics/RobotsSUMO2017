@@ -69,11 +69,11 @@ class Robot :
                 time.sleep(0.1)
                 print (distance, angle)
             else:
-                self.com.envoiMoteurCapteurSat(0,int(angle),150)
+                self.com.envoiMoteurCapteurSat(0,int(angle),170)
                 time.sleep(0.1)
-                self.com.envoiMoteurCapteurSat(int(distance),0,150) #envoi d'entiers
+                self.com.envoiMoteurCapteurSat(int(distance),0,170) #envoi d'entiers
                 time.sleep(0.1)
-                print (distance, angle, 150)
+                print (distance, angle, 170)
             
     def orderToPoint(self, point):
         (x0, y0) = (self.x,self.y)

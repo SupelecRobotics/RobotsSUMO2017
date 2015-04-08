@@ -47,6 +47,7 @@ class CommunicationSerial :
         t1 = theta >> 8
         t2 = theta - (t1 << 8)
         satV = satVitesse - ((satVitesse >> 8) << 8)    #saturation vitesse : 1 byte max
+        print satV
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satV)
         self.serMoteurCapteur.write(inputByteString)
