@@ -57,16 +57,16 @@ class Robot :
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
         coor = (self.x,self.y)
-        while dist(coor,point) > 30:
+        while dist(coor,point) > 50:
             self.printPosition()
             (distance, angle)  = self.orderToPoint(point)
             if (distance > 300): distance = 300
             print (distance, angle)
             coor = (self.x, self.y)
             self.com.envoiMoteurCapteur(0,int(angle))
-            time.sleep(0.05)
+            time.sleep(0.1)
             self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
-            time.sleep(0.05)
+            time.sleep(0.1)
             
     def orderToPoint(self, point):
         (x0, y0) = (self.x,self.y)
