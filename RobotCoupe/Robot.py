@@ -51,7 +51,7 @@ class Robot :
         print trajectoire.orderToPoint(point)
         for point in trajectoire.orderToPoint(point):
             print point
-            bougeToPoint(point)
+            self.bougeToPoint(point)
             time.sleep(1)
             
     def bougeToPoint(self,point):

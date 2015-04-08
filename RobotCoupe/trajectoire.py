@@ -150,13 +150,13 @@ class Trajectoire :
 
 #robomoviesForest.displayForest()
 #
-traj = Trajectoire((250, 1000), 0, True)
-
-pouet = traj.pointPath((1500, 350))
-commande = traj.orderToPoint((700,1700))
-
-print pouet
-print commande
+#traj = Trajectoire((250, 1000), 0, True)
+#
+#pouet = traj.pointPath((1500, 350))
+#commande = traj.orderToPoint((700,1700))
+#
+#print pouet
+#print commande
 
 
     
