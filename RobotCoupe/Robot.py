@@ -52,7 +52,7 @@ class Robot :
         for point in trajectoire.pointPath(point):
             print point
             self.bougeToPoint(point)
-            time.sleep(1)
+            time.sleep(0.5)
             
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
@@ -63,9 +63,9 @@ class Robot :
             print (distance, angle)
             coor = (self.x, self.y)
             self.com.envoiMoteurCapteur(0,int(angle))
-            time.sleep(1)
+            time.sleep(0.5)
             self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
-            time.sleep(1)
+            time.sleep(0.5)
             
     def orderToPoint(self, point):
         (x0, y0) = (self.x,self.y)
