@@ -71,8 +71,7 @@ class Robot :
         (x0, y0) = (self.x,self.y)
         (x, y) = point
         distance = dist((x0,y0), point)
-        ang = - self.theta + angle((1, 0), (x - x0, y - y0))*180/math.pi
-        ang = (ang + 180) % (360)  - 180     # ang dans [-180, 180]
+        ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
         return (distance, ang)
         
     def updatePosition(self):

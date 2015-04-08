@@ -143,20 +143,21 @@ class Trajectoire :
         (x0, y0) = (450,1000)
         (x, y) = point
         distance = dist((x0,y0), point)
-        #print angle((1, 0), (x - x0, y - y0))*180/math.pi
-        ang = - 0 + angle((1, 0), (x - x0, y - y0))*180/math.pi
-        ang = (ang + 180) % (360)  - 180     # ang dans [-180, 180]
+        print angle((1, 0), (x - x0, y - y0))*1800/math.pi
+        ang = - 600 + angle((1, 0), (x - x0, y - y0))*1800/math.pi
+        print ang
+      #  ang = ang % 3600     # ang dans [-180, 180]
         return (distance, ang)
 
 #robomoviesForest.displayForest()
 #
-#traj = Trajectoire((809, 856), 0, True)
-#
+traj = Trajectoire((450, 1000), 0, True)
+
 #pouet = traj.pointPath((600, 800))
-#commande = traj.orderToPoint((600,800))
-#
+commande = traj.orderToPoint((350,800))
+
 #print pouet
-#print commande
+print commande
 
 
     
