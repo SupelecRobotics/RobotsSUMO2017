@@ -57,7 +57,7 @@ class Robot :
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
         coor = (self.x,self.y)
-        while dist(coor,point) > 5:
+        while dist(coor,point) > 30:
             self.printPosition()
             (distance, angle)  = self.orderToPoint(point)
             if (distance > 300): distance = 300
