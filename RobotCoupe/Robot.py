@@ -60,7 +60,7 @@ class Robot :
         while dist(coor,point) > 50:
             self.printPosition()
             (distance, angle)  = self.orderToPoint(point)
-            if (distance > 900): distance = 900
+            if (distance > 500): distance = 500
             print (distance, angle)
             coor = (self.x, self.y)
             self.com.envoiMoteurCapteur(0,int(angle))
