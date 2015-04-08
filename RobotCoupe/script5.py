@@ -7,9 +7,13 @@ Created on Tue Mar 17 19:47:24 2015
 
 from Robot import Robot
 
+#print "a"
 robot = Robot('/dev/ttyACM0','/dev/ttyACM0')
+#print "Robot created"
 robot.printPosition()
+#print "got position"
 robot.bouge(100,0)
+#print "moved"
 robot.printPosition()
 robot.bouge(0,100)
 robot.printPosition()

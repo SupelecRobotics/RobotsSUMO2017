@@ -11,7 +11,7 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM0')
 robot.printPosition()
-robot.allerA((350,600))
+robot.allerA((350,450))
 robot.printPosition()
 time.sleep(2)
 robot.printPosition()

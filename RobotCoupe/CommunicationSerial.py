@@ -31,7 +31,7 @@ class CommunicationSerial :
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
         self.serMoteurCapteur.write(inputByteString)
-#        print("Envoi Byte String")
+#        print("Envoi")
         self.serMoteurCapteur.readline()
 #        print(self.serMoteurCapteur.readline())
         time.sleep(0.5)
@@ -39,14 +39,14 @@ class CommunicationSerial :
     def stop(self):
         inputByteString = chr(1)
         self.serMoteurCapteur.write(inputByteString)
-#        print("Envoi Byte String")
+#        print("Envoi")
         self.serMoteurCapteur.readline()
         time.sleep(0.5)
         
     def getInfos(self):
         inputByteString = chr(2)
         self.serMoteurCapteur.write(inputByteString)
-#        print("Envoi Byte String")
+#        print("Envoi")
         returned = ""
         for i in range(0,10):
             r = self.serMoteurCapteur.read()
