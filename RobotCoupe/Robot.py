@@ -48,7 +48,7 @@ class Robot :
         trajectoire = traj((self.x, self.y), self.theta, True)
         print point
         print "debut"
-        print trajectoire.orderToPoint(point)
+#        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
             print point
             self.bougeToPoint(point)
@@ -62,7 +62,7 @@ class Robot :
             coor = (self.x, self.y)
             self.com.envoiMoteurCapteur(0,int(angle))
             self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
-            time.sleep(0.5)
+            time.sleep(2)
             
     def orderToPoint(self, point):
         (x0, y0) = (self.x,self.y)
