@@ -55,6 +55,7 @@ class Robot :
             time.sleep(1)
             
     def bougeToPoint(self,point):
+        print "objective : " + str(point) 
         coor = (self.x,self.y)
         while dist(coor,point) > 5:
             self.printPosition()
