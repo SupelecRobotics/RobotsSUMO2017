@@ -120,9 +120,14 @@ class CommunicationSerial :
         time.sleep(0.5)
     
     def getColor(self):
-        while(True):
-        	self.serCouleur.write(chr(250))
-		time.sleep(1)
-        	a = self.serCouleur.read()
-		self.serCouleur.readline()
-		print a.encode('hex')
+        re = '00'
+        while(re == '00'):
+            self.serCouleur.write(chr(255))
+            time.sleep(1)
+            a = self.serCouleur.read()
+            self.serCouleur.readline()
+            re = a.encode('hex')
+        if (re == '01'): return 'J'
+        else: return 'V'
+           
+      
