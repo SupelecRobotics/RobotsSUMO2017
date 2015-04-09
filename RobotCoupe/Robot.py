@@ -31,7 +31,7 @@ class Robot :
         print self.couleur
         self.com.envoiColor(self.couleur)
         self.printPosition()
-        print self.getGachette()
+        print self.com.getGachette()
         
     def bouge(self,d,theta):
         self.com.envoiMain(d,theta)
