@@ -14,11 +14,11 @@ class CommunicationSerial :
     
     def __init__(self, ser1, ser2, ser3) :
         ser = serial.Serial(ser1, 115200)
-        serb = serial.Serial(ser2, 9600)
+        serb = serial.Serial(ser2, 115200)
 #        serc = serial.Serial(ser3, 9600)
         time.sleep(3)
         ser.write(chr(250))
-        serb.write(chr(255))
+        serb.write(chr(250))
 #        print serc.write(chr(255))
 #        print "written"
         time.sleep(1)
@@ -31,12 +31,12 @@ class CommunicationSerial :
 #        c = serc.read()
         #print c
         print "read"
-        if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 9600)
-        elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 9600)
-        else: self.serBluetooth = serial.Serial(ser1, 9600)
-        if (b.encode('hex') == '00'): self.serMain = serial.Serial(ser2, 9600)
-        elif (b.encode('hex') == '01'): self.serCouleur = serial.Serial(ser2, 9600)
-        else: self.serBluetooth = serial.Serial(ser2, 9600)
+        if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
+        elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
+        else: self.serBluetooth = serial.Serial(ser1, 115200)
+        if (b.encode('hex') == '00'): self.serMain = serial.Serial(ser2, 115200)
+        elif (b.encode('hex') == '01'): self.serCouleur = serial.Serial(ser2, 115200)
+        else: self.serBluetooth = serial.Serial(ser2, 115200)
         #if (c == 0): self.serMain = serial.Serial(ser3, 9600)
         #elif (c == 1): self.serCouleur = serial.Serial(ser3, 9600)
         #else: self.serBluetooth = serial.Serial(ser3, 9600)
@@ -91,13 +91,13 @@ class CommunicationSerial :
     def getInfos(self):
         inputByteString = chr(2)
         self.serMain.write(inputByteString)
-#        print("Envoi")
+        print("Envoi")
         returned = ""
         for i in range(0,10):
             r = self.serMain.read()
             returned += r.encode('hex')
         re = self.serMain.readline()
-#        return returnedString
+	print("Get")
         
         l = []
         k = 0
