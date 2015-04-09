@@ -8,7 +8,7 @@ Created on Tue Mar 17 19:47:24 2015
 from Robot import Robot
 
 #print "a"
-robot = Robot('/dev/ttyACM0','/dev/ttyACM0')
+robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 #print "Robot created"
 robot.printPosition()
 #print "got position"

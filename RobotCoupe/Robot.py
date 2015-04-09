@@ -13,8 +13,8 @@ class Robot :
     """ Simulates the Robot
     """
     
-    def __init__(self, ser1, ser2) :
-        self.com = com(ser1,ser2)
+    def __init__(self, ser1, ser2, ser3) :
+        self.com = com(ser1,ser2, ser3)
         #position physique
         self.x = 250
         self.y = 1000
@@ -29,7 +29,7 @@ class Robot :
         time.sleep(3)
         
     def bouge(self,d,theta):
-        self.com.envoiMoteurCapteur(d,theta)
+        self.com.envoiMain(d,theta)
         
 #    def bougeAngle(self,angle):
 #        while self.theta - angle > 3:
@@ -63,15 +63,15 @@ class Robot :
             if (distance > 500): distance = 500
             coor = (self.x, self.y)
             if (distance > 150):
-                self.com.envoiMoteurCapteur(0,int(angle))
+                self.com.envoiMain(0,int(angle))
                 time.sleep(0.1)
-                self.com.envoiMoteurCapteur(int(distance),0) #envoi d'entiers
+                self.com.envoiMain(int(distance),0) #envoi d'entiers
                 time.sleep(0.1)
                 print (distance, angle)
             else:
-                self.com.envoiMoteurCapteurSat(0,int(angle),170)
+                self.com.envoiMainSat(0,int(angle),170)
                 time.sleep(0.1)
-                self.com.envoiMoteurCapteurSat(int(distance),0,170) #envoi d'entiers
+                self.com.envoiMainSat(int(distance),0,170) #envoi d'entiers
                 time.sleep(0.1)
                 print (distance, angle, 170)
             

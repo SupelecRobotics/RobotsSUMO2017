@@ -12,12 +12,30 @@ class CommunicationSerial :
     """ Links the Raspberry Pi with Arduinos through Serial Communication
     """
     
-    def __init__(self, ser1, ser2) :
-        self.serMoteurCapteur = serial.Serial(ser1, 9600)
+    def __init__(self, ser1, ser2, ser3) :
+        ser = serial.Serial(ser1, 9600)
+        serb = serial.Serial(ser2, 9600)
+        serc = serial.Serial(ser3, 9600)
+        ser.write(250)
+        serb.write(250)
+        serc.write(250)
+        a = ser.readline()
+        b = serb.readline()
+        c = serc.readline()
+        if (a == 0): self.serMain = serial.Serial(ser1, 9600)
+        elif (a == 1): self.serCouleur = serial.Serial(ser1, 9600)
+        else: self.serBluetooth = serial.Serial(ser1, 9600)
+        if (b == 0): self.serMain = serial.Serial(ser2, 9600)
+        elif (b == 1): self.serCouleur = serial.Serial(ser2, 9600)
+        else: self.serBluetooth = serial.Serial(ser2, 9600)
+        if (c == 0): self.serMain = serial.Serial(ser3, 9600)
+        elif (c == 1): self.serCouleur = serial.Serial(ser3, 9600)
+        else: self.serBluetooth = serial.Serial(ser3, 9600)
+        #self.serMoteurCapteur = serial.Serial(ser1, 9600)
         #self.serVideo = serial.Serial(ser2, 9600)
         time.sleep(3)
         
-    def envoiMoteurCapteur(self, d=0, theta=0):
+    def envoiMain(self, d=0, theta=0):
         commande = 0
         if (d<0):
            d = -d + 32768
@@ -30,13 +48,13 @@ class CommunicationSerial :
         satVitesse = 230    #saturation vitesse : 1 byte max
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
-        self.serMoteurCapteur.write(inputByteString)
+        self.serMain.write(inputByteString)
 #        print("Envoi")
-        self.serMoteurCapteur.readline()
+        self.serMain.readline()
 #        print(self.serMoteurCapteur.readline())
         time.sleep(0.5)
         
-    def envoiMoteurCapteurSat(self, d=0, theta=0, satVitesse=0):
+    def envoiMainSat(self, d=0, theta=0, satVitesse=0):
         commande = 0
         if (d<0):
            d = -d + 32768
@@ -47,31 +65,30 @@ class CommunicationSerial :
         t1 = theta >> 8
         t2 = theta - (t1 << 8)
         satV = satVitesse - ((satVitesse >> 8) << 8)    #saturation vitesse : 1 byte max
-        print satV
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satV)
-        self.serMoteurCapteur.write(inputByteString)
+        self.serMain.write(inputByteString)
 #        print("Envoi")
-        self.serMoteurCapteur.readline()
+        self.serMain.readline()
 #        print(self.serMoteurCapteur.readline())
         time.sleep(0.5)
         
     def stop(self):
         inputByteString = chr(1)
-        self.serMoteurCapteur.write(inputByteString)
+        self.serMain.write(inputByteString)
 #        print("Envoi")
-        self.serMoteurCapteur.readline()
+        self.serMain.readline()
         time.sleep(0.5)
         
     def getInfos(self):
         inputByteString = chr(2)
-        self.serMoteurCapteur.write(inputByteString)
+        self.serMain.write(inputByteString)
 #        print("Envoi")
         returned = ""
         for i in range(0,10):
-            r = self.serMoteurCapteur.read()
+            r = self.serMain.read()
             returned += r.encode('hex')
-        re = self.serMoteurCapteur.readline()
+        re = self.serMain.readline()
 #        return returnedString
         
         l = []

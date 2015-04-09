@@ -9,7 +9,7 @@ Created on Wed Apr 08 22:03:07 2015
 from Robot import Robot
 import time
 
-robot = Robot('/dev/ttyACM0','/dev/ttyACM0')
+robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
 
 while (True):
