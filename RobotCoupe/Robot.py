@@ -89,6 +89,7 @@ class Robot :
         return (distance, ang)
         
     def updatePosition(self):
+	print "update"
         string = self.com.getInfos()
         self.x = string[0]
         self.y = string[1]
