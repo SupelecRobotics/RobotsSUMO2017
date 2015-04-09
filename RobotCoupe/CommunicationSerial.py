@@ -129,5 +129,18 @@ class CommunicationSerial :
             re = a.encode('hex')
         if (re == '01'): return 'J'
         else: return 'V'
-           
+        
+    def envoiColor(self, couleur):
+        self.serMain.write(chr(255))
+        time.sleep(1)
+        if (couleur == 'J'): self.serMain.write(chr(1))
+        else: self.serMain.write(chr(2))
+        
+    def getGachette(self):
+        self.serMain.write(chr(254))
+        time.sleep(1)
+        a = self.serMain.read()
+        self.serMain.readline()
+        if (a == '00'): return False
+        else: return True 
       
