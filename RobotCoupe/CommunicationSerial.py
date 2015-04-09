@@ -16,22 +16,21 @@ class CommunicationSerial :
         ser = serial.Serial(ser1, 115200)
 #        serb = serial.Serial(ser2, 9600)
 #        serc = serial.Serial(ser3, 9600)
-	time.sleep(3)
-	while(True):
-        	ser.write(chr(250))
+        time.sleep(3)
+        ser.write(chr(250))
 #        print serb.write(chr(255))
 #        print serc.write(chr(255))
-		print "written"
-		time.sleep(1)
-        	a = ser.read()
-		ser.readline()
-	#a = ser.readline()
-		print a.encode('hex')
+        print "written"
+        time.sleep(1)
+        a = ser.read()
+        ser.readline()
+        #a = ser.readline()
+        print a.encode('hex')
 #        b = serb.read()
-	#print b
+        #print b
 #        c = serc.read()
-	#print c
-	print "read"
+        #print c
+        print "read"
         #if (a == 0): self.serMain = serial.Serial(ser1, 9600)
         #elif (a == 1): self.serCouleur = serial.Serial(ser1, 9600)
         #else: self.serBluetooth = serial.Serial(ser1, 9600)
@@ -120,3 +119,11 @@ class CommunicationSerial :
             l.append(r)        
         return l
         time.sleep(0.5)
+    
+    def getColor(self):
+        while(True):
+        	self.serCouleur.write(chr(250))
+		time.sleep(1)
+        	a = self.serCouleur.read()
+		self.serCouleur.readline()
+		print a.encode('hex')
