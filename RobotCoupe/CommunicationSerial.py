@@ -141,6 +141,7 @@ class CommunicationSerial :
         time.sleep(1)
         a = self.serMain.read()
         self.serMain.readline()
+        print a.encode('hex')
         if (a.encode('hex') == '00'): return False
         else: return True 
       
