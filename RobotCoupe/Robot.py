@@ -32,7 +32,7 @@ class Robot :
         self.com.envoiColor(self.couleur)
         time.sleep(1)
         self.printPosition()
-        while self.com.getGachette != True :
+        while self.com.getGachette() != True :
             time.sleep(2)
         
     def bouge(self,d,theta):
@@ -84,13 +84,13 @@ class Robot :
                 self.com.envoiMain(0,int(angle))
                 time.sleep(0.1)
                 self.com.envoiMain(int(distance),0) #envoi d'entiers
-                time.sleep(0.1)
+                time.sleep(0.05)
                 print (distance, angle)
             else:
                 self.com.envoiMainSat(0,int(angle),170)
                 time.sleep(0.1)
                 self.com.envoiMainSat(int(distance),0,170) #envoi d'entiers
-                time.sleep(0.1)
+                time.sleep(0.05)
                 print (distance, angle, 170)
             
     def orderToPoint(self, point):
