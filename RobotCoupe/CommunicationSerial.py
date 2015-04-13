@@ -13,8 +13,8 @@ class CommunicationSerial :
     """
     
     def __init__(self, ser1, ser2, ser3) :
-        ser = serial.Serial(ser1, 115200)
-        serb = serial.Serial(ser2, 115200)
+        ser = serial.Serial(ser1, 115200, timeout = 2)
+        serb = serial.Serial(ser2, 115200, timeout = 2)
 #        serc = serial.Serial(ser3, 9600)
         time.sleep(3)
         ser.write(chr(250))
@@ -25,6 +25,7 @@ class CommunicationSerial :
         a = ser.read()
         ser.readline()
         print a.encode('hex')
+        time.sleep(1)
         b = serb.read()
         serb.readline()
         print b.encode('hex')
@@ -97,7 +98,7 @@ class CommunicationSerial :
             r = self.serMain.read()
             returned += r.encode('hex')
         re = self.serMain.readline()
-	print("Get")
+        print("Get")
         
         l = []
         k = 0
@@ -132,7 +133,6 @@ class CommunicationSerial :
         
     def envoiColor(self, couleur):
         self.serMain.write(chr(255))
-        self.serMain.read(3)
         time.sleep(1)
         if (couleur == 'J'): self.serMain.write(chr(1))
         else: self.serMain.write(chr(2))
