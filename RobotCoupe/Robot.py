@@ -5,6 +5,7 @@ Created on Tue Mar 17 19:39:38 2015
 @author: Fabien
 """
 import time
+import math
 from util import *
 from CommunicationSerial import CommunicationSerial as com
 from trajectoire import Trajectoire as traj
@@ -78,13 +79,13 @@ class Robot :
         while dist(coor,point) > 50:
             time.sleep(0.5)
             (distance, angle)  = self.orderToPoint(point)
-            if (distance > 400): distance = 400
-            if (distance > 200):
+            if (math.fabs(distance) > 400): distance = 400
+            if (math.fabs(distance) > 200):
                 self.com.envoiMain(0,int(angle))
                 time.sleep(0.5)
                 self.com.envoiMain(int(distance),0) #envoi d'entiers
                 print (distance, angle)
-            elif (distance > 100):
+            elif (math.fabs(distance) > 100):
                 self.com.envoiMainSat(0,int(angle),170)
                 time.sleep(0.5)
                 self.com.envoiMainSat(int(distance),0,170) #envoi d'entiers
