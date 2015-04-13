@@ -61,7 +61,7 @@ class CommunicationSerial :
 #        print("Envoi")
         self.serMain.readline()
 #        print(self.serMoteurCapteur.readline())
-        time.sleep(0.7)
+        time.sleep(0.3)
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
         commande = 0
@@ -80,7 +80,7 @@ class CommunicationSerial :
 #        print("Envoi")
         self.serMain.readline()
 #        print(self.serMoteurCapteur.readline())
-        time.sleep(0.7)
+        time.sleep(0.3)
         
     def stop(self):
         inputByteString = chr(1)
