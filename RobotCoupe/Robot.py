@@ -30,6 +30,7 @@ class Robot :
         self.couleur = self.com.getColor()
         print self.couleur
         self.com.envoiColor(self.couleur)
+        time.sleep(1)
         self.printPosition()
         print self.com.getGachette()
         
