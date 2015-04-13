@@ -134,6 +134,7 @@ class CommunicationSerial :
     def envoiColor(self, couleur):
         self.serMain.write(chr(255))
         time.sleep(1)
+        self.serMain.readline()
         if (couleur == 'J'): self.serMain.write(chr(1))
         else: self.serMain.write(chr(2))
         
