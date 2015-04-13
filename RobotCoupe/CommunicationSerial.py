@@ -97,7 +97,7 @@ class CommunicationSerial :
         for i in range(0,10):
             r = self.serMain.read()
             returned += r.encode('hex')
-        re = self.serMain.readline()
+        self.serMain.readline()
         print("Get")
         
         l = []
@@ -140,9 +140,8 @@ class CommunicationSerial :
     def getGachette(self):
         self.serMain.write(chr(254))
         time.sleep(1)
-        a = self.serMain.readline()
+        a = self.serMain.read()
         self.serMain.readline()
-        print a.encode('hex')
         if (a.encode('hex') == '00'): return False
         else: return True 
       
