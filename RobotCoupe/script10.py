@@ -20,5 +20,6 @@ while (True):
 #    robot.bouge(int(d),0)
     x = raw_input('Enter x : ')
     y = raw_input('Enter y : ')
-    robot.allerAangle((int(x),int(y)))
+    theta = raw_input('Enter theta : ')
+    robot.allerAangle((int(x),int(y)), int(theta))
     time.sleep(1)
