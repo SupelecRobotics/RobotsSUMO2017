@@ -132,11 +132,11 @@ class CommunicationSerial :
         else: return 'V'
         
     def envoiColor(self, couleur):
-        self.serMain.write(chr(255))
-        time.sleep(1)
-        self.serMain.readline()
-        if (couleur == 'J'): self.serMain.write(chr(1))
-        else: self.serMain.write(chr(2))
+#        self.serMain.write(chr(255))
+#        time.sleep(1)
+#        self.serMain.readline()
+        if (couleur == 'J'): self.serMain.write(chr(255))
+        else: self.serMain.write(chr(253))
         
     def getGachette(self):
         self.serMain.write(chr(254))
