@@ -140,7 +140,7 @@ class CommunicationSerial :
     def getGachette(self):
         self.serMain.write(chr(254))
         time.sleep(1)
-        a = self.serMain.read()
+        a = self.serMain.readline()
         self.serMain.readline()
         print a.encode('hex')
         if (a.encode('hex') == '00'): return False
