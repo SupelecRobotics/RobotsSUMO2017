@@ -118,7 +118,7 @@ class CommunicationSerial :
                 k += 2
             l.append(r)        
         return l
-        time.sleep(0.5)
+#        time.sleep(0.5)
     
     def getColor(self):
         re = '00'

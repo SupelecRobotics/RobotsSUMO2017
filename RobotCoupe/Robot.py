@@ -77,7 +77,6 @@ class Robot :
         print "objective : " + str(point) 
         coor = (self.x,self.y)
         while dist(coor,point) > 50:
-            time.sleep(0.5)
             (distance, angle)  = self.orderToPoint(point)
             if (math.fabs(distance) > 800): distance = math.copysign(800,distance)
             if (math.fabs(distance) > 200):
