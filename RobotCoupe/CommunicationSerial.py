@@ -137,6 +137,7 @@ class CommunicationSerial :
 #        self.serMain.readline()
         if (couleur == 'J'): self.serMain.write(chr(255))
         else: self.serMain.write(chr(253))
+        self.serMain.readline()
         
     def getGachette(self):
         self.serMain.write(chr(254))
