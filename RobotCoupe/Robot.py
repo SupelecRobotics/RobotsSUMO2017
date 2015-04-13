@@ -60,7 +60,6 @@ class Robot :
         for point in trajectoire.pointPath(point):
             print point
             self.bougeToPoint(point)
-            time.sleep(0.1)
             
     def allerAangle(self, point,theta):
         trajectoire = traj((self.x, self.y), self.theta, True)
@@ -70,30 +69,31 @@ class Robot :
         for point in trajectoire.pointPath(point):
             print point
             self.bougeToPoint(point)
-            time.sleep(0.1)
         self.bouge(0, theta - self.theta)
             
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
         coor = (self.x,self.y)
-        while dist(coor,point) > 50:
+        while dist(coor,point) > 100:
             (distance, angle)  = self.orderToPoint(point)
-            if (math.fabs(distance) > 800): distance = math.copysign(800,distance)
-            if (math.fabs(distance) > 200):
-                self.com.envoiMain(0,int(angle))
-                time.sleep(1)
-                self.com.envoiMain(int(distance),0) #envoi d'entiers
-                print (distance, angle)
-            elif (math.fabs(distance) > 100):
-                self.com.envoiMainSat(0,int(angle),170)
-                time.sleep(1)
-                self.com.envoiMainSat(int(distance),0,170) #envoi d'entiers
-                print (distance, angle, 170)
-            else:
-                self.com.envoiMainSat(0,int(angle),150)
-                time.sleep(1)
-                self.com.envoiMainSat(int(distance),0,150) #envoi d'entiers
-                print (distance, angle, 150)
+            if (math.fabs(distance) > 600): distance = math.copysign(600,distance)
+            self.com.envoiMain(0,int(angle))
+            self.com.envoiMain(int(distance),0) #envoi d'entiers
+#            if (math.fabs(distance) > 200):
+#                self.com.envoiMain(0,int(angle))
+#                time.sleep(1)
+#                self.com.envoiMain(int(distance),0) #envoi d'entiers
+#                print (distance, angle)
+#            elif (math.fabs(distance) > 100):
+#                self.com.envoiMainSat(0,int(angle),170)
+#                time.sleep(1)
+#                self.com.envoiMainSat(int(distance),0,170) #envoi d'entiers
+#                print (distance, angle, 170)
+#            else:
+#                self.com.envoiMainSat(0,int(angle),150)
+#                time.sleep(1)
+#                self.com.envoiMainSat(int(distance),0,150) #envoi d'entiers
+#                print (distance, angle, 150)
             self.printPosition()
             coor = (self.x, self.y)
             
