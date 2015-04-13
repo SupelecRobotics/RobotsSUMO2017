@@ -32,7 +32,8 @@ class Robot :
         self.com.envoiColor(self.couleur)
         time.sleep(1)
         self.printPosition()
-        print self.com.getGachette()
+        while self.com.getGachette != True :
+            time.sleep(2)
         
     def bouge(self,d,theta):
         self.com.envoiMain(d,theta)
