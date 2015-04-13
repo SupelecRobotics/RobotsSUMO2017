@@ -84,13 +84,13 @@ class Robot :
                 self.com.envoiMain(0,int(angle))
                 time.sleep(0.1)
                 self.com.envoiMain(int(distance),0) #envoi d'entiers
-                time.sleep(0.05)
+                time.sleep(0.1)
                 print (distance, angle)
             else:
                 self.com.envoiMainSat(0,int(angle),170)
                 time.sleep(0.1)
                 self.com.envoiMainSat(int(distance),0,170) #envoi d'entiers
-                time.sleep(0.05)
+                time.sleep(0.1)
                 print (distance, angle, 170)
             
     def orderToPoint(self, point):
