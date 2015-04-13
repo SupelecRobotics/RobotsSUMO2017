@@ -79,7 +79,7 @@ class Robot :
         while dist(coor,point) > 50:
             time.sleep(0.5)
             (distance, angle)  = self.orderToPoint(point)
-            if (math.fabs(distance) > 400): distance = 400
+            if (math.fabs(distance) > 400): distance = math.copysign(400,distance)
             if (math.fabs(distance) > 200):
                 self.com.envoiMain(0,int(angle))
                 time.sleep(0.5)
