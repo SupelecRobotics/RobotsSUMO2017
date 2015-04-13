@@ -61,6 +61,17 @@ class Robot :
             self.bougeToPoint(point)
             time.sleep(0.1)
             
+    def allerAangle(self, point,theta):
+        trajectoire = traj((self.x, self.y), self.theta, True)
+        print point
+        print "debut"
+#        print trajectoire.orderToPoint(point)
+        for point in trajectoire.pointPath(point):
+            print point
+            self.bougeToPoint(point)
+            time.sleep(0.1)
+        self.bouge(0, theta - self.theta)
+            
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
         coor = (self.x,self.y)
