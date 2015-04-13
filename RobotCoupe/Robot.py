@@ -76,6 +76,7 @@ class Robot :
         print "objective : " + str(point) 
         coor = (self.x,self.y)
         while dist(coor,point) > 50:
+            self.com.stop()
             self.printPosition()
             (distance, angle)  = self.orderToPoint(point)
             if (distance > 500): distance = 500
@@ -84,13 +85,11 @@ class Robot :
                 self.com.envoiMain(0,int(angle))
                 time.sleep(0.1)
                 self.com.envoiMain(int(distance),0) #envoi d'entiers
-                time.sleep(0.1)
                 print (distance, angle)
             else:
                 self.com.envoiMainSat(0,int(angle),170)
                 time.sleep(0.1)
                 self.com.envoiMainSat(int(distance),0,170) #envoi d'entiers
-                time.sleep(0.1)
                 print (distance, angle, 170)
             
     def orderToPoint(self, point):
