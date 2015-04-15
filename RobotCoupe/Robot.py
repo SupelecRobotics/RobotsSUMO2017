@@ -69,10 +69,11 @@ class Robot :
         for point in trajectoire.pointPath(point):
             print point
             self.bougeToPoint(point)
-        if (math.fabs(theta - self.theta) <= 1800 ):
-            self.bouge(0, theta - self.theta)
-        else:
-            self.bouge(0, theta - self.theta - 3600)
+        self.bouge(0, theta - self.theta)
+#        if (math.fabs(theta - self.theta) <= 1800 ):
+#            self.bouge(0, theta - self.theta)
+#        else:
+#            self.bouge(0, theta - self.theta - 3600)
             
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
@@ -118,7 +119,7 @@ class Robot :
         string = self.com.getInfos()
         self.x = string[0]
         self.y = string[1]
-        self.theta = string[2]
+        self.theta = ( (string[2] + 1800 ) % 3600 ) - 1800
         self.c1 = string[3]
         self.c2 = string[4]
         self.c3 = string[5]
