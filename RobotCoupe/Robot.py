@@ -78,7 +78,7 @@ class Robot :
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
         coor = (self.x,self.y)
-        while dist(coor,point) > 50: 	#100
+        while dist(coor,point) > 80: 	#100
             (distance, angle)  = self.orderToPoint(point)
             if (math.fabs(distance) > 600): distance = math.copysign(600,distance)
             self.com.envoiMain(0,int(angle))
@@ -119,7 +119,7 @@ class Robot :
         string = self.com.getInfos()
         self.x = string[0]
         self.y = string[1]
-        self.theta = ( (string[2] + 1800 ) % 3600 ) - 1800
+        self.theta = string[2] #( (string[2] + 1800 ) % 3600 ) - 1800
         self.c1 = string[3]
         self.c2 = string[4]
         self.c3 = string[5]
