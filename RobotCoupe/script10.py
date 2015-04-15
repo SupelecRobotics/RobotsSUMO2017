@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Apr 01 22:35:16 2015
+Created on Wed Apr 08 22:03:07 2015
 
 @author: Fabien
 """
+
 
 from Robot import Robot
 import time
@@ -19,5 +20,6 @@ while (True):
 #    robot.bouge(int(d),0)
     x = raw_input('Enter x : ')
     y = raw_input('Enter y : ')
-    robot.bougeToPoint((int(x),int(y)))
+    theta = raw_input('Enter theta : ')
+    robot.allerAangle((int(x),int(y)), int(theta))
     time.sleep(1)

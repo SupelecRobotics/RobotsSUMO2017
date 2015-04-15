@@ -118,14 +118,46 @@ class Trajectoire :
 #        robomoviesForest.displayForest()
         
         return way
+        
+        
+    def pointPath(self, point) :
+
+        pathMan = PathManager(robomoviesForest.getForest())
+        pathMan.setThreshold(4)
+        (x, y) = point
+        (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
+        print (x,y)
+        pathMan.findPath(self.position[0],(x, y, 0))
+
+#        print "path"
+#        print pathMan.path
+
+        pth = []
+        for coor in pathMan.path:
+            (x,y) = coor            
+            pth.append( (y*self.facteurDistance ,(40-x)*self.facteurDistance) )
+        
+        return pth
+        
+    def orderToPoint(self, point):
+        (x0, y0) = (450,1000)
+        (x, y) = point
+        distance = dist((x0,y0), point)
+        print angle((1, 0), (x - x0, y - y0))*1800/math.pi
+        ang = - 600 + angle((1, 0), (x - x0, y - y0))*1800/math.pi
+        print ang
+      #  ang = ang % 3600     # ang dans [-180, 180]
+        return (distance, ang)
 
 #robomoviesForest.displayForest()
 #
-#traj = Trajectoire((250, 1000), 0, True)
+#traj = Trajectoire((450, 1000), 0, True)
 #
-#pouet = traj.ordersTo((350, 500))
+##pouet = traj.pointPath((600, 800))
+#commande = traj.orderToPoint((350,800))
 #
-#print pouet
+##print pouet
+#print commande
 
 
     
