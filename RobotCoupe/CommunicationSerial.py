@@ -146,4 +146,35 @@ class CommunicationSerial :
         self.serMain.readline()
         if (a.encode('hex') == '00'): return False
         else: return True 
+        
+    def appelMonteeActionneurGobeletDevant(self):
+        self.serMain.write(chr(254))
+        time.sleep(1)
+        self.serMain.readline()
+        
+    def appelMonteeActionneurGobeletDerriere(self):
+        self.serMain.write(chr(254))
+        time.sleep(1)
+        self.serMain.readline()
+        
+    def appelDescenteActionneurGobeletDevant(self):
+        self.serMain.write(chr(254))
+        time.sleep(1)
+        self.serMain.readline()
+        
+    def appelDescenteActionneurGobeletDerriere(self):
+        self.serMain.write(chr(254))
+        time.sleep(1)
+        self.serMain.readline()
+        
+    def appelClapGauche(self):
+        self.serMain.write(chr(254))
+        time.sleep(1)
+        self.serMain.readline()
+        
+    def appelClapDroit(self):
+        self.serMain.write(chr(254))
+        time.sleep(1)
+        self.serMain.readline()
+        
       

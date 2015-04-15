@@ -53,6 +53,7 @@ class Robot :
 #            time.sleep(0.5)
         
     def allerA(self, point):
+        self.updatePosition()
         trajectoire = traj((self.x, self.y), self.theta, True)
         print point
         print "debut"
@@ -62,6 +63,7 @@ class Robot :
             self.bougeToPoint(point)
             
     def allerAangle(self, point,theta):
+        self.updatePosition()
         trajectoire = traj((self.x, self.y), self.theta, True)
         print point
         print "debut"
@@ -70,7 +72,6 @@ class Robot :
             print point
             self.bougeToPoint(point)
         self.bouge(0, theta - self.theta)
-        self.updatePosition()
 #        if (math.fabs(theta - self.theta) <= 1800 ):
 #            self.bouge(0, theta - self.theta)
 #        else:
@@ -79,7 +80,7 @@ class Robot :
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
         coor = (self.x,self.y)
-        while dist(coor,point) > 80: 	#100
+        while dist(coor,point) > 50: 	#100
             (distance, angle)  = self.orderToPoint(point)
             if (math.fabs(distance) > 600): distance = math.copysign(600,distance)
             self.com.envoiMain(0,int(angle))
@@ -128,7 +129,7 @@ class Robot :
         
     def game(self):
         if (self.couleur == 'J'):
-            robot.allerAangle((int(200),int(550)), int(-900))
+            robot.allerAangle((int(220),int(550)), int(-900))
             time.sleep(2)
             robot.allerAangle((int(650),int(1100)), int(0))
             time.sleep(2)
@@ -140,12 +141,12 @@ class Robot :
             time.sleep(2)
             robot.allerAangle((int(2300),int(600)), int(0))
             time.sleep(2)
-            robot.allerAangle((int(2600),int(1400)), int(1800))
+            robot.allerAangle((int(2700),int(1400)), int(1800))
             time.sleep(2)
-            robot.allerAangle((int(1800),int(1000)), int(1800))
+            robot.allerAangle((int(1500),int(1000)), int(1800))
             time.sleep(1)
         elif (self.couleur == 'V'):
-            robot.allerAangle((int(2800),int(550)), int(-900))
+            robot.allerAangle((int(2780),int(550)), int(-900))
             time.sleep(2)
             robot.allerAangle((int(2350),int(1100)), int(1800))
             time.sleep(2)
