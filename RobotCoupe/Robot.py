@@ -72,7 +72,7 @@ class Robot :
         if (math.fabs(theta - self.theta) <= 1800 ):
             self.bouge(0, theta - self.theta)
         else:
-            self.bouge(0, - self.theta - theta)
+            self.bouge(0, theta - self.theta - 3600)
             
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
