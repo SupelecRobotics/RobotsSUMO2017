@@ -69,12 +69,15 @@ class Robot :
         for point in trajectoire.pointPath(point):
             print point
             self.bougeToPoint(point)
-        self.bouge(0, theta - self.theta)
+        if (math.fabs(theta - self.theta) <= 180 ):
+            self.bouge(0, theta - self.theta)
+        else:
+            self.bouge(0, self.theta - theta)
             
     def bougeToPoint(self,point):
         print "objective : " + str(point) 
         coor = (self.x,self.y)
-        while dist(coor,point) > 100:
+        while dist(coor,point) > 50: 	#100
             (distance, angle)  = self.orderToPoint(point)
             if (math.fabs(distance) > 600): distance = math.copysign(600,distance)
             self.com.envoiMain(0,int(angle))
