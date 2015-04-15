@@ -70,6 +70,7 @@ class Robot :
             print point
             self.bougeToPoint(point)
         self.bouge(0, theta - self.theta)
+        self.updatePosition()
 #        if (math.fabs(theta - self.theta) <= 1800 ):
 #            self.bouge(0, theta - self.theta)
 #        else:
