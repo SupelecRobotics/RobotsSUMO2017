@@ -126,6 +126,42 @@ class Robot :
         self.c3 = string[5]
         self.c4 = string[6]
         
+    def game(self):
+        if (self.couleur == 'J'):
+            robot.allerAangle((int(200),int(550)), int(-900))
+            time.sleep(2)
+            robot.allerAangle((int(650),int(1100)), int(0))
+            time.sleep(2)
+            robot.allerAangle((int(1250),int(450)), int(1800))
+            time.sleep(2)
+            robot.allerAangle((int(2600),int(250)), int(1800))
+            time.sleep(2)
+            robot.allerAangle((int(2600),int(600)), int(0))
+            time.sleep(2)
+            robot.allerAangle((int(2300),int(600)), int(0))
+            time.sleep(2)
+            robot.allerAangle((int(2600),int(1400)), int(1800))
+            time.sleep(2)
+            robot.allerAangle((int(1800),int(1000)), int(1800))
+            time.sleep(1)
+        elif (self.couleur == 'V'):
+            robot.allerAangle((int(2800),int(550)), int(-900))
+            time.sleep(2)
+            robot.allerAangle((int(2350),int(1100)), int(1800))
+            time.sleep(2)
+            robot.allerAangle((int(1750),int(450)), int(0))
+            time.sleep(2)
+            robot.allerAangle((int(400),int(250)), int(0))
+            time.sleep(2)
+            robot.allerAangle((int(400),int(600)), int(1800))
+            time.sleep(2)
+            robot.allerAangle((int(700),int(600)), int(1800))
+            time.sleep(2)
+            robot.allerAangle((int(400),int(1400)), int(0))
+            time.sleep(2)
+            robot.allerAangle((int(800),int(1400)), int(0))
+            time.sleep(1)
+        
     def printPosition(self):
         self.updatePosition()
         print "x : " + str(self.x) + " , y : " + str(self.y) + " , theta : " + str(self.theta)
