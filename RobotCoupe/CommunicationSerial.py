@@ -148,32 +148,42 @@ class CommunicationSerial :
         else: return True 
         
     def appelMonteeActionneurGobeletDevant(self):
-        self.serMain.write(chr(254))
+        self.serMain.write(chr(3))
         time.sleep(1)
         self.serMain.readline()
         
     def appelMonteeActionneurGobeletDerriere(self):
-        self.serMain.write(chr(254))
+        self.serMain.write(chr(5))
         time.sleep(1)
         self.serMain.readline()
         
     def appelDescenteActionneurGobeletDevant(self):
-        self.serMain.write(chr(254))
+        self.serMain.write(chr(4))
         time.sleep(1)
         self.serMain.readline()
         
     def appelDescenteActionneurGobeletDerriere(self):
-        self.serMain.write(chr(254))
+        self.serMain.write(chr(6))
         time.sleep(1)
         self.serMain.readline()
         
-    def appelClapGauche(self):
-        self.serMain.write(chr(254))
+    def appelMonteeClapGauche(self):
+        self.serMain.write(chr(7))
         time.sleep(1)
         self.serMain.readline()
         
-    def appelClapDroit(self):
-        self.serMain.write(chr(254))
+    def appelMonteeClapDroit(self):
+        self.serMain.write(chr(9))
+        time.sleep(1)
+        self.serMain.readline()
+        
+    def appelDescenteClapGauche(self):
+        self.serMain.write(chr(8))
+        time.sleep(1)
+        self.serMain.readline()
+        
+    def appelDescenteClapDroit(self):
+        self.serMain.write(chr(10))
         time.sleep(1)
         self.serMain.readline()
         
