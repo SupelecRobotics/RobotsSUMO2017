@@ -5,6 +5,7 @@ Created on Tue Mar 17 19:39:38 2015
 @author: Fabien
 """
 import time
+import math
 from util import *
 from CommunicationSerial import CommunicationSerial as com
 from trajectoire import Trajectoire as traj
@@ -80,3 +81,11 @@ class Robot :
         self.updatePosition()
         print "x : " + str(self.x) + " , y : " + str(self.y) + " , theta : " + str(self.theta)
         print "Capteurs : " + str(self.c1) + " ; " + str(self.c2) + " ; " + str(self.c3) + " ; " + str(self.c4) 
+    
+    def isFacing(self, x, y) :
+        dx = x - self.x
+        dy = y - self.y
+        dtheta = (1800/math.pi) * math.atan2(dy,dx) - self.theta
+        dtheta = dtheta % 3600
+        return (dtheta < 900 or dtheta > 2700)
+        
