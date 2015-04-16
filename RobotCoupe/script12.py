@@ -10,12 +10,12 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
-robot.com.appelMonteeGobeletDevant()
+robot.com.appelMonteeActionneurGobeletDevant()
 time.sleep(2)
-robot.com.appelDescenteGobeletDevant()
-robot.com.appelMonteeGobeletDerriere()
+robot.com.appelDescenteActionneurGobeletDevant()
+robot.com.appelMonteeActionneurGobeletDerriere()
 time.sleep(2)
-robot.com.appelDesceneGobeletDerriere()
+robot.com.appelDescentActionneurGobeletDerriere()
 
 robot.com.appelDescenteClapDroit()
 time.sleep(2)
