@@ -181,12 +181,10 @@ class Robot :
             self.allerAangle((int(2750),int(250)), int(0))
             self.com.appelDescenteClapDroit()
             self.allerAangle((int(2750),int(250)), int(-900))
-            self.bouge(100,0)
             self.com.appelMonteeClapDroit()
             self.allerAangle((int(2150),int(250)), int(0))
             self.com.appelDescenteClapDroit()
             self.allerAangle((int(2150),int(250)), int(-900))
-            self.bouge(100,0)
             self.com.appelMonteeClapDroit()
             
 #            self.allerAangle((int(600),int(1000)), int(1800))
