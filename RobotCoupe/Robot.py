@@ -128,6 +128,7 @@ class Robot :
         self.c4 = string[6]
         
     def game(self):
+        time.sleep(15)
         if (self.couleur == 'J'):
 #            robot.allerAangle((int(220),int(550)), int(-900))
 #            time.sleep(2)
