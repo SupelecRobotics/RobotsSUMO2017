@@ -149,42 +149,49 @@ class CommunicationSerial :
         
     def appelMonteeActionneurGobeletDevant(self):
         self.serMain.write(chr(3))
-        time.sleep(2)
+        time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelMonteeActionneurGobeletDerriere(self):
         self.serMain.write(chr(5))
-        time.sleep(2)
+        time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelDescenteActionneurGobeletDevant(self):
         self.serMain.write(chr(4))
-        time.sleep(2)
+        time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelDescenteActionneurGobeletDerriere(self):
         self.serMain.write(chr(6))
-        time.sleep(2)
+        time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelMonteeClapGauche(self):
-        self.serMain.write(chr(7))
-        time.sleep(2)
+        self.serMain.write(chr(8))
+        time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelMonteeClapDroit(self):
-        self.serMain.write(chr(9))
-        time.sleep(2)
+        self.serMain.write(chr(10))
+        time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelDescenteClapGauche(self):
-        self.serMain.write(chr(8))
-        time.sleep(2)
+        self.serMain.write(chr(7))
+        time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelDescenteClapDroit(self):
-        self.serMain.write(chr(10))
-        time.sleep(2)
+        self.serMain.write(chr(9))
+        time.sleep(1)
         self.serMain.readline()
-        
+        time.sleep(1)
       

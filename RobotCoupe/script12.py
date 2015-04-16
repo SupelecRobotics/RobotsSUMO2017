@@ -17,7 +17,12 @@ robot.com.appelMonteeActionneurGobeletDerriere()
 robot.com.appelDescenteActionneurGobeletDerriere()
 
 robot.com.appelDescenteClapDroit()
+robot.bouge(0,500)
+robot.bouge(0,-500)
 robot.com.appelMonteeClapDroit()
+#robot.com.appelMonteeClapDroit()
 
 robot.com.appelDescenteClapGauche()
+robot.bouge(0,500)
+robot.bouge(0,-500)
 robot.com.appelMonteeClapGauche()
