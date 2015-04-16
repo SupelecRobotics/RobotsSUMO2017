@@ -10,26 +10,25 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
-robot.allerAangle((int(300),int(550)), int(-1150))
+robot.allerAangle((int(300),int(550)), int(-1170))
 time.sleep(1)
 robot.bouge(150,0)
 #prend gobelet
-robot.com.appelMonteeGobeletDevant()
+#robot.com.appelActionneurMonteeGobeletDevant()
 time.sleep(1)
 robot.bouge(-150,0)
 time.sleep(1)
 robot.allerAangle((int(250),int(250)), int(-900))
 robot.com.appelDescenteClapDroit()
 robot.allerAangle((int(250),int(250)), int(0))
-robot.allerAangle((int(400),int(250)), int(0))
-robot.allerAangle((int(600),int(350)), int(0))
-robot.allerAangle((int(800),int(250)), int(0))
-robot.allerAangle((int(1000),int(250)), int(0))
+robot.allerAangle((int(850),int(250)), int(-900))
+robot.allerAangle((int(850),int(250)), int(0))
+robot.bouge(100,0)
 robot.com.appelMonteeClapDroit()
 # fait claps
 
 robot.allerAangle((int(600),int(1000)), int(1800))
-robot.com.appelDescenteGobeletDevant()
+#robot.com.appelDescenteGobeletDevant()
 
 #robot.allerAangle((int(600),int(1100)), int(1800))
 #time.sleep(1)
@@ -51,11 +50,13 @@ robot.com.appelDescenteGobeletDevant()
 #time.sleep(1)
 ##prend gobelet
 #
-#robot.allerAangle((int(2600),int(250)), int(1800))
-#robot.com.appelDescenteClapGauche()
-#robot.allerAangle((int(2300),int(250)), int(1800))
-#robot.com.appelMonteeClapGauche()
-#time.sleep(1)
+robot.allerAangle((int(2600),int(250)), int(1800))
+robot.com.appelDescenteClapGauche()
+robot.bouge(0,-500)
+robot.bouge(0,500)
+robot.bouge(200,0)
+robot.com.appelMonteeClapGauche()
+time.sleep(1)
 ##faire claps
 #
 #robot.allerAangle((int(2600),int(600)), int(0))
