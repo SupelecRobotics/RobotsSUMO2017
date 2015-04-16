@@ -24,10 +24,12 @@ robot.allerAangle((int(250),int(250)), int(0))
 robot.allerAangle((int(400),int(250)), int(0))
 robot.allerAangle((int(600),int(350)), int(0))
 robot.allerAangle((int(800),int(250)), int(0))
-robot.allerAangle((int(800),int(250)), int(0))
 robot.allerAangle((int(1000),int(250)), int(0))
 robot.com.appelMonteeClapDroit()
 # fait claps
+
+robot.allerAangle((int(600),int(1000)), int(1800))
+robot.com.appelDescenteGobeletDevant()
 
 #robot.allerAangle((int(600),int(1100)), int(1800))
 #time.sleep(1)
@@ -63,3 +65,33 @@ robot.com.appelMonteeClapDroit()
 #robot.allerAangle((int(2700),int(1400)), int(1800))
 #time.sleep(1)
 ##drop gobelet
+
+
+
+##cote vert
+#robot.allerAangle((int(2700),int(550)), int(-800))
+#time.sleep(1)
+#robot.bouge(150,0)
+##prend gobelet
+#robot.com.appelMonteeGobeletDerriere()
+#time.sleep(1)
+#robot.bouge(-150,0)
+#time.sleep(1)
+#robot.allerAangle((int(2750),int(250)), int(1150))
+#robot.com.appelDescenteClapDroit()
+#robot.allerAangle((int(2750),int(250)), int(0))
+#robot.allerAangle((int(2600),int(250)), int(0))
+#robot.allerAangle((int(2400),int(350)), int(0))
+#robot.allerAangle((int(2200),int(250)), int(0))
+#robot.allerAangle((int(2000),int(250)), int(0))
+#robot.com.appelMonteeClapDroit()
+#
+#robot.allerAangle((int(2400),int(1000)), int(1800))
+#robot.com.appelDescenteGobeletDerriere()
+
+#robot.allerAangle((int(400),int(250)), int(1800))
+#robot.com.appelDescenteClapGauche()
+#robot.allerAangle((int(700),int(250)), int(1800))
+#robot.com.appelMonteeClapGauche()
+#time.sleep(1)
+#faire claps
