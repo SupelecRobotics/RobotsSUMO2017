@@ -34,7 +34,7 @@ class Robot :
         time.sleep(1)
         self.printPosition()
         while self.com.getGachette() != True :
-            time.sleep(2)
+            time.sleep(1)
         
     def bouge(self,d,theta):
         self.com.envoiMain(d,theta)
