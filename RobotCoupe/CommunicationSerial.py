@@ -13,8 +13,8 @@ class CommunicationSerial :
     """
     
     def __init__(self, ser1, ser2, ser3) :
-        ser = serial.Serial(ser1, 115200, timeout = 2)
-        serb = serial.Serial(ser2, 115200, timeout = 2)
+        ser = serial.Serial(ser1, 115200, timeout = 4)
+        serb = serial.Serial(ser2, 115200, timeout = 4)
 #        serc = serial.Serial(ser3, 57600)
         time.sleep(3)
         ser.write(chr(250))
