@@ -228,7 +228,7 @@ class Robot :
         self.updatePosition()
         print "x : " + str(self.x) + " , y : " + str(self.y) + " , theta : " + str(self.theta)
         print "Capteurs : " + str(self.c1) + " ; " + str(self.c2) + " ; " + str(self.c3) + " ; " + str(self.c4) 
-        print "time : " + self.time
+        print "time : " + str(self.time)
 
     def isFacing(self, x, y) :
         dx = x - self.x
