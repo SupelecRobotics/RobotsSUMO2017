@@ -12,7 +12,7 @@ import math
 
 from pathManager import PathManager
 from util import *
-from robomoviesMapV2 import *
+from robomoviesMapLoad import *
 
 
 class Trajectoire :

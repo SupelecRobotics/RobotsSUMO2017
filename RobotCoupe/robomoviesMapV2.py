@@ -100,7 +100,10 @@ robomoviesForest.popRectangle((80,295),(120,300),0)
 
 robomoviesForest.enlargeYourPenis(15, -5)
 
+robomoviesForest.createTextFile('newMap.txt')
 
-robomoviesForest.displayForest()
+#robomoviesForest.loadTextFile('newMap.txt')
+#robomoviesForest.createTextFile('newMap.txt')
+#robomoviesForest.displayForest()
 
 
