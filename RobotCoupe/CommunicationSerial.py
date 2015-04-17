@@ -17,12 +17,10 @@ class CommunicationSerial :
             ser = serial.Serial(ser1, 115200, timeout = 4)
         except serial.SerialException:
             print "No connection to the first device could be established"
-            self.envoiErreurArduino()
         try:
             serb = serial.Serial(ser2, 115200, timeout = 4)
         except serial.SerialException:
             print "No connection to the second device could be established"
-            self.envoiErreurArduino()
         
 #        serc = serial.Serial(ser3, 57600)
         time.sleep(3)

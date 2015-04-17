@@ -221,10 +221,14 @@ class Robot :
             
     def game(self):
         try:
-            self.gameD()
+            self.gameFalse()
         except serial.SerialException:
             print "Cables Arduino déconnectés"
             self.com.envoiErreurArduino()
+            
+    def gameFalse(self):
+        time.sleep(15)
+        self.bouge(100,0)
         
     def printPosition(self):
         self.updatePosition()
