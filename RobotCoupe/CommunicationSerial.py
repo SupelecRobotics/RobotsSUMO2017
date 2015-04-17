@@ -94,7 +94,7 @@ class CommunicationSerial :
         self.serMain.write(inputByteString)
         print("Envoi")
         returned = ""
-        for i in range(0,10):
+        for i in range(0,11):
             r = self.serMain.read()
             returned += r.encode('hex')
         self.serMain.readline()
@@ -194,4 +194,18 @@ class CommunicationSerial :
         time.sleep(1)
         self.serMain.readline()
         time.sleep(1)
-      
+        
+    def envoiCouleurReady(self):
+        self.serCouleur.write(2)
+        time.sleep(1)
+        self.serCouleur.readline()
+        
+    def envoiAllGreen(self):
+        self.serCouleur.write(3)
+        time.sleep(1)
+        self.serCouleur.readline()
+        
+    def envoiDepartZone(self):
+        self.serCouleur.write(4)
+        time.sleep(1)
+        self.serCouleur.readline()

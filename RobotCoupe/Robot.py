@@ -32,9 +32,11 @@ class Robot :
         print self.couleur
         self.com.envoiColor(self.couleur)
         time.sleep(1)
+        self.com.envoiCouleurReady()
         self.printPosition()
         while self.com.getGachette() != True :
             time.sleep(1)
+        self.com.envoiAllGreen()
         
     def bouge(self,d,theta):
         self.com.envoiMain(d,theta)
@@ -117,7 +119,7 @@ class Robot :
         return (distance, ang)
         
     def updatePosition(self):
-	print "update"
+        print "update"
         string = self.com.getInfos()
         self.x = string[0]
         self.y = string[1]
@@ -126,9 +128,11 @@ class Robot :
         self.c2 = string[4]
         self.c3 = string[5]
         self.c4 = string[6]
+        self.time = string[7]
         
     def game(self):
-        time.sleep(15)
+        #time.sleep(15)
+        self.com.envoiDepartZone()
         if (self.couleur == 'J'):
 #            robot.allerAangle((int(220),int(550)), int(-900))
 #            time.sleep(2)
@@ -218,6 +222,7 @@ class Robot :
         self.updatePosition()
         print "x : " + str(self.x) + " , y : " + str(self.y) + " , theta : " + str(self.theta)
         print "Capteurs : " + str(self.c1) + " ; " + str(self.c2) + " ; " + str(self.c3) + " ; " + str(self.c4) 
+        print "time : " + self.time
 
     def isFacing(self, x, y) :
         dx = x - self.x
