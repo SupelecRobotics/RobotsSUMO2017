@@ -9,6 +9,7 @@ import math
 from util import *
 from CommunicationSerial import CommunicationSerial as com
 from trajectoire import Trajectoire as traj
+import serial
 
 class Robot :
     """ Simulates the Robot
@@ -223,6 +224,7 @@ class Robot :
             self.gameD()
         except serial.SerialException:
             print "Cables Arduino déconnectés"
+            self.com.envoiErreurArduino()
         
     def printPosition(self):
         self.updatePosition()
