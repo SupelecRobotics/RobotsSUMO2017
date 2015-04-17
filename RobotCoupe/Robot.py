@@ -9,6 +9,7 @@ import math
 from util import *
 from CommunicationSerial import CommunicationSerial as com
 from trajectoire import Trajectoire as traj
+import serial
 
 class Robot :
     """ Simulates the Robot
@@ -32,9 +33,11 @@ class Robot :
         print self.couleur
         self.com.envoiColor(self.couleur)
         time.sleep(1)
+        self.com.envoiCouleurReady()
         self.printPosition()
         while self.com.getGachette() != True :
-            time.sleep(2)
+            time.sleep(1)
+        self.com.envoiAllGreen()
         
     def bouge(self,d,theta):
         self.com.envoiMain(d,theta)
@@ -117,7 +120,7 @@ class Robot :
         return (distance, ang)
         
     def updatePosition(self):
-	print "update"
+        print "update"
         string = self.com.getInfos()
         self.x = string[0]
         self.y = string[1]
@@ -126,47 +129,112 @@ class Robot :
         self.c2 = string[4]
         self.c3 = string[5]
         self.c4 = string[6]
+        self.time = string[7]
         
-    def game(self):
+    def gameD(self):
+        #time.sleep(15)
+        self.com.envoiDepartZone()
         if (self.couleur == 'J'):
-            robot.allerAangle((int(220),int(550)), int(-900))
-            time.sleep(2)
-            robot.allerAangle((int(650),int(1100)), int(0))
-            time.sleep(2)
-            robot.allerAangle((int(1250),int(450)), int(1800))
-            time.sleep(2)
-            robot.allerAangle((int(2600),int(250)), int(1800))
-            time.sleep(2)
-            robot.allerAangle((int(2600),int(600)), int(0))
-            time.sleep(2)
-            robot.allerAangle((int(2300),int(600)), int(0))
-            time.sleep(2)
-            robot.allerAangle((int(2700),int(1400)), int(1800))
-            time.sleep(2)
-            robot.allerAangle((int(1500),int(1000)), int(1800))
+#            robot.allerAangle((int(220),int(550)), int(-900))
+#            time.sleep(2)
+#            robot.allerAangle((int(650),int(1100)), int(0))
+#            time.sleep(2)
+#            robot.allerAangle((int(1250),int(450)), int(1800))
+#            time.sleep(2)
+#            robot.allerAangle((int(2600),int(250)), int(1800))
+#            time.sleep(2)
+#            robot.allerAangle((int(2600),int(600)), int(0))
+#            time.sleep(2)
+#            robot.allerAangle((int(2300),int(600)), int(0))
+#            time.sleep(2)
+#            robot.allerAangle((int(2700),int(1400)), int(1800))
+#            time.sleep(2)
+#            robot.allerAangle((int(1500),int(1000)), int(1800))
+#            time.sleep(1)
+        
+#            self.allerAangle((int(300),int(550)), int(-1170))
+#            time.sleep(1)
+#            self.bouge(150,0)
+            #robot.com.appelActionneurMonteeGobeletDevant()
+#            time.sleep(1)
+#            self.bouge(-150,0)
+#            time.sleep(1)
+            self.allerAangle((int(250),int(250)), int(-900))
+            self.com.appelDescenteClapDroit()
+            self.allerAangle((int(250),int(250)), int(0))
+            self.bouge(100,0)
+            self.com.appelMonteeClapDroit()
+            self.allerAangle((int(850),int(250)), int(-900))
+            self.com.appelDescenteClapDroit()
+            self.allerAangle((int(850),int(250)), int(0))
+            self.bouge(100,0)
+            self.com.appelMonteeClapDroit()
+            # fait claps
+            
+#            self.allerAangle((int(600),int(1000)), int(1800))
+#            #robot.com.appelDescenteGobeletDevant()
+            self.allerAangle((int(2600),int(250)), int(1800))
+            self.com.appelDescenteClapGauche()
+            self.bouge(0,-500)
+            self.bouge(0,500)
+            self.bouge(200,0)
+            self.com.appelMonteeClapGauche()
             time.sleep(1)
         elif (self.couleur == 'V'):
-            robot.allerAangle((int(2780),int(550)), int(-900))
-            time.sleep(2)
-            robot.allerAangle((int(2350),int(1100)), int(1800))
-            time.sleep(2)
-            robot.allerAangle((int(1750),int(450)), int(0))
-            time.sleep(2)
-            robot.allerAangle((int(400),int(250)), int(0))
-            time.sleep(2)
-            robot.allerAangle((int(400),int(600)), int(1800))
-            time.sleep(2)
-            robot.allerAangle((int(700),int(600)), int(1800))
-            time.sleep(2)
-            robot.allerAangle((int(400),int(1400)), int(0))
-            time.sleep(2)
-            robot.allerAangle((int(800),int(1400)), int(0))
-            time.sleep(1)
+#            self.allerAangle((int(2700),int(550)), int(-800))
+#            time.sleep(1)
+#            self.bouge(150,0)
+            self.allerAangle((int(2750),int(250)), int(0))
+            self.com.appelDescenteClapDroit()
+            self.allerAangle((int(2750),int(250)), int(-900))
+            self.com.appelMonteeClapDroit()
+            self.allerAangle((int(2150),int(250)), int(0))
+            self.com.appelDescenteClapDroit()
+            self.allerAangle((int(2150),int(250)), int(-900))
+            self.com.appelMonteeClapDroit()
+            
+#            self.allerAangle((int(600),int(1000)), int(1800))
+#            #robot.com.appelDescenteGobeletDevant()
+            self.allerAangle((int(400),int(250)), int(0))
+            self.com.appelDescenteClapGauche()
+            self.bouge(0,500)
+            self.bouge(0,-500)
+            self.bouge(200,0)
+            self.com.appelMonteeClapGauche()
+            
+#            robot.allerAangle((int(2780),int(550)), int(-900))
+#            time.sleep(2)
+#            robot.allerAangle((int(2350),int(1100)), int(1800))
+#            time.sleep(2)
+#            robot.allerAangle((int(1750),int(450)), int(0))
+#            time.sleep(2)
+#            robot.allerAangle((int(400),int(250)), int(0))
+#            time.sleep(2)
+#            robot.allerAangle((int(400),int(600)), int(1800))
+#            time.sleep(2)
+#            robot.allerAangle((int(700),int(600)), int(1800))
+#            time.sleep(2)
+#            robot.allerAangle((int(400),int(1400)), int(0))
+#            time.sleep(2)
+#            robot.allerAangle((int(800),int(1400)), int(0))
+#            time.sleep(1)
+            
+    def game(self):
+        try:
+            self.gameFalse()
+        except serial.SerialException:
+            print "Cables Arduino déconnectés"
+            self.com.envoiErreurArduino()
+            
+    def gameFalse(self):
+        time.sleep(15)
+        self.bouge(100,0)
         
     def printPosition(self):
         self.updatePosition()
         print "x : " + str(self.x) + " , y : " + str(self.y) + " , theta : " + str(self.theta)
         print "Capteurs : " + str(self.c1) + " ; " + str(self.c2) + " ; " + str(self.c3) + " ; " + str(self.c4) 
+        print "time : " + str(self.time)
 
     def isFacing(self, x, y) :
         dx = x - self.x

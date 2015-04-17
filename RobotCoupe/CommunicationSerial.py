@@ -13,9 +13,16 @@ class CommunicationSerial :
     """
     
     def __init__(self, ser1, ser2, ser3) :
-        ser = serial.Serial(ser1, 115200, timeout = 2)
-        serb = serial.Serial(ser2, 115200, timeout = 2)
-#        serc = serial.Serial(ser3, 9600)
+        try:
+            ser = serial.Serial(ser1, 115200, timeout = 4)
+        except serial.SerialException:
+            print "No connection to the first device could be established"
+        try:
+            serb = serial.Serial(ser2, 115200, timeout = 4)
+        except serial.SerialException:
+            print "No connection to the second device could be established"
+        
+#        serc = serial.Serial(ser3, 57600)
         time.sleep(3)
         ser.write(chr(250))
         serb.write(chr(250))
@@ -94,7 +101,7 @@ class CommunicationSerial :
         self.serMain.write(inputByteString)
         print("Envoi")
         returned = ""
-        for i in range(0,10):
+        for i in range(0,11):
             r = self.serMain.read()
             returned += r.encode('hex')
         self.serMain.readline()
@@ -103,7 +110,7 @@ class CommunicationSerial :
         l = []
         k = 0
         # while k < returned.length
-        while k < 19:
+        while k < 21:
             if k < 12:
 #                print returned[k:k+4]
                 r = int(returned[k:k+4],16)
@@ -148,33 +155,69 @@ class CommunicationSerial :
         else: return True 
         
     def appelMonteeActionneurGobeletDevant(self):
-        self.serMain.write(chr(254))
+        self.serMain.write(chr(3))
         time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelMonteeActionneurGobeletDerriere(self):
-        self.serMain.write(chr(254))
+        self.serMain.write(chr(5))
         time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelDescenteActionneurGobeletDevant(self):
-        self.serMain.write(chr(254))
+        self.serMain.write(chr(4))
         time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
     def appelDescenteActionneurGobeletDerriere(self):
-        self.serMain.write(chr(254))
+        self.serMain.write(chr(6))
         time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
-    def appelClapGauche(self):
-        self.serMain.write(chr(254))
+    def appelMonteeClapGauche(self):
+        self.serMain.write(chr(8))
         time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
-    def appelClapDroit(self):
-        self.serMain.write(chr(254))
+    def appelMonteeClapDroit(self):
+        self.serMain.write(chr(10))
         time.sleep(1)
         self.serMain.readline()
+        time.sleep(1)
         
-      
+    def appelDescenteClapGauche(self):
+        self.serMain.write(chr(7))
+        time.sleep(1)
+        self.serMain.readline()
+        time.sleep(1)
+        
+    def appelDescenteClapDroit(self):
+        self.serMain.write(chr(9))
+        time.sleep(1)
+        self.serMain.readline()
+        time.sleep(1)
+        
+    def envoiCouleurReady(self):
+        self.serCouleur.write(chr(2))
+        time.sleep(1)
+        self.serCouleur.readline()
+        
+    def envoiAllGreen(self):
+        self.serCouleur.write(chr(3))
+        time.sleep(1)
+        self.serCouleur.readline()
+        
+    def envoiDepartZone(self):
+        self.serCouleur.write(chr(4))
+        time.sleep(1)
+        self.serCouleur.readline()
+        
+    def envoiErreurArduino(self):
+        self.serCouleur.write(chr(5))
+        time.sleep(1)
+        self.serCouleur.readline()
