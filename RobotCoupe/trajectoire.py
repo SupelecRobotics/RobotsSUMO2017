@@ -24,7 +24,8 @@ class Trajectoire :
         
         self.currentWay = []
 
-        self.facteurDistance = 50.0
+        self.facteurDistance = 10.0
+        # avant 50
 
         self.facteurDegre = 10.0
         
@@ -150,7 +151,7 @@ class Trajectoire :
         return (distance, ang)
 
 #robomoviesForest.displayForest()
-#
+##
 #traj = Trajectoire((450, 1000), 0, True)
 #
 ##pouet = traj.pointPath((600, 800))
