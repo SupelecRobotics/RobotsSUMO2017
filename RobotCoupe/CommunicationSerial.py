@@ -196,16 +196,16 @@ class CommunicationSerial :
         time.sleep(1)
         
     def envoiCouleurReady(self):
-        self.serCouleur.write(2)
+        self.serCouleur.write(chr(2))
         time.sleep(1)
         self.serCouleur.readline()
         
     def envoiAllGreen(self):
-        self.serCouleur.write(3)
+        self.serCouleur.write(chr(3))
         time.sleep(1)
         self.serCouleur.readline()
         
     def envoiDepartZone(self):
-        self.serCouleur.write(4)
+        self.serCouleur.write(chr(4))
         time.sleep(1)
         self.serCouleur.readline()
