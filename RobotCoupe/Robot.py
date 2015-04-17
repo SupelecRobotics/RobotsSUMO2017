@@ -175,3 +175,54 @@ class Robot :
         dtheta = dtheta % 3600
         return (dtheta < 900 or dtheta > 2700)
     
+
+"""
+
+# OBTENTION DES CHEMINS
+
+# parametres necessaires
+matrix = [[?]] # la carte du terrain
+
+clap1 = (?,?) #
+clap2 = (?,?) # position des claps
+clap3 = (?,?) #
+
+gobelet1 = (?,?) #
+gobelet2 = (?,?) # position des gobelets
+gobelet3 = (?,?) #
+
+distanceGobelet = ? # distance voulue entre le centre du robot et le gobelet au debut du script
+
+# obtention des chemins
+pm = PathManager(matrix)
+
+obj = FixedObjective(clap1, 0, 0) # cette variable est ecrasee a chaque nouvel objectif
+pathC1 = obj.getPath(robot.position, pm)[1] # chemin vers le clap 1
+# cette ligne peut etre repetee pour obtenir le chemin depuis une nouvelle position. Pas besoin de repeter la ligne precedente tant que l'objectif reste le meme.
+
+obj = FixedObjective(clap2, 0, 0)
+pathC2 = obj.getPath(robot.position, pm)[1] # chemin vers le clap 2
+
+obj = FixedObjective(clap3, 0, 0)
+pathC3 = obj.getPath(robot.position, pm)[1] # chemin vers le clap 3
+
+obj = MobileObjective(gobelet1, distanceGobelet, 0, 0)
+pathG1 = obj.getPath(robot.position, pm)[1] # chemin vers le gobelet 1
+
+obj = MobileObjective(gobelet2, distanceGobelet, 0, 0)
+pathG2 = obj.getPath(robot.position, pm)[1] # chemin vers le gobelet 2
+
+obj = MobileObjective(gobelet3, distanceGobelet, 0, 0)
+pathG3 = obj.getPath(robot.position, pm)[1] # chemin vers le gobelet 3
+
+# /!\ remplacer "robot.position" par le bon moyen d'obtenir la position du robot /!\
+
+"""
+
+
+
+
+
+
+
+
