@@ -216,3 +216,8 @@ class CommunicationSerial :
         self.serCouleur.write(chr(4))
         time.sleep(1)
         self.serCouleur.readline()
+        
+    def envoiErreurArduino(self):
+        self.serCouleur.write(chr(5))
+        time.sleep(1)
+        self.serCouleur.readline()

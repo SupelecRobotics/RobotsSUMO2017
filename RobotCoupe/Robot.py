@@ -130,7 +130,7 @@ class Robot :
         self.c4 = string[6]
         self.time = string[7]
         
-    def game(self):
+    def gameD(self):
         #time.sleep(15)
         self.com.envoiDepartZone()
         if (self.couleur == 'J'):
@@ -217,6 +217,12 @@ class Robot :
 #            time.sleep(2)
 #            robot.allerAangle((int(800),int(1400)), int(0))
 #            time.sleep(1)
+            
+    def game(self):
+        try:
+            self.gameD()
+        except serial.SerialException:
+            print "Cables Arduino déconnectés"
         
     def printPosition(self):
         self.updatePosition()
