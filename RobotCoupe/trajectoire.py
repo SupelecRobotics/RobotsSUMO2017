@@ -126,6 +126,7 @@ class Trajectoire :
         pathMan = PathManager(robomoviesForest.getForest())
         pathMan.setThreshold(4)
         (x, y) = point
+        print (x,y)
         (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
         print (x,y)
         pathMan.findPath(self.position[0],(x, y, 0))
@@ -136,7 +137,7 @@ class Trajectoire :
         pth = []
         for coor in pathMan.path:
             (x,y) = coor            
-            pth.append( (y*self.facteurDistance ,(40-x)*self.facteurDistance) )
+            pth.append( (y*self.facteurDistance ,(2000/self.facteurDistance-x)*self.facteurDistance) )
         
         return pth
         
@@ -152,12 +153,12 @@ class Trajectoire :
 
 #robomoviesForest.displayForest()
 ##
-#traj = Trajectoire((450, 1000), 0, True)
+traj = Trajectoire((450, 1000), 0, True)
 #
-##pouet = traj.pointPath((600, 800))
+pouet = traj.pointPath((600, 800))
 #commande = traj.orderToPoint((350,800))
 #
-##print pouet
+print pouet
 #print commande
 
 
