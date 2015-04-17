@@ -13,8 +13,15 @@ class CommunicationSerial :
     """
     
     def __init__(self, ser1, ser2, ser3) :
-        ser = serial.Serial(ser1, 115200, timeout = 4)
-        serb = serial.Serial(ser2, 115200, timeout = 4)
+        try:
+            ser = serial.Serial(ser1, 115200, timeout = 4)
+        except serial.SerialException:
+            print "No connection to the first device could be established"
+        try:
+            serb = serial.Serial(ser2, 115200, timeout = 4)
+        except serial.SerialException:
+            print "No connection to the second device could be established"
+        
 #        serc = serial.Serial(ser3, 57600)
         time.sleep(3)
         ser.write(chr(250))
@@ -103,7 +110,7 @@ class CommunicationSerial :
         l = []
         k = 0
         # while k < returned.length
-        while k < 19:
+        while k < 21:
             if k < 12:
 #                print returned[k:k+4]
                 r = int(returned[k:k+4],16)
