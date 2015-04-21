@@ -58,21 +58,19 @@ class Robot :
     def allerA(self, point):
         self.updatePosition()
         trajectoire = traj((self.x, self.y), self.theta, True)
-        print point
-        print "debut"
+        print "From " + str((self.x, self.y)) + " to " + str(point)
 #        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
-            print point
+            print "At : " + str(point)
             self.bougeToPoint(point)
             
     def allerAangle(self, point,theta):
         self.updatePosition()
         trajectoire = traj((self.x, self.y), self.theta, True)
-        print point
-        print "debut"
+        print "From " + str((self.x, self.y)) + " to " + str(point)
 #        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
-            print point
+            print "At : " + str(point)
             self.bougeToPoint(point)
         self.bouge(0, theta - self.theta)
 #        if (math.fabs(theta - self.theta) <= 1800 ):
@@ -81,28 +79,12 @@ class Robot :
 #            self.bouge(0, theta - self.theta - 3600)
             
     def bougeToPoint(self,point):
-        print "objective : " + str(point) 
         coor = (self.x,self.y)
         while dist(coor,point) > 30: 	#100
             (distance, angle)  = self.orderToPoint(point)
-            if (math.fabs(distance) > 600): distance = math.copysign(600,distance)
+            if (math.fabs(distance) > 600): distance = math.copysign(500,distance)
             self.com.envoiMain(0,int(angle))
             self.com.envoiMain(int(distance),0) #envoi d'entiers
-#            if (math.fabs(distance) > 200):
-#                self.com.envoiMain(0,int(angle))
-#                time.sleep(1)
-#                self.com.envoiMain(int(distance),0) #envoi d'entiers
-#                print (distance, angle)
-#            elif (math.fabs(distance) > 100):
-#                self.com.envoiMainSat(0,int(angle),170)
-#                time.sleep(1)
-#                self.com.envoiMainSat(int(distance),0,170) #envoi d'entiers
-#                print (distance, angle, 170)
-#            else:
-#                self.com.envoiMainSat(0,int(angle),150)
-#                time.sleep(1)
-#                self.com.envoiMainSat(int(distance),0,150) #envoi d'entiers
-#                print (distance, angle, 150)
             self.printPosition()
             coor = (self.x, self.y)
             
@@ -120,7 +102,6 @@ class Robot :
         return (distance, ang)
         
     def updatePosition(self):
-        print "update"
         string = self.com.getInfos()
         self.x = string[0]
         self.y = string[1]
@@ -135,7 +116,7 @@ class Robot :
         #time.sleep(15)
         self.com.envoiDepartZone()
         if (self.couleur == 'J'):
-#            robot.allerAangle((int(220),int(550)), int(-900))
+            robot.allerAangle((int(220),int(550)), int(-900))
 #            time.sleep(2)
 #            robot.allerAangle((int(650),int(1100)), int(0))
 #            time.sleep(2)

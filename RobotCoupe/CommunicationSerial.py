@@ -98,13 +98,11 @@ class CommunicationSerial :
     def getInfos(self):
         inputByteString = chr(2)
         self.serMain.write(inputByteString)
-        print("Envoi")
         returned = ""
         for i in range(0,11):
             r = self.serMain.read()
             returned += r.encode('hex')
         self.serMain.readline()
-        print("Get")
         
         l = []
         k = 0
@@ -147,7 +145,7 @@ class CommunicationSerial :
         
     def getGachette(self):
         self.serMain.write(chr(254))
-        time.sleep(1)
+        time.sleep(0.5)
         a = self.serMain.read()
         self.serMain.readline()
         if (a.encode('hex') == '00'): return False
@@ -196,20 +194,20 @@ class CommunicationSerial :
         
     def envoiCouleurReady(self):
         self.serCouleur.write(chr(2))
-        time.sleep(1)
+        time.sleep(0.5)
         self.serCouleur.readline()
         
     def envoiAllGreen(self):
         self.serCouleur.write(chr(3))
-        time.sleep(1)
+        time.sleep(0.5)
         self.serCouleur.readline()
         
     def envoiDepartZone(self):
         self.serCouleur.write(chr(4))
-        time.sleep(1)
+        time.sleep(0.5)
         self.serCouleur.readline()
         
     def envoiErreurArduino(self):
         self.serCouleur.write(chr(5))
-        time.sleep(1)
+        time.sleep(0.5)
         self.serCouleur.readline()
