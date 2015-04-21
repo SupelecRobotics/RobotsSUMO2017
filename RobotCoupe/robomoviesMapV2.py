@@ -98,7 +98,7 @@ robomoviesForest.popRectangle((120,260),(120,300),0)
 robomoviesForest.popRectangle((80,295),(120,300),0)
 
 
-robomoviesForest.enlargeYourPenis(15, -5)
+robomoviesForest.enlargeYourPenis(19, -5)
 
 robomoviesForest.createTextFile('newMap.txt')
 
