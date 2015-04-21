@@ -28,11 +28,11 @@ class Robot :
         self.c4 = 0
         #time
         self.time = 0
-        time.sleep(4)
+        time.sleep(2)
         self.couleur = self.com.getColor()
         print self.couleur
         self.com.envoiColor(self.couleur)
-        time.sleep(3)
+        time.sleep(2)
         self.com.envoiCouleurReady()
         self.printPosition()
         while self.com.getGachette() != True :
@@ -221,24 +221,23 @@ class Robot :
             
     def game(self):
         try:
-            self.gameFalse()
+            self.gameD()
         except serial.SerialException:
             print "Cables Arduino déconnectés"
             self.com.envoiErreurArduino()
             
     def gameFalse(self):
-#        time.sleep(10)
         self.com.envoiDepartZone()
-	if (self.couleur == 'J'):
-		self.allerAangle((int(250),int(250)),-900)
-		self.com.appelDescenteClapDroit()
-		self.allerAangle((int(250),int(250)), 0)
-		self.com.appelMonteeClapDroit()
-	elif (self.couleur == 'V'):
-		self.allerAangle((int(2750),int(250)),-900)
-		self.com.appelDescenteClapGauche()
-		self.allerAangle((int(2750),int(250)), -1800)
-		self.com.appelMonteeClapGauche()
+        if (self.couleur == 'J'):
+            self.allerAangle((int(250),int(250)),-900)
+            self.com.appelDescenteClapDroit()
+            self.allerAangle((int(250),int(250)), 0)
+            self.com.appelMonteeClapDroit()
+        elif (self.couleur == 'V'):
+            self.allerAangle((int(2750),int(250)),-900)
+            self.com.appelDescenteClapGauche()
+            self.allerAangle((int(2750),int(250)), -1800)
+            self.com.appelMonteeClapGauche()
         
     def printPosition(self):
         self.updatePosition()

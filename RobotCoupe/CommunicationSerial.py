@@ -13,7 +13,6 @@ class CommunicationSerial :
     """
     
     def __init__(self, ser1, ser2, ser3) :
-#	file = open('exception.txt', 'w')
         try:
 		ser = serial.Serial(ser1, 115200)
         except serial.SerialException:
@@ -25,25 +24,20 @@ class CommunicationSerial :
         
 #        serc = serial.Serial(ser3, 57600)
         time.sleep(3)
-#	file.write('hey\n')
         ser.write(chr(250))
         serb.write(chr(250))
 #        print serc.write(chr(255))
-#        print "written"
         time.sleep(1)
         a = ser.read()
         ser.readline()
         print a.encode('hex')
-#	file.write(a.encode('hex'))
-        time.sleep(1)
+#        time.sleep(1)
         b = serb.read()
         serb.readline()
         print b.encode('hex')
-#	file.write(b.encode('hex') + '\n')
 #        c = serc.read()
         #print c
         print "read"
-#	file.write('read')
         if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
         elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
         else: self.serBluetooth = serial.Serial(ser1, 115200)
