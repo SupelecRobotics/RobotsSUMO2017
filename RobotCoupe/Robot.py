@@ -230,14 +230,14 @@ class Robot :
 #        time.sleep(10)
         self.com.envoiDepartZone()
 	if (self.couleur == 'J'):
-		self.allerAangle((int(250),int(200)),-900)
+		self.allerAangle((int(250),int(220)),-900)
 		self.com.appelDescenteClapDroit()
-		self.allerAangle((int(250),int(200)), 0)
+		self.allerAangle((int(250),int(220)), 0)
 		self.com.appelMonteeClapDroit()
 	elif (self.couleur == 'V'):
-		self.allerAangle((int(2750),int(200)),-900)
+		self.allerAangle((int(2750),int(220)),-900)
 		self.com.appelDescenteClapGauche()
-		self.allerAangle((int(2750),int(200)), -1800)
+		self.allerAangle((int(2750),int(220)), -1800)
 		self.com.appelMonteeClapGauche()
         
     def printPosition(self):
