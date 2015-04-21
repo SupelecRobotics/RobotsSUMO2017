@@ -10,7 +10,7 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 robot.printPosition()
-robot.bougeDroit((200,0))
+robot.bouge(200,0)
 robot.printPosition()
 time.sleep(2)
 robot.printPosition()

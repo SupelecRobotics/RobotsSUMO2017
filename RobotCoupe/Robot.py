@@ -28,11 +28,11 @@ class Robot :
         self.c4 = 0
         #time
         self.time = 0
-        time.sleep(3)
+        time.sleep(4)
         self.couleur = self.com.getColor()
         print self.couleur
         self.com.envoiColor(self.couleur)
-        time.sleep(1)
+        time.sleep(3)
         self.com.envoiCouleurReady()
         self.printPosition()
         while self.com.getGachette() != True :
@@ -159,21 +159,21 @@ class Robot :
 #            time.sleep(1)
 #            self.bouge(-150,0)
 #            time.sleep(1)
-            self.allerAangle((int(250),int(250)), int(-900))
+            self.allerAangle((int(250),int(200)), int(-900))
             self.com.appelDescenteClapDroit()
-            self.allerAangle((int(250),int(250)), int(0))
+            self.allerAangle((int(250),int(200)), int(0))
             self.bouge(100,0)
             self.com.appelMonteeClapDroit()
-            self.allerAangle((int(850),int(250)), int(-900))
+            self.allerAangle((int(850),int(200)), int(-900))
             self.com.appelDescenteClapDroit()
-            self.allerAangle((int(850),int(250)), int(0))
+            self.allerAangle((int(850),int(200)), int(0))
             self.bouge(100,0)
             self.com.appelMonteeClapDroit()
             # fait claps
             
 #            self.allerAangle((int(600),int(1000)), int(1800))
 #            #robot.com.appelDescenteGobeletDevant()
-            self.allerAangle((int(2600),int(250)), int(1800))
+            self.allerAangle((int(2600),int(200)), int(1800))
             self.com.appelDescenteClapGauche()
             self.bouge(0,-500)
             self.bouge(0,500)
@@ -184,18 +184,18 @@ class Robot :
 #            self.allerAangle((int(2700),int(550)), int(-800))
 #            time.sleep(1)
 #            self.bouge(150,0)
-            self.allerAangle((int(2750),int(250)), int(0))
+            self.allerAangle((int(2750),int(200)), int(0))
             self.com.appelDescenteClapDroit()
-            self.allerAangle((int(2750),int(250)), int(-900))
+            self.allerAangle((int(2750),int(200)), int(-900))
             self.com.appelMonteeClapDroit()
-            self.allerAangle((int(2150),int(250)), int(0))
+            self.allerAangle((int(2150),int(200)), int(0))
             self.com.appelDescenteClapDroit()
-            self.allerAangle((int(2150),int(250)), int(-900))
+            self.allerAangle((int(2150),int(200)), int(-900))
             self.com.appelMonteeClapDroit()
             
 #            self.allerAangle((int(600),int(1000)), int(1800))
 #            #robot.com.appelDescenteGobeletDevant()
-            self.allerAangle((int(400),int(250)), int(0))
+            self.allerAangle((int(400),int(200)), int(0))
             self.com.appelDescenteClapGauche()
             self.bouge(0,500)
             self.bouge(0,-500)
@@ -227,8 +227,18 @@ class Robot :
             self.com.envoiErreurArduino()
             
     def gameFalse(self):
-        time.sleep(15)
-        self.bouge(100,0)
+#        time.sleep(10)
+        self.com.envoiDepartZone()
+	if (self.couleur == 'J'):
+		self.allerAangle((int(250),int(200)),-900)
+		self.com.appelDescenteClapDroit()
+		self.allerAangle((int(250),int(200)), 0)
+		self.com.appelMonteeClapDroit()
+	elif (self.couleur == 'V'):
+		self.allerAangle((int(2750),int(200)),-900)
+		self.com.appelDescenteClapGauche()
+		self.allerAangle((int(2750),int(200)), -1800)
+		self.com.appelMonteeClapGauche()
         
     def printPosition(self):
         self.updatePosition()

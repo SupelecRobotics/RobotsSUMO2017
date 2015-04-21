@@ -10,4 +10,4 @@ size = (201, 301)
 
 robomoviesForest = Map(size)
 
-robomoviesForest.loadTextFile('newMap.txt')
+robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
