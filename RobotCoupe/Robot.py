@@ -92,7 +92,7 @@ class Robot :
         (distance, angle)  = self.orderToPoint(point)
         self.com.envoiMain(0,int(angle))
         while distance > 500:
-            self.com.envoiMain(math.copysign(500,distance),0)
+            self.com.envoiMain(int(math.copysign(500,distance)),0)
             distance -= math.copysign(500,distance)
         self.com.envoiMain(int(distance),0) #envoi d'entiers
         self.printPosition()
