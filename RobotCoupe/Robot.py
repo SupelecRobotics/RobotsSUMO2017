@@ -116,7 +116,7 @@ class Robot :
         #time.sleep(15)
         self.com.envoiDepartZone()
         if (self.couleur == 'J'):
-            robot.allerAangle((int(220),int(550)), int(-900))
+            self.allerAangle((int(220),int(550)), int(-900))
 #            time.sleep(2)
 #            robot.allerAangle((int(650),int(1100)), int(0))
 #            time.sleep(2)

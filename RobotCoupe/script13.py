@@ -10,15 +10,15 @@ from Robot import Robot
 import time
 #import logging
 
-file = open('exception.txt', 'w')
-file.write('Start\n')
+#file = open('exception.txt', 'w')
+#file.write('Start\n')
 
 #time.sleep(5)
 #logging.basicConfig(level=logging.DEBUG, filename='/tmp/myapp.log')
 #try :
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 #	robot.printPosition()
-file.write('Robot On\n')
+#file.write('Robot On\n')
 robot.game()
 #except:
 #	logging.exception('Error')
