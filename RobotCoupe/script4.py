@@ -14,5 +14,5 @@ while (True):
 #    robot.bouge(int(d),0)
     d = raw_input('Enter d : ')
     theta = raw_input('Enter theta : ')
-    robot.bouge((int(d),int(theta)))
+    robot.bouge(int(d),int(theta))
     time.sleep(1)
