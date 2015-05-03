@@ -21,6 +21,8 @@ while(True)	:
 	print theta
 	robot.bouge(0,int(theta))
 	robot.bouge(int(d),0)
-	
+	robot.com.appelMonteeActionneurGobeletDevant()
 	time.sleep(2)
+	robot.com.appelDescenteActionneurGobeletDevant()
+	
 robot.printPosition()
