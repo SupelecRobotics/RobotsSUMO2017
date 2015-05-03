@@ -66,6 +66,7 @@ class Robot :
             
     def allerAangle(self, point,theta):
         self.updatePosition()
+        #tronquage dans trajectoire nécessaire?
         trajectoire = traj((self.x, self.y), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
 #        print trajectoire.orderToPoint(point)
@@ -91,7 +92,7 @@ class Robot :
     def bougeToPoint(self,point):
         (distance, angle)  = self.orderToPoint(point)
         self.com.envoiMain(0,int(angle))
-        while distance > 500:
+        while math.fabs(distance) > 500:
             self.com.envoiMain(int(math.copysign(500,distance)),0)
             distance -= math.copysign(500,distance)
         self.com.envoiMain(int(distance),0) #envoi d'entiers
