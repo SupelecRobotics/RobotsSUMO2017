@@ -10,13 +10,12 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 while(True)	:
 	robot.printPosition()
 	orientationInitiale = True
-	sens = True
+	sens = raw_input('Enter sens : ')
 	l = raw_input('Enter l : ')
 	d1 = 10
 	d2 = 30
 	gobelet = True
 	d = int(l) / 2
-	theta = donneAlpha(orientationInitiale, sens, int(l) / 10, d1, d2, gobelet)
 	theta = theta * 10
 	print theta
 	robot.bouge(0,int(theta))
