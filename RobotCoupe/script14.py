@@ -16,7 +16,8 @@ while(True)	:
 	d2 = 300
 	gobelet = True
 	theta = donneAlpha(orientationInitiale, sens, l, d1, d2, gobelet)
+	print theta
 	#robot.bouge(int(l),int(theta))
-
+	
 	time.sleep(2)
 robot.printPosition()

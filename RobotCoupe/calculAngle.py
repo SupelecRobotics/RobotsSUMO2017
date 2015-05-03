@@ -17,8 +17,8 @@ def nxor(a, b)  :
     return (not ((a and (not b)) or ((not a) and b)))
     
     
-print nxor(True, False)
-print nxor(False, False)
+# nxor(True, False)
+#print nxor(False, False)
 
 
 def donneAlpha(orientationInitiale, sens, l, d1, d2, gobelet) :
