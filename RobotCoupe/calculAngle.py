@@ -45,5 +45,5 @@ def donneAlpha(orientationInitiale, sens, l, d1, d2, gobelet) :
     
     return alpha
     
-print donneAlpha(True, True, 500, 20, 30, True)
+#print donneAlpha(True, True, 500, 20, 30, True)
     
