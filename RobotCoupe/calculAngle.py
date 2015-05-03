@@ -36,7 +36,7 @@ def donneAlpha(orientationInitiale, sens, l, d1, d2, gobelet) :
     else :
         signeAlpha = -1
     
-    if(not(a))  :
+    if(a)  :
         d = d1
     else :
         d = d2

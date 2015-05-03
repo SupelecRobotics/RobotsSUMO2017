@@ -12,8 +12,8 @@ while(True)	:
 	orientationInitiale = True
 	sens = True
 	l = raw_input('Enter l : ')
-	d1 = 100
-	d2 = 300
+	d1 = 10
+	d2 = 30
 	gobelet = True
 	d = int(l) / 2
 	theta = donneAlpha(orientationInitiale, sens, l, d1, d2, gobelet)
