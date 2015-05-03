@@ -47,3 +47,8 @@ def donneAlpha(orientationInitiale, sens, l, d1, d2, gobelet) :
     
 #print donneAlpha(True, True, 500, 20, 30, True)
     
+def donneL(alpha, l, profSpot)	:
+	Lprime = l * math.cos(float(alpha))
+	L = float(profSpot) / float(2) + Lprime
+	
+	return L
