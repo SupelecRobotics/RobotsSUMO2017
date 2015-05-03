@@ -17,6 +17,7 @@ while(True)	:
 	gobelet = True
 	d = int(l) / 2
 	theta = donneAlpha(orientationInitiale, sens, int(l) / 10, d1, d2, gobelet)
+	theta = theta * 10
 	print theta
 	robot.bouge(0,int(theta))
 	robot.bouge(int(d),0)
