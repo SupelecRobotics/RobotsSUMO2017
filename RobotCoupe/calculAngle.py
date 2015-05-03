@@ -50,6 +50,6 @@ def donneAlpha(orientationInitiale, sens, l, d1, d2, gobelet) :
 def donneL(alpha, l, profSpot)	:
 	Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
 	#L = float(profSpot) / float(2) + Lprime
-	L = Lprime
+	L = Lprime - 10
 	
 	return L
