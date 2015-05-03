@@ -10,8 +10,8 @@ def xor(a, b)   :
     return ((a and (not b)) or ((not a) and b))
     
 
-print xor(True, False)
-print xor(False, False)
+#print xor(True, False)
+#print xor(False, False)
 
 def nxor(a, b)  :
     return (not ((a and (not b)) or ((not a) and b)))
