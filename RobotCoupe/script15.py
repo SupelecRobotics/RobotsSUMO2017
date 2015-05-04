@@ -8,6 +8,7 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
+print 'pré pouet'
 robot.allerAangle(( 500, 250), 1800)
 print 'pouet'
 
