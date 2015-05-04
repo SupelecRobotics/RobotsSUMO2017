@@ -11,13 +11,14 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 print 'pré pouet'
 robot.allerAangle(( 910, 850), 900)
 print 'pouet'
+time.sleep(1)
 #robot.bouge(100, 0)
 print 'post pouet'
 
 robot.updatePosition
 orientationInitiale = True
 sens = True
-l = 25
+l = 35
 d1 = 10
 d2 = 30
 gobelet = True
@@ -30,6 +31,7 @@ theta =  theta * 10 + int(robot.theta)
 
 
 robot.bouge(0,int(theta))
+time.sleep(1)
 robot.bouge(int(L),0)
 robot.com.appelMonteeActionneurGobeletDevant()
 time.sleep(2)
