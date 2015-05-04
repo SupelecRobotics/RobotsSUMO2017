@@ -16,6 +16,10 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 # #robot.bouge(100, 0)
 # print 'post pouet'
 
+robot.bouge(0, 900)
+robot.bouge(0, -900)
+
+
 # robot.updatePosition
 orientationInitiale = True
 sens = True
