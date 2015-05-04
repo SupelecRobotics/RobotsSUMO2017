@@ -33,7 +33,7 @@ print theta
 profSpot = 7
 L = donneL(theta, int(l), profSpot)
 L = L * 10
-theta =  theta * 10 + int(robot.theta)
+theta =  theta * 10
 
 
 robot.bouge(0,int(theta))
