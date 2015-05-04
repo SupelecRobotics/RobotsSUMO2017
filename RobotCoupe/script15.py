@@ -9,13 +9,14 @@ import time
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
 print 'pré pouet'
-robot.allerAangle(( 910, 950), 900)
+robot.allerAangle(( 910, 850), 900)
 print 'pouet'
-
+robot.allerA((910, 950))
+print 'post pouet'
 
 orientationInitiale = True
 sens = True
-l = 250
+l = 25
 d1 = 10
 d2 = 30
 gobelet = True
