@@ -24,7 +24,7 @@ theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
 profSpot = 7
 L = donneL(theta, int(l), profSpot)
 L = L * 10
-theta = (int)robot.theta + theta * 10
+theta = int(robot.theta) + theta * 10
 
 print theta
 robot.bouge(0,int(theta))
