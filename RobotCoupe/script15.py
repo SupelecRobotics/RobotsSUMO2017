@@ -9,7 +9,7 @@ import time
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
 robot.allerAangle(( 500, 250), 1800)
-
+print 'pouet'
 
 
 orientationInitiale = True
