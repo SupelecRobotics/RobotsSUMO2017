@@ -21,6 +21,16 @@ print 'post pouet'
 
 
 robot.updatePosition()
+
+(x0, y0) = (robot.x,robot.y)
+(x, y) = (910, 1170)
+
+
+delta = - robot.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
+
+robot.bouge(0, int(- delta))
+robot.updatePosition()
+
 orientationInitiale = True
 sens = True
 robot.printPosition()
