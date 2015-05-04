@@ -11,7 +11,7 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 print 'pré pouet'
 robot.allerAangle(( 910, 850), 900)
 print 'pouet'
-robot.bouge(100, 0)
+#robot.bouge(100, 0)
 print 'post pouet'
 
 robot.updatePosition
