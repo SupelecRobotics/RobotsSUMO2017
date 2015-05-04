@@ -18,7 +18,7 @@ print 'post pouet'
 robot.updatePosition
 orientationInitiale = True
 sens = True
-l = 35
+l = 32
 d1 = 10
 d2 = 30
 gobelet = True
