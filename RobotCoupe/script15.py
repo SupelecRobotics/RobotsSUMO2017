@@ -9,14 +9,14 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
-print 'pré pouet'
-robot.allerAangle(( 910, 850), 900)
-print 'pouet'
-time.sleep(1)
-#robot.bouge(100, 0)
-print 'post pouet'
+# print 'pré pouet'
+# robot.allerAangle(( 910, 850), 900)
+# print 'pouet'
+# time.sleep(1)
+# #robot.bouge(100, 0)
+# print 'post pouet'
 
-robot.updatePosition
+# robot.updatePosition
 orientationInitiale = True
 sens = True
 l = 37
