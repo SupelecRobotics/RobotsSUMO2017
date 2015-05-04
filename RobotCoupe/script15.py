@@ -4,6 +4,7 @@
 from Robot import Robot
 from calculAngle import donneAlpha
 from calculAngle import donneL
+from util import *
 import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
@@ -18,7 +19,7 @@ print 'post pouet'
 robot.updatePosition
 orientationInitiale = True
 sens = True
-l = 32
+l = 37
 d1 = 10
 d2 = 30
 gobelet = True
