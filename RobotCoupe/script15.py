@@ -14,6 +14,7 @@ print 'pouet'
 robot.allerA((910, 950))
 print 'post pouet'
 
+robot.updatePosition
 orientationInitiale = True
 sens = True
 l = 25
@@ -21,12 +22,13 @@ d1 = 10
 d2 = 30
 gobelet = True
 theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
+print theta
 profSpot = 7
 L = donneL(theta, int(l), profSpot)
 L = L * 10
 theta =  theta * 10 - int(robot.theta)
 
-print theta
+
 robot.bouge(0,int(theta))
 robot.bouge(int(L),0)
 robot.com.appelMonteeActionneurGobeletDevant()
