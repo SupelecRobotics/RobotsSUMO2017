@@ -23,7 +23,7 @@ print 'post pouet'
 robot.updatePosition
 orientationInitiale = True
 sens = True
-robot.printPosition()
+#robot.printPosition()
 l = int(dist((robot.x, robot.y), (910, 1170))) / 10
 d1 = 10
 d2 = 30
