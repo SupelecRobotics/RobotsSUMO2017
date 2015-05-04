@@ -23,7 +23,7 @@ print 'post pouet'
 robot.updatePosition
 orientationInitiale = True
 sens = True
-l = int(dist((robot.x, robot.y), (550, 1000))) / 10
+l = int(dist((robot.x, robot.y), (910, 1170))) / 10
 d1 = 10
 d2 = 30
 gobelet = True
