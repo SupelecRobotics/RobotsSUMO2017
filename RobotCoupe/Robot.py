@@ -79,24 +79,24 @@ class Robot :
 #        else:
 #            self.bouge(0, theta - self.theta - 3600)
             
-#    def bougeToPoint(self,point):
-#        coor = (self.x,self.y)
-#        while dist(coor,point) > 30: 	#100
-#            (distance, angle)  = self.orderToPoint(point)
-#            if (math.fabs(distance) > 600): distance = math.copysign(500,distance)
-#            self.com.envoiMain(0,int(angle))
-#            self.com.envoiMain(int(distance),0) #envoi d'entiers
-#            self.printPosition()
-#            coor = (self.x, self.y)
-            
     def bougeToPoint(self,point):
-        (distance, angle)  = self.orderToPoint(point)
-        self.com.envoiMain(0,int(angle))
-        while math.fabs(distance) > 500:
-            self.com.envoiMain(int(math.copysign(500,distance)),0)
-            distance -= math.copysign(500,distance)
-        self.com.envoiMain(int(distance),0) #envoi d'entiers
-        self.printPosition()
+        coor = (self.x,self.y)
+        while dist(coor,point) > 30: 	#100
+            (distance, angle)  = self.orderToPoint(point)
+            if (math.fabs(distance) > 500): distance = math.copysign(500,distance)
+            self.com.envoiMain(0,int(angle))
+            self.com.envoiMain(int(distance),0) #envoi d'entiers
+            self.printPosition()
+            coor = (self.x, self.y)
+            
+#    def bougeToPoint(self,point):
+#        (distance, angle)  = self.orderToPoint(point)
+#        self.com.envoiMain(0,int(angle))
+#        while math.fabs(distance) > 500:
+#            self.com.envoiMain(int(math.copysign(500,distance)),0)
+#            distance -= math.copysign(500,distance)
+#        self.com.envoiMain(int(distance),0) #envoi d'entiers
+#        self.printPosition()
             
     def orderToPoint(self, point):
         (x0, y0) = (self.x,self.y)
