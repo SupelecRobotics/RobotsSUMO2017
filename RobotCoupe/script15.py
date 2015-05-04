@@ -23,7 +23,7 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 # robot.updatePosition
 orientationInitiale = True
 sens = True
-l = dist((robot.x, robot.y), (550, 1000))
+l = int(dist((robot.x, robot.y), (550, 1000))) / 10
 d1 = 10
 d2 = 30
 gobelet = True
