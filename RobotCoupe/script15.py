@@ -42,7 +42,7 @@ theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
 print theta
 profSpot = 7
 L = donneL(theta, int(l), profSpot)
-L = L * 10
+L = L * 10 + 50
 theta =  theta * 10
 
 
