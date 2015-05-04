@@ -16,14 +16,14 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 # #robot.bouge(100, 0)
 # print 'post pouet'
 
-robot.bouge(0, 900)
-robot.bouge(0, -900)
+# robot.bouge(0, 900)
+# robot.bouge(0, -900)
 
 
 # robot.updatePosition
 orientationInitiale = True
 sens = True
-l = 37
+l = dist((robot.x, robot.y), (550, 1000))
 d1 = 10
 d2 = 30
 gobelet = True
