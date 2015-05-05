@@ -119,8 +119,8 @@ time.sleep(1)
 robot.bouge(int(L),0)
 time.sleep(3)
 
-
-robot.bouge(-500, 0)
+robot.bouge(0, -200)
+robot.bouge(-100, 0)
 
 
 robot.com.appelDescenteActionneurGobeletDevant()
