@@ -13,7 +13,7 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 print 'pré pouet'
 robot.allerA(( 450, 450))
 print 'pouet'
-#time.sleep(1)
+time.sleep(1)
 #robot.bouge(100, 0)
 print 'post pouet'
 
@@ -48,11 +48,11 @@ theta =  theta * 10
 
 
 robot.bouge(0,int(theta))
-#time.sleep(1)
+time.sleep(1)
 robot.bouge(int(L),0)
 time.sleep(0.5)
 robot.com.appelMonteeActionneurGobeletDevant()
-#time.sleep(1)
+time.sleep(1)
 robot.updatePosition()
 
 #1er plot
@@ -82,7 +82,7 @@ theta =  theta * 10
 
 
 robot.bouge(0,int(theta))
-#time.sleep(1)
+time.sleep(1)
 robot.bouge(int(L),0)
 time.sleep(3)
 
@@ -116,9 +116,9 @@ theta =  theta * 10
 
 
 robot.bouge(0,int(theta))
-#time.sleep(1)
+time.sleep(1)
 robot.bouge(int(L),0)
-#time.sleep(3)
+time.sleep(3)
 
 robot.bouge(0, -500)
 robot.bouge(-500, 0)
