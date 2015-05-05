@@ -28,6 +28,9 @@ class Robot :
         self.c2 = 0
         self.c3 = 0
         self.c4 = 0
+		# changement de repère
+		self.facteurDistance = 10.0
+		self.facteurDegre = 10.0
         #time
         self.time = 0
         time.sleep(2)
@@ -40,10 +43,8 @@ class Robot :
         while self.com.getGachette() != True :
             time.sleep(1)
         self.com.envoiAllGreen()
-		
-		self.facteurDistance = 10.0
 
-        self.facteurDegre = 10.0
+		
         
     def bouge(self,d,theta):
         self.com.envoiMain(d,theta)
