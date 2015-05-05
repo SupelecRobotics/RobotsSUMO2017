@@ -9,7 +9,7 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
-robot.bouge(200, 0)
+#robot.bouge(200, 0)
 print 'pré pouet'
 robot.allerA(( 450, 450))
 print 'pouet'
@@ -43,7 +43,7 @@ theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
 print theta
 profSpot = 7
 L = donneL(theta, int(l), profSpot)
-L = L * 10 + 80
+L = L * 10 + 60
 theta =  theta * 10
 
 
