@@ -19,11 +19,11 @@ class Robot :
     
     def __init__(self, ser1, ser2, ser3) :
 		self.com = com(ser1,ser2, ser3)
-        #position physique
+		#position physique
 		self.x = 250
 		self.y = 1000
 		self.theta = 0
-        # capteurs
+		# capteurs
 		self.c1 = 0
 		self.c2 = 0
 		self.c3 = 0
@@ -32,17 +32,17 @@ class Robot :
 		self.facteurDistance = 10.0
 		self.facteurDegre = 10.0
 		#time
-        self.time = 0
-        time.sleep(2)
-        self.couleur = self.com.getColor()
-        print self.couleur
-        self.com.envoiColor(self.couleur)
-        time.sleep(2)
-        self.com.envoiCouleurReady()
-        self.printPosition()
-        while self.com.getGachette() != True :
-            time.sleep(1)
-        self.com.envoiAllGreen()
+		self.time = 0
+		time.sleep(2)
+		self.couleur = self.com.getColor()
+		print self.couleur
+		self.com.envoiColor(self.couleur)
+		time.sleep(2)
+		self.com.envoiCouleurReady()
+		self.printPosition()
+		while self.com.getGachette() != True :
+		time.sleep(1)
+		self.com.envoiAllGreen()
 		
         
     def bouge(self,d,theta):
