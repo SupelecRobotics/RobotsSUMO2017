@@ -42,7 +42,7 @@ theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
 print theta
 profSpot = 7
 L = donneL(theta, int(l), profSpot)
-L = L * 10 + 100
+L = L * 10 + 80
 theta =  theta * 10
 
 
@@ -53,4 +53,5 @@ time.sleep(0.5)
 robot.com.appelMonteeActionneurGobeletDevant()
 time.sleep(1)
 robot.bouge(-500, 0)
+robot.bouge(480, 0)
 robot.com.appelDescenteActionneurGobeletDevant()
