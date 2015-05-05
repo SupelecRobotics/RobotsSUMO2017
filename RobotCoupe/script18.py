@@ -29,8 +29,8 @@ robot.updatePosition()
 
 delta = - robot.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
 
-robot.bouge(0, int(delta))
-robot.updatePosition()
+# robot.bouge(0, int(delta))
+# robot.updatePosition()
 
 orientationInitiale = True
 sens = True
