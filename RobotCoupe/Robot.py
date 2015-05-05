@@ -7,6 +7,8 @@ Created on Tue Mar 17 19:39:38 2015
 import time
 import math
 from util import *
+from pathManager import PathManager
+from robomoviesMapLoad import *
 from CommunicationSerial import CommunicationSerial as com
 from trajectoire import Trajectoire as traj
 import serial
@@ -38,6 +40,10 @@ class Robot :
         while self.com.getGachette() != True :
             time.sleep(1)
         self.com.envoiAllGreen()
+		
+		self.facteurDistance = 10.0
+
+        self.facteurDegre = 10.0
         
     def bouge(self,d,theta):
         self.com.envoiMain(d,theta)
@@ -111,7 +117,7 @@ class Robot :
             distance = -distance
         return (distance, ang)
         
-    def goToGobelet(self, point):
+    def goToGobeletLocal(self, point):
         robot.updatePosition()
         (x0, y0) = (self.x,self.y)
         (x, y) = point
@@ -136,6 +142,24 @@ class Robot :
         robot.com.appelMonteeActionneurGobeletDevant()
         time.sleep(2)
         robot.com.appelDescenteActionneurGobeletDevant()
+		
+	def goToGobelet(self, posGobelet)	:
+		
+		self.updatePosition()
+		pathMan = PathManager(robomoviesForest.getForest())
+        pathMan.setThreshold(4)
+        (xG, yG) = posGobelet
+        (xG, yG) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
+        print (xG,yG)
+		for i in range(1, 7)	:
+			
+			
+			pathMan.findPath((self.x, self.y),(xG, yG, 0))
+			length = pathMan.getPathLength()
+			
+		
+		
+		
         
     def updatePosition(self):
         string = self.com.getInfos()
