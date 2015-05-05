@@ -37,7 +37,7 @@ robot.printPosition()
 l = int(dist((robot.x, robot.y), (910, 1170))) / 10
 d1 = 10
 d2 = 30
-gobelet = True
+gobelet = False
 theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
 print theta
 profSpot = 7
