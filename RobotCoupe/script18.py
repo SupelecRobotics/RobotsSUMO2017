@@ -9,6 +9,7 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
+robot.bouge(200, 0)
 print 'pré pouet'
 robot.allerA(( 450, 450))
 print 'pouet'
