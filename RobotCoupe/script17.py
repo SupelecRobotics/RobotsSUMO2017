@@ -49,6 +49,7 @@ theta =  theta * 10
 robot.bouge(0,int(theta))
 time.sleep(1)
 robot.bouge(int(L),0)
+time.sleep(1)
 robot.com.appelMonteeActionneurGobeletDevant()
 time.sleep(1)
 robot.bouge(-500, 0)
