@@ -41,7 +41,7 @@ class Robot :
 		self.com.envoiCouleurReady()
 		self.printPosition()
 		while self.com.getGachette() != True :
-		time.sleep(1)
+			time.sleep(1)
 		self.com.envoiAllGreen()
 		
         
