@@ -10,7 +10,7 @@ import time
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
 print 'pré pouet'
-robot.allerA(( 1500, 650))
+robot.allerAangle(( 910, 850), 900)
 print 'pouet'
 time.sleep(1)
 #robot.bouge(100, 0)
@@ -23,7 +23,7 @@ print 'post pouet'
 robot.updatePosition()
 
 (x0, y0) = (robot.x,robot.y)
-(x, y) = (1500, 350)
+(x, y) = (910, 1170)
 
 
 delta = - robot.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
@@ -34,7 +34,7 @@ robot.updatePosition()
 orientationInitiale = True
 sens = True
 robot.printPosition()
-l = int(dist((robot.x, robot.y), (1500, 350))) / 10
+l = int(dist((robot.x, robot.y), (910, 1170))) / 10
 d1 = 10
 d2 = 30
 gobelet = True
