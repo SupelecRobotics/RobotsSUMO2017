@@ -21,12 +21,13 @@ print 'post pouet'
 
 
 robot.allerAangle((int(250),int(250)),-900)
-robot.com.appelDescenteClapDroit()
-robot.allerAangle((int(250),int(250)), 0)
-robot.com.appelMonteeClapDroit()
+robot.com.appelMonteeActionneurGobeletDevant()
+# robot.com.appelDescenteClapDroit()
+# robot.allerAangle((int(250),int(250)), 0)
+# robot.com.appelMonteeClapDroit()
 
-robot.allerAangle((int(700),int(250)), 0)
-robot.com.appelDescenteClapDroit()
-robot.allerAangle((int(900),int(250)), 0)
-robot.com.appelMonteeClapDroit()
+# robot.allerAangle((int(700),int(250)), 0)
+# robot.com.appelDescenteClapDroit()
+# robot.allerAangle((int(900),int(250)), 0)
+# robot.com.appelMonteeClapDroit()
 
