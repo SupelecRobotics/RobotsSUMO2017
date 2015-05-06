@@ -51,6 +51,7 @@ class CommunicationSerial :
         time.sleep(2)
         
     def envoiMain(self, d=0, theta=0):
+        # commande sur 1 byte, distance sur 2 bytes, theta sur 2 bytes, 
         commande = 0
         if (d<0):
            d = -d + 32768
@@ -173,7 +174,7 @@ class CommunicationSerial :
         
     def appelMonteeClapGauche(self):
         self.serMain.write(chr(8))
-        time.sleep(1)
+        time.sleep(0.5)
         self.serMain.readline()
         time.sleep(1)
         
