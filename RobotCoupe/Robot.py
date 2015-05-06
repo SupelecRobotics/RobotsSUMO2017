@@ -14,9 +14,9 @@ from trajectoire import Trajectoire as traj
 import serial
 
 class Robot :
-    """ Simulates the Robot
-    """
-    
+	""" Simulates the Robot
+	"""
+
 	def __init__(self, ser1, ser2, ser3) :
 		self.com = com(ser1,ser2, ser3)
 		#position physique
