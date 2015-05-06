@@ -5,19 +5,36 @@ from Robot import Robot
 import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
+##########################
+#3 cylindres + 1 gobelet
+#
+#pos robot 
+#pos cyl 870, 645
+#pos cyl 1100, 230
+#pos cyl 1300, 600
+#pos gob 1500, 350
+#
+#3 cylindres
+#
+#cyl 850, 1800
+#cyl 850, 1900
+#cyl 90, 1800
+#
+#
+#
+#
+#
 
-#robot.bouge(200, 0)
-print 'pré pouet'
+
 robot.allerA(( 450, 450))
-print 'pouet'
+
 time.sleep(1)
-#robot.bouge(100, 0)
-print 'post pouet'
 
 # robot.bouge(0, 900)
 # robot.bouge(0, -900)
 
 
+robot.updatePosition()
 
 robot.goToGobeletLocal((250, 250), True)
 
