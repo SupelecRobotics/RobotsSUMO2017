@@ -35,7 +35,7 @@ orientationInitiale = True
 sens = True
 robot.printPosition()
 l = int(dist((robot.x, robot.y), (910, 1170))) / 10
-d1 = 10.5
+d1 = 10.25
 d2 = 8.5
 gobelet = True
 theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
