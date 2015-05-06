@@ -124,31 +124,29 @@ class Robot :
         print distance
         return (distance, ang)
         
-    def goToGobeletLocal(self, point):
+    def goToGobeletLocal(self, point, sens):
         robot.updatePosition()
         (x0, y0) = (self.x,self.y)
         (x, y) = point
         distance = dist((x0,y0), point)
         ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
         orientationInitiale = True
-        sens = True
         robot.printPosition()
         l = distance / 10
         d1 = 10
-        d2 = 30
+        d2 = 8.5
         gobelet = True
         theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
         print theta
         profSpot = 7
         L = donneL(theta, int(l), profSpot)
-        L = L * 10
+        L = L * 10 +60
         theta =  theta * 10 + ang
         robot.bouge(0,int(theta))
         time.sleep(1)
         robot.bouge(int(L),0)
+		time.sleep(0.5)
         robot.com.appelMonteeActionneurGobeletDevant()
-        time.sleep(2)
-        robot.com.appelDescenteActionneurGobeletDevant()
 		
 	def goToGobelet(self, posGobelet)	:
 		
