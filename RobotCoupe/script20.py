@@ -39,22 +39,29 @@ time.sleep(1)
 
 robot.goToCylindreLocal((870, 645), True)
 
-
+time.sleep(3)
 
 #plot 2
 
 robot.updatePosition()
 
-robot.goToCylindreLocal((90, 250), True)
+robot.allerA((900, 520))
+
+robot.goToCylindreLocal((1100, 230), True)
 
 time.sleep(3)
 
+#plot 3
 
+robot.updatePosition()
 
+robot.allerA((1200, 260))
 
-robot.goToCylindreLocal((90, 150), True)
+robot.goToCylindreLocal((1300, 600), True)
 
 time.sleep(3)
+
+#gobelet 
 
 robot.bouge(0, -500)
 robot.bouge(-500, 0)
