@@ -5,6 +5,7 @@ import time
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
 
+
 while (True):
 	robot.printPosition()
 	#    d = raw_input('Enter a distance: ')
