@@ -27,7 +27,7 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
 
 
-robot.allerA(( 450, 450))
+robot.allerA(( 700, 950))
 
 time.sleep(1)
 
@@ -35,14 +35,15 @@ time.sleep(1)
 # robot.bouge(0, -900)
 
 
-robot.updatePosition()
-
-robot.goToGobeletLocal((250, 250), True)
-
-
-
 #1er plot
 
+robot.goToCylindreLocal((870, 645), True)
+
+
+
+#plot 2
+
+robot.updatePosition()
 
 robot.goToCylindreLocal((90, 250), True)
 
@@ -50,7 +51,6 @@ time.sleep(3)
 
 
 
-#plot 2
 
 robot.goToCylindreLocal((90, 150), True)
 
