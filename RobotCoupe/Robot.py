@@ -172,20 +172,20 @@ class Robot :
 		time.sleep(0.5)
 		robot.com.appelMonteeActionneurGobeletDevant()
 		
-	def goToGobelet(self, posGobelet)	:
-		self.updatePosition()
-		pathMan = PathManager(robomoviesForest.getForest())
-		pathMan.setThreshold(4)
-		(xG, yG) = posGobelet
-		(xG, yG) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
-		print (xG,yG)
-		for i in range(1, 7)	:
+	# def goToGobelet(self, posGobelet)	:
+		# self.updatePosition()
+		# pathMan = PathManager(robomoviesForest.getForest())
+		# pathMan.setThreshold(4)
+		# (xG, yG) = posGobelet
+		# (xG, yG) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
+		# print (xG,yG)
+		# for i in range(1, 7)	:
 
 
-			pathMan.findPath((self.x, self.y),(xG, yG, 0))
-			length = pathMan.getPathLength()
+			# pathMan.findPath((self.x, self.y),(xG, yG, 0))
+			# length = pathMan.getPathLength()
 		
-		print pouet
+		# print pouet
 
 
 
