@@ -23,21 +23,6 @@ robot.goToGobeletLocal((910, 1170), False)
 
 
 
-#1er plot
-
-
-robot.goToCylindreLocal((90, 250), True)
-
-time.sleep(3)
-
-
-
-#plot 2
-
-robot.goToCylindreLocal((90, 150), True)
-
-time.sleep(3)
-
 robot.bouge(0, -500)
 robot.bouge(-500, 0)
 
