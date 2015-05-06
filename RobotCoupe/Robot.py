@@ -14,87 +14,87 @@ from trajectoire import Trajectoire as traj
 import serial
 
 class Robot :
-	""" Simulates the Robot
-	"""
+    """ Simulates the Robot
+    """
 
-	def __init__(self, ser1, ser2, ser3) :
-		self.com = com(ser1,ser2, ser3)
-		#position physique
-		self.x = 250
-		self.y = 1000
-		self.theta = 0
-		# capteurs
-		self.c1 = 0
-		self.c2 = 0
-		self.c3 = 0
-		self.c4 = 0
-		#changement de repère
-		self.facteurDistance = 10.0
-		self.facteurDegre = 10.0
-		#time
-		self.time = 0
-		time.sleep(2)
-		self.couleur = self.com.getColor()
-		print self.couleur
-		self.com.envoiColor(self.couleur)
-		time.sleep(2)
-		self.com.envoiCouleurReady()
-		self.printPosition()
-		while not self.com.getGachette():
-			time.sleep(1)
-		self.com.envoiAllGreen()
-		
+    def __init__(self, ser1, ser2, ser3) :
+        self.com = com(ser1,ser2, ser3)
+        #position physique
+        self.x = 250
+        self.y = 1000
+        self.theta = 0
+        # capteurs
+        self.c1 = 0
+        self.c2 = 0
+        self.c3 = 0
+        self.c4 = 0
+        #changement de repère
+        self.facteurDistance = 10.0
+        self.facteurDegre = 10.0
+        #time
+        self.time = 0
+        time.sleep(2)
+        self.couleur = self.com.getColor()
+        print self.couleur
+        self.com.envoiColor(self.couleur)
+        time.sleep(2)
+        self.com.envoiCouleurReady()
+        self.printPosition()
+        while not self.com.getGachette():
+            time.sleep(1)
+        self.com.envoiAllGreen()
         
-	def bouge(self,d,theta):
-		self.com.envoiMain(d,theta)
-		
-	#    def bougeAngle(self,angle):
-	#        while self.theta - angle > 3:
-	#            self.printPosition()
-	#            coor = (self.x, self.y)
-	#            (x, y) = point
-	#            distance = dist(coor, point)
-	#            ang = - self.theta + angle((x, 0), (x - self.x, y - self.y))
-	#            ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
-	#            print int(distance)
-	#            print int(ang*10)
-	#            self.com.envoiMoteurCapteur(int(distance),int(ang*10)) #envoi d'entiers
-	#            time.sleep(0.5)
         
-	def allerA(self, point):
-		self.updatePosition()
-		trajectoire = traj((self.x, self.y), self.theta, True)
-		print "From " + str((self.x, self.y)) + " to " + str(point)
-	#        print trajectoire.orderToPoint(point)
-		for point in trajectoire.pointPath(point):
-			print "At : " + str(point)
-			self.bougeToPoint(point)
+    def bouge(self,d,theta):
+        self.com.envoiMain(d,theta)
+        
+    #    def bougeAngle(self,angle):
+    #        while self.theta - angle > 3:
+    #            self.printPosition()
+    #            coor = (self.x, self.y)
+    #            (x, y) = point
+    #            distance = dist(coor, point)
+    #            ang = - self.theta + angle((x, 0), (x - self.x, y - self.y))
+    #            ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
+    #            print int(distance)
+    #            print int(ang*10)
+    #            self.com.envoiMoteurCapteur(int(distance),int(ang*10)) #envoi d'entiers
+    #            time.sleep(0.5)
+        
+    def allerA(self, point):
+        self.updatePosition()
+        trajectoire = traj((self.x, self.y), self.theta, True)
+        print "From " + str((self.x, self.y)) + " to " + str(point)
+    #        print trajectoire.orderToPoint(point)
+        for point in trajectoire.pointPath(point):
+            print "At : " + str(point)
+            self.bougeToPoint(point)
             
-	def allerAangle(self, point,theta):
-		self.updatePosition()
-		#tronquage dans trajectoire nécessaire?
-		trajectoire = traj((self.x, self.y), self.theta, True)
-		print "From " + str((self.x, self.y)) + " to " + str(point)
-	#        print trajectoire.orderToPoint(point)
-		for point in trajectoire.pointPath(point):
-			print "At : " + str(point)
-			self.bougeToPoint(point)
-		self.bouge(0, theta - self.theta)
+    def allerAangle(self, point,theta):
+        self.updatePosition()
+        #tronquage dans trajectoire nécessaire?
+        trajectoire = traj((self.x, self.y), self.theta, True)
+        print "From " + str((self.x, self.y)) + " to " + str(point)
+    #        print trajectoire.orderToPoint(point)
+        for point in trajectoire.pointPath(point):
+            print "At : " + str(point)
+            self.bougeToPoint(point)
+        self.bouge(0, theta - self.theta)
 #        if (math.fabs(theta - self.theta) <= 1800 ):
 #            self.bouge(0, theta - self.theta)
 #        else:
 #            self.bouge(0, theta - self.theta - 3600)
             
-	def bougeToPoint(self,point):
-		coor = (self.x,self.y)
-		while dist(coor,point) > 30: 	#100
-			(distance, angle)  = self.orderToPoint(point)
-			if (math.fabs(distance) > 500): distance = math.copysign(500,distance)
-			self.com.envoiMain(0,int(angle))
-			self.com.envoiMain(int(distance),0) #envoi d'entiers
-			self.printPosition()
-			coor = (self.x, self.y)
-			
+    def bougeToPoint(self,point):
+        coor = (self.x,self.y)
+        while dist(coor,point) > 30:     #100
+            (distance, angle)  = self.orderToPoint(point)
+            if (math.fabs(distance) > 500): distance = math.copysign(500,distance)
+            self.com.envoiMain(0,int(angle))
+            self.com.envoiMain(int(distance),0) #envoi d'entiers
+            self.printPosition()
+            coor = (self.x, self.y)
+            
 #    def bougeToPoint(self,point):
 #        (distance, angle)  = self.orderToPoint(point)
 #        self.com.envoiMain(0,int(angle))
@@ -104,93 +104,93 @@ class Robot :
 #        self.com.envoiMain(int(distance),0) #envoi d'entiers
 #        self.printPosition()
             
-	def orderToPoint(self, point):
-		(x0, y0) = (self.x,self.y)
-		(x, y) = point
-		distance = dist((x0,y0), point)
-		ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-		ang = (ang + 1800) % 3600 - 1800
-		print "avant"
-		print ang
-		print distance
-		if (ang > 900): 
-			ang = ang - 1800
-			distance = -distance
-		if (ang < -900):
-			ang = ang + 1800
-			distance = -distance
-		print "apres"
-		print ang
-		print distance
-		return (distance, ang)
+    def orderToPoint(self, point):
+        (x0, y0) = (self.x,self.y)
+        (x, y) = point
+        distance = dist((x0,y0), point)
+        ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
+        ang = (ang + 1800) % 3600 - 1800
+        print "avant"
+        print ang
+        print distance
+        if (ang > 900): 
+            ang = ang - 1800
+            distance = -distance
+        if (ang < -900):
+            ang = ang + 1800
+            distance = -distance
+        print "apres"
+        print ang
+        print distance
+        return (distance, ang)
 
-	
-	def goToCylindreLocal(self, point, sens):
-		robot.updatePosition()
-		(x0, y0) = (self.x,self.y)
-		(x, y) = point
-		distance = dist((x0,y0), point)
-		ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-		orientationInitiale = True
-		robot.printPosition()
-		l = distance / 10
-		d1 = 10
-		d2 = 8.5
-		gobelet = False
-		theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
-		print theta
-		profSpot = 7
-		L = donneL(theta, int(l), profSpot)
-		L = L * 10 +60
-		theta =  theta * 10 + ang
-		robot.bouge(0,int(theta))
-		time.sleep(1)
-		robot.bouge(int(L),0)
-		time.sleep(0.5)
-		# robot.com.appelMonteeActionneurGobeletDevant()
+    
+    def goToCylindreLocal(self, point, sens):
+        robot.updatePosition()
+        (x0, y0) = (self.x,self.y)
+        (x, y) = point
+        distance = dist((x0,y0), point)
+        ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
+        orientationInitiale = True
+        robot.printPosition()
+        l = distance / 10
+        d1 = 10
+        d2 = 8.5
+        gobelet = False
+        theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
+        print theta
+        profSpot = 7
+        L = donneL(theta, int(l), profSpot)
+        L = L * 10 +60
+        theta =  theta * 10 + ang
+        robot.bouge(0,int(theta))
+        time.sleep(1)
+        robot.bouge(int(L),0)
+        time.sleep(0.5)
+        # robot.com.appelMonteeActionneurGobeletDevant()
         
     def goToGobeletLocal(self, point, sens):
-		robot.updatePosition()
-		(x0, y0) = (self.x,self.y)
-		(x, y) = point
-		distance = dist((x0,y0), point)
-		ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-		orientationInitiale = True
-		robot.printPosition()
-		l = distance / 10
-		d1 = 10
-		d2 = 8.5
-		gobelet = True
-		theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
-		print theta
-		profSpot = 7
-		L = donneL(theta, int(l), profSpot)
-		L = L * 10 +60
-		theta =  theta * 10 + ang
-		robot.bouge(0,int(theta))
-		time.sleep(1)
-		robot.bouge(int(L),0)
-		time.sleep(0.5)
-		if(sens)	:
-			robot.com.appelMonteeActionneurGobeletDevant()
-		else	:
-			robot.com.appelMonteeActionneurGobeletDerriere()
-		
-		
-	# def goToGobelet(self, posGobelet)	:
-		# self.updatePosition()
-		# pathMan = PathManager(robomoviesForest.getForest())
-		# pathMan.setThreshold(4)
-		# (xG, yG) = posGobelet
-		# (xG, yG) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
-		# print (xG,yG)
-		# for i in range(1, 7)	:
+        robot.updatePosition()
+        (x0, y0) = (self.x,self.y)
+        (x, y) = point
+        distance = dist((x0,y0), point)
+        ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
+        orientationInitiale = True
+        robot.printPosition()
+        l = distance / 10
+        d1 = 10
+        d2 = 8.5
+        gobelet = True
+        theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
+        print theta
+        profSpot = 7
+        L = donneL(theta, int(l), profSpot)
+        L = L * 10 +60
+        theta =  theta * 10 + ang
+        robot.bouge(0,int(theta))
+        time.sleep(1)
+        robot.bouge(int(L),0)
+        time.sleep(0.5)
+        if(sens)    :
+            robot.com.appelMonteeActionneurGobeletDevant()
+        else    :
+            robot.com.appelMonteeActionneurGobeletDerriere()
+        
+        
+    # def goToGobelet(self, posGobelet)    :
+        # self.updatePosition()
+        # pathMan = PathManager(robomoviesForest.getForest())
+        # pathMan.setThreshold(4)
+        # (xG, yG) = posGobelet
+        # (xG, yG) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
+        # print (xG,yG)
+        # for i in range(1, 7)    :
 
 
-			# pathMan.findPath((self.x, self.y),(xG, yG, 0))
-			# length = pathMan.getPathLength()
-		
-		# print pouet
+            # pathMan.findPath((self.x, self.y),(xG, yG, 0))
+            # length = pathMan.getPathLength()
+        
+        # print pouet
 
 
 
