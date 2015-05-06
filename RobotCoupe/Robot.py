@@ -146,6 +146,7 @@ class Robot :
         theta =  theta * 10 + ang
         if(not sens):
             theta += 1800
+            L = -L
         self.bouge(0,int(theta))
         time.sleep(1)
         self.bouge(int(L),0)
@@ -172,6 +173,7 @@ class Robot :
         theta =  theta * 10 + ang
         if(not sens):
             theta += 1800
+            L = -L
         self.bouge(0,int(theta))
         time.sleep(1)
         self.bouge(int(L),0)
