@@ -10,7 +10,7 @@ import time
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
 print 'pré pouet'
-robot.allerA(( 910, 850))
+robot.allerAangle(( 910, 850), 900)
 print 'pouet'
 time.sleep(1)
 #robot.bouge(100, 0)
