@@ -63,8 +63,14 @@ time.sleep(3)
 
 #gobelet 
 
-robot.bouge(0, -500)
-robot.bouge(-500, 0)
+robot.updatePosition()
+
+robot.allerA((1250, 300))
+
+robot.goToGobeletLocal((1500, 350), True)
+
+time.sleep(1)
+
 
 
 robot.com.appelDescenteActionneurGobeletDevant()
