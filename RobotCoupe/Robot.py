@@ -12,6 +12,7 @@ from robomoviesMapLoad import *
 from CommunicationSerial import CommunicationSerial as com
 from trajectoire import Trajectoire as traj
 import serial
+from calculAngle import *
 
 class Robot :
     """ Simulates the Robot
@@ -150,13 +151,13 @@ class Robot :
         # robot.com.appelMonteeActionneurGobeletDevant()
         
     def goToGobeletLocal(self, point, sens):
-        robot.updatePosition()
+        self.updatePosition()
         (x0, y0) = (self.x,self.y)
         (x, y) = point
         distance = dist((x0,y0), point)
         ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
         orientationInitiale = True
-        robot.printPosition()
+        self.printPosition()
         l = distance / 10
         d1 = 10
         d2 = 8.5
@@ -167,14 +168,14 @@ class Robot :
         L = donneL(theta, int(l), profSpot)
         L = L * 10 +60
         theta =  theta * 10 + ang
-        robot.bouge(0,int(theta))
+        self.bouge(0,int(theta))
         time.sleep(1)
-        robot.bouge(int(L),0)
+        self.bouge(int(L),0)
         time.sleep(0.5)
-        if(sens)    :
-            robot.com.appelMonteeActionneurGobeletDevant()
-        else    :
-            robot.com.appelMonteeActionneurGobeletDerriere()
+        if(sens):
+            self.com.appelMonteeActionneurGobeletDevant()
+        else:
+            self.com.appelMonteeActionneurGobeletDerriere()
         
         
     # def goToGobelet(self, posGobelet)    :
