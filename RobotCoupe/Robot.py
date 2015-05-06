@@ -17,7 +17,7 @@ class Robot :
     """ Simulates the Robot
     """
     
-    def __init__(self, ser1, ser2, ser3) :
+	def __init__(self, ser1, ser2, ser3) :
 		self.com = com(ser1,ser2, ser3)
 		#position physique
 		self.x = 250
@@ -45,56 +45,56 @@ class Robot :
 		self.com.envoiAllGreen()
 		
         
-    def bouge(self,d,theta):
-        self.com.envoiMain(d,theta)
+	def bouge(self,d,theta):
+		self.com.envoiMain(d,theta)
+		
+	#    def bougeAngle(self,angle):
+	#        while self.theta - angle > 3:
+	#            self.printPosition()
+	#            coor = (self.x, self.y)
+	#            (x, y) = point
+	#            distance = dist(coor, point)
+	#            ang = - self.theta + angle((x, 0), (x - self.x, y - self.y))
+	#            ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
+	#            print int(distance)
+	#            print int(ang*10)
+	#            self.com.envoiMoteurCapteur(int(distance),int(ang*10)) #envoi d'entiers
+	#            time.sleep(0.5)
         
-#    def bougeAngle(self,angle):
-#        while self.theta - angle > 3:
-#            self.printPosition()
-#            coor = (self.x, self.y)
-#            (x, y) = point
-#            distance = dist(coor, point)
-#            ang = - self.theta + angle((x, 0), (x - self.x, y - self.y))
-#            ang = (ang + math.pi) % (2*math.pi)  - math.pi     # ang dans [-180, 180]
-#            print int(distance)
-#            print int(ang*10)
-#            self.com.envoiMoteurCapteur(int(distance),int(ang*10)) #envoi d'entiers
-#            time.sleep(0.5)
-        
-    def allerA(self, point):
-        self.updatePosition()
-        trajectoire = traj((self.x, self.y), self.theta, True)
-        print "From " + str((self.x, self.y)) + " to " + str(point)
-#        print trajectoire.orderToPoint(point)
-        for point in trajectoire.pointPath(point):
-            print "At : " + str(point)
-            self.bougeToPoint(point)
+	def allerA(self, point):
+		self.updatePosition()
+		trajectoire = traj((self.x, self.y), self.theta, True)
+		print "From " + str((self.x, self.y)) + " to " + str(point)
+	#        print trajectoire.orderToPoint(point)
+		for point in trajectoire.pointPath(point):
+			print "At : " + str(point)
+			self.bougeToPoint(point)
             
-    def allerAangle(self, point,theta):
-        self.updatePosition()
-        #tronquage dans trajectoire nécessaire?
-        trajectoire = traj((self.x, self.y), self.theta, True)
-        print "From " + str((self.x, self.y)) + " to " + str(point)
-#        print trajectoire.orderToPoint(point)
-        for point in trajectoire.pointPath(point):
-            print "At : " + str(point)
-            self.bougeToPoint(point)
-        self.bouge(0, theta - self.theta)
+	def allerAangle(self, point,theta):
+		self.updatePosition()
+		#tronquage dans trajectoire nécessaire?
+		trajectoire = traj((self.x, self.y), self.theta, True)
+		print "From " + str((self.x, self.y)) + " to " + str(point)
+	#        print trajectoire.orderToPoint(point)
+		for point in trajectoire.pointPath(point):
+			print "At : " + str(point)
+			self.bougeToPoint(point)
+		self.bouge(0, theta - self.theta)
 #        if (math.fabs(theta - self.theta) <= 1800 ):
 #            self.bouge(0, theta - self.theta)
 #        else:
 #            self.bouge(0, theta - self.theta - 3600)
             
-    def bougeToPoint(self,point):
-        coor = (self.x,self.y)
-        while dist(coor,point) > 30: 	#100
-            (distance, angle)  = self.orderToPoint(point)
-            if (math.fabs(distance) > 500): distance = math.copysign(500,distance)
-            self.com.envoiMain(0,int(angle))
-            self.com.envoiMain(int(distance),0) #envoi d'entiers
-            self.printPosition()
-            coor = (self.x, self.y)
-            
+	def bougeToPoint(self,point):
+		coor = (self.x,self.y)
+		while dist(coor,point) > 30: 	#100
+			(distance, angle)  = self.orderToPoint(point)
+			if (math.fabs(distance) > 500): distance = math.copysign(500,distance)
+			self.com.envoiMain(0,int(angle))
+			self.com.envoiMain(int(distance),0) #envoi d'entiers
+			self.printPosition()
+			coor = (self.x, self.y)
+			
 #    def bougeToPoint(self,point):
 #        (distance, angle)  = self.orderToPoint(point)
 #        self.com.envoiMain(0,int(angle))
