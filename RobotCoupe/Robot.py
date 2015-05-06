@@ -170,7 +170,11 @@ class Robot :
 		time.sleep(1)
 		robot.bouge(int(L),0)
 		time.sleep(0.5)
-		robot.com.appelMonteeActionneurGobeletDevant()
+		if(sens)	:
+			robot.com.appelMonteeActionneurGobeletDevant()
+		else	:
+			robot.com.appelMonteeActionneurGobeletDerriere()
+		
 		
 	# def goToGobelet(self, posGobelet)	:
 		# self.updatePosition()
