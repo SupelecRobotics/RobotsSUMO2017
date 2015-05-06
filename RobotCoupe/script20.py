@@ -26,6 +26,7 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 #
 
 
+
 robot.allerA(( 450, 450))
 
 time.sleep(1)

@@ -124,7 +124,7 @@ class Robot :
         print distance
         return (distance, ang)
 		
-	def goToCylindreLocal(self, point, sens)	:
+	def goToCylindreLocal(self, point, sens):
 		robot.updatePosition()
 		(x0, y0) = (self.x,self.y)
 		(x, y) = point
@@ -185,7 +185,8 @@ class Robot :
 
 			pathMan.findPath((self.x, self.y),(xG, yG, 0))
 			length = pathMan.getPathLength()
-
+		
+		print pouet
 
 
 
