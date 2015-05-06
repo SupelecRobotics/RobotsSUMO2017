@@ -173,7 +173,6 @@ class Robot :
 		robot.com.appelMonteeActionneurGobeletDevant()
 		
 	def goToGobelet(self, posGobelet)	:
-		
 		self.updatePosition()
 		pathMan = PathManager(robomoviesForest.getForest())
 		pathMan.setThreshold(4)
