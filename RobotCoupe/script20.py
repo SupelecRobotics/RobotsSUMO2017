@@ -37,7 +37,7 @@ time.sleep(1)
 
 #1er plot
 
-robot.goToCylindreLocal((870, 645), True)
+robot.goToCylindreLocal((870, 645), False)
 
 time.sleep(3)
 
@@ -47,7 +47,7 @@ robot.updatePosition()
 
 robot.allerA((900, 520))
 
-robot.goToCylindreLocal((1100, 230), True)
+robot.goToCylindreLocal((1100, 230), False)
 
 time.sleep(3)
 
@@ -57,7 +57,7 @@ robot.updatePosition()
 
 robot.allerA((1200, 260))
 
-robot.goToCylindreLocal((1300, 600), True)
+robot.goToCylindreLocal((1300, 600), False)
 
 time.sleep(3)
 
@@ -67,7 +67,7 @@ robot.updatePosition()
 
 robot.allerA((1250, 300))
 
-robot.goToGobeletLocal((1500, 350), True)
+robot.goToGobeletLocal((1500, 350), False)
 
 time.sleep(1)
 
