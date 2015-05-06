@@ -104,26 +104,27 @@ class Robot :
 #        self.com.envoiMain(int(distance),0) #envoi d'entiers
 #        self.printPosition()
             
-    def orderToPoint(self, point):
-        (x0, y0) = (self.x,self.y)
-        (x, y) = point
-        distance = dist((x0,y0), point)
-        ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-        ang = (ang + 1800) % 3600 - 1800
-        print "avant"
-        print ang
-        print distance
-        if (ang > 900): 
-            ang = ang - 1800
-            distance = -distance
-        if (ang < -900):
-            ang = ang + 1800
-            distance = -distance
-        print "apres"
-        print ang
-        print distance
-        return (distance, ang)
-		
+	def orderToPoint(self, point):
+		(x0, y0) = (self.x,self.y)
+		(x, y) = point
+		distance = dist((x0,y0), point)
+		ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
+		ang = (ang + 1800) % 3600 - 1800
+		print "avant"
+		print ang
+		print distance
+		if (ang > 900): 
+			ang = ang - 1800
+			distance = -distance
+		if (ang < -900):
+			ang = ang + 1800
+			distance = -distance
+		print "apres"
+		print ang
+		print distance
+		return (distance, ang)
+
+	
 	def goToCylindreLocal(self, point, sens):
 		robot.updatePosition()
 		(x0, y0) = (self.x,self.y)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from Robot import *
+from Robot import Robot
 import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
