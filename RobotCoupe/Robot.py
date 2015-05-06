@@ -132,7 +132,7 @@ class Robot :
         (x, y) = point
         distance = dist((x0,y0), point)
         ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-        orientationInitiale = sens
+        orientationInitiale = True
         self.printPosition()
         l = distance / 10
         d1 = 10
@@ -158,7 +158,7 @@ class Robot :
         (x, y) = point
         distance = dist((x0,y0), point)
         ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-        orientationInitiale = sens
+        orientationInitiale = True
         self.printPosition()
         l = distance / 10
         d1 = 10
