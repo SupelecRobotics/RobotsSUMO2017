@@ -145,81 +145,81 @@ class CommunicationSerial :
         
     def appelMonteeActionneurGobeletDevant(self):
         self.serMain.write(chr(3))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelMonteeActionneurGobeletDerriere(self):
         self.serMain.write(chr(5))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelDescenteActionneurGobeletDevant(self):
         self.serMain.write(chr(4))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelDescenteActionneurGobeletDerriere(self):
         self.serMain.write(chr(6))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelMonteeClapGauche(self):
         self.serMain.write(chr(8))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         time.sleep(1)
         
     def appelMonteeClapDroit(self):
         self.serMain.write(chr(10))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelDescenteClapGauche(self):
         self.serMain.write(chr(7))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelDescenteClapDroit(self):
         self.serMain.write(chr(9))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelMonteeActionneurCylindreDevant(self):
         self.serMain.write(chr(11))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelMonteeActionneurCylindreDerriere(self):
         self.serMain.write(chr(13))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelDescenteActionneurCylindreDevant(self):
         self.serMain.write(chr(12))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelDescenteActionneurCylindreDerriere(self):
         self.serMain.write(chr(14))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def envoiCouleurReady(self):
         self.serCouleur.write(chr(2))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serCouleur.readline()
         
     def envoiAllGreen(self):
         self.serCouleur.write(chr(3))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serCouleur.readline()
         
     def envoiDepartZone(self):
         self.serCouleur.write(chr(4))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serCouleur.readline()
         
     def envoiErreurArduino(self):
         self.serCouleur.write(chr(5))
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.serCouleur.readline()
