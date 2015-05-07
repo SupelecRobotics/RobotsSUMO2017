@@ -48,9 +48,9 @@ robot.goToCylindreLocal((1100, 230), False)
 robot.printPosition()
 #plot 3
 
-robot.com.appelMonteeActionneurGobeletDevant()
-robot.allerA((1200, 260))
-robot.com.appelDescenteActionneurGobeletDevant()
+# robot.com.appelMonteeActionneurGobeletDevant()
+# robot.allerA((1200, 260))
+# robot.com.appelDescenteActionneurGobeletDevant()
 robot.goToCylindreLocal((1300, 600), False)
 
 
