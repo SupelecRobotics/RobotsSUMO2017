@@ -64,7 +64,7 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
-        trajectoire = traj((self.x, self.y), self.theta, True)
+        trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
     #        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
@@ -74,7 +74,7 @@ class Robot :
     def allerAangle(self, point,theta):
         self.updatePosition()
         #tronquage dans trajectoire nécessaire?
-        trajectoire = traj((self.x, self.y), self.theta, True)
+        trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
     #        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
