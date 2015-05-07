@@ -66,7 +66,7 @@ class Robot :
         self.updatePosition()
         trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
-    #        print trajectoire.orderToPoint(point)
+        print trajectoire.orderToPoint(point)
         print "start"
         for point in trajectoire.pointPath(point):
             print "point"
@@ -81,7 +81,7 @@ class Robot :
         #tronquage dans trajectoire nécessaire?
         trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
-    #        print trajectoire.orderToPoint(point)
+        print trajectoire.orderToPoint(point)
         print "start"
         for point in trajectoire.pointPath(point):
             print "point"
