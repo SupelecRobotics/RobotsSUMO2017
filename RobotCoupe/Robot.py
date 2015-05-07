@@ -142,7 +142,7 @@ class Robot :
         print theta
         profSpot = 7
         L = donneL(theta, int(l), profSpot)
-        L = L * 10 +60
+        L = L * 10 +70
         theta =  theta * 10 + ang
         if(not sens):
             theta += 1800
@@ -170,7 +170,7 @@ class Robot :
         print theta
         profSpot = 7
         L = donneL(theta, int(l), profSpot)
-        L = L * 10 +60
+        L = L * 10 +70
         theta =  theta * 10 + ang
         if(not sens):
             theta += 1800
