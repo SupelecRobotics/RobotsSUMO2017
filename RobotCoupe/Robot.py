@@ -163,15 +163,8 @@ class Robot :
         distance = dist((x0,y0), point)
         ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
         self.printPosition()
-        theta = self.donneAngleApproche(sens, int(distance / 10), True)
-        print theta
-        L = self.donneLApproche(theta, int(l), sens)
-        L = L * 10 +70
-        theta =  theta * 10 + ang
-        if(not sens):
-            theta += 1800
-            theta = superModulo(theta)
-            L = -L
+        
+        (theta, L) = self.donneDonneesApproche(sens, int(distance / 10), True, ang)
         self.bouge(0,int(theta))
         time.sleep(1)
         self.bouge(int(L),0)
@@ -211,10 +204,48 @@ class Robot :
         Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
         L =  Lprime - 10 - float(profSpot) / float(2)
         
-
         return L
         
+    def donneDonneesApproche(self, sens, l, gobelet, angle)    :
+    #    sens : bool qui vaut true si l'objectif est devant le robot
+    #    l : int égal à la distance centre robot à centre gobelet
+    #    gobelet : bool vrai si l'objectif est un gobelet, et faux si c'est un plot
+    #    angle : int (en déci-angle) angle qui permet de placer le robot dans la direction du gobelet/cylindre
         
+        ## Constantes (en cm)
+        
+        #Profondeur spots
+        profSpot = 7
+        #devant(gobelet, cylindre)
+        d1 = 10
+        d2 = 8.5
+        #derriere(gobelet, cylindre)
+        d3 = 9.5
+        d4 = 8
+        
+        if (gobelet and sens):
+            alpha = - math.asin(float(d1) / float(l))*360/(2*math.pi)
+        elif (gobelet and not sens):
+            alpha = math.asin(float(d3) / float(l))*360/(2*math.pi)
+        elif (not gobelet and sens):
+            alpha = math.asin(float(d2) / float(l))*360/(2*math.pi)
+        else:
+            alpha = - math.asin(float(d4) / float(l))*360/(2*math.pi)
+        
+        Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
+        L =  Lprime - 10 - float(profSpot) / float(2)
+        
+        print theta
+        L = L * 10 +70
+        theta =  alpha * 10 + angle
+        if(not sens):
+            theta += 1800
+            theta = superModulo(theta)
+            L = -L
+        
+        return (theta, L)
+    
+    
     # def goToGobelet(self, posGobelet)    :
         # self.updatePosition()
         # pathMan = PathManager(robomoviesForest.getForest())
