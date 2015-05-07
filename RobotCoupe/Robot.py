@@ -78,8 +78,10 @@ class Robot :
         print "From " + str((self.x, self.y)) + " to " + str(point)
     #        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
-            print "At : " + str(point)
-            self.bougeToPoint(point)
+            (a, b) = point
+            (a, b) = (int(a), int(b))
+            print "At : " + str((a, b))
+            self.bougeToPoint((a, b))
         self.bouge(0, theta - self.theta)
 #        if (math.fabs(theta - self.theta) <= 1800 ):
 #            self.bouge(0, theta - self.theta)
