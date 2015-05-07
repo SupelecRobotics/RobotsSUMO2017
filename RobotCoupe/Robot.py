@@ -392,10 +392,7 @@ class Robot :
         
     def evasionObstacle(self):
         #distance du robot à l'osbtacle (estimée)   
-        if (self.c2 <= 30 and self.c3 <= 30):
-            obstacleDevant = True
-        else:
-            obstacleDevant = False
+        obstacleDevant = (self.c2 <= 30 and self.c3 <= 30)
         d = 10
         alpha = int(self.theta / 10)
         pointDevant = (int(self.x + d * Math.cos(alpha)), int(self.y + d * Math.sin(alpha)))
