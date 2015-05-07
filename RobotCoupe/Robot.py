@@ -67,7 +67,9 @@ class Robot :
         trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
     #        print trajectoire.orderToPoint(point)
+        print "start"
         for point in trajectoire.pointPath(point):
+            print "point"
             (a, b) = point
             (a, b) = (round(a), round(b))
             print "At : " + str((a, b))
@@ -80,7 +82,9 @@ class Robot :
         trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
     #        print trajectoire.orderToPoint(point)
+        print "start"
         for point in trajectoire.pointPath(point):
+            print "point"
             (a, b) = point
             (a, b) = (round(a), round(b))
             print "At : " + str((a, b))
