@@ -386,6 +386,16 @@ class Robot :
         dtheta = (1800/math.pi) * math.atan2(dy,dx) - self.theta
         dtheta = dtheta % 3600
         return (dtheta < 900 or dtheta > 2700)
+        
+    def evasionObstacle(self):
+        #distance du robot à l'osbtacle (estimée)   
+        obstacleDevant = True
+        d = 10
+        alpha = int(self.theta / 10)
+        pointDevant = (int(self.x + d * Math.cos(alpha)), int(self.y + d * Math.sin(alpha)))
+        pointDroite = (int(self.x + d * Math.cos(alpha-90)), int(self.y + d * Math.sin(alpha-90)))
+        pointGauche = (int(self.x + d * Math.cos(alpha+90)), int(self.y + d * Math.sin(alpha+90)))
+        pointDerriere = (int(self.x + d * Math.cos(alpha+180)), int(self.y + d * Math.sin(alpha+180)))
     
 
 """
