@@ -64,8 +64,8 @@ class CommunicationSerial :
         satVitesse = 230    #saturation vitesse : 1 byte max
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
-        self.serMain.write(inputByteString)
         print "envoi"
+        self.serMain.write(inputByteString)
         if (self.serMain.read().encode('hex') == '02'):
             return False
         self.serMain.readline()
