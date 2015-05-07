@@ -29,7 +29,7 @@ class Trajectoire :
 
         self.facteurDegre = 10.0
         
-        self.position = [( (2000-y)/self.facteurDistance, x/self.facteurDistance), angle/self.facteurDegre*math.pi/180, orientation]
+        self.position = [( round ((2000-y)/self.facteurDistance), round( x/self.facteurDistance) ), round( angle/self.facteurDegre*math.pi/180), orientation]
 
 #        print self.position
 
@@ -127,7 +127,7 @@ class Trajectoire :
         pathMan.setThreshold(4)
         (x, y) = point
 #        print (x,y)
-        (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
+        (x, y) = ( round( (2000-y)/self.facteurDistance), round(x/self.facteurDistance))
         print (x,y)
         pathMan.findPath(self.position[0],(x, y, 0))
 
