@@ -68,8 +68,11 @@ class Robot :
         print "From " + str((self.x, self.y)) + " to " + str(point)
     #        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
-            print "At : " + str(point)
-            self.bougeToPoint(point)
+            (a, b) = point
+            (a, b) = (int(a), int(b))
+            print "At : " + str((a, b))
+            self.bougeToPoint((a, b))
+
             
     def allerAangle(self, point,theta):
         self.updatePosition()
