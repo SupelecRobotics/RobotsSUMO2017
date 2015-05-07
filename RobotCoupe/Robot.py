@@ -162,8 +162,8 @@ class Robot :
         orientationInitiale = True
         self.printPosition()
         l = distance / 10
-        d1 = 100
-        d2 = 8.5
+        d1 = 10
+        d2 = 80.5
         gobelet = True
         theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
         print theta
