@@ -139,11 +139,11 @@ class Robot :
         d2 = 8.5
         gobelet = False
         #theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
-        theta = donneAngleApproche(sens, int(l), False)
+        theta = self.donneAngleApproche(sens, int(l), False)
         print theta
         profSpot = 7
         #L = donneL(theta, int(l), profSpot)
-        L = donneLApproche(theta, int(l), sens)
+        L = self.donneLApproche(theta, int(l), sens)
         L = L * 10 +70
         theta =  theta * 10 + ang
         if(not sens):
@@ -169,11 +169,11 @@ class Robot :
         d2 = 8.5
         gobelet = True
         #theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
-        theta = donneAngleApproche(sens, int(l), True)
+        theta = self.donneAngleApproche(sens, int(l), True)
         print theta
         profSpot = 7
         #L = donneL(theta, int(l), profSpot)
-        L = donneLApproche(theta, int(l), sens)
+        L = self.donneLApproche(theta, int(l), sens)
         L = L * 10 +70
         theta =  theta * 10 + ang
         if(not sens):
