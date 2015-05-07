@@ -135,7 +135,7 @@ class Robot :
         
         (theta, L) = self.donneDonneesApproche(sens, int(distance / 10), False, ang)
         self.bouge(0,int(theta))
-        time.sleep(1)
+        time.sleep(0.5)
         self.bouge(int(L),0)
         time.sleep(0.5)
         # if(sens):
@@ -153,7 +153,7 @@ class Robot :
         
         (theta, L) = self.donneDonneesApproche(sens, int(distance / 10), True, ang)
         self.bouge(0,int(theta))
-        time.sleep(1)
+        time.sleep(0.5)
         self.bouge(int(L),0)
         time.sleep(0.5)
         if(sens):
