@@ -49,9 +49,9 @@ robot.goToCylindreLocal((1100, 230), False)
 
 
 #plot 3
-
+robot.com.appelMonteeActionneurGobeletDevant()
 robot.updatePosition()
-
+robot.com.appelDescenteActionneurGobeletDevant()
 robot.allerA((1200, 260))
 
 robot.goToCylindreLocal((1300, 600), False)
