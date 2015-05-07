@@ -69,7 +69,7 @@ class Robot :
     #        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
             (a, b) = point
-            (a, b) = (int(a), int(b))
+            (a, b) = (round(a), round(b))
             print "At : " + str((a, b))
             self.bougeToPoint((a, b))
 
@@ -82,7 +82,7 @@ class Robot :
     #        print trajectoire.orderToPoint(point)
         for point in trajectoire.pointPath(point):
             (a, b) = point
-            (a, b) = (int(a), int(b))
+            (a, b) = (round(a), round(b))
             print "At : " + str((a, b))
             self.bougeToPoint((a, b))
         self.bouge(0, theta - self.theta)
