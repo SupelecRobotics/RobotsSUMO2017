@@ -85,6 +85,9 @@ class CommunicationSerial :
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satV)
         self.serMain.write(inputByteString)
 #        print("Envoi")
+#        if (self.serMain.read().encode('hex') = '02'):
+#            
+            
         self.serMain.readline()
 #        print(self.serMoteurCapteur.readline())
 #        time.sleep(0.3)
