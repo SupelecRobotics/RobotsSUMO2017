@@ -19,7 +19,7 @@ print 'post pouet'
 
 
 
-robot.goToGobeletLocal((250, 250), False)
+robot.goToGobeletLocal((250, 250), True)
 
 
 
