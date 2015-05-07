@@ -21,10 +21,7 @@ print 'post pouet'
 
 robot.goToGobeletLocal((910, 1170), False)
 
-
-
-robot.bouge(0, -500)
-robot.bouge(-500, 0)
+time.sleep(1)
 
 
 robot.com.appelDescenteActionneurGobeletDevant()
