@@ -248,9 +248,9 @@ class Robot :
         
     def updatePosition(self):
         string = self.com.getInfos()
-        self.x = string[0]
-        self.y = string[1]
-        self.theta = string[2] #( (string[2] + 1800 ) % 3600 ) - 1800
+        self.x = int(string[0])
+        self.y = int(string[1])
+        self.theta = int(string[2]) #( (string[2] + 1800 ) % 3600 ) - 1800
         self.c1 = string[3]
         self.c2 = string[4]
         self.c3 = string[5]
