@@ -132,29 +132,16 @@ class Robot :
         (x, y) = point
         distance = dist((x0,y0), point)
         ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-        orientationInitiale = True
-        self.printPosition()
-        l = distance / 10
-        d1 = 10
-        d2 = 8.5
-        gobelet = False
-        #theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
-        theta = self.donneAngleApproche(sens, int(l), False)
-        print theta
-        profSpot = 7
-        #L = donneL(theta, int(l), profSpot)
-        L = self.donneLApproche(theta, int(l), sens)
-        L = L * 10 +70
-        theta =  theta * 10 + ang
-        if(not sens):
-            theta += 1800
-            theta = superModulo(theta)
-            L = -L
+        
+        (theta, L) = self.donneDonneesApproche(sens, int(distance / 10), False, ang)
         self.bouge(0,int(theta))
         time.sleep(1)
         self.bouge(int(L),0)
         time.sleep(0.5)
-        # robot.com.appelMonteeActionneurGobeletDevant()
+        if(sens):
+            #self.com.appelMonteeActionneurGobeletDevant()
+        else:
+            #self.com.appelMonteeActionneurGobeletDerriere()
         
     def goToGobeletLocal(self, point, sens):
         self.updatePosition()
@@ -162,7 +149,6 @@ class Robot :
         (x, y) = point
         distance = dist((x0,y0), point)
         ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-        self.printPosition()
         
         (theta, L) = self.donneDonneesApproche(sens, int(distance / 10), True, ang)
         self.bouge(0,int(theta))
