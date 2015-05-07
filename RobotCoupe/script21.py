@@ -19,7 +19,7 @@ print 'post pouet'
 
 
 
-robot.goToCylindreLocal((910, 1170), False)
+robot.goToCylindreLocal((910, 1170), True)
 
 time.sleep(1)
 
