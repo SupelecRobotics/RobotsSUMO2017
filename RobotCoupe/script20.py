@@ -65,7 +65,7 @@ time.sleep(3)
 
 robot.updatePosition()
 
-robot.allerA((1250, 300))
+robot.allerA((1250, 400))
 
 robot.goToGobeletLocal((1500, 350), False)
 
