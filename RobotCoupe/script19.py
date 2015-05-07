@@ -6,16 +6,10 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
-#robot.bouge(200, 0)
-print 'pré pouet'
-robot.allerA(( 450, 450))
-print 'pouet'
-time.sleep(1)
-#robot.bouge(100, 0)
-print 'post pouet'
+#passage coin inférieur gauche
 
-# robot.bouge(0, 900)
-# robot.bouge(0, -900)
+robot.allerA(( 450, 450))
+
 
 
 
@@ -28,7 +22,7 @@ robot.goToGobeletLocal((250, 250), True)
 
 robot.goToCylindreLocal((90, 250), True)
 
-time.sleep(3)
+
 
 
 
