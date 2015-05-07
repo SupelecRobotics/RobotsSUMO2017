@@ -182,6 +182,41 @@ class Robot :
             self.com.appelMonteeActionneurGobeletDevant()
         else:
             self.com.appelMonteeActionneurGobeletDerriere()
+            
+    def donneAngleApproche(sens, l, gobelet) :
+    #    sens : bool qui vaut true si l'objectif est devant le robot
+    #    l : int égal à la distance centre robot à centre gobelet
+    #    gobelet : bool vrai si l'objectif est un gobelet, et faux si c'est un plot
+        
+        #devant(gobelet, cylindre)
+        d1 = 10
+        d2 = 10
+        #derriere(gobelet, cylindre)
+        d3 = 8.5
+        d4 = 8.5     
+        
+        if (gobelet and sens):
+            alpha = - math.asin(float(d1) / float(l))*360/(2*math.pi)
+        elif (gobelet and not sens):
+            alpha = math.asin(float(d2) / float(l))*360/(2*math.pi)
+        elif (not gobelet and sens):
+            alpha = math.asin(float(d3) / float(l))*360/(2*math.pi)
+        else:
+            alpha = - math.asin(float(d4) / float(l))*360/(2*math.pi)
+        
+        return alpha
+        
+    #print donneAlpha(True, True, 500, 20, 30, True)
+        
+    def donneLApproche(alpha, l, sens):
+        profSpot = 7
+        Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
+        L =  Lprime - 10 - float(profSpot) / float(2)
+        
+        if (not sens):
+            L = -L
+        
+        return L
         
         
     # def goToGobelet(self, posGobelet)    :
