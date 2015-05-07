@@ -45,7 +45,7 @@ robot.allerA((900, 520))
 
 robot.goToCylindreLocal((1100, 230), False)
 
-
+robot.printPosition()
 #plot 3
 
 robot.com.appelMonteeActionneurGobeletDevant()
