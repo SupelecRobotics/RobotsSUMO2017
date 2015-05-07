@@ -138,10 +138,12 @@ class Robot :
         d1 = 10
         d2 = 8.5
         gobelet = False
-        theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
+        #theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
+        theta = donneAngleApproche(sens, int(l), False)
         print theta
         profSpot = 7
-        L = donneL(theta, int(l), profSpot)
+        #L = donneL(theta, int(l), profSpot)
+        L = donneLApproche(theta, int(l), sens)
         L = L * 10 +70
         theta =  theta * 10 + ang
         if(not sens):
@@ -166,10 +168,12 @@ class Robot :
         d1 = 10
         d2 = 8.5
         gobelet = True
-        theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
+        #theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
+        theta = donneAngleApproche(sens, int(l), True)
         print theta
         profSpot = 7
-        L = donneL(theta, int(l), profSpot)
+        #L = donneL(theta, int(l), profSpot)
+        L = donneLApproche(theta, int(l), sens)
         L = L * 10 +70
         theta =  theta * 10 + ang
         if(not sens):
@@ -192,17 +196,17 @@ class Robot :
         
         #devant(gobelet, cylindre)
         d1 = 10
-        d2 = 10
+        d2 = 8.5
         #derriere(gobelet, cylindre)
-        d3 = 8.5
-        d4 = 8.5     
+        d3 = 9.2
+        d4 = 8
         
         if (gobelet and sens):
             alpha = - math.asin(float(d1) / float(l))*360/(2*math.pi)
         elif (gobelet and not sens):
-            alpha = math.asin(float(d2) / float(l))*360/(2*math.pi)
-        elif (not gobelet and sens):
             alpha = math.asin(float(d3) / float(l))*360/(2*math.pi)
+        elif (not gobelet and sens):
+            alpha = math.asin(float(d2) / float(l))*360/(2*math.pi)
         else:
             alpha = - math.asin(float(d4) / float(l))*360/(2*math.pi)
         
@@ -215,9 +219,7 @@ class Robot :
         Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
         L =  Lprime - 10 - float(profSpot) / float(2)
         
-        if (not sens):
-            L = -L
-        
+
         return L
         
         
