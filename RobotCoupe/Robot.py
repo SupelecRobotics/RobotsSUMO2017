@@ -146,6 +146,7 @@ class Robot :
         theta =  theta * 10 + ang
         if(not sens):
             theta += 1800
+            theta = superModulo(theta)
             L = -L
         self.bouge(0,int(theta))
         time.sleep(1)
