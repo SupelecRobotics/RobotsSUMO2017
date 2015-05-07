@@ -370,7 +370,16 @@ class Robot :
             self.com.appelMonteeClapGauche()
         
     def printPosition(self):
+        # Demande des informations récentes à l'arduino puis
+        # affiche les informations stockées dans les variables du robot.
         self.updatePosition()
+        print "x : " + str(self.x) + " , y : " + str(self.y) + " , theta : " + str(self.theta)
+        print "Capteurs : " + str(self.c1) + " ; " + str(self.c2) + " ; " + str(self.c3) + " ; " + str(self.c4) 
+        print "time : " + str(self.time)
+        
+    def printPositionRobot(self):
+        # affiche les informations stockées dans les variables du robot
+        # Attention !!! les informations ne sont pas nécessairement récentes.
         print "x : " + str(self.x) + " , y : " + str(self.y) + " , theta : " + str(self.theta)
         print "Capteurs : " + str(self.c1) + " ; " + str(self.c2) + " ; " + str(self.c3) + " ; " + str(self.c4) 
         print "time : " + str(self.time)
