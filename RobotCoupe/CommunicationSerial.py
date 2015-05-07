@@ -196,6 +196,26 @@ class CommunicationSerial :
         time.sleep(0.5)
         self.serMain.readline()
         
+    def appelMonteeActionneurCylindreDevant(self):
+        self.serMain.write(chr(11))
+        time.sleep(0.5)
+        self.serMain.readline()
+        
+    def appelMonteeActionneurCylindreDerriere(self):
+        self.serMain.write(chr(13))
+        time.sleep(0.5)
+        self.serMain.readline()
+        
+    def appelDescenteActionneurCylindreDevant(self):
+        self.serMain.write(chr(12))
+        time.sleep(0.5)
+        self.serMain.readline()
+        
+    def appelDescenteActionneurCylindreDerriere(self):
+        self.serMain.write(chr(14))
+        time.sleep(0.5)
+        self.serMain.readline()
+        
     def envoiCouleurReady(self):
         self.serCouleur.write(chr(2))
         time.sleep(0.5)
