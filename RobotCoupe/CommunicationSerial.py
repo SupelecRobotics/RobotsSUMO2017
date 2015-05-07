@@ -65,10 +65,10 @@ class CommunicationSerial :
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
         self.serMain.write(inputByteString)
-#        print("Envoi")
+        if (self.serMain.read().encode('hex') == '02'):
+            return False
         self.serMain.readline()
-#        print(self.serMoteurCapteur.readline())
-#        time.sleep(0.3)
+        return True
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
         commande = 0
@@ -83,21 +83,13 @@ class CommunicationSerial :
         satV = satVitesse - ((satVitesse >> 8) << 8)    #saturation vitesse : 1 byte max
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satV)
-        self.serMain.write(inputByteString)
-#        print("Envoi")
-#        if (self.serMain.read().encode('hex') = '02'):
-#            
-            
+        self.serMain.write(inputByteString)            
         self.serMain.readline()
-#        print(self.serMoteurCapteur.readline())
-#        time.sleep(0.3)
         
     def stop(self):
         inputByteString = chr(1)
         self.serMain.write(inputByteString)
-#        print("Envoi")
         self.serMain.readline()
-#        time.sleep(0.5)
         
     def getInfos(self):
         inputByteString = chr(2)
@@ -126,7 +118,6 @@ class CommunicationSerial :
                 k += 2
             l.append(r)        
         return l
-#        time.sleep(0.5)
     
     def getColor(self):
         re = '00'
@@ -140,9 +131,6 @@ class CommunicationSerial :
         else: return 'V'
         
     def envoiColor(self, couleur):
-#        self.serMain.write(chr(255))
-#        time.sleep(1)
-#        self.serMain.readline()
         if (couleur == 'J'): self.serMain.write(chr(255))
         else: self.serMain.write(chr(253))
         self.serMain.readline()
