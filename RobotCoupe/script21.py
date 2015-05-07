@@ -11,8 +11,8 @@ robot.goToGobeletLocal((910, 1170), True)
 
 time.sleep(1)
 
-robot.allerA((450, 450))
-robot.goToGobeletLocal((250, 250), True)
+#robot.allerA((450, 450))
+#robot.goToGobeletLocal((250, 250), True)
 #robot.goToCylindreLocal((90, 250), True)
 #robot.goToCylindreLocal((90, 150), True)
 
