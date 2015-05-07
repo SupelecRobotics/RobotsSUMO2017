@@ -89,7 +89,7 @@ class Robot :
             (a, b) = (round(a), round(b))
             print "At : " + str((a, b))
             self.bougeToPoint((a, b))
-        self.bouge(0, theta - self.theta)
+        self.bouge(0, int(theta - self.theta))
 #        if (math.fabs(theta - self.theta) <= 1800 ):
 #            self.bouge(0, theta - self.theta)
 #        else:
