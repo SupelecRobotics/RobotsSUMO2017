@@ -49,11 +49,11 @@ robot.goToCylindreLocal((1100, 230), False)
 
 
 #plot 3
-robot.com.appelMonteeActionneurGobeletDevant()
-robot.updatePosition()
-robot.com.appelDescenteActionneurGobeletDevant()
-robot.allerA((1200, 260))
 
+robot.updatePosition()
+robot.com.appelMonteeActionneurGobeletDevant()
+robot.allerA((1200, 260))
+robot.com.appelDescenteActionneurGobeletDevant()
 robot.goToCylindreLocal((1300, 600), False)
 
 
@@ -66,7 +66,18 @@ robot.allerA((1250, 400))
 robot.goToGobeletLocal((1500, 350), False)
 
 
-
-
 robot.com.appelDescenteActionneurGobeletDevant()
+
+# retour au départ :D
+
+robot.updatePosition()
+
+robot.allerAangle((600, 1000), 0)
+
+robot.allerA((250, 1000))
+
+
+
+
+
 
