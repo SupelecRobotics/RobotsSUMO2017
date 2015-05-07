@@ -138,10 +138,11 @@ class Robot :
         time.sleep(1)
         self.bouge(int(L),0)
         time.sleep(0.5)
-        if(sens):
-            #self.com.appelMonteeActionneurGobeletDevant()
-        else:
-            #self.com.appelMonteeActionneurGobeletDerriere()
+        # if(sens):
+            # self.com.appelMonteeActionneurGobeletDevant()
+        # else:
+            # self.com.appelMonteeActionneurGobeletDerriere()
+            
         
     def goToGobeletLocal(self, point, sens):
         self.updatePosition()
