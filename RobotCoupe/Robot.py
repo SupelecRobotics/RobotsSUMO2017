@@ -235,7 +235,7 @@ class Robot :
         Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
         L =  Lprime - 10 - float(profSpot) / float(2)
         
-        L = L * 10 +70
+        L = L * 10 + 60
         theta =  alpha * 10 + angle
         if(not sens):
             theta += 1800
