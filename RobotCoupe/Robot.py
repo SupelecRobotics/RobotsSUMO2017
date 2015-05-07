@@ -162,17 +162,9 @@ class Robot :
         (x, y) = point
         distance = dist((x0,y0), point)
         ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-        orientationInitiale = True
         self.printPosition()
-        l = distance / 10
-        d1 = 10
-        d2 = 8.5
-        gobelet = True
-        #theta = donneAlpha(orientationInitiale, bool(sens), int(l), d1, d2, gobelet)
-        theta = self.donneAngleApproche(sens, int(l), True)
+        theta = self.donneAngleApproche(sens, int(distance / 10), True)
         print theta
-        profSpot = 7
-        #L = donneL(theta, int(l), profSpot)
         L = self.donneLApproche(theta, int(l), sens)
         L = L * 10 +70
         theta =  theta * 10 + ang
@@ -188,6 +180,7 @@ class Robot :
             self.com.appelMonteeActionneurGobeletDevant()
         else:
             self.com.appelMonteeActionneurGobeletDerriere()
+        
             
     def donneAngleApproche(self, sens, l, gobelet) :
     #    sens : bool qui vaut true si l'objectif est devant le robot
@@ -212,7 +205,6 @@ class Robot :
         
         return alpha
         
-    #print donneAlpha(True, True, 500, 20, 30, True)
         
     def donneLApproche(self, alpha, l, sens):
         profSpot = 7
