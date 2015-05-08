@@ -13,15 +13,19 @@ import math
 from pathManager import PathManager
 from util import *
 from robomoviesMapLoad import *
+from CommunicationSerial import CommunicationSerial as com
 
 
+        
 class Trajectoire :
 
 
     def __init__(self, coordinates, angle, orientation) :
         
         self.currentWay = []
-
+        
+        
+        
         self.facteurDistance = 10.0
         # avant 50
 
@@ -40,6 +44,19 @@ class Trajectoire :
         x, y = coordinates
         self.position = [ (2000 - y) / self.facteurDistance, x / self.facteurDistance, (math.pi/180) * angle / self.facteurDegre, orientation ]
     
+    def detectionObstacles(self, pointVersionComBalise):
+        print 'getRobCoords Start'
+        (x, y) = pointVersionComBalise
+        print 'detection'
+        print (x, y)
+        pointVersionForest = (x / 10, 300 - y / 10)
+        print 'sur la Forest'
+        print pointVersionForest
+        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
+        robomoviesForest.popLosange(pointVersionForest, 38, -1)
+        robomoviesForest.popLosange(pointVersionForest, 13, 0)
+        print 'fin de creation d obstacle'
+
     def chemin(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
 
@@ -64,7 +81,7 @@ class Trajectoire :
         self.currentWay = way
         
         return way
-
+    
     def comingOut(self, point, angleArrivee)   :
 
         (x, y) = point
@@ -128,7 +145,7 @@ class Trajectoire :
 
         (x, y) = point
 #        print (x,y)
-        (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
+        (x, y) = ( round( (2000-y)/self.facteurDistance), round(x/self.facteurDistance))
         print (x,y)
         self.pm.findPath(self.position[0],(x, y, 0))
 
@@ -141,6 +158,7 @@ class Trajectoire :
             pth.append( (y*self.facteurDistance ,(2000/self.facteurDistance-x)*self.facteurDistance) )
         
         return pth
+        
         
     def orderToPoint(self, point):
         (x0, y0) = (450,1000)

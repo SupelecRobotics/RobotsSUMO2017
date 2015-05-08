@@ -14,41 +14,53 @@ class CommunicationSerial :
     
     def __init__(self, ser1, ser2, ser3) :
         try:
-		ser = serial.Serial(ser1, 115200)
+            sera = serial.Serial(ser1, 115200)
+            serb = serial.Serial(ser2, 115200)
+            serc = serial.Serial(ser3, 115200)
         except serial.SerialException:
             print "No connection to the first device could be established"
-        try:
-		serb = serial.Serial(ser2, 115200)
-        except serial.SerialException:
-            print "No connection to the second device could be established"
         
 #        serc = serial.Serial(ser3, 57600)
         time.sleep(3)
-        ser.write(chr(250))
+        sera.write(chr(250))
         serb.write(chr(250))
+        serc.write(chr(250))
 #        print serc.write(chr(255))
         time.sleep(1)
-        a = ser.read()
-        ser.readline()
+        
+        a = sera.read()
+        sera.readline()
         print a.encode('hex')
+        
 #        time.sleep(1)
         b = serb.read()
         serb.readline()
         print b.encode('hex')
-#        c = serc.read()
-        #print c
+        
+        c = serc.read()
+        serc.readline()
+        print c.encode('hex')
         print "read"
+        
         if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
         elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
         else: self.serBluetooth = serial.Serial(ser1, 115200)
+        
         if (b.encode('hex') == '00'): self.serMain = serial.Serial(ser2, 115200)
         elif (b.encode('hex') == '01'): self.serCouleur = serial.Serial(ser2, 115200)
         else: self.serBluetooth = serial.Serial(ser2, 115200)
+
+        if (c.encode('hex') == '00'): self.serMain = serial.Serial(ser3, 115200)
+        elif (c.encode('hex') == '01'): self.serCouleur = serial.Serial(ser3, 115200)
+        else: self.serBluetooth = serial.Serial(ser3, 115200)
+        
         #if (c == 0): self.serMain = serial.Serial(ser3, 9600)
         #elif (c == 1): self.serCouleur = serial.Serial(ser3, 9600)
         #else: self.serBluetooth = serial.Serial(ser3, 9600)
         #self.serMain = serial.Serial(ser1, 9600)
         time.sleep(2)
+
+        self.lastRobCoords = (0,0)
         
     def envoiMain(self, d=0, theta=0):
         # commande sur 1 byte, distance sur 2 bytes, theta sur 2 bytes, 
@@ -65,12 +77,31 @@ class CommunicationSerial :
         
         inputByteString = chr(commande) + chr(d1) + chr(d2) + chr(t1) + chr(t2) + chr(satVitesse)
         print "envoi"
+        print d
+        print theta
         self.serMain.write(inputByteString)
         if (self.serMain.read().encode('hex') == '02'):
             return False
         self.serMain.readline()
         print "reçu"
         return True
+    
+    def getRobCoords(self):
+
+        if(self.serBluetooth.inWaiting() > 0):
+            c = ''
+            while(c != '#'):
+                c = self.serBluetooth.read()
+                print "first loop"
+
+            msg = self.serBluetooth.read(9)
+            while(self.serBluetooth.inWaiting() != 0):
+                self.serBluetooth.read()
+                print "second loop"
+                
+            self.lastRobCoords = ((int(msg[1:5]),int(msg[5:])))
+
+        return self.lastRobCoords
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
         commande = 0

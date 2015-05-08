@@ -11,6 +11,7 @@ from pathManager import PathManager
 from robomoviesMapLoad import *
 from CommunicationSerial import CommunicationSerial as com
 from trajectoire import Trajectoire as traj
+from carte import Map
 import serial
 from calculAngle import *
 
@@ -75,6 +76,7 @@ class Robot :
             (a, b) = (round(a), round(b))
             print "At : " + str((a, b))
             self.bougeToPoint((a, b))
+        self.updatePosition()
 
             
     def allerAangle(self, point,theta):
@@ -90,6 +92,7 @@ class Robot :
             print "At : " + str((a, b))
             self.bougeToPoint((a, b))
         self.bouge(0, int(theta - self.theta))
+        self.updatePosition()
 #        if (math.fabs(theta - self.theta) <= 1800 ):
 #            self.bouge(0, theta - self.theta)
 #        else:
@@ -141,13 +144,14 @@ class Robot :
         time.sleep(0.5)
         self.bouge(int(L),0)
         time.sleep(0.5)
-        # if(sens):
-            # self.com.appelMonteeActionneurGobeletDevant()
-        # else:
-            # self.com.appelMonteeActionneurGobeletDerriere()
+        if(sens):
+            self.com.appelMonteeActionneurGobeletDevant()
+        else:
+            self.com.appelMonteeActionneurGobeletDerriere()
             
         
     def goToGobeletLocal(self, point, sens):
+        self.face(point, sens)
         self.updatePosition()
         (x0, y0) = (self.x,self.y)
         (x, y) = point
@@ -204,13 +208,20 @@ class Robot :
         
         ## Constantes (en cm)
         
-        #Profondeur spots
-        profSpot = 7
+        #offset de la distance
         #devant(gobelet, cylindre)
-        d1 = 10
+        offset1 = 11.5
+        offset2 = 11.5
+        #derriere(gobelet, cylindre)
+        offset3 = 11.5
+        offset4 = 11.5
+        
+        #Distances au centre
+        #devant(gobelet, cylindre)
+        d1 = 9.9
         d2 = 8.5
         #derriere(gobelet, cylindre)
-        d3 = 9.5
+        d3 = 7.9
         d4 = 8
         
         if (gobelet and sens):
@@ -222,10 +233,20 @@ class Robot :
         else:
             alpha = - math.asin(float(d4) / float(l))*360/(2*math.pi)
         
-        Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
-        L =  Lprime - 10 - float(profSpot) / float(2)
+        # Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
+        # L =  Lprime - 10 - float(profSpot) / float(2)
+        # L = L * 10 + 53
         
-        L = L * 10 + 53
+        L = abs(l * math.cos(float(alpha)*2*math.pi/360))
+        if (gobelet and sens):
+            L = (L - offset1) * 10
+        elif (gobelet and not sens):
+            L = (L - offset3) * 10
+        elif (not gobelet and sens):
+            L = (L - offset2) * 10
+        else:
+            L = (L - offset4) * 10
+        
         theta =  alpha * 10 + angle
         if(not sens):
             theta += 1800
@@ -396,6 +417,18 @@ class Robot :
         dtheta = dtheta % 3600
         return (dtheta < 900 or dtheta > 2700)
         
+    def face(self, point, sens) :
+        (x, y) = point
+        self.updatePosition()
+        dx = x - self.x
+        dy = y - self.y
+        dtheta = - self.theta + angle((1, 0), (dx, dy))*1800/math.pi
+        if(not sens) :
+            dtheta += 1800
+        dtheta = superModulo(dtheta)
+        self.bouge(0, int(dtheta))
+        
+        
     def evasionObstacle(self):
         #distance du robot à l'osbtacle (estimée)   
         obstacleDevant = (self.c2 <= 30 and self.c3 <= 30)
@@ -406,7 +439,8 @@ class Robot :
         pointGauche = (int(self.x + d * Math.cos(alpha+90)), int(self.y + d * Math.sin(alpha+90)))
         pointDerriere = (int(self.x + d * Math.cos(alpha+180)), int(self.y + d * Math.sin(alpha+180)))
     
-
+    
+        
 """
 
 # OBTENTION DES CHEMINS

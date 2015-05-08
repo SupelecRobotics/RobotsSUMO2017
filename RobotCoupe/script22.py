@@ -7,27 +7,29 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
-#robot.bouge(200, 0)
-print 'pré pouet'
-robot.allerA(( 350, 220))
-print 'pouet'
+sens = False
+gobelet = True
+point = (910, 850)
+
+robot.allerA(point)
+#robot.allerAangle(point, 0)
+if(gobelet)  :
+    robot.goToGobeletLocal((910, 1170), sens)
+else :
+    robot.goToCylindreLocal((910, 1170), sens)
+
+
 time.sleep(1)
-#robot.bouge(100, 0)
-print 'post pouet'
 
-# robot.bouge(0, 900)
-# robot.bouge(0, -900)
+if(gobelet and sens)  :
+    robot.com.appelDescenteActionneurGobeletDevant()
+elif(gobelet and (not sens)) :
+    robot.com.appelDescenteActionneurGobeletDerriere()
+elif((not gobelet) and sens) :
+    robot.com.appelDescenteActionneurCylindreDevant()
+else :
+    robot.com.appelDescenteActionneurCylindreDerriere()
 
-
-
-robot.allerAangle((int(250),int(250)),-900)
-robot.com.appelMonteeActionneurGobeletDevant()
-# robot.com.appelDescenteClapDroit()
-# robot.allerAangle((int(250),int(250)), 0)
-# robot.com.appelMonteeClapDroit()
-
-# robot.allerAangle((int(700),int(250)), 0)
-# robot.com.appelDescenteClapDroit()
-# robot.allerAangle((int(900),int(250)), 0)
-# robot.com.appelMonteeClapDroit()
-
+robot.allerA(point)
+robot.allerAangle((600, 1000), 0)
+robot.allerA((250, 1000))
