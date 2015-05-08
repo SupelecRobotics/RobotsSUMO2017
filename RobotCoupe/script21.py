@@ -34,18 +34,19 @@ robot.allerA((450, 1000))
 #robot.goToCylindreLocal((90, 150), True)
 
 #claps
-robot.allerAangle((int(250),int(250)),-900)
+robot.allerAangle((int(250),int(230)),-900)
 robot.com.appelMonteeActionneurGobeletDevant()
 robot.com.appelDescenteClapDroit()
-robot.allerAangle((int(250),int(250)), 0)
+robot.allerAangle((int(250),int(230)), 0)
 robot.com.appelMonteeClapDroit()
 
-robot.allerAangle((int(700),int(250)), 0)
+robot.allerAangle((int(700),int(230)), 0)
 robot.com.appelDescenteClapDroit()
-robot.allerAangle((int(900),int(250)), 0)
+#robot.allerAangle((int(900),int(230)), 0)
+robot.bouge(int(200),0)
 robot.com.appelMonteeClapDroit()
 
-#chercher cylindres près des distributeurs??
+#chercher cylindres près des distributeurs?? (temps tros short)
 
 #poser 2 cylindres dans zone rouge
 #clap côté adverse
