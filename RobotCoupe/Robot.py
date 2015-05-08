@@ -11,6 +11,7 @@ from pathManager import PathManager
 from robomoviesMapLoad import *
 from CommunicationSerial import CommunicationSerial as com
 from trajectoire import Trajectoire as traj
+from carte import Map
 import serial
 from calculAngle import *
 
@@ -436,7 +437,12 @@ class Robot :
         pointGauche = (int(self.x + d * Math.cos(alpha+90)), int(self.y + d * Math.sin(alpha+90)))
         pointDerriere = (int(self.x + d * Math.cos(alpha+180)), int(self.y + d * Math.sin(alpha+180)))
     
-
+    def detectionObstacles(self):
+        (x, y) = self.com.getRobCoors
+        pointVersionForest = (x, 300 - y)
+        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
+        robomoviesForest.popCircle(point, 13, 0)
+        robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
 """
 
 # OBTENTION DES CHEMINS
