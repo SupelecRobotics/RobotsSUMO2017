@@ -36,6 +36,9 @@ class Robot :
         #time
         self.time = 0
         time.sleep(2)
+        #carte
+        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
+        robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         self.couleur = self.com.getColor()
         print self.couleur
         self.com.envoiColor(self.couleur)
@@ -441,7 +444,7 @@ class Robot :
         (x, y) = self.com.getRobCoors
         pointVersionForest = (x, 300 - y)
         robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
-        robomoviesForest.popCircle(point, 13, 0)
+        robomoviesForest.popCircle(point, 14, 0)
         robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
 """
 
