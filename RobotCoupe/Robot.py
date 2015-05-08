@@ -150,6 +150,7 @@ class Robot :
             
         
     def goToGobeletLocal(self, point, sens):
+        self.face(point, sens)
         self.updatePosition()
         (x0, y0) = (self.x,self.y)
         (x, y) = point
@@ -412,6 +413,16 @@ class Robot :
         dtheta = (1800/math.pi) * math.atan2(dy,dx) - self.theta
         dtheta = dtheta % 3600
         return (dtheta < 900 or dtheta > 2700)
+        
+    def face(self, point, sens) :
+        self.updatePosition()
+        dx = x - self.x
+        dy = y - self.y
+        dtheta = (1800/math.pi) * math.atan2(dy,dx) - self.theta
+        if(not sens) :
+            dtheta += 1800
+        dtheta = superModulo(dtheta)
+        
         
     def evasionObstacle(self):
         #distance du robot à l'osbtacle (estimée)   
