@@ -442,7 +442,7 @@ class Robot :
         pointDerriere = (int(self.x + d * Math.cos(alpha+180)), int(self.y + d * Math.sin(alpha+180)))
     
     def detectionObstacles(self):
-        (x, y) = self.com.getRobCoors
+        (x, y) = self.com.getRobCoords()
         pointVersionForest = (x, 300 - y)
         robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
         robomoviesForest.popCircle(point, 14, 0)
