@@ -415,6 +415,7 @@ class Robot :
         return (dtheta < 900 or dtheta > 2700)
         
     def face(self, point, sens) :
+        (x, y) = point
         self.updatePosition()
         dx = x - self.x
         dy = y - self.y
