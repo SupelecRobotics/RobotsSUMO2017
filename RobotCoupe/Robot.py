@@ -419,7 +419,7 @@ class Robot :
         self.updatePosition()
         dx = x - self.x
         dy = y - self.y
-        dtheta = (1800/math.pi) * math.atan2(dy,dx) - self.theta
+        dtheta = - self.theta + angle((1, 0), (dx, dy))*1800/math.pi
         if(not sens) :
             dtheta += 1800
         dtheta = superModulo(dtheta)
