@@ -6,4 +6,4 @@ import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
-robot.allerA((2600, 350))
+robot.allerA((2600, 1000))
