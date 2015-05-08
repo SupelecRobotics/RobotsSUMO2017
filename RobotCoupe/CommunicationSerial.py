@@ -59,6 +59,8 @@ class CommunicationSerial :
         #else: self.serBluetooth = serial.Serial(ser3, 9600)
         #self.serMain = serial.Serial(ser1, 9600)
         time.sleep(2)
+
+        self.lastRobCoords = (0,0)
         
     def envoiMain(self, d=0, theta=0):
         # commande sur 1 byte, distance sur 2 bytes, theta sur 2 bytes, 
@@ -86,19 +88,17 @@ class CommunicationSerial :
     
     def getRobCoords(self):
 
-        c = ''
-        while(c != '#'):
-            c = self.serBluetooth.read()
+        if(self.serBluetooth.inWaiting() >= 10):
+            c = ''
+            while(c != '#'):
+                c = self.serBluetooth.read()
 
-        msg = '#' + self.serBluetooth.read(39)
+            msg = self.serBluetooth.read(9)
+            self.serBluetooth.readline()
 
-        self.serBluetooth.readline()
+            self.lastRobCoords = ((int(msg[1:5]),int(msg[5:])))
 
-        for i in in range(0,4):
-            cutMsg = msg[2 + 10*i:10 + 10*i]
-            robCoords.append((int(cutMsg[:4]),int(cutMsg[4:])))
-
-        return robCoords
+        return self.lastRobCoords
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
         commande = 0
