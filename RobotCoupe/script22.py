@@ -20,7 +20,7 @@ print 'post pouet'
 
 
 
-robot.allerAangle((int(250),int(250)),-900)
+#robot.allerAangle((int(250),int(250)),-900)
 robot.com.appelMonteeActionneurGobeletDevant()
 # robot.com.appelDescenteClapDroit()
 # robot.allerAangle((int(250),int(250)), 0)
