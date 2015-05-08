@@ -30,5 +30,6 @@ elif((not gobelet) and sens) :
 else :
     robot.com.appelDescenteActionneurCylindreDerriere()
 
+robot.allerA((910, 850))
 robot.allerAangle((600, 1000), 0)
 robot.allerA((250, 1000))
