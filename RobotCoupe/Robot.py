@@ -445,7 +445,7 @@ class Robot :
         (x, y) = self.com.getRobCoords()
         print 'detection'
         print (x, y)
-        pointVersionForest = (x, 300 - y)
+        pointVersionForest = (x / 10, 300 - y / 10)
         print 'sur la Forest'
         print pointVersionForest
         robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
