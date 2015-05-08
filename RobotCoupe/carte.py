@@ -119,7 +119,7 @@ class Map   :
         
         for i in range(x - halfDiag - 1, x + halfDiag + 1) :
             for j in range(y - halfDiag - 1, y + halfDiag + 1)  :
-                if(self.isInTheForest((i, j)) and ( abs(i) <= halfDiag - abs(j)) :
+                if(self.isInTheForest((i, j)) and ( abs(i) <= halfDiag - abs(j))) :
                     self.forest[i][j] = obstacleLevel
 
                     
