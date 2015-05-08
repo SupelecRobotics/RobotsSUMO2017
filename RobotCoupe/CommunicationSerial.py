@@ -14,9 +14,9 @@ class CommunicationSerial :
     
     def __init__(self, ser1, ser2, ser3) :
         try:
-		sera = serial.Serial(ser1, 115200)
-		serb = serial.Serial(ser2, 115200)
-		serc = serial.Serial(ser3, 115200)
+            sera = serial.Serial(ser1, 115200)
+            serb = serial.Serial(ser2, 115200)
+            serc = serial.Serial(ser3, 115200)
         except serial.SerialException:
             print "No connection to the first device could be established"
         
