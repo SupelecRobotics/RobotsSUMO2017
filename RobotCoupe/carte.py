@@ -113,7 +113,16 @@ class Map   :
                 if(self.isInTheForest((i, j)) and ( math.sqrt((i - x)*(i - x) + (j - y)*(j - y)) <= radius)) :
                     self.forest[i][j] = obstacleLevel
     # end of popCircle
+    
+    def popLosange(self, center, halfDiag, obstacleLevel) :
+        (x, y) = center
+        
+        for i in range(x - halfDiag - 1, x + halfDiag + 1) :
+            for j in range(y - halfDiag - 1, y + halfDiag + 1)  :
+                if(self.isInTheForest((i, j)) and ( abs(i) <= halfDiag - abs(j)) :
+                    self.forest[i][j] = obstacleLevel
 
+                    
     def unZoom(self, factor)    :
         """int -> void
         replaces the forest by a forest "factor" times less big, and change obstacles in the same way
