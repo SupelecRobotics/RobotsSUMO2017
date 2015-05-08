@@ -92,10 +92,12 @@ class CommunicationSerial :
             c = ''
             while(c != '#'):
                 c = self.serBluetooth.read()
+                print "first loop"
 
             msg = self.serBluetooth.read(9)
             while(self.serBluetooth.inWaiting() != 0):
                 self.serBluetooth.read()
+                print "second loop"
                 
             self.lastRobCoords = ((int(msg[1:5]),int(msg[5:])))
 
