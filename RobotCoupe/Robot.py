@@ -442,6 +442,7 @@ class Robot :
         pointDerriere = (int(self.x + d * Math.cos(alpha+180)), int(self.y + d * Math.sin(alpha+180)))
     
     def detectionObstacles(self):
+        print 'getRobCoords Start'
         (x, y) = self.com.getRobCoords()
         print 'detection'
         print (x, y)
