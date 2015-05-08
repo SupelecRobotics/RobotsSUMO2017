@@ -68,6 +68,7 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
+        self.detectionObstacles()
         trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
         print trajectoire.pointPath(point)
