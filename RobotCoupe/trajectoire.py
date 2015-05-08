@@ -20,8 +20,6 @@ class Trajectoire :
 
     def __init__(self, coordinates, angle, orientation) :
         
-        (x,y) = coordinates
-        
         self.currentWay = []
 
         self.facteurDistance = 10.0
@@ -29,10 +27,19 @@ class Trajectoire :
 
         self.facteurDegre = 10.0
         
-        self.position = [( (2000-y)/self.facteurDistance, x/self.facteurDistance), angle/self.facteurDegre*math.pi/180, orientation]
+        self.position = []
+        self.updatePosition(coordinates, angle, orientation)
+        
+        self.pm = PathManager(robomoviesForest.getForest())
+        self.pm.setThreshold(4)
 
 #        print self.position
-
+    
+    def updatePosition(self, coordinates, angle, orientation) :
+        
+        x, y = coordinates
+        self.position = [ (2000 - y) / self.facteurDistance, x / self.facteurDistance, (math.pi/180) * angle / self.facteurDegre, orientation ]
+    
     def chemin(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
 
@@ -60,13 +67,11 @@ class Trajectoire :
 
     def comingOut(self, point, angleArrivee)   :
 
-        pathMan = PathManager(robomoviesForest.getForest())
-        pathMan.setThreshold(4)
         (x, y) = point
         (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
-        pathMan.findPath(self.position[0],(x, y, 0))
+        self.pm.findPath(self.position[0],(x, y, 0))
 
-        path = pathMan.path
+        path = self.pm.path
         
         coor0 = self.position[0]
         angle0 = self.position[1]
@@ -100,19 +105,17 @@ class Trajectoire :
 
     def ordersTo(self, point) :
 
-        pathMan = PathManager(robomoviesForest.getForest())
-        pathMan.setThreshold(4)
         (x, y) = point
         (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
         print (x,y)
-        pathMan.findPath(self.position[0],(x, y, 0))
+        self.pm.findPath(self.position[0],(x, y, 0))
 
 #        print "path"
-#        print pathMan.path
+#        print self.pm.path
 
-        way = self.chemin(pathMan.path)
+        way = self.chemin(self.pm.path)
 
-        for coor in pathMan.path :
+        for coor in self.pm.path :
             (x, y) = coor
             robomoviesForest.forest[int(x)][int(y)] = -8
 
@@ -123,19 +126,17 @@ class Trajectoire :
         
     def pointPath(self, point) :
 
-        pathMan = PathManager(robomoviesForest.getForest())
-        pathMan.setThreshold(4)
         (x, y) = point
 #        print (x,y)
         (x, y) = ( (2000-y)/self.facteurDistance, x/self.facteurDistance)
         print (x,y)
-        pathMan.findPath(self.position[0],(x, y, 0))
+        self.pm.findPath(self.position[0],(x, y, 0))
 
 #        print "path"
-#        print pathMan.path
+#        print self.pm.path
 
         pth = []
-        for coor in pathMan.path:
+        for coor in self.pm.path:
             (x,y) = coor            
             pth.append( (y*self.facteurDistance ,(2000/self.facteurDistance-x)*self.facteurDistance) )
         

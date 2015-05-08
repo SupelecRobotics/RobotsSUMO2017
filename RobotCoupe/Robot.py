@@ -45,6 +45,8 @@ class Robot :
             time.sleep(1)
         self.com.envoiAllGreen()
         
+        self.traj = traj((int(self.x), int(self.y)), self.theta, True)
+        
         
     def bouge(self,d,theta):
         self.com.envoiMain(d,theta)
@@ -64,13 +66,12 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
-        trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
-        print trajectoire.pointPath(point)
+        print self.traj.pointPath(point)
         print "start"
-        for point in trajectoire.pointPath(point):
+        for p in self.traj.pointPath(point):
             print "point"
-            (a, b) = point
+            (a, b) = p
             (a, b) = (round(a), round(b))
             print "At : " + str((a, b))
             self.bougeToPoint((a, b))
@@ -79,13 +80,12 @@ class Robot :
     def allerAangle(self, point,theta):
         self.updatePosition()
         #tronquage dans trajectoire nécessaire?
-        trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
         print "From " + str((self.x, self.y)) + " to " + str(point)
-        print trajectoire.pointPath(point)
+        print self.traj.pointPath(point)
         print "start"
-        for point in trajectoire.pointPath(point):
+        for p in self.traj.pointPath(point):
             print "point"
-            (a, b) = point
+            (a, b) = p
             (a, b) = (round(a), round(b))
             print "At : " + str((a, b))
             self.bougeToPoint((a, b))
@@ -263,6 +263,8 @@ class Robot :
         self.c3 = string[5]
         self.c4 = string[6]
         self.time = string[7]
+        
+        self.traj.updatePosition((self.x,self.y), self.theta, True)
         
     def gameD(self):
         #time.sleep(15)
