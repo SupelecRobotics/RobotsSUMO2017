@@ -95,7 +95,7 @@ class CommunicationSerial :
 
             msg = self.serBluetooth.read(9)
             while(self.serBluetooth.inWaiting() != 0):
-                self.serBluetooth.readline()
+                self.serBluetooth.read()
                 
             self.lastRobCoords = ((int(msg[1:5]),int(msg[5:])))
 
