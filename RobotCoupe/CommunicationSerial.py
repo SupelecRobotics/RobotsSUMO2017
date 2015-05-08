@@ -28,7 +28,7 @@ class CommunicationSerial :
 #        print serc.write(chr(255))
         time.sleep(1)
         
-        a = ser.read()
+        a = sera.read()
         sera.readline()
         print a.encode('hex')
         
