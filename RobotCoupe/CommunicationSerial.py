@@ -88,14 +88,15 @@ class CommunicationSerial :
     
     def getRobCoords(self):
 
-        if(self.serBluetooth.inWaiting() >= 10):
+        if(self.serBluetooth.inWaiting() > 0):
             c = ''
             while(c != '#'):
                 c = self.serBluetooth.read()
 
             msg = self.serBluetooth.read(9)
-            self.serBluetooth.readline()
-
+            while(self.serBluetooth.inWaiting() != 0):
+                self.serBluetooth.readline()
+                
             self.lastRobCoords = ((int(msg[1:5]),int(msg[5:])))
 
         return self.lastRobCoords
