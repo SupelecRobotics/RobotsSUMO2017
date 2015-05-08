@@ -223,7 +223,7 @@ class Robot :
         d1 = 9.9
         d2 = 8.5
         #derriere(gobelet, cylindre)
-        d3 = 9
+        d3 = 8.5
         d4 = 8
         
         if (gobelet and sens):
