@@ -36,9 +36,6 @@ class Robot :
         #time
         self.time = 0
         time.sleep(2)
-        #carte
-        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
-        robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         self.couleur = self.com.getColor()
         print self.couleur
         self.com.envoiColor(self.couleur)
