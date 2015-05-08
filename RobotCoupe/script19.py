@@ -30,10 +30,6 @@ robot.goToCylindreLocal((90, 250), True)
 
 robot.goToCylindreLocal((90, 150), True)
 
-time.sleep(3)
-
-robot.bouge(0, -500)
-robot.bouge(-500, 0)
 
 
 robot.com.appelDescenteActionneurGobeletDevant()
