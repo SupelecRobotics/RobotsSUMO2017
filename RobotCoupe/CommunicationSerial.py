@@ -16,7 +16,7 @@ class CommunicationSerial :
         try:
 		sera = serial.Serial(ser1, 115200)
 		serb = serial.Serial(ser2, 115200)
-#		serc = serial.Serial(ser3, 115200)
+		serc = serial.Serial(ser3, 115200)
         except serial.SerialException:
             print "No connection to the first device could be established"
         
@@ -24,7 +24,7 @@ class CommunicationSerial :
         time.sleep(3)
         sera.write(chr(250))
         serb.write(chr(250))
-#        serc.write(chr(250))
+        serc.write(chr(250))
 #        print serc.write(chr(255))
         time.sleep(1)
         
@@ -37,9 +37,9 @@ class CommunicationSerial :
         serb.readline()
         print b.encode('hex')
         
-#        c = serc.read()
-#        serc.readline()
-#        print c
+        c = serc.read()
+        serc.readline()
+        print c
         print "read"
         
         if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
@@ -50,9 +50,9 @@ class CommunicationSerial :
         elif (b.encode('hex') == '01'): self.serCouleur = serial.Serial(ser2, 115200)
         else: self.serBluetooth = serial.Serial(ser2, 115200)
 
-##        if (c.encode('hex') == '00'): self.serMain = serial.Serial(ser3, 115200)
-##        elif (c.encode('hex') == '01'): self.serCouleur = serial.Serial(ser3, 115200)
-##        else: self.serBluetooth = serial.Serial(ser3, 115200)
+        if (c.encode('hex') == '00'): self.serMain = serial.Serial(ser3, 115200)
+        elif (c.encode('hex') == '01'): self.serCouleur = serial.Serial(ser3, 115200)
+        else: self.serBluetooth = serial.Serial(ser3, 115200)
         
         #if (c == 0): self.serMain = serial.Serial(ser3, 9600)
         #elif (c == 1): self.serCouleur = serial.Serial(ser3, 9600)
