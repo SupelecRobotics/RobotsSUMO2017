@@ -445,7 +445,7 @@ class Robot :
         (x, y) = self.com.getRobCoords()
         pointVersionForest = (x, 300 - y)
         robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
-        robomoviesForest.popCircle(point, 14, 0)
+        robomoviesForest.popCircle(pointVersionForest, 14, 0)
         robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
 """
 
