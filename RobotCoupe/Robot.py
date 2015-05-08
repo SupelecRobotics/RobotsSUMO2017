@@ -449,7 +449,7 @@ class Robot :
         print 'sur la Forest'
         print pointVersionForest
         robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
-        robomoviesForest.popCircle(pointVersionForest, 32, 1)
+        robomoviesForest.popCircle(pointVersionForest, 32, -1)
         robomoviesForest.popCircle(pointVersionForest, 13, 0)
         robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         print 'fin de creation d obstacle'
