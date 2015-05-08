@@ -422,6 +422,7 @@ class Robot :
         if(not sens) :
             dtheta += 1800
         dtheta = superModulo(dtheta)
+        self.bouge(0, int(dtheta))
         
         
     def evasionObstacle(self):
