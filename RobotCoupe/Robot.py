@@ -216,7 +216,7 @@ class Robot :
         
         #Distances au centre
         #devant(gobelet, cylindre)
-        d1 = 10
+        d1 = 9.7
         d2 = 8.5
         #derriere(gobelet, cylindre)
         d3 = 9.5
