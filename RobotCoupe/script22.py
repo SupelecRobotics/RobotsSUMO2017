@@ -9,10 +9,10 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 
 sens = True
 gobelet = True
+point = (910, 850)
 
-
-robot.allerA((910, 850))
-#robot.allerAangle((910, 850), 0)
+robot.allerA(point)
+#robot.allerAangle(point, 0)
 if(gobelet)  :
     robot.goToGobeletLocal((910, 1170), sens)
 else :
@@ -30,6 +30,6 @@ elif((not gobelet) and sens) :
 else :
     robot.com.appelDescenteActionneurCylindreDerriere()
 
-robot.allerA((910, 850))
+robot.allerA(point)
 robot.allerAangle((600, 1000), 0)
 robot.allerA((250, 1000))
