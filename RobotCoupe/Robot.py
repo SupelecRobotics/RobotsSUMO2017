@@ -206,8 +206,15 @@ class Robot :
         
         ## Constantes (en cm)
         
-        #Profondeur spots
-        profSpot = 7
+        #offset de la distance
+        #devant(gobelet, cylindre)
+        offset1 = 8.2
+        offset2 = 8.2
+        #derriere(gobelet, cylindre)
+        offset3 = 8.2
+        offset4 = 8.2
+        
+        #Distances au centre
         #devant(gobelet, cylindre)
         d1 = 10
         d2 = 8.5
@@ -224,10 +231,20 @@ class Robot :
         else:
             alpha = - math.asin(float(d4) / float(l))*360/(2*math.pi)
         
-        Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
-        L =  Lprime - 10 - float(profSpot) / float(2)
+        # Lprime = abs(l * math.cos(float(alpha)*2*math.pi/360))
+        # L =  Lprime - 10 - float(profSpot) / float(2)
+        # L = L * 10 + 53
         
-        L = L * 10 + 53
+        L = abs(l * math.cos(float(alpha)*2*math.pi/360))
+        if (gobelet and sens):
+            L = (L - offset1) * 10
+        elif (gobelet and not sens):
+            L = (L - offset3) * 10
+        elif (not gobelet and sens):
+            L = (L - offset2) * 10
+        else:
+            L = (L - offset4) * 10
+        
         theta =  alpha * 10 + angle
         if(not sens):
             theta += 1800
