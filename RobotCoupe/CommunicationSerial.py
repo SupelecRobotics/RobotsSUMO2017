@@ -39,7 +39,7 @@ class CommunicationSerial :
         
         c = serc.read()
         serc.readline()
-        print c
+        print c.encode('hex')
         print "read"
         
         if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
