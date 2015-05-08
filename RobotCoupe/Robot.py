@@ -443,8 +443,12 @@ class Robot :
     
     def detectionObstacles(self):
         (x, y) = self.com.getRobCoords()
+        print 'detection'
+        print (x, y)
         pointVersionForest = (x, 300 - y)
-        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
+        print 'sur la Forest'
+        print pointVersionForest
+        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         robomoviesForest.popCircle(pointVersionForest, 25, 0)
         robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         
