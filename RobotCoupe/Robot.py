@@ -68,8 +68,8 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
-        self.detectionObstacles()
         trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
+        trajectoire.detectionObstacles(self.com.getRobCoords())
         print "From " + str((self.x, self.y)) + " to " + str(point)
         print trajectoire.pointPath(point)
         print "start"
@@ -86,6 +86,7 @@ class Robot :
         self.updatePosition()
         #tronquage dans trajectoire nécessaire?
         trajectoire = traj((int(self.x), int(self.y)), self.theta, True)
+        trajectoire.detectionObstacles(self.com.getRobCoords())
         print "From " + str((self.x, self.y)) + " to " + str(point)
         print trajectoire.pointPath(point)
         print "start"
@@ -441,19 +442,7 @@ class Robot :
         pointGauche = (int(self.x + d * Math.cos(alpha+90)), int(self.y + d * Math.sin(alpha+90)))
         pointDerriere = (int(self.x + d * Math.cos(alpha+180)), int(self.y + d * Math.sin(alpha+180)))
     
-    def detectionObstacles(self):
-        print 'getRobCoords Start'
-        (x, y) = self.com.getRobCoords()
-        print 'detection'
-        print (x, y)
-        pointVersionForest = (x / 10, 300 - y / 10)
-        print 'sur la Forest'
-        print pointVersionForest
-        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
-        robomoviesForest.popCircle(pointVersionForest, 32, -1)
-        robomoviesForest.popCircle(pointVersionForest, 13, 0)
-        robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
-        print 'fin de creation d obstacle'
+    
         
 """
 

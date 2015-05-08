@@ -13,8 +13,10 @@ import math
 from pathManager import PathManager
 from util import *
 from robomoviesMapLoad import *
+from CommunicationSerial import CommunicationSerial as com
 
 
+        
 class Trajectoire :
 
 
@@ -23,7 +25,9 @@ class Trajectoire :
         (x,y) = coordinates
         
         self.currentWay = []
-
+        
+        
+        
         self.facteurDistance = 10.0
         # avant 50
 
@@ -32,6 +36,21 @@ class Trajectoire :
         self.position = [( round ((2000-y)/self.facteurDistance), round( x/self.facteurDistance) ), round( angle/self.facteurDegre*math.pi/180), orientation]
 
 #        print self.position
+
+    def detectionObstacles(self, pointVersionComBalise):
+        print 'getRobCoords Start'
+        (x, y) = pointVersionComBalise
+        print 'detection'
+        print (x, y)
+        pointVersionForest = (x / 10, 300 - y / 10)
+        print 'sur la Forest'
+        print pointVersionForest
+        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
+        robomoviesForest.popCircle(pointVersionForest, 32, -1)
+        robomoviesForest.popCircle(pointVersionForest, 13, 0)
+        robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
+        print 'fin de creation d obstacle'
+
 
     def chemin(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
@@ -57,7 +76,7 @@ class Trajectoire :
         self.currentWay = way
         
         return way
-
+    
     def comingOut(self, point, angleArrivee)   :
 
         pathMan = PathManager(robomoviesForest.getForest())
@@ -140,6 +159,7 @@ class Trajectoire :
             pth.append( (y*self.facteurDistance ,(2000/self.facteurDistance-x)*self.facteurDistance) )
         
         return pth
+        
         
     def orderToPoint(self, point):
         (x0, y0) = (450,1000)
