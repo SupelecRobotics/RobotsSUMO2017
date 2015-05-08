@@ -209,11 +209,11 @@ class Robot :
         
         #offset de la distance
         #devant(gobelet, cylindre)
-        offset1 = 12.6
-        offset2 = 12.6
+        offset1 = 11.5
+        offset2 = 11.5
         #derriere(gobelet, cylindre)
-        offset3 = 12.6
-        offset4 = 12.6
+        offset3 = 11.5
+        offset4 = 11.5
         
         #Distances au centre
         #devant(gobelet, cylindre)
