@@ -35,6 +35,7 @@ class Robot :
         self.facteurDegre = 10.0
         #time
         self.time = 0
+        self.traj = traj((int(self.x), int(self.y)), self.theta, True)
         time.sleep(2)
         self.couleur = self.com.getColor()
         print self.couleur
@@ -45,7 +46,7 @@ class Robot :
         while not self.com.getGachette():
             time.sleep(1)
         self.com.envoiAllGreen()
-        self.traj = traj((int(self.x), int(self.y)), self.theta, True)
+        
         
         
     def bouge(self,d,theta):
