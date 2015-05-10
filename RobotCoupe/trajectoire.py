@@ -42,7 +42,7 @@ class Trajectoire :
     def updatePosition(self, coordinates, angle, orientation) :
         
         (x, y) = coordinates
-        self.position = [ (2000 - y) / self.facteurDistance, x / self.facteurDistance, (math.pi/180) * angle / self.facteurDegre, orientation ]
+        self.position = [ ((2000 - y) / self.facteurDistance, x / self.facteurDistance), (math.pi/180) * angle / self.facteurDegre, orientation ]
     
     def detectionObstacles(self, pointVersionComBalise):
         print 'getRobCoords Start'
