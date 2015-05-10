@@ -15,10 +15,16 @@ class CommunicationSerial :
     def __init__(self, ser1, ser2, ser3) :
         try:
             sera = serial.Serial(ser1, 115200)
-            serb = serial.Serial(ser2, 115200)
-            serc = serial.Serial(ser3, 115200)
         except serial.SerialException:
             print "No connection to the first device could be established"
+        try:
+            serb = serial.Serial(ser2, 115200)
+        except serial.SerialException:
+            print "No connection to the second device could be established"
+        try:
+            serc = serial.Serial(ser3, 115200)
+        except serial.SerialException:
+            print "No connection to the third device could be established"
         
 #        serc = serial.Serial(ser3, 57600)
         time.sleep(3)
@@ -36,11 +42,9 @@ class CommunicationSerial :
         b = serb.read()
         serb.readline()
         print b.encode('hex')
-
-        print serc
         
         c = serc.read()
-        serc.readline()
+        #serc.readline()
         print c.encode('hex')
         print "read"
         
