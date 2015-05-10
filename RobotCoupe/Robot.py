@@ -45,7 +45,6 @@ class Robot :
         while not self.com.getGachette():
             time.sleep(1)
         self.com.envoiAllGreen()
-        
         self.traj = traj((int(self.x), int(self.y)), self.theta, True)
         
         
