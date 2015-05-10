@@ -54,7 +54,7 @@ class Trajectoire :
         print pointVersionForest
         robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
         robomoviesForest.popLosange(pointVersionForest, 38, -1)
-        robomoviesForest.popLosange(pointVersionForest, 13, 0)
+        robomoviesForest.popLosange(pointVersionForest, 38, 0)
         #debug
         robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         print 'fin de creation d obstacle'
