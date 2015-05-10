@@ -67,7 +67,7 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
-        self.traj.detectionObstacles(self.com.getRoobCoords())
+        self.traj.detectionObstacles(self.com.getRobCoords())
         print "From " + str((self.x, self.y)) + " to " + str(point)
         print self.traj.pointPath(point)
         print "start"
