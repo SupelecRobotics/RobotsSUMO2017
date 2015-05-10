@@ -12,8 +12,10 @@ def dist(A, B) :
         result : float
         calculates the euclid distance between points A and B
     """
-    dX = float(A[0] - B[0])
-    dY = float(A[1] - B[1])
+    (A0, A1) = A
+    (B0, B1) = B
+    dX = float(A0 - B0)
+    dY = float(A1 - B1)
     return math.sqrt(dX*dX + dY*dY)
 
 def height(A, B, C) :
