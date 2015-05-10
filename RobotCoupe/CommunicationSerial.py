@@ -60,7 +60,7 @@ class CommunicationSerial :
         #self.serMain = serial.Serial(ser1, 9600)
         time.sleep(2)
 
-        self.lastRobCoords[2] = [(0,0),(0,0)]
+        self.lastRobCoords = [(0,0),(0,0)]
         
     def envoiMain(self, d=0, theta=0):
         # commande sur 1 byte, distance sur 2 bytes, theta sur 2 bytes, 
