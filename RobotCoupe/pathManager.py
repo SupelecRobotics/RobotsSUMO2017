@@ -8,7 +8,7 @@ import math
 import timeit
 import util
 from aStar import AStar
-from carte import carte
+from carte import Map
 
 class PathManager :
     
@@ -19,7 +19,7 @@ class PathManager :
             - 0s are always obstacle
             - negatives are either free spaces or obstacle, depending on the threshold
         """
-        self.baseMap = carte       # carte
+        self.baseMap = carte       # Base Map
         self.thresholdMap = [[ ]]   # bool matrix for use by the AStar class
         self.setThreshold(0)        # default threshold is 0
         self.path = []
