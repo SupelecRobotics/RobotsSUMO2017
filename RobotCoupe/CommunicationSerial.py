@@ -36,6 +36,8 @@ class CommunicationSerial :
         b = serb.read()
         serb.readline()
         print b.encode('hex')
+
+        print serc
         
         c = serc.read()
         serc.readline()
