@@ -29,8 +29,7 @@ class PathManager :
             constructs thresholdMap from baseMap : 
             values between 0 and -threshold are obstacles (False), other values are free spaces (True)
         """
-        forest = self.baseMap.getForest()
-        self.thresholdMap = [ [ (forest[x][y] > 0 or forest[x][y] < -threshold) for y in xrange(len(self.forest[x])) ] for x in xrange(len(self.forest)) ]
+        self.thresholdMap = [ [ (self.baseMap[x][y] > 0 or self.baseMap[x][y] < -threshold) for y in xrange(len(self.baseMap[x])) ] for x in xrange(len(self.baseMap)) ]
     
     def findPath(self, start, goal) :
         """ start : (float,float), goal : (float,float,float) or (float,float)
