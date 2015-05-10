@@ -57,7 +57,7 @@ class Trajectoire :
         robomoviesForest.popLosange(pointVersionForest, 13, 0)
         robomoviesForest.popCircle(pointVersionForest, 11, 0)
         #debug
-        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
+        robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         print 'fin de creation d obstacle'
 
     def chemin(self, path) :
