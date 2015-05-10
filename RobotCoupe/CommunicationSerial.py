@@ -104,7 +104,8 @@ class CommunicationSerial :
             
         x = (self.lastRobCoords[0][0] + self.lastRobCoords[1][0])/2
         y = (self.lastRobCoords[0][1] + self.lastRobCoords[1][1])/2
-        
+
+        print self.lastRobCoords
         return (x,y)
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
