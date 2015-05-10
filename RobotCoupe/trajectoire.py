@@ -34,7 +34,7 @@ class Trajectoire :
         self.position = []
         self.updatePosition(coordinates, angle, orientation)
         
-        self.pm = PathManager(robomoviesForest.getForest())
+        self.pm = PathManager(robomoviesForest)
         self.pm.setThreshold(4)
 
 #        print self.position
@@ -55,7 +55,6 @@ class Trajectoire :
         robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
         robomoviesForest.popLosange(pointVersionForest, 38, -1)
         robomoviesForest.popLosange(pointVersionForest, 13, 0)
-        self.pm.matrix = robomoviesForest
         #debug
         robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         print 'fin de creation d obstacle'
