@@ -53,8 +53,8 @@ class Trajectoire :
         print 'sur la Forest'
         print pointVersionForest
         self.pm.baseMap.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
-        self.pm.baseMap.popLosange(pointVersionForest, 48, -1)
-        self.pm.baseMap.popLosange(pointVersionForest, 48, 0)
+        self.pm.baseMap.popLosange(pointVersionForest, 38, -1)
+        self.pm.baseMap.popLosange(pointVersionForest, 14, 0)
         self.pm.setThreshold(4)
         #debug
         robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
