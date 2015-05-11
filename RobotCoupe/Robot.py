@@ -70,7 +70,7 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
-        #self.traj.detectionObstacles(self.com.getRobCoords())
+        self.traj.detectionObstacles(self.com.getRobCoords())
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
         else :
@@ -88,7 +88,7 @@ class Robot :
             
     def allerAangle(self, point,theta):
         self.updatePosition()
-        #self.traj.detectionObstacles(self.com.getRobCoords())
+        self.traj.detectionObstacles(self.com.getRobCoords())
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
         else :
