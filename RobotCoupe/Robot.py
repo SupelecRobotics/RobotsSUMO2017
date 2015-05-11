@@ -77,9 +77,7 @@ class Robot :
             print "point " + str(point) + " impossible à atteindre"
         else :
             print "From " + str((self.x, self.y)) + " to " + str(point)
-            t = time.time()
             print self.traj.pointPath(point)
-            print time.time() - t
             print "start"
             for p in self.traj.pointPath(point):
                 print "point"
@@ -101,9 +99,7 @@ class Robot :
         else :
             #tronquage dans trajectoire nécessaire?
             print "From " + str((self.x, self.y)) + " to " + str(point)
-            t = time.time()
             print self.traj.pointPath(point)
-            print time.time() - t
             print "start"
             for p in self.traj.pointPath(point):
                 print "point"
