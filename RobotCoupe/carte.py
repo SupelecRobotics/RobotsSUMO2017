@@ -251,8 +251,12 @@ class Map   :
 #        print file.read(302)
 #        print file.read(302)
 
-    def isInTheConvexHull(self, convexHull, point) :
-    
+    # def isInTheConvexHull(self, convexHull, point) :
+        # point
+        # referred = convexHull[0]
+        # for tempPoint in convexHull[1:] :
+            # (x, y) = tempPoint
+            
         
 #map = Map((200,300))
 #map.enclose(0)
