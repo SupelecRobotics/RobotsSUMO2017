@@ -53,7 +53,7 @@ class Robot :
         
         
     def bouge(self,d,theta):
-        self.com.envoiMain(d,theta)
+        print self.com.envoiMain(d,theta)
         
     #    def bougeAngle(self,angle):
     #        while self.theta - angle > 3:
