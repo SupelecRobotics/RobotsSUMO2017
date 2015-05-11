@@ -264,7 +264,8 @@ class Map   :
                 if(a > minAngle) :
                     minAngle = a
         
-        return (maxAngle - minAngle >= math.pi)
+        return (maxAngle + minAngle >= math.pi)
+        
         
 #map = Map((200,300))
 #map.enclose(0)
