@@ -65,10 +65,14 @@ class AStar :
             returns : bool (success)
         """
         # verifie the goal can be reached
-        for x in xrange(len(self.blockMat)) :
-            for y in xrange(len(self.blockMat[x])) :
-                if self.isGoal((x,y)) and not self.blockMat[x][y] :
-                    return False
+#        isGoalInWall = True
+#        for x in xrange(len(self.blockMat)) :
+#            for y in xrange(len(self.blockMat[x])) :
+#                if self.isGoal((x,y)) and self.blockMat[x][y] :
+#                    isGoalInWall = False
+#                    break
+#        if isGoalInWall :
+#            return False
         
         if self.pathEnd != None :   # if starting point fulfills the goal condition
             return True
