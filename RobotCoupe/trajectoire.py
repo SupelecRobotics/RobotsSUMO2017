@@ -156,10 +156,7 @@ class Trajectoire :
 #        print (x,y)
         (x, y) = ( round( (2000-y)/self.facteurDistance), round(x/self.facteurDistance))
         print (x,y)
-#        t = time.time()
         self.pm.findPath(self.position[0],(x, y, 0))
-#        print time.time() - t
-
 #        print "path"
 #        print self.pm.path
 

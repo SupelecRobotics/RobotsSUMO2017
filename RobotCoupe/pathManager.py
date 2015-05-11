@@ -6,7 +6,6 @@ Created on Thu Jan  8 21:52:30 2015
 """
 import math
 import timeit
-import time
 import util
 from aStar import AStar
 from carte import Map
@@ -38,13 +37,11 @@ class PathManager :
             uses the AStar class to find the shortest path between 'start' and 'goal'
             then simplifies the path to obtain straight lines as long as possible
         """
-        t= time.time()
         if len(goal) == 2 :
             goal = goal + (0,)  # default value of 'goalRadius' is 0
         a = AStar(start, goal, self.thresholdMap)
         a.aStar()
         p = a.buildPath()
-        print time.time() - t
         if p == None :
             self.path == None
         else :
