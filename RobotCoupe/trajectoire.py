@@ -155,7 +155,7 @@ class Trajectoire :
         pth = []
         for coor in self.pm.path:
             (x,y) = coor            
-            pth.append( (y*self.facteurDistance ,(2000/self.facteurDistance-x)*self.facteurDistance) )
+            pth.append( (y*self.facteurDistance , 2000 - x*self.facteurDistance) )
         
         return pth
         
