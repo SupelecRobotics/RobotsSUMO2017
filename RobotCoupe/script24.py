@@ -11,6 +11,7 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 robot.allerA((730, 1580))
 robot.goToCylindreLocal((850, 1800), True)
 robot.goToCylindreLocal((850, 1900), True)
+robot.bouge(-100, 0)
 
 # Gobelet G2 + dépose dans la zone de départ
 
