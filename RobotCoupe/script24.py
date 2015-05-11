@@ -25,16 +25,16 @@ robot.goToCylindreLocal((910, 1170), False)
 
 # robot.com.appelDescenteActionneurGobeletDerriere()
 
-# Gobelet G1 + Cylindres P4 et P5
+# # Gobelet G1 + Cylindres P4 et P5
 
-robot.allerA(( 450, 450))
-robot.goToGobeletLocal((250, 250), True)
+# robot.allerA(( 450, 450))
+# robot.goToGobeletLocal((250, 250), True)
 
-#1er plot
-robot.goToCylindreLocal((90, 250), True)
+# #1er plot
+# robot.goToCylindreLocal((90, 250), True)
 
-#plot 2
-robot.goToCylindreLocal((90, 150), True)
+# #plot 2
+# robot.goToCylindreLocal((90, 150), True)
 
 #claps
 robot.allerAangle((int(250),int(230)),-900)
