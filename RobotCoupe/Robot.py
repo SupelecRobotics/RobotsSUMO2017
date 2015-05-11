@@ -108,7 +108,7 @@ class Robot :
             
     def bougeToPoint(self,point):
         coor = (self.x,self.y)
-        while dist(coor,point) > 30:     #100
+        while dist(coor,point) > 70:     #100
             (distance, angle)  = self.orderToPoint(point)
             if (math.fabs(distance) > 500): distance = math.copysign(500,distance)
             self.com.envoiMain(0,int(angle))

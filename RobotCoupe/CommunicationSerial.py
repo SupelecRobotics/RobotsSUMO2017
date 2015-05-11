@@ -243,6 +243,12 @@ class CommunicationSerial :
         time.sleep(0.25)
         self.serMain.readline()
         
+    def envoiDistanceRemettre(self):
+        #pour remettre la distance des capteurs à la valeur normale
+        self.serCouleur.write(chr(200))
+        time.sleep(0.25)
+        self.serCouleur.readline()
+        
     def envoiCouleurReady(self):
         self.serCouleur.write(chr(2))
         time.sleep(0.25)
