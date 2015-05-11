@@ -35,6 +35,7 @@ class Robot :
         self.facteurDegre = 10.0
         #time
         self.time = 0
+        self.traj = traj((int(self.x), int(self.y)), self.theta, True)
         time.sleep(2)
         self.couleur = self.com.getColor()
         print self.couleur
@@ -46,7 +47,6 @@ class Robot :
             time.sleep(1)
         self.com.envoiAllGreen()
         
-        self.traj = traj((int(self.x), int(self.y)), self.theta, True)
         
         
     def bouge(self,d,theta):
@@ -67,36 +67,44 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
-        print "From " + str((self.x, self.y)) + " to " + str(point)
-        print self.traj.pointPath(point)
-        print "start"
-        for p in self.traj.pointPath(point):
-            print "point"
-            (a, b) = p
-            (a, b) = (round(a), round(b))
-            print "At : " + str((a, b))
-            self.bougeToPoint((a, b))
-        self.updatePosition()
+        #self.traj.detectionObstacles(self.com.getRobCoords())
+        if(not self.traj.isInTheTravelableMap(point)) :
+            print "point " + str(point) + " impossible à atteindre"
+        else :
+            print "From " + str((self.x, self.y)) + " to " + str(point)
+            print self.traj.pointPath(point)
+            print "start"
+            for p in self.traj.pointPath(point):
+                print "point"
+                (a, b) = p
+                (a, b) = (round(a), round(b))
+                print "At : " + str((a, b))
+                self.bougeToPoint((a, b))
+            self.updatePosition()
 
             
     def allerAangle(self, point,theta):
         self.updatePosition()
-        #tronquage dans trajectoire nécessaire?
-        print "From " + str((self.x, self.y)) + " to " + str(point)
-        print self.traj.pointPath(point)
-        print "start"
-        for p in self.traj.pointPath(point):
-            print "point"
-            (a, b) = p
-            (a, b) = (round(a), round(b))
-            print "At : " + str((a, b))
-            self.bougeToPoint((a, b))
-        self.bouge(0, int(theta - self.theta))
-        self.updatePosition()
-#        if (math.fabs(theta - self.theta) <= 1800 ):
-#            self.bouge(0, theta - self.theta)
-#        else:
-#            self.bouge(0, theta - self.theta - 3600)
+        #self.traj.detectionObstacles(self.com.getRobCoords())
+        if(not self.traj.isInTheTravelableMap(point)) :
+            print "point " + str(point) + " impossible à atteindre"
+        else :
+            #tronquage dans trajectoire nécessaire?
+            print "From " + str((self.x, self.y)) + " to " + str(point)
+            print self.traj.pointPath(point)
+            print "start"
+            for p in self.traj.pointPath(point):
+                print "point"
+                (a, b) = p
+                (a, b) = (round(a), round(b))
+                print "At : " + str((a, b))
+                self.bougeToPoint((a, b))
+            self.bouge(0, int(theta - self.theta))
+            self.updatePosition()
+    #        if (math.fabs(theta - self.theta) <= 1800 ):
+    #            self.bouge(0, theta - self.theta)
+    #        else:
+    #            self.bouge(0, theta - self.theta - 3600)
             
     def bougeToPoint(self,point):
         coor = (self.x,self.y)

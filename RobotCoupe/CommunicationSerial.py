@@ -15,10 +15,16 @@ class CommunicationSerial :
     def __init__(self, ser1, ser2, ser3) :
         try:
             sera = serial.Serial(ser1, 115200)
-            serb = serial.Serial(ser2, 115200)
-            serc = serial.Serial(ser3, 115200)
         except serial.SerialException:
             print "No connection to the first device could be established"
+        try:
+            serb = serial.Serial(ser2, 115200)
+        except serial.SerialException:
+            print "No connection to the second device could be established"
+        try:
+            serc = serial.Serial(ser3, 115200)
+        except serial.SerialException:
+            print "No connection to the third device could be established"
         
 #        serc = serial.Serial(ser3, 57600)
         time.sleep(3)
@@ -38,7 +44,7 @@ class CommunicationSerial :
         print b.encode('hex')
         
         c = serc.read()
-        serc.readline()
+        #serc.readline()
         print c.encode('hex')
         print "read"
         
@@ -60,7 +66,7 @@ class CommunicationSerial :
         #self.serMain = serial.Serial(ser1, 9600)
         time.sleep(2)
 
-        self.lastRobCoords = (0,0)
+        self.lastRobCoords = [(0,0),(0,0)]
         
     def envoiMain(self, d=0, theta=0):
         # commande sur 1 byte, distance sur 2 bytes, theta sur 2 bytes, 
@@ -94,14 +100,19 @@ class CommunicationSerial :
                 c = self.serBluetooth.read()
                 print "first loop"
 
-            msg = self.serBluetooth.read(9)
+            msg = self.serBluetooth.read(10)
             while(self.serBluetooth.inWaiting() != 0):
                 self.serBluetooth.read()
                 print "second loop"
-                
-            self.lastRobCoords = ((int(msg[1:5]),int(msg[5:])))
 
-        return self.lastRobCoords
+            camIndex = int(msg[9])
+            self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:])))
+            
+        x = (self.lastRobCoords[0][0] + self.lastRobCoords[1][0])/2
+        y = (self.lastRobCoords[0][1] + self.lastRobCoords[1][1])/2
+
+        print self.lastRobCoords
+        return (x,y)
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
         commande = 0

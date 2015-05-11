@@ -34,29 +34,38 @@ class Trajectoire :
         self.position = []
         self.updatePosition(coordinates, angle, orientation)
         
-        self.pm = PathManager(robomoviesForest.getForest())
+        self.pm = PathManager(robomoviesForest)
         self.pm.setThreshold(4)
 
 #        print self.position
     
     def updatePosition(self, coordinates, angle, orientation) :
         
-        x, y = coordinates
-        self.position = [ (2000 - y) / self.facteurDistance, x / self.facteurDistance, (math.pi/180) * angle / self.facteurDegre, orientation ]
+        (x, y) = coordinates
+        self.position = [ ((2000 - y) / self.facteurDistance, x / self.facteurDistance), (math.pi/180) * angle / self.facteurDegre, orientation ]
     
     def detectionObstacles(self, pointVersionComBalise):
         print 'getRobCoords Start'
         (x, y) = pointVersionComBalise
         print 'detection'
         print (x, y)
-        pointVersionForest = (x / 10, 300 - y / 10)
+        pointVersionForest = (x / self.facteurDistance, 300 - y / self.facteurDistance)
         print 'sur la Forest'
         print pointVersionForest
-        robomoviesForest.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
-        robomoviesForest.popLosange(pointVersionForest, 38, -1)
-        robomoviesForest.popLosange(pointVersionForest, 13, 0)
+        self.pm.baseMap.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
+        self.pm.baseMap.popLosange(pointVersionForest, 38, -1)
+        self.pm.baseMap.popLosange(pointVersionForest, 14, 0)
+        self.pm.setThreshold(4)
+        #debug
+        robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         print 'fin de creation d obstacle'
 
+       
+    def isInTheTravelableMap(self, point) :
+        (x, y) = point
+        (a, b) = ((2000 - y) / self.facteurDistance, x / self.facteurDistance)
+        return self.pm.baseMap.isInTheForest((a, b))
+       
     def chemin(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
 

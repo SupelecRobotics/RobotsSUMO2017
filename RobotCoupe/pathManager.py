@@ -8,17 +8,18 @@ import math
 import timeit
 import util
 from aStar import AStar
+from carte import Map
 
 class PathManager :
     
-    def __init__(self, matrix) :
+    def __init__(self, carte) :
         """ matrix : [[int]]
             'matrix' represents the grid :
             - positives are always free spaces
             - 0s are always obstacle
             - negatives are either free spaces or obstacle, depending on the threshold
         """
-        self.baseMap = matrix       # base integer matrix
+        self.baseMap = carte       # Base Map
         self.thresholdMap = [[ ]]   # bool matrix for use by the AStar class
         self.setThreshold(0)        # default threshold is 0
         self.path = []
@@ -28,7 +29,8 @@ class PathManager :
             constructs thresholdMap from baseMap : 
             values between 0 and -threshold are obstacles (False), other values are free spaces (True)
         """
-        self.thresholdMap = [ [ (self.baseMap[x][y] > 0 or self.baseMap[x][y] < -threshold) for y in xrange(len(self.baseMap[x])) ] for x in xrange(len(self.baseMap)) ]
+        forest = self.baseMap.getForest()
+        self.thresholdMap = [ [ (forest[x][y] > 0 or forest[x][y] < -threshold) for y in xrange(len(forest[x])) ] for x in xrange(len(forest)) ]
     
     def findPath(self, start, goal) :
         """ start : (float,float), goal : (float,float,float) or (float,float)
