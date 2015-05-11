@@ -69,8 +69,10 @@ class Robot :
     #            time.sleep(0.5)
         
     def allerA(self, point):
+        print "debut allerA"
         self.updatePosition()
 #        self.traj.detectionObstacles(self.com.getRobCoords())
+        print "after update"
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
         else :
@@ -84,11 +86,14 @@ class Robot :
                 print "At : " + str((a, b))
                 self.bougeToPoint((a, b))
             self.updatePosition()
+        print "fin allerA"
 
             
     def allerAangle(self, point,theta):
+        print "debut allerAAngle"
         self.updatePosition()
 #        self.traj.detectionObstacles(self.com.getRobCoords())
+        print "after update"
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
         else :
@@ -104,6 +109,7 @@ class Robot :
                 self.bougeToPoint((a, b))
             self.bouge(0, int(theta - self.theta))
             self.updatePosition()
+        print "fin allerAAngle"
     #        if (math.fabs(theta - self.theta) <= 1800 ):
     #            self.bouge(0, theta - self.theta)
     #        else:
@@ -289,7 +295,7 @@ class Robot :
         string = self.com.getInfos()
         self.x = round(string[0])
         self.y = round(string[1])
-        self.theta = round(( (string[2] + 1800 ) % 3600 ) - 1800) + self.dtheta #( (string[2] + 1800 ) % 3600 ) - 1800
+        self.theta = round(( (string[2] + self.dtheta + 1800 ) % 3600 ) - 1800) #( (string[2] + 1800 ) % 3600 ) - 1800
         print self.theta        
         self.c1 = string[3]
         self.c2 = string[4]
