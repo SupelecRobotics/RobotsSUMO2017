@@ -25,6 +25,7 @@ class Robot :
         self.x = 250
         self.y = 1000
         self.theta = 0
+        self.dtheta = 0
         # capteurs
         self.c1 = 0
         self.c2 = 0
@@ -39,6 +40,8 @@ class Robot :
         time.sleep(2)
         self.couleur = self.com.getColor()
         print self.couleur
+        if self.couleur:
+            self.dtheta = 1800
         self.com.envoiColor(self.couleur)
         time.sleep(2)
         self.com.envoiCouleurReady()
@@ -286,7 +289,7 @@ class Robot :
         string = self.com.getInfos()
         self.x = round(string[0])
         self.y = round(string[1])
-        self.theta = round(string[2]) #( (string[2] + 1800 ) % 3600 ) - 1800
+        self.theta = round(( (string[2] + 1800 ) % 3600 ) - 1800) + self.dtheta #( (string[2] + 1800 ) % 3600 ) - 1800
         self.c1 = string[3]
         self.c2 = string[4]
         self.c3 = string[5]
