@@ -34,6 +34,8 @@ robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
 #
 #robot.com.appelDescenteActionneurGobeletDevant()
 
+robot.appelMonteeActionneurGobeletDevant()
+robot.appelDescenteActionneurGobeletDevant()
 
 robot.allerA((2400, 450))
 
