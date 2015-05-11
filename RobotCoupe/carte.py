@@ -270,7 +270,7 @@ class Map   :
         (maxX, maxY) = self.size
         for i in range(0, maxX - 1) :
             for j in range(0, maxY - 1)  :
-                if(isInPolygon((i, j), points)) :
+                if(self.isInTheConvexHull((i, j), points)) :
                     self.forest[i][j] = obstacleLevel
 
                     
