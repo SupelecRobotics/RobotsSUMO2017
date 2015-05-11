@@ -297,7 +297,7 @@ class Robot :
         self.c4 = string[6]
         self.time = string[7]
         
-        #self.traj.updatePosition((self.x,self.y), self.theta, True)
+        self.traj.updatePosition((self.x,self.y), self.theta, True)
         
     def gameD(self):
         #time.sleep(15)
