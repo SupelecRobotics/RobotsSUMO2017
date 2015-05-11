@@ -38,4 +38,28 @@ def angle(A,B) :
     a2 = math.atan2(B[1], B[0])
     return a2 - a1
 
+def angle2(A,B,C) :
+    """ A, B, C : (float,float) or (int,int)
+        result : float
+        calculates the angle ABC in radians
+    """
+    a1 = math.atan2(A[1]-B[1], A[0]-B[0])
+    a2 = math.atan2(C[1]-B[1], C[0]-B[0])
+    return a2 - a1
+
+def isInPolygon(A, L) :
+    """ A : (float,float)
+        L : [(float,float)]
+        checks whether point A is inside the convex envelope of the list of points L
+    """
+    if len(L) == 1 :
+        return A == L[0]
+    
+    maxAngle = 0
+    minAngle = 0
+    for p in L[1:] :
+        a = angle2(L[0], A, p)
+        maxAngle = max(maxAngle, a)
+        minAngle = min(maxAngle, a)
+    return maxAngle - minAngle >= math.pi
 

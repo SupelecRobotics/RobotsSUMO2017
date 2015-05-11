@@ -12,10 +12,8 @@ def dist(A, B) :
         result : float
         calculates the euclid distance between points A and B
     """
-    (A0, A1) = A
-    (B0, B1) = B
-    dX = float(A0 - B0)
-    dY = float(A1 - B1)
+    dX = float(A[0] - B[0])
+    dY = float(A[1] - B[1])
     return math.sqrt(dX*dX + dY*dY)
 
 def height(A, B, C) :
@@ -34,8 +32,34 @@ def height(A, B, C) :
 def angle(A,B) :
     """ A, B : (float,float) or (int,int)
         result : float
-        calculates the angle AÔB
+        calculates the angle AÔB in radians
     """
     a1 = math.atan2(A[1], A[0])
     a2 = math.atan2(B[1], B[0])
     return a2 - a1
+
+def angle2(A,B,C) :
+    """ A, B, C : (float,float) or (int,int)
+        result : float
+        calculates the angle ABC in radians
+    """
+    a1 = math.atan2(A[1]-B[1], A[0]-B[0])
+    a2 = math.atan2(C[1]-B[1], C[0]-B[0])
+    return a2 - a1
+
+def isInPolygon(A, L) :
+    """ A : (float,float)
+        L : [(float,float)]
+        checks whether point A is inside the convex envelope of the list of points L
+    """
+    if len(L) == 1 :
+        return A == L[0]
+    
+    maxAngle = 0
+    minAngle = 0
+    for p in L[1:] :
+        a = angle2(L[0], A, p)
+        maxAngle = max(maxAngle, a)
+        minAngle = min(maxAngle, a)
+    return maxAngle - minAngle >= math.pi
+
