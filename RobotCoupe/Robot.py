@@ -25,6 +25,7 @@ class Robot :
         self.x = 250
         self.y = 1000
         self.theta = 0
+        self.dtheta = 0
         # capteurs
         self.c1 = 0
         self.c2 = 0
@@ -39,6 +40,8 @@ class Robot :
         time.sleep(2)
         self.couleur = self.com.getColor()
         print self.couleur
+        if self.couleur == 'V':
+            self.dtheta = 1800
         self.com.envoiColor(self.couleur)
         time.sleep(2)
         self.com.envoiCouleurReady()
@@ -66,8 +69,10 @@ class Robot :
     #            time.sleep(0.5)
         
     def allerA(self, point):
+        print "debut allerA"
         self.updatePosition()
-        #self.traj.detectionObstacles(self.com.getRobCoords())
+#        self.traj.detectionObstacles(self.com.getRobCoords())
+        print "after update"
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
         else :
@@ -81,11 +86,14 @@ class Robot :
                 print "At : " + str((a, b))
                 self.bougeToPoint((a, b))
             self.updatePosition()
+        print "fin allerA"
 
             
     def allerAangle(self, point,theta):
+        print "debut allerAAngle"
         self.updatePosition()
-        #self.traj.detectionObstacles(self.com.getRobCoords())
+#        self.traj.detectionObstacles(self.com.getRobCoords())
+        print "after update"
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
         else :
@@ -101,6 +109,7 @@ class Robot :
                 self.bougeToPoint((a, b))
             self.bouge(0, int(theta - self.theta))
             self.updatePosition()
+        print "fin allerAAngle"
     #        if (math.fabs(theta - self.theta) <= 1800 ):
     #            self.bouge(0, theta - self.theta)
     #        else:
@@ -108,7 +117,7 @@ class Robot :
             
     def bougeToPoint(self,point):
         coor = (self.x,self.y)
-        while dist(coor,point) > 30:     #100
+        while dist(coor,point) > 70:     #100
             (distance, angle)  = self.orderToPoint(point)
             if (math.fabs(distance) > 500): distance = math.copysign(500,distance)
             self.com.envoiMain(0,int(angle))
@@ -286,14 +295,15 @@ class Robot :
         string = self.com.getInfos()
         self.x = round(string[0])
         self.y = round(string[1])
-        self.theta = round(string[2]) #( (string[2] + 1800 ) % 3600 ) - 1800
+        self.theta = round(( (string[2] + self.dtheta + 1800 ) % 3600 ) - 1800) #( (string[2] + 1800 ) % 3600 ) - 1800
+        print self.theta        
         self.c1 = string[3]
         self.c2 = string[4]
         self.c3 = string[5]
         self.c4 = string[6]
         self.time = string[7]
         
-        self.traj.updatePosition((self.x,self.y), self.theta, True)
+        #self.traj.updatePosition((self.x,self.y), self.theta, True)
         
     def gameD(self):
         #time.sleep(15)

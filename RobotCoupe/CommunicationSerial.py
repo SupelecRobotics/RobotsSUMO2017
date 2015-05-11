@@ -26,7 +26,6 @@ class CommunicationSerial :
         except serial.SerialException:
             print "No connection to the third device could be established"
         
-#        serc = serial.Serial(ser3, 57600)
         time.sleep(3)
         sera.write(chr(250))
         serb.write(chr(250))
@@ -44,7 +43,7 @@ class CommunicationSerial :
         print b.encode('hex')
         
         c = serc.read()
-        #serc.readline()
+        serc.readline()
         print c.encode('hex')
         print "read"
         
@@ -60,10 +59,6 @@ class CommunicationSerial :
         elif (c.encode('hex') == '01'): self.serCouleur = serial.Serial(ser3, 115200)
         else: self.serBluetooth = serial.Serial(ser3, 115200)
         
-        #if (c == 0): self.serMain = serial.Serial(ser3, 9600)
-        #elif (c == 1): self.serCouleur = serial.Serial(ser3, 9600)
-        #else: self.serBluetooth = serial.Serial(ser3, 9600)
-        #self.serMain = serial.Serial(ser1, 9600)
         time.sleep(2)
 
         self.lastRobCoords = [(0,0),(0,0)]
@@ -247,6 +242,12 @@ class CommunicationSerial :
         self.serMain.write(chr(14))
         time.sleep(0.25)
         self.serMain.readline()
+        
+    def envoiDistanceRemettre(self):
+        #pour remettre la distance des capteurs à la valeur normale
+        self.serCouleur.write(chr(200))
+        time.sleep(0.25)
+        self.serCouleur.readline()
         
     def envoiCouleurReady(self):
         self.serCouleur.write(chr(2))
