@@ -44,6 +44,7 @@ class PathManager :
         a = AStar(start, goal, self.thresholdMap)
         a.aStar()
         p = a.buildPath()
+        print time.time() - t
         if p == None :
             self.path == None
         else :
@@ -56,7 +57,6 @@ class PathManager :
                     i += 1
                 current = i
                 self.path.insert(0,p[current])
-        print time.time() - t
         
     def isLineClear(self, pointA, pointB) :
         """ pointA, pointB : (float,float)
