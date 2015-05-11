@@ -8,6 +8,8 @@ import random
 
 import math
 
+from util import *
+
 class Map   :
     """Implements a Map !
     """
@@ -248,6 +250,9 @@ class Map   :
         file.close()
 #        print file.read(302)
 #        print file.read(302)
+
+    def isInTheConvexHull(self, convexHull, point) :
+    
         
 #map = Map((200,300))
 #map.enclose(0)
