@@ -49,7 +49,7 @@ class Trajectoire :
         (x, y) = pointVersionComBalise
         print 'detection'
         print (x, y)
-        pointVersionForest = (x / 10, 300 - y / 10)
+        pointVersionForest = (x / self.facteurDistance, 300 - y / self.facteurDistance)
         print 'sur la Forest'
         print pointVersionForest
         self.pm.baseMap.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
@@ -60,6 +60,12 @@ class Trajectoire :
         robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         print 'fin de creation d obstacle'
 
+       
+    def isInTheTravelableMap(self, point) :
+        (x, y) = point
+        (a, b) = ((2000 - y) / self.facteurDistance, x / self.facteurDistance)
+        return self.pm.baseMap.isInTheForest((a, b))
+       
     def chemin(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
 

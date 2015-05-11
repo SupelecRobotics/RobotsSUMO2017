@@ -67,7 +67,7 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
-        self.traj.detectionObstacles(self.com.getRobCoords())
+        #self.traj.detectionObstacles(self.com.getRobCoords())
         print "From " + str((self.x, self.y)) + " to " + str(point)
         print self.traj.pointPath(point)
         print "start"
@@ -82,6 +82,7 @@ class Robot :
             
     def allerAangle(self, point,theta):
         self.updatePosition()
+        #self.traj.detectionObstacles(self.com.getRobCoords())
         #tronquage dans trajectoire nécessaire?
         print "From " + str((self.x, self.y)) + " to " + str(point)
         print self.traj.pointPath(point)
