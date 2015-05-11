@@ -115,8 +115,8 @@ class Robot :
         while dist(coor,point) > 70:     #100
             (distance, angle)  = self.orderToPoint(point)
             if (math.fabs(distance) > 500): distance = math.copysign(500,distance)
-            self.com.envoiMain(0,int(angle))
-            self.com.envoiMain(int(distance),0) #envoi d'entiers
+            self.bouge(0,int(angle))
+            self.bouge(int(distance),0) #envoi d'entiers
             self.printPosition()
             coor = (self.x, self.y)
             
