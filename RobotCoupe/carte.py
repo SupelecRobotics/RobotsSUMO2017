@@ -256,7 +256,7 @@ class Map   :
         minAngle = 0.0
         maxAngle = 0.0
         for tempPoint in convexHull[1:] :
-            a = angle(referred, point, tempPoint)
+            a = angle2(referred, point, tempPoint)
             if(a < 0) :
                 if((-a) > maxAngle ) :
                     maxAngle = -a 
@@ -266,6 +266,14 @@ class Map   :
         
         return (maxAngle + minAngle >= math.pi)
         
+    def popPolygon(self, points, obstacleLevel) :
+        (maxX, maxY) = self.size
+        for i in range(0, maxX - 1) :
+            for j in range(0, maxY - 1)  :
+                if(self.isInTheForest((i, j)) and (isInPolygon((i, j), points))) :
+                    self.forest[i][j] = obstacleLevel
+
+                    
         
 #map = Map((200,300))
 #map.enclose(0)
