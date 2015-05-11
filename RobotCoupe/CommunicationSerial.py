@@ -184,7 +184,7 @@ class CommunicationSerial :
         
     def appelMonteeActionneurGobeletDevant(self):
         self.serMain.write(chr(3))
-#        time.sleep(0.25)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelMonteeActionneurGobeletDerriere(self):
@@ -194,7 +194,7 @@ class CommunicationSerial :
         
     def appelDescenteActionneurGobeletDevant(self):
         self.serMain.write(chr(4))
-#        time.sleep(0.25)
+        time.sleep(0.25)
         self.serMain.readline()
         
     def appelDescenteActionneurGobeletDerriere(self):
