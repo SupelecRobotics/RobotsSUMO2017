@@ -251,12 +251,20 @@ class Map   :
 #        print file.read(302)
 #        print file.read(302)
 
-    # def isInTheConvexHull(self, convexHull, point) :
-        # point
-        # referred = convexHull[0]
-        # for tempPoint in convexHull[1:] :
-            # (x, y) = tempPoint
-            
+    def isInTheConvexHull(self, convexHull, point) :
+        referred = convexHull[0]
+        minAngle = 0.0
+        maxAngle = 0.0
+        for tempPoint in convexHull[1:] :
+            a = angle(referred, point, tempPoint)
+            if(a < 0) :
+                if((-a) > maxAngle ) :
+                    maxAngle = -a 
+            else :
+                if(a > minAngle) :
+                    minAngle = a
+        
+        return (maxAngle - minAngle >= math.pi)
         
 #map = Map((200,300))
 #map.enclose(0)
