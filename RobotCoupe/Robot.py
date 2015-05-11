@@ -290,13 +290,14 @@ class Robot :
         self.x = round(string[0])
         self.y = round(string[1])
         self.theta = round(( (string[2] + 1800 ) % 3600 ) - 1800) + self.dtheta #( (string[2] + 1800 ) % 3600 ) - 1800
+        print self.theta        
         self.c1 = string[3]
         self.c2 = string[4]
         self.c3 = string[5]
         self.c4 = string[6]
         self.time = string[7]
         
-        self.traj.updatePosition((self.x,self.y), self.theta, True)
+        #self.traj.updatePosition((self.x,self.y), self.theta, True)
         
     def gameD(self):
         #time.sleep(15)
