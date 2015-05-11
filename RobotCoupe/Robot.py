@@ -70,17 +70,17 @@ class Robot :
         #self.traj.detectionObstacles(self.com.getRobCoords())
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
-            break
-        print "From " + str((self.x, self.y)) + " to " + str(point)
-        print self.traj.pointPath(point)
-        print "start"
-        for p in self.traj.pointPath(point):
-            print "point"
-            (a, b) = p
-            (a, b) = (round(a), round(b))
-            print "At : " + str((a, b))
-            self.bougeToPoint((a, b))
-        self.updatePosition()
+        else :
+            print "From " + str((self.x, self.y)) + " to " + str(point)
+            print self.traj.pointPath(point)
+            print "start"
+            for p in self.traj.pointPath(point):
+                print "point"
+                (a, b) = p
+                (a, b) = (round(a), round(b))
+                print "At : " + str((a, b))
+                self.bougeToPoint((a, b))
+            self.updatePosition()
 
             
     def allerAangle(self, point,theta):
@@ -88,23 +88,23 @@ class Robot :
         #self.traj.detectionObstacles(self.com.getRobCoords())
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
-            break
-        #tronquage dans trajectoire nécessaire?
-        print "From " + str((self.x, self.y)) + " to " + str(point)
-        print self.traj.pointPath(point)
-        print "start"
-        for p in self.traj.pointPath(point):
-            print "point"
-            (a, b) = p
-            (a, b) = (round(a), round(b))
-            print "At : " + str((a, b))
-            self.bougeToPoint((a, b))
-        self.bouge(0, int(theta - self.theta))
-        self.updatePosition()
-#        if (math.fabs(theta - self.theta) <= 1800 ):
-#            self.bouge(0, theta - self.theta)
-#        else:
-#            self.bouge(0, theta - self.theta - 3600)
+        else :
+            #tronquage dans trajectoire nécessaire?
+            print "From " + str((self.x, self.y)) + " to " + str(point)
+            print self.traj.pointPath(point)
+            print "start"
+            for p in self.traj.pointPath(point):
+                print "point"
+                (a, b) = p
+                (a, b) = (round(a), round(b))
+                print "At : " + str((a, b))
+                self.bougeToPoint((a, b))
+            self.bouge(0, int(theta - self.theta))
+            self.updatePosition()
+    #        if (math.fabs(theta - self.theta) <= 1800 ):
+    #            self.bouge(0, theta - self.theta)
+    #        else:
+    #            self.bouge(0, theta - self.theta - 3600)
             
     def bougeToPoint(self,point):
         coor = (self.x,self.y)
