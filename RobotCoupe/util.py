@@ -59,7 +59,11 @@ def isInPolygon(A, L) :
     minAngle = 0
     for p in L[1:] :
         a = angle2(L[0], A, p)
+        a = (a+math.pi) % (2*math.pi) - math.pi
+        print a
         maxAngle = max(maxAngle, a)
-        minAngle = min(maxAngle, a)
+        minAngle = min(minAngle, a)
+    print maxAngle
+    print minAngle
     return maxAngle - minAngle >= math.pi
 
