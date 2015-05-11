@@ -40,7 +40,7 @@ class Robot :
         time.sleep(2)
         self.couleur = self.com.getColor()
         print self.couleur
-        if self.couleur:
+        if self.couleur == 'V':
             self.dtheta = 1800
         self.com.envoiColor(self.couleur)
         time.sleep(2)
