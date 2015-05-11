@@ -52,12 +52,10 @@ class Trajectoire :
         pointVersionForest = (x / self.facteurDistance, 300 - y / self.facteurDistance)
         print 'sur la Forest'
         print pointVersionForest
-        self.pm.baseMap.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap-Original.txt')
+        self.pm.baseMap.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/mapZoneDepartElargie.txt')
         self.pm.baseMap.popLosange(pointVersionForest, 38, -1)
         self.pm.baseMap.popLosange(pointVersionForest, 14, 0)
         self.pm.setThreshold(4)
-        #debug
-        robomoviesForest.createTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/newMap.txt')
         print 'fin de creation d obstacle'
 
        
