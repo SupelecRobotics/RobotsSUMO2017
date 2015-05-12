@@ -101,7 +101,7 @@ class CommunicationSerial :
             print msg
 
             if(msg[9].isdigit()):
-                camIndex = int(msg[9])
+                camIndex = int(msg[9]) - 1
 
                 if(msg[1] == 'x'):
                     self.trackingStat[camIndex] = 0
