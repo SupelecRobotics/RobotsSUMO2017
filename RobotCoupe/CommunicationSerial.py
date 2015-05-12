@@ -98,6 +98,7 @@ class CommunicationSerial :
                 print "first loop"
 
             msg = self.serBluetooth.read(10)
+            print msg
 
             camIndex = int(msg[9])
 
@@ -105,15 +106,14 @@ class CommunicationSerial :
                 self.trackingStat[camIndex] = 0
             else:
                 self.trackingStat[camIndex] = 1
-            
-            self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:])))
+                self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:])))
 
 
         nbValidCams = self.trackingStat[0] + self.trackingStat[1]
 
         if(nbValidCams > 0):
-            x = (self.trackingStat[0]*self.lastRobCoords[0][0] + self.trackingStat[0]*self.lastRobCoords[1][0])/nbValidCams
-            y = (self.trackingStat[0]*self.lastRobCoords[0][1] + self.trackingStat[0]*self.lastRobCoords[1][1])/nbValidCams
+            x = (self.trackingStat[0]*self.lastRobCoords[0][0] + self.trackingStat[1]*self.lastRobCoords[1][0])/nbValidCams
+            y = (self.trackingStat[0]*self.lastRobCoords[0][1] + self.trackingStat[1]*self.lastRobCoords[1][1])/nbValidCams
             return (x,y)
         else:
             return None
