@@ -13,23 +13,24 @@ class CommunicationSerial :
     """
     
     def __init__(self, ser1, ser2, ser3) :
+        
         try:
             sera = serial.Serial(ser1, 115200)
         except serial.SerialException:
             print "No connection to the first device could be established"
-        try:
-            serb = serial.Serial(ser2, 115200)
-        except serial.SerialException:
-            print "No connection to the second device could be established"
-        try:
-            serc = serial.Serial(ser3, 115200)
-        except serial.SerialException:
-            print "No connection to the third device could be established"
+##        try:
+##            serb = serial.Serial(ser2, 115200)
+##        except serial.SerialException:
+##            print "No connection to the second device could be established"
+##        try:
+##            serc = serial.Serial(ser3, 115200)
+##        except serial.SerialException:
+##            print "No connection to the third device could be established"
         
         time.sleep(3)
         sera.write(chr(250))
-        serb.write(chr(250))
-        serc.write(chr(250))
+        #serb.write(chr(250))
+        #serc.write(chr(250))
 #        print serc.write(chr(255))
         time.sleep(1)
         
@@ -38,26 +39,26 @@ class CommunicationSerial :
         print a.encode('hex')
         
 #        time.sleep(1)
-        b = serb.read()
-        serb.readline()
-        print b.encode('hex')
+        #b = serb.read()
+        #serb.readline()
+        #print b.encode('hex')
         
-        c = serc.read()
-        serc.readline()
-        print c.encode('hex')
-        print "read"
+        #c = serc.read()
+        #serc.readline()
+        #print c.encode('hex')
+        #print "read"
         
         if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
         elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
         else: self.serBluetooth = serial.Serial(ser1, 115200)
         
-        if (b.encode('hex') == '00'): self.serMain = serial.Serial(ser2, 115200)
-        elif (b.encode('hex') == '01'): self.serCouleur = serial.Serial(ser2, 115200)
-        else: self.serBluetooth = serial.Serial(ser2, 115200)
+        #if (b.encode('hex') == '00'): self.serMain = serial.Serial(ser2, 115200)
+        #elif (b.encode('hex') == '01'): self.serCouleur = serial.Serial(ser2, 115200)
+        #else: self.serBluetooth = serial.Serial(ser2, 115200)
 
-        if (c.encode('hex') == '00'): self.serMain = serial.Serial(ser3, 115200)
-        elif (c.encode('hex') == '01'): self.serCouleur = serial.Serial(ser3, 115200)
-        else: self.serBluetooth = serial.Serial(ser3, 115200)
+        #if (c.encode('hex') == '00'): self.serMain = serial.Serial(ser3, 115200)
+        #elif (c.encode('hex') == '01'): self.serCouleur = serial.Serial(ser3, 115200)
+        #else: self.serBluetooth = serial.Serial(ser3, 115200)
         
         time.sleep(2)
 
