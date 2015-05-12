@@ -98,9 +98,6 @@ class CommunicationSerial :
                 print "first loop"
 
             msg = self.serBluetooth.read(10)
-            while(self.serBluetooth.inWaiting() != 0):
-                self.serBluetooth.read()
-                print "second loop"
 
             camIndex = int(msg[9])
 
