@@ -193,6 +193,9 @@ class CommunicationSerial :
         if (a.encode('hex') == '00'): return False
         else: return True 
         
+        #############
+        #Appels actionneurs gobelets
+        
     def appelMonteeActionneurGobeletDevant(self):
         self.serMain.write(chr(3))
         time.sleep(0.25)
@@ -212,6 +215,9 @@ class CommunicationSerial :
         self.serMain.write(chr(6))
         time.sleep(0.25)
         self.serMain.readline()
+
+        #############
+        #Appels actionneurs claps
         
     def appelMonteeClapGauche(self):
         self.serMain.write(chr(8))
@@ -234,31 +240,90 @@ class CommunicationSerial :
         time.sleep(0.25)
         self.serMain.readline()
         
-    def appelMonteeActionneurCylindreDevant(self):
+        #############
+        #Appels actionneurs cylindres
+        
+    def appelMonteePinceDevant(self):
         self.serMain.write(chr(11))
         time.sleep(0.25)
         self.serMain.readline()
         
-    def appelMonteeActionneurCylindreDerriere(self):
+    def appelMonteePinceDerriere(self):
         self.serMain.write(chr(13))
         time.sleep(0.25)
         self.serMain.readline()
         
-    def appelDescenteActionneurCylindreDevant(self):
+    def appelDescentePinceDevant(self):
         self.serMain.write(chr(12))
         time.sleep(0.25)
         self.serMain.readline()
         
-    def appelDescenteActionneurCylindreDerriere(self):
+    def appelDescentePinceDerriere(self):
         self.serMain.write(chr(14))
         time.sleep(0.25)
         self.serMain.readline()
+        
+    def appelSortiePinceDevant(self):
+        self.serMain.write(chr(15))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    def appelSortiePinceDerriere(self):
+        self.serMain.write(chr(17))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    def appelRetourPinceDevant(self):
+        self.serMain.write(chr(16))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    def appelRetourPinceDerriere(self):
+        self.serMain.write(chr(18))
+        time.sleep(0.25)
+        self.serMain.readline()
+    
+    def appelFermeturePinceDevant(self):
+        self.serMain.write(chr(19))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    def appelFermeturePinceDerriere(self):
+        self.serMain.write(chr(22))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    def appelOuvertureInternePinceDevant(self):
+        self.serMain.write(chr(20))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    def appelOuvertureInternePinceDerriere(self):
+        self.serMain.write(chr(23))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    def appelOuvertureExternePinceDevant(self):
+        self.serMain.write(chr(21))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    def appelOuvertureExternePinceDerriere(self):
+        self.serMain.write(chr(24))
+        time.sleep(0.25)
+        self.serMain.readline()
+        
+    ################
+    ##capteurs remis à jour
         
     def envoiDistanceRemettre(self):
         #pour remettre la distance des capteurs à la valeur normale
         self.serCouleur.write(chr(200))
         time.sleep(0.25)
         self.serCouleur.readline()
+        
+    ################
+    ##debug arduino (envoyé à arduino couleur pour affichage)
         
     def envoiCouleurReady(self):
         self.serCouleur.write(chr(2))
