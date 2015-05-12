@@ -241,22 +241,27 @@ class CommunicationSerial :
         
         #############
         #Appels actionneurs cylindres
+        #inverse devant derriere
         
+        #montee derriere
     def appelMonteePinceDevant(self):
         self.serMain.write(chr(11))
         time.sleep(0.25)
         self.serMain.readline()
         
+        #descente incontrollée à l'infini
     def appelMonteePinceDerriere(self):
         self.serMain.write(chr(13))
         time.sleep(0.25)
         self.serMain.readline()
         
+        #descente derriere
     def appelDescentePinceDevant(self):
         self.serMain.write(chr(12))
         time.sleep(0.25)
         self.serMain.readline()
         
+        #montee devant
     def appelDescentePinceDerriere(self):
         self.serMain.write(chr(14))
         time.sleep(0.25)
