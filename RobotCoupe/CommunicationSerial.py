@@ -106,7 +106,7 @@ class CommunicationSerial :
                 self.trackingStat[camIndex] = 0
             else:
                 self.trackingStat[camIndex] = 1
-                self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:])))
+                self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:-1])))
 
 
         nbValidCams = self.trackingStat[0] + self.trackingStat[1]
