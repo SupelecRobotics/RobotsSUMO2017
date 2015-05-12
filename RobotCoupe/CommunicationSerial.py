@@ -62,6 +62,7 @@ class CommunicationSerial :
         time.sleep(2)
 
         self.lastRobCoords = [(0,0),(0,0)]
+        self.trackingStat = [0,0]
         
     def envoiMain(self, d=0, theta=0):
         # commande sur 1 byte, distance sur 2 bytes, theta sur 2 bytes, 
@@ -89,7 +90,7 @@ class CommunicationSerial :
     
     def getRobCoords(self):
 
-        if(self.serBluetooth.inWaiting() > 0):
+        while(self.serBluetooth.inWaiting() > 0):
             c = ''
             while(c != '#'):
                 c = self.serBluetooth.read()
@@ -101,13 +102,23 @@ class CommunicationSerial :
                 print "second loop"
 
             camIndex = int(msg[9])
-            self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:])))
-            
-        x = (self.lastRobCoords[0][0] + self.lastRobCoords[1][0])/2
-        y = (self.lastRobCoords[0][1] + self.lastRobCoords[1][1])/2
 
-        print self.lastRobCoords
-        return (x,y)
+            if(msg[1] == 'x'):
+                self.trackingStat[camIndex] = 0
+            else:
+                self.trackingStat[camIndex] = 1
+            
+            self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:])))
+
+
+        nbValidCams = self.trackingStat[0] + self.trackingStat[1]
+
+        if(nbValidCams > 0):
+            x = (self.trackingStat[0]*self.lastRobCoords[0][0] + self.trackingStat[0]*self.lastRobCoords[1][0])/nbValidCams
+            y = (self.trackingStat[0]*self.lastRobCoords[0][1] + self.trackingStat[0]*self.lastRobCoords[1][1])/nbValidCams
+            return (x,y)
+        else:
+            return None
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
         commande = 0
