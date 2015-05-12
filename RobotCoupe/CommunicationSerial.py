@@ -100,13 +100,14 @@ class CommunicationSerial :
             msg = self.serBluetooth.read(10)
             print msg
 
-            camIndex = int(msg[9])
+            if(msg[9].isdigit()):
+                camIndex = int(msg[9])
 
-            if(msg[1] == 'x'):
-                self.trackingStat[camIndex] = 0
-            else:
-                self.trackingStat[camIndex] = 1
-                self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:-1])))
+                if(msg[1] == 'x'):
+                    self.trackingStat[camIndex] = 0
+                elif(msg[1:9].isdigit()):
+                    self.trackingStat[camIndex] = 1
+                    self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:-1])))
 
 
         nbValidCams = self.trackingStat[0] + self.trackingStat[1]
