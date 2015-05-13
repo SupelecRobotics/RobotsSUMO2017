@@ -310,7 +310,7 @@ class Robot :
             
     def game(self):
         try:
-            self.gameD()
+            self.gameFalse()
         except serial.SerialException:
             print "Cables Arduino déconnectés"
             self.com.envoiErreurArduino()
@@ -318,15 +318,25 @@ class Robot :
     def gameFalse(self):
         self.com.envoiDepartZone()
         if (self.couleur == 'J'):
-            self.allerAangle((int(250),int(250)),-900)
-            self.com.appelDescenteClapDroit()
-            self.allerAangle((int(250),int(250)), 0)
-            self.com.appelMonteeClapDroit()
+#            self.allerAangle((int(250),int(250)),-900)
+#            self.com.appelDescenteClapDroit()
+#            self.allerAangle((int(250),int(250)), 0)
+#            self.com.appelMonteeClapDroit()
+            robot.allerA((910,850))
+            robot.goToGobeletLocal((910, 1170), False)
+            robot.allerAangle((600, 1000), 0)
+            robot.allerA((250, 1000))
+            robot.com.appelDescenteActionneurGobeletDerriere()
         elif (self.couleur == 'V'):
-            self.allerAangle((int(2750),int(250)),-900)
-            self.com.appelDescenteClapGauche()
-            self.allerAangle((int(2750),int(250)), -1800)
-            self.com.appelMonteeClapGauche()
+#            self.allerAangle((int(2750),int(250)),-900)
+#            self.com.appelDescenteClapGauche()
+#            self.allerAangle((int(2750),int(250)), -1800)
+#            self.com.appelMonteeClapGauche()
+            robot.allerA((2090,850))
+            robot.goToGobeletLocal((2090, 1170), False)
+            robot.allerAangle((2400, 1000), 1800)
+            robot.allerA((2750, 1000))
+            robot.com.appelDescenteActionneurGobeletDerriere()
         
     def printPosition(self):
         # Demande des informations récentes à l'arduino puis
