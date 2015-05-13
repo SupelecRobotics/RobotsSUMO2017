@@ -16,11 +16,6 @@ def xor(a, b)   :
 def nxor(a, b)  :
     return (not ((a and (not b)) or ((not a) and b)))
     
-def superModulo(angle)  :
-    angle = int(angle) % 3600
-    if(angle > 1800)    :
-        angle -= 3600
-    return angle
     
 # nxor(True, False)
 #print nxor(False, False)

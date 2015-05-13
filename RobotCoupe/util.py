@@ -64,3 +64,9 @@ def isInPolygon(A, L) :
         minAngle = min(minAngle, a)
     return maxAngle - minAngle >= math.pi
 
+def superModulo(angle)  :
+    angle = int(angle) % 3600
+    if(angle > 1800)    :
+        angle -= 3600
+    return angle
+
