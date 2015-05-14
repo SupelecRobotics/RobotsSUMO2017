@@ -26,6 +26,8 @@ class Robot :
         self.y = 1000
         self.theta = 0
         self.dtheta = 0
+        self.dx = -30
+        self.dy = 0
         # capteurs
         self.c1 = 0
         self.c2 = 0
@@ -185,8 +187,7 @@ class Robot :
             self.com.appelMonteeActionneurGobeletDevant()
         else:
             self.com.appelMonteeActionneurGobeletDerriere()
-        
-            
+
     def donneAngleApproche(self, sens, l, gobelet) :
     #    sens : bool qui vaut true si l'objectif est devant le robot
     #    l : int égal à la distance centre robot à centre gobelet
@@ -294,8 +295,8 @@ class Robot :
         
     def updatePosition(self):
         string = self.com.getInfos()
-        self.x = round(string[0])
-        self.y = round(string[1])
+        self.x = round(string[0]) + self.dx
+        self.y = round(string[1]) + self.dy
         self.theta = round(( (string[2] + self.dtheta + 1800 ) % 3600 ) - 1800) #( (string[2] + 1800 ) % 3600 ) - 1800   
         self.c1 = string[3]
         self.c2 = string[4]
