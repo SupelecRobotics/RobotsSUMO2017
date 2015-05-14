@@ -63,8 +63,8 @@ class Trajectoire :
     def isInTheTravelableMap(self, point) :
         (x, y) = point
         (a, b) = ((2000 - y) / self.facteurDistance, x / self.facteurDistance)
-        return (self.pm.baseMap.isInTheForest((a, b)) and (self.pm.baseMap.forest[a][b] > 0))
-       
+        return (self.pm.baseMap.isInTheForest((a, b)) and (self.pm.baseMap.forest[int(a)][int(b)] > 0))
+
     def chemin(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
 

@@ -231,22 +231,46 @@ class Map   :
             file.write(s + "\n")
         file.close()
         
+    # def loadTextFile(self, path):
+        # file = open(path, 'r')
+        # (x,y) = self.size
+        # self.forest = []
+        # for i in range(0,x) :
+            # self.forest.append([])
+            # for j in range(0,y):
+                # self.forest[i].append([])
+                # a = file.read(1)
+                # if a == ".":
+                    # self.forest[i][j] = 1
+                # elif a == "0":
+                    # self.forest[i][j] = 0
+                # else:
+                    # self.forest[i][j] = -1
+            # file.read(1) 
+        # file.close()
+##       print file.read(302)
+##       print file.read(302)
+
     def loadTextFile(self, path):
         file = open(path, 'r')
         (x,y) = self.size
         self.forest = []
-        for i in range(0,x - 1) :
+        for i in range(0, x) :
             self.forest.append([])
-            for j in range(0,y - 1):
+            for j in range(0, y) :
                 self.forest[i].append([])
+                
+        for i in range(0,x) :
+            for j in range(0 ,y):
                 a = file.read(1)
+                j = j % y
                 if a == ".":
                     self.forest[i][j] = 1
                 elif a == "0":
                     self.forest[i][j] = 0
                 else:
                     self.forest[i][j] = -1
-          file.read(1) 
+            file.read(2) 
         file.close()
 #        print file.read(302)
 #        print file.read(302)
