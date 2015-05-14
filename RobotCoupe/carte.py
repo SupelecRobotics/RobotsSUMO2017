@@ -235,9 +235,9 @@ class Map   :
         file = open(path, 'r')
         (x,y) = self.size
         self.forest = []
-        for i in range(0,x) :
+        for i in range(0,x - 1) :
             self.forest.append([])
-            for j in range(0,y):
+            for j in range(0,y - 1):
                 self.forest[i].append([])
                 a = file.read(1)
                 if a == ".":
@@ -246,7 +246,7 @@ class Map   :
                     self.forest[i][j] = 0
                 else:
                     self.forest[i][j] = -1
-  #          file.read(1)
+          file.read(1) 
         file.close()
 #        print file.read(302)
 #        print file.read(302)
