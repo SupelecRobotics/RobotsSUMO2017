@@ -157,7 +157,7 @@ class Trajectoire :
         print (x,y)
         self.pm.findPath(self.position[0],(x, y, 0))
 #        print "path"
-#        print self.pm.path
+        print self.pm.path
 
         pth = []
         for coor in self.pm.path:
