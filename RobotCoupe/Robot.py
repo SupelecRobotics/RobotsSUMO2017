@@ -328,6 +328,7 @@ class Robot :
 #            self.com.appelDescenteClapDroit()
 #            self.allerAangle((int(250),int(250)), 0)
 #            self.com.appelMonteeClapDroit()
+            self.allerA((550, 1000)) #pour ne pas se prendre le bord en sortant...
             self.allerA((910,850))
             self.goToGobeletLocal((910, 1170), False)
             self.allerAangle((600, 1000), 0)
@@ -338,7 +339,8 @@ class Robot :
 #            self.com.appelDescenteClapGauche()
 #            self.allerAangle((int(2750),int(250)), -1800)
 #            self.com.appelMonteeClapGauche()
-            self.allerA((2090,850))
+            self.allerA((2450,1000))
+            self.allerA((2090,850)) 
             self.goToGobeletLocal((2090, 1170), False)
             self.allerAangle((2400, 1000), 1800)
             self.allerA((2750, 1000))
