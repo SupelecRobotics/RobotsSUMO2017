@@ -45,25 +45,26 @@ class Trajectoire :
         self.position = [ ((2000 - y) / self.facteurDistance, x / self.facteurDistance), (math.pi/180) * angle / self.facteurDegre, orientation ]
     
     def detectionObstacles(self, pointVersionComBalise):
-        print 'getRobCoords Start'
-        (x, y) = pointVersionComBalise
-        print 'detection'
-        print (x, y)
-        pointVersionForest = (x / self.facteurDistance, 300 - y / self.facteurDistance)
-        print 'sur la Forest'
-        print pointVersionForest
-        self.pm.baseMap.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/mapZoneDepartElargie.txt')
-        self.pm.baseMap.popLosange(pointVersionForest, 38, -1)
-        self.pm.baseMap.popLosange(pointVersionForest, 14, 0)
-        self.pm.setThreshold(4)
-        print 'fin de creation d obstacle'
+        if(pointVersionComBalise <> None) :
+            print 'getRobCoords Start'
+            (x, y) = pointVersionComBalise
+            print 'detection'
+            print (x, y)
+            pointVersionForest = (x / self.facteurDistance, 300 - y / self.facteurDistance)
+            print 'sur la Forest'
+            print pointVersionForest
+            self.pm.baseMap.loadTextFile('/home/pi/RobotsSUMO2017/RobotCoupe/mapZoneDepartElargie.txt')
+            self.pm.baseMap.popLosange(pointVersionForest, 38, -1)
+            self.pm.baseMap.popLosange(pointVersionForest, 14, 0)
+            self.pm.setThreshold(4)
+            print 'fin de creation d obstacle'
 
        
     def isInTheTravelableMap(self, point) :
         (x, y) = point
         (a, b) = ((2000 - y) / self.facteurDistance, x / self.facteurDistance)
-        return self.pm.baseMap.isInTheForest((a, b))
-       
+        return (self.pm.baseMap.isInTheForest((a, b)) and (self.pm.baseMap.forest[int(a)][int(b)] > 0))
+
     def chemin(self, path) :
         # pas de changement d'orientation sur cette portion de trajectoire
 
@@ -156,7 +157,7 @@ class Trajectoire :
         print (x,y)
         self.pm.findPath(self.position[0],(x, y, 0))
 #        print "path"
-#        print self.pm.path
+        print self.pm.path
 
         pth = []
         for coor in self.pm.path:

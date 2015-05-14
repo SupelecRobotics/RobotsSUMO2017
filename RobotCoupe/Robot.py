@@ -26,6 +26,8 @@ class Robot :
         self.y = 1000
         self.theta = 0
         self.dtheta = 0
+        self.dx = -30
+        self.dy = 0
         # capteurs
         self.c1 = 0
         self.c2 = 0
@@ -41,7 +43,8 @@ class Robot :
         self.couleur = self.com.getColor()
         print self.couleur
         if self.couleur == 'V':
-            self.dtheta = 1800
+            self.dtheta = 0
+            self.dx = 30
         self.com.envoiColor(self.couleur)
         time.sleep(2)
         self.com.envoiCouleurReady()
@@ -70,7 +73,9 @@ class Robot :
         
     def allerA(self, point):
         self.updatePosition()
+        t = time.time()
 #        self.traj.detectionObstacles(self.com.getRobCoords())
+        print "temps pris pour la detection d'obstacles " + str(time.time() - t)
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
         else :
@@ -87,28 +92,32 @@ class Robot :
         print "fin allerA"
 
             
+    # def allerAangle(self, point,theta):
+        # self.updatePosition()
+     ##  self.traj.detectionObstacles(self.com.getRobCoords())
+        # if(not self.traj.isInTheTravelableMap(point)) :
+            # print "point " + str(point) + " impossible à atteindre"
+        # else :
+           ## tronquage dans trajectoire nécessaire?
+            # print "From " + str((self.x, self.y)) + " to " + str(point)
+            # print self.traj.pointPath(point)
+            # print "start"
+            # for p in self.traj.pointPath(point):
+                # print "point"
+                # (a, b) = p
+                # (a, b) = (round(a), round(b))
+                # print "At : " + str((a, b))
+                # self.bougeToPoint((a, b))
+            # self.bouge(0, int(theta - self.theta))
+            # self.updatePosition()
+            
     def allerAangle(self, point,theta):
-        self.updatePosition()
-#        self.traj.detectionObstacles(self.com.getRobCoords())
-        if(not self.traj.isInTheTravelableMap(point)) :
-            print "point " + str(point) + " impossible à atteindre"
-        else :
-            #tronquage dans trajectoire nécessaire?
-            print "From " + str((self.x, self.y)) + " to " + str(point)
-            print self.traj.pointPath(point)
-            print "start"
-            for p in self.traj.pointPath(point):
-                print "point"
-                (a, b) = p
-                (a, b) = (round(a), round(b))
-                print "At : " + str((a, b))
-                self.bougeToPoint((a, b))
+        self.allerA(point)
+        t = time.time()
+        if(self.traj.isInTheTravelableMap(point)) :
+            print "temps pris pour isInTheTravelableMap " + str(time.time() - t)
             self.bouge(0, int(theta - self.theta))
             self.updatePosition()
-    #        if (math.fabs(theta - self.theta) <= 1800 ):
-    #            self.bouge(0, theta - self.theta)
-    #        else:
-    #            self.bouge(0, theta - self.theta - 3600)
             
     def bougeToPoint(self,point):
         coor = (self.x,self.y)
@@ -179,8 +188,7 @@ class Robot :
             self.com.appelMonteeActionneurGobeletDevant()
         else:
             self.com.appelMonteeActionneurGobeletDerriere()
-        
-            
+
     def donneAngleApproche(self, sens, l, gobelet) :
     #    sens : bool qui vaut true si l'objectif est devant le robot
     #    l : int égal à la distance centre robot à centre gobelet
@@ -288,8 +296,8 @@ class Robot :
         
     def updatePosition(self):
         string = self.com.getInfos()
-        self.x = round(string[0])
-        self.y = round(string[1])
+        self.x = round(string[0]) + self.dx
+        self.y = round(string[1]) + self.dy
         self.theta = round(( (string[2] + self.dtheta + 1800 ) % 3600 ) - 1800) #( (string[2] + 1800 ) % 3600 ) - 1800   
         self.c1 = string[3]
         self.c2 = string[4]
@@ -322,21 +330,31 @@ class Robot :
 #            self.com.appelDescenteClapDroit()
 #            self.allerAangle((int(250),int(250)), 0)
 #            self.com.appelMonteeClapDroit()
-            robot.allerA((910,850))
-            robot.goToGobeletLocal((910, 1170), False)
-            robot.allerAangle((600, 1000), 0)
-            robot.allerA((250, 1000))
-            robot.com.appelDescenteActionneurGobeletDerriere()
+            self.allerA((550, 1000)) #pour ne pas se prendre le bord en sortant...
+            self.allerA((910,850))
+            self.goToGobeletLocal((910, 1170), False)
+            self.allerAangle((700,250),-900)
+            self.com.appelDescenteClapDroit()
+            self.allerAangle((700,250),0)
+            self.com.appelMonteeClapDroit()
+            self.allerAangle((600, 1000), 0)
+            self.allerA((250, 1000))
+            self.com.appelDescenteActionneurGobeletDerriere()
         elif (self.couleur == 'V'):
 #            self.allerAangle((int(2750),int(250)),-900)
 #            self.com.appelDescenteClapGauche()
 #            self.allerAangle((int(2750),int(250)), -1800)
 #            self.com.appelMonteeClapGauche()
-            robot.allerA((2090,850))
-            robot.goToGobeletLocal((2090, 1170), False)
-            robot.allerAangle((2400, 1000), 1800)
-            robot.allerA((2750, 1000))
-            robot.com.appelDescenteActionneurGobeletDerriere()
+            self.allerA((2450,1000))
+            self.allerA((2090,850)) 
+            self.goToGobeletLocal((2090, 1170), False)
+            self.allerAangle((int(2300),int(250)),-900)
+            self.com.appelDescenteClapGauche()
+            self.allerAangle((int(2300),int(250)), -1800)
+            self.com.appelMonteeClapGauche()
+            self.allerAangle((2400, 1000), 1800)
+            self.allerA((2750, 1000))
+            self.com.appelDescenteActionneurGobeletDerriere()
         
     def printPosition(self):
         # Demande des informations récentes à l'arduino puis

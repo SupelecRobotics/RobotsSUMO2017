@@ -35,8 +35,7 @@ class CommunicationSerial :
                 
         time.sleep(3)
 
-    def identifySerial(self, ser):
-        
+    def identifySerial(self, ser):     
         if(ser is not None):
             print "Receiving from " + ser.port
             a = ser.read()
