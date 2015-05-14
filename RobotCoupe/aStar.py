@@ -150,5 +150,5 @@ class AStar :
             returns : bool (goal condition reached)
             the goal condition is : being in the circle of center 'self.goal' and radius 'self.goalRadius'
         """
-        return round(util.dist(point, self.goal), 3) <= self.goalRadius
-
+#        return round(util.dist(point, self.goal), 3) <= self.goalRadius
+        return round(util.dist(point, self.goal)) <= self.goalRadius

@@ -246,7 +246,7 @@ class Map   :
                     self.forest[i][j] = 0
                 else:
                     self.forest[i][j] = -1
-            file.read(1)
+  #          file.read(1)
         file.close()
 #        print file.read(302)
 #        print file.read(302)

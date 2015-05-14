@@ -40,7 +40,7 @@ class PathManager :
         if len(goal) == 2 :
             goal = goal + (0,)  # default value of 'goalRadius' is 0
         a = AStar(start, goal, self.thresholdMap)
-        a.aStar()
+        print "Résultat de A*: " + str(a.aStar())
         p = a.buildPath()
         if p == None :
             self.path == None
