@@ -17,12 +17,6 @@ class CommunicationSerial :
         try:
             ser = serial.Serial(serPath, 115200)
         except serial.SerialException:
-
-            print "No connection to the third device could be established"
-            
-        
-        
-
             print "No connection to the device " + serPath + " could be established"
             return None
         else:
@@ -41,38 +35,6 @@ class CommunicationSerial :
                 print "Serial not opened, cannot send query"
                 
         time.sleep(3)
-        
-        [sera,serb,serc] = serials #modif
-
-        sera.write(chr(250))
-        serb.write(chr(250))
-        # serc.write(chr(250))
-       # print serc.write(chr(255))
-        time.sleep(1)
-        
-        a = sera.read()
-        sera.readline()
-        print a.encode('hex')
-        
-       # time.sleep(1)
-        b = serb.read()
-        serb.readline()
-        print b.encode('hex')
-        
-        # c = serc.read()
-        # serc.readline()
-        # print c.encode('hex')
-        # print "read"
-        
-        ### Pour pouvoir tester la connexion avec chaque arduino
-        self.serMain = None
-        self.serCouleur = None
-        self.serBluetooth = None
-        
-        ## C'est quoi ser1 bordel ???
-        # if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
-        # elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
-        # else: self.serBluetooth = serial.Serial(ser1, 115200)
 
 
     def identifySerial(self, ser):     
@@ -87,7 +49,6 @@ class CommunicationSerial :
             else: self.serBluetooth = ser
         else:
             print "Serial not opened, cannot read Id code"
-            
     
     def __init__(self, ser1, ser2, ser3) :
 
