@@ -1,0 +1,21 @@
+python: can't open file 'script13py': [Errno 2] No such file or directory
+No connection to the first device could be established
+No connection to the third device could be established
+Traceback (most recent call last):
+  File "script13.py", line 20, in <module>
+    robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
+  File "/home/pi/RobotsSUMO2017/RobotCoupe/Robot.py", line 23, in __init__
+    self.com = com(ser1,ser2, ser3)
+  File "/home/pi/RobotsSUMO2017/RobotCoupe/CommunicationSerial.py", line 32, in __init__
+    sera.write(chr(250))
+UnboundLocalError: local variable 'sera' referenced before assignment
+No connection to the first device could be established
+No connection to the third device could be established
+Traceback (most recent call last):
+  File "script13.py", line 20, in <module>
+    robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
+  File "/home/pi/RobotsSUMO2017/RobotCoupe/Robot.py", line 23, in __init__
+    self.com = com(ser1,ser2, ser3)
+  File "/home/pi/RobotsSUMO2017/RobotCoupe/CommunicationSerial.py", line 32, in __init__
+    sera.write(chr(250))
+UnboundLocalError: local variable 'sera' referenced before assignment

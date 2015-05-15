@@ -74,7 +74,7 @@ class Robot :
     def allerA(self, point):
         self.updatePosition()
         t = time.time()
-#        self.traj.detectionObstacles(self.com.getRobCoords())
+        self.traj.detectionObstacles(self.com.getRobCoords())
         print "temps pris pour la detection d'obstacles " + str(time.time() - t)
         if(not self.traj.isInTheTravelableMap(point)) :
             print "point " + str(point) + " impossible à atteindre"
@@ -165,10 +165,10 @@ class Robot :
         time.sleep(0.5)
         self.bouge(int(L),0)
         time.sleep(0.5)
-        if(sens):
-            self.com.appelMonteeActionneurGobeletDevant()
-        else:
-            self.com.appelMonteeActionneurGobeletDerriere()
+        # if(sens):
+            # self.com.appelMonteeActionneurGobeletDevant()
+        # else:
+            # self.com.appelMonteeActionneurGobeletDerriere()
             
         
     def goToGobeletLocal(self, point, sens):
@@ -233,7 +233,7 @@ class Robot :
         offset1 = 11.5
         offset2 = 11.5
         #derriere(gobelet, cylindre)
-        offset3 = 11.5
+        offset3 = 10.3
         offset4 = 11.5
         
         #Distances au centre
@@ -330,12 +330,14 @@ class Robot :
 #            self.com.appelDescenteClapDroit()
 #            self.allerAangle((int(250),int(250)), 0)
 #            self.com.appelMonteeClapDroit()
-            self.allerA((550, 1000)) #pour ne pas se prendre le bord en sortant...
-            self.allerA((910,850))
+            self.allerA((650, 1000)) #pour ne pas se prendre le bord en sortant...
+    #        self.allerA((910,850))
             self.goToGobeletLocal((910, 1170), False)
-            self.allerAangle((700,250),-900)
+            self.allerA((870, 1000))
+            self.goToCylindreLocal((870, 645), True)
+            self.allerAangle((300,280),-900)
             self.com.appelDescenteClapDroit()
-            self.allerAangle((700,250),0)
+            self.allerAangle((300,280),0)
             self.com.appelMonteeClapDroit()
             self.allerAangle((600, 1000), 0)
             self.allerA((250, 1000))
@@ -345,12 +347,20 @@ class Robot :
 #            self.com.appelDescenteClapGauche()
 #            self.allerAangle((int(2750),int(250)), -1800)
 #            self.com.appelMonteeClapGauche()
-            self.allerA((2450,1000))
-            self.allerA((2090,850)) 
+            self.allerA((2350,1000))
+       #     self.allerA((2090,850)) 
             self.goToGobeletLocal((2090, 1170), False)
-            self.allerAangle((int(2300),int(250)),-900)
+            self.allerA((2130, 1000))
+            self.goToCylindreLocal((2130, 645), True)
+            self.allerA((2550, 450))
+            self.goToGobelet((2750, 250), True)
+            self.allerAangle((int(2700),int(300)),-900)
             self.com.appelDescenteClapGauche()
-            self.allerAangle((int(2300),int(250)), -1800)
+            self.allerAangle((int(2700),int(300)), -1800)
+            self.com.appelMonteeClapGauche()
+            self.allerA((int(2200),int(300)))
+            self.com.appelDescenteClapGauche()
+            self.allerAangle((int(2000),int(300)))
             self.com.appelMonteeClapGauche()
             self.allerAangle((2400, 1000), 1800)
             self.allerA((2750, 1000))

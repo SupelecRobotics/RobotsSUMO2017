@@ -26,6 +26,9 @@ class CommunicationSerial :
             serc = serial.Serial(ser3, 115200)
         except serial.SerialException:
             print "No connection to the third device could be established"
+            
+        
+        
         
         time.sleep(3)
         sera.write(chr(250))
@@ -47,6 +50,12 @@ class CommunicationSerial :
         # serc.readline()
         # print c.encode('hex')
         # print "read"
+        
+        ### Pour pouvoir tester la connexion avec chaque arduino
+        self.serMain = None
+        self.serCouleur = None
+        self.serBluetooth = None
+        
         
         if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
         elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
@@ -90,33 +99,37 @@ class CommunicationSerial :
         return True
     
     def getRobCoords(self):
+        
+        if(self.serBluetooth <> None) :
+            while(self.serBluetooth.inWaiting() > 0):
+                c = ''
+                while(c != '#'):
+                    c = self.serBluetooth.read()
+                    print "first loop"
 
-        while(self.serBluetooth.inWaiting() > 0):
-            c = ''
-            while(c != '#'):
-                c = self.serBluetooth.read()
-                print "first loop"
+                msg = self.serBluetooth.read(10)
+                print msg
 
-            msg = self.serBluetooth.read(10)
-            print msg
+                if(msg[9].isdigit()):
+                    camIndex = int(msg[9]) - 1
 
-            if(msg[9].isdigit()):
-                camIndex = int(msg[9]) - 1
-
-                if(msg[1] == 'x'):
-                    self.trackingStat[camIndex] = 0
-                elif(msg[1:9].isdigit()):
-                    self.trackingStat[camIndex] = 1
-                    self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:-1])))
+                    if(msg[1] == 'x'):
+                        self.trackingStat[camIndex] = 0
+                    elif(msg[1:9].isdigit()):
+                        self.trackingStat[camIndex] = 1
+                        self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:-1])))
 
 
-        nbValidCams = self.trackingStat[0] + self.trackingStat[1]
+            nbValidCams = self.trackingStat[0] + self.trackingStat[1]
 
-        if(nbValidCams > 0):
-            x = (self.trackingStat[0]*self.lastRobCoords[0][0] + self.trackingStat[1]*self.lastRobCoords[1][0])/nbValidCams
-            y = (self.trackingStat[0]*self.lastRobCoords[0][1] + self.trackingStat[1]*self.lastRobCoords[1][1])/nbValidCams
-            return (x,y)
-        else:
+            if(nbValidCams > 0):
+                x = (self.trackingStat[0]*self.lastRobCoords[0][0] + self.trackingStat[1]*self.lastRobCoords[1][0])/nbValidCams
+                y = (self.trackingStat[0]*self.lastRobCoords[0][1] + self.trackingStat[1]*self.lastRobCoords[1][1])/nbValidCams
+                return (x,y)
+            else:
+                return None
+        else :
+            print "Bluetooth Arduino Disconnected"
             return None
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
