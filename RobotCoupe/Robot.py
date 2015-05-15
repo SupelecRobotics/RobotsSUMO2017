@@ -165,10 +165,10 @@ class Robot :
         time.sleep(0.5)
         self.bouge(int(L),0)
         time.sleep(0.5)
-        # if(sens):
-            # self.com.appelMonteeActionneurGobeletDevant()
-        # else:
-            # self.com.appelMonteeActionneurGobeletDerriere()
+        if(sens):
+            self.com.appelFermeturePinceDevant()
+        else:
+            self.com.appelFermeturePinceDerriere()
             
         
     def goToGobeletLocal(self, point, sens):
@@ -333,7 +333,6 @@ class Robot :
             self.com.appelOuvertureExternePinceDevant()
             self.com.appelOuvertureExternePinceDerriere()
             self.allerA((650, 1000)) #pour ne pas se prendre le bord en sortant...
-            #        self.allerA((910,850))
             self.goToGobeletLocal((910, 1170), False)
             self.allerA((870, 1000))
             #   self.goToCylindreLocal((870, 645), True)
@@ -346,11 +345,14 @@ class Robot :
             self.allerAangle((700, 280), 0)
             self.com.appelDescenteClapDroit()
             self.bouge(200, 0)
-            self.bouge(50, 0)
+            self.bouge(60, 0)
             self.com.appelMonteeClapDroit()
+            self.goToCylindreLocal((1100,230),True)
+            self.bouge(200,0)
             self.allerAangle((600, 1000), 0)
             self.allerA((400, 1000))
-            self.com.appelDescenteActionneurGobeletDerriere()
+            self.com.appelDescenteActionneurGobeletDevant()
+            self.com.appelOuvertureExternePinceDevant()
             self.allerA((550,1000))
             self.allerAangle((2400,300),-900)
             self.com.appelDescenteClapGauche()
@@ -380,12 +382,15 @@ class Robot :
             self.allerAangle((int(2300),int(280)), -1800)
             self.com.appelDescenteClapGauche()
             self.bouge(200, 0)
-            self.bouge(50,0)
+            self.bouge(60,0)
             self.com.appelMonteeClapGauche()
-            self.allerAangle((2400, 1000), -1800)
+            self.goToCylindreLocal((1900,230),True)
+            self.bouge(200,0)
+            self.allerAangle((2400, 1000), 0)
             self.allerA((2600, 1000))
-            self.com.appelDescenteActionneurGobeletDerriere()
-            self.allerA((2350,1000))
+            self.com.appelDescenteActionneurGobeletDevant()
+            self.com.appelOuvertureExternePinceDevant()
+            self.allerA((2450,1000))
             self.allerAangle((600,300),-900)
             self.com.appelDescenteClapDroit()
             self.allerAangle((600,300),0)
@@ -395,8 +400,8 @@ class Robot :
             self.allerA((1400,650))
             self.goToGobeletLocal((1500,350),True)
             self.allerAangle((2600,1600),2250)
-            self.com.appelDescenteActionneurGobeletDerriere()
             self.com.appelDescenteActionneurGobeletDevant()
+            self.com.appelDescenteActionneurGobeletDerriere()
 
     def printPosition(self):
         # Demande des informations récentes à l'arduino puis
