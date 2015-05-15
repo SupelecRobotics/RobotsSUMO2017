@@ -15,99 +15,80 @@ class CommunicationSerial :
     def openSerial(self, serPath):
 
         try:
-            ser = serial.Serial(serPath, 115200)
+            ser = serial.Serial(ser1, 115200)
         except serial.SerialException:
-<<<<<<< HEAD
-            print "No connection to the third device could be established"
-            
-        
-        
-=======
-            print "No connection to the device " + serPath + " could be established"
+            print "No connection to the device" + serPath + "could be established"
             return None
         else:
-            print "Serial " + serPath + " successfully opened"
+            time.sleep(3)
             return ser
->>>>>>> origin/master
         
     def sendIdQueries(self, serials):
 
         for ser in serials:
 
             if(ser is not None):
-                print "Sending to " + ser.port
                 ser.write(chr(250))
-            else:
-                print "Serial not opened, cannot send query"
-                
         time.sleep(3)
-<<<<<<< HEAD
+
+    def identifySerial(self, ser):
+
+        a = ser.read()
+        ser.readline()
+        print a.encode('hex')
+
+        if (a.encode('hex') == '00'): self.serMain = ser
+        elif (a.encode('hex') == '01'): self.serCouleur = ser
+        else: self.serBluetooth = ser
+            
+    
+    def __init__(self, ser1, ser2, ser3) :
+        
+        try:
+            sera = serial.Serial(ser1, 115200)
+        except serial.SerialException:
+            print "No connection to the first device could be established"
+##        try:
+##            serb = serial.Serial(ser2, 115200)
+##        except serial.SerialException:
+##            print "No connection to the second device could be established"
+##        try:
+##            serc = serial.Serial(ser3, 115200)
+##        except serial.SerialException:
+##            print "No connection to the third device could be established"
+        
+        time.sleep(3)
         sera.write(chr(250))
-        serb.write(chr(250))
-        # serc.write(chr(250))
-       # print serc.write(chr(255))
+        #serb.write(chr(250))
+        #serc.write(chr(250))
+#        print serc.write(chr(255))
         time.sleep(1)
         
         a = sera.read()
         sera.readline()
         print a.encode('hex')
         
-       # time.sleep(1)
-        b = serb.read()
-        serb.readline()
-        print b.encode('hex')
+#        time.sleep(1)
+        #b = serb.read()
+        #serb.readline()
+        #print b.encode('hex')
         
-        # c = serc.read()
-        # serc.readline()
-        # print c.encode('hex')
-        # print "read"
-        
-        ### Pour pouvoir tester la connexion avec chaque arduino
-        self.serMain = None
-        self.serCouleur = None
-        self.serBluetooth = None
-        
+        #c = serc.read()
+        #serc.readline()
+        #print c.encode('hex')
+        #print "read"
         
         if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
         elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
         else: self.serBluetooth = serial.Serial(ser1, 115200)
-=======
-
-    def identifySerial(self, ser):     
-        if(ser is not None):
-            print "Receiving from " + ser.port
-            a = ser.read()
-            ser.readline()
-            print "Serial reads : " + a.encode('hex')
-
-            if (a.encode('hex') == '00'): self.serMain = ser
-            elif (a.encode('hex') == '01'): self.serCouleur = ser
-            else: self.serBluetooth = ser
-        else:
-            print "Serial not opened, cannot read Id code"
-            
-    
-    def __init__(self, ser1, ser2, ser3) :
->>>>>>> origin/master
         
-        sera = self.openSerial(ser1)
-        serb = self.openSerial(ser2)
-        serc = self.openSerial(ser3)
+        #if (b.encode('hex') == '00'): self.serMain = serial.Serial(ser2, 115200)
+        #elif (b.encode('hex') == '01'): self.serCouleur = serial.Serial(ser2, 115200)
+        #else: self.serBluetooth = serial.Serial(ser2, 115200)
 
-        print '\n'
-
-        time.sleep(3)
-
-        print "Sending Id queries..."
-        #self.sendIdQueries([sera])
-        self.sendIdQueries([sera,serb,serc])
-
-        print '\n'
-        print "Receiving Id codes..."
-
-        self.identifySerial(sera)
-        self.identifySerial(serb)
-        self.identifySerial(serc)
+        #if (c.encode('hex') == '00'): self.serMain = serial.Serial(ser3, 115200)
+        #elif (c.encode('hex') == '01'): self.serCouleur = serial.Serial(ser3, 115200)
+        #else: self.serBluetooth = serial.Serial(ser3, 115200)
         
         time.sleep(2)
 
@@ -139,37 +120,33 @@ class CommunicationSerial :
         return True
     
     def getRobCoords(self):
-        
-        if(self.serBluetooth <> None) :
-            while(self.serBluetooth.inWaiting() > 0):
-                c = ''
-                while(c != '#'):
-                    c = self.serBluetooth.read()
-                    print "first loop"
 
-                msg = self.serBluetooth.read(10)
-                print msg
+        while(self.serBluetooth.inWaiting() > 0):
+            c = ''
+            while(c != '#'):
+                c = self.serBluetooth.read()
+                print "first loop"
 
-                if(msg[9].isdigit()):
-                    camIndex = int(msg[9]) - 1
+            msg = self.serBluetooth.read(10)
+            print msg
 
-                    if(msg[1] == 'x'):
-                        self.trackingStat[camIndex] = 0
-                    elif(msg[1:9].isdigit()):
-                        self.trackingStat[camIndex] = 1
-                        self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:-1])))
+            if(msg[9].isdigit()):
+                camIndex = int(msg[9]) - 1
+
+                if(msg[1] == 'x'):
+                    self.trackingStat[camIndex] = 0
+                elif(msg[1:9].isdigit()):
+                    self.trackingStat[camIndex] = 1
+                    self.lastRobCoords[camIndex] = ((int(msg[1:5]),int(msg[5:-1])))
 
 
-            nbValidCams = self.trackingStat[0] + self.trackingStat[1]
+        nbValidCams = self.trackingStat[0] + self.trackingStat[1]
 
-            if(nbValidCams > 0):
-                x = (self.trackingStat[0]*self.lastRobCoords[0][0] + self.trackingStat[1]*self.lastRobCoords[1][0])/nbValidCams
-                y = (self.trackingStat[0]*self.lastRobCoords[0][1] + self.trackingStat[1]*self.lastRobCoords[1][1])/nbValidCams
-                return (x,y)
-            else:
-                return None
-        else :
-            print "Bluetooth Arduino Disconnected"
+        if(nbValidCams > 0):
+            x = (self.trackingStat[0]*self.lastRobCoords[0][0] + self.trackingStat[1]*self.lastRobCoords[1][0])/nbValidCams
+            y = (self.trackingStat[0]*self.lastRobCoords[0][1] + self.trackingStat[1]*self.lastRobCoords[1][1])/nbValidCams
+            return (x,y)
+        else:
             return None
         
     def envoiMainSat(self, d=0, theta=0, satVitesse=0):
