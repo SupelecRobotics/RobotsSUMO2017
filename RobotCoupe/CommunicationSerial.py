@@ -17,18 +17,18 @@ class CommunicationSerial :
         try:
             ser = serial.Serial(serPath, 115200)
         except serial.SerialException:
-<<<<<<< HEAD
+
             print "No connection to the third device could be established"
             
         
         
-=======
+
             print "No connection to the device " + serPath + " could be established"
             return None
         else:
             print "Serial " + serPath + " successfully opened"
             return ser
->>>>>>> origin/master
+
         
     def sendIdQueries(self, serials):
 
@@ -41,7 +41,9 @@ class CommunicationSerial :
                 print "Serial not opened, cannot send query"
                 
         time.sleep(3)
-<<<<<<< HEAD
+        
+        [sera,serb,serc] = serials #modif
+
         sera.write(chr(250))
         serb.write(chr(250))
         # serc.write(chr(250))
@@ -67,11 +69,11 @@ class CommunicationSerial :
         self.serCouleur = None
         self.serBluetooth = None
         
-        
-        if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
-        elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
-        else: self.serBluetooth = serial.Serial(ser1, 115200)
-=======
+        ## C'est quoi ser1 bordel ???
+        # if (a.encode('hex') == '00'): self.serMain = serial.Serial(ser1, 115200)
+        # elif (a.encode('hex') == '01'): self.serCouleur = serial.Serial(ser1, 115200)
+        # else: self.serBluetooth = serial.Serial(ser1, 115200)
+
 
     def identifySerial(self, ser):     
         if(ser is not None):
@@ -88,7 +90,7 @@ class CommunicationSerial :
             
     
     def __init__(self, ser1, ser2, ser3) :
->>>>>>> origin/master
+
         
         sera = self.openSerial(ser1)
         serb = self.openSerial(ser2)
