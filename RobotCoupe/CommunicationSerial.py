@@ -104,7 +104,11 @@ class CommunicationSerial :
 
         print '\n'
         print "Receiving Id codes..."
-
+        
+        self.serMain = None
+        self.serCouleur = None
+        self.serBluetooth = None
+        
         self.identifySerial(sera)
         self.identifySerial(serb)
         self.identifySerial(serc)
@@ -140,7 +144,7 @@ class CommunicationSerial :
     
     def getRobCoords(self):
         
-        if(self.serBluetooth <> None) :
+        if(self.serBluetooth is not None) :
             while(self.serBluetooth.inWaiting() > 0):
                 c = ''
                 while(c != '#'):
