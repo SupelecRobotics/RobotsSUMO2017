@@ -295,9 +295,12 @@ class Robot :
 
         
     def updatePosition(self):
+        print "anciennes coords " + str((self.x, self.y))
         string = self.com.getInfos()
         self.x = round(string[0]) + self.dx
+        print "dx " + str(self.dx)
         self.y = round(string[1]) + self.dy
+        print "nouvelles coords " + str((self.x, self.y))
         self.theta = round(( (string[2] + self.dtheta + 1800 ) % 3600 ) - 1800) #( (string[2] + 1800 ) % 3600 ) - 1800   
         self.c1 = string[3]
         self.c2 = string[4]
@@ -353,7 +356,7 @@ class Robot :
             self.allerA((2130, 1000))
             self.goToCylindreLocal((2130, 645), True)
             self.allerA((2550, 450))
-            self.goToGobelet((2750, 250), True)
+            self.goToGobeletLocal((2750, 250), True)
             self.allerAangle((int(2700),int(300)),-900)
             self.com.appelDescenteClapGauche()
             self.allerAangle((int(2700),int(300)), -1800)
