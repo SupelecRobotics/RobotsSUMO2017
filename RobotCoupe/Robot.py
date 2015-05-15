@@ -386,7 +386,7 @@ class Robot :
             self.com.appelMonteeClapGauche()
             self.goToCylindreLocal((1900,230),True)
             self.bouge(200,0)
-            self.allerAangle((2400, 1000), 0)
+            self.allerAangle((2400, 1000), 1800)
             self.allerA((2600, 1000))
             self.com.appelDescenteActionneurGobeletDevant()
             self.com.appelOuvertureExternePinceDevant()
