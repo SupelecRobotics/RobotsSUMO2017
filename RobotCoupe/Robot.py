@@ -165,25 +165,34 @@ class Robot :
         time.sleep(0.5)
         self.bouge(int(L),0)
         time.sleep(0.5)
-
-        if(sens):
-            #ouvre le truc
-            self.com.appelOuvertureExternePinceDevant()
-            #baisse le truc
-            self.com.appelDescentePinceDevant()
-            #ferme le truc
+        
+        if(sens) :
             self.com.appelFermeturePinceDevant()
-            #monte le truc
-            self.com.appelMonteePinceDevant()
-        else:
-            #ouvre le truc
-            self.com.appelOuvertureExternePinceDerriere()
-            #baisse le truc
-            self.com.appelDescentePinceDerriere()
-            #ferme le truc
+        else :
             self.com.appelFermeturePinceDerriere()
-            #monte le truc
-            self.com.appelMonteePinceDerriere()
+        
+        # if(sens):
+            # # ouvre le truc
+            # self.com.appelOuvertureExternePinceDevant()
+            # # baisse le truc
+            # self.com.appelDescentePinceDevant()
+            # # ferme le truc
+	    # time.sleep(3)
+            # self.com.appelFermeturePinceDevant()
+            # # monte le truc
+            # self.com.appelMonteePinceDevant()
+	    # time.sleep(4)
+        # else:
+            # # ouvre le truc
+            # self.com.appelOuvertureExternePinceDerriere()
+            # # baisse le truc
+            # self.com.appelDescentePinceDerriere()
+            # # ferme le truc
+	    # time.sleep(3)
+            # self.com.appelFermeturePinceDerriere()
+            # # monte le truc
+            # self.com.appelMonteePinceDerriere()
+	    # time.sleep(3)
             
         
     def goToGobeletLocal(self, point, sens):
@@ -204,7 +213,7 @@ class Robot :
         if(sens):
             self.com.appelMonteeActionneurGobeletDevant()
         else:
-            self.com.appelMonteeActioneurGobeletDerriere()
+            self.com.appelMonteeActionneurGobeletDerriere()
 
 
     def donneAngleApproche(self, sens, l, gobelet) :
@@ -249,10 +258,10 @@ class Robot :
         #offset de la distance
         #devant(gobelet, cylindre)
         offset1 = 7.9
-        offset2 = 8.2
+        offset2 = 6.7
         #derriere(gobelet, cylindre)
         offset3 = 7.9
-        offset4 = 8.5
+        offset4 = 7
         
         #Distances au centre
         #devant(gobelet, cylindre)
@@ -347,7 +356,7 @@ class Robot :
     def gameFalse(self):
         self.com.envoiDepartZone()
         if (self.couleur == 'J'):
-            time.sleep(7)
+            time.sleep(5)
             self.com.appelOuvertureExternePinceDevant()
             self.com.appelOuvertureExternePinceDerriere()
             self.allerA((650, 1000)) #pour ne pas se prendre le bord en sortant...
@@ -375,15 +384,15 @@ class Robot :
             self.com.appelDescenteClapGauche()
             self.allerAangle((2400,220),-1750)
             self.com.appelMonteeClapGauche()
-            self.allerAangle((2500,700),-1800)
+            self.allerAangle((2500,600),-1800)
             self.com.appelDescenteActionneurGobeletDerriere()
             self.allerA((1600,650))
             self.goToGobeletLocal((1500,350),True)
-            self.allerAangle((400,1600),450)
+            self.allerAangle((2600,1500),450)
             self.com.appelDescenteActionneurGobeletDevant()
             self.com.appelDescenteActionneurGobeletDerriere()
         elif (self.couleur == 'V'):
-            time.sleep(7)
+            time.sleep(5)
             self.com.appelOuvertureExternePinceDerriere()
             self.com.appelOuvertureExternePinceDevant()
             self.allerA((2350,1000))
@@ -412,11 +421,11 @@ class Robot :
             self.com.appelDescenteClapDroit()
             self.allerAangle((600,220),0)
             self.com.appelMonteeClapDroit()
-            self.allerAangle((500,700),0)
+            self.allerAangle((500,600),0)
             self.com.appelDescenteActionneurGobeletDerriere()
             self.allerA((1400,650))
             self.goToGobeletLocal((1500,350),True)
-            self.allerAangle((2600,1600),2250)
+            self.allerAangle((400,1500),2250)
             self.com.appelDescenteActionneurGobeletDevant()
             self.com.appelDescenteActionneurGobeletDerriere()
 

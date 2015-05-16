@@ -11,6 +11,12 @@ from Robot import Robot
 import time
 
 robot = Robot('/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2')
+robot.com.appelOuvertureExternePinceDevant()
+robot.com.appelOuvertureExternePinceDerriere()
+robot.com.appelMonteePinceDevant()
+time.sleep(2)
+robot.com.appelMonteePinceDerriere()
+time.sleep(2)
 
 while(True) :
     robot.updatePosition()
