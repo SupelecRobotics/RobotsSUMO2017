@@ -165,27 +165,7 @@ class Robot :
         time.sleep(0.5)
         self.bouge(int(L),0)
         time.sleep(0.5)
-        if(sens):
-            self.com.appelFermeturePinceDevant()
-        else:
-            self.com.appelFermeturePinceDerriere()
-            
-        
-    def goToGobeletLocal(self, point, sens):
-        self.face(point, sens)
-        self.updatePosition()
-        (x0, y0) = (self.x,self.y)
-        (x, y) = point
-        distance = dist((x0,y0), point)
-        ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
-        
-        (theta, L) = self.donneDonneesApproche(sens, int(distance / 10), True, ang)
-        
-        self.bouge(0,int(theta))
-        time.sleep(0.5)
-        self.bouge(int(L),0)
-        time.sleep(0.5)
-        
+
         if(sens):
             #ouvre le truc
             self.com.appelOuvertureExternePinceDevant()
@@ -204,6 +184,27 @@ class Robot :
             self.com.appelFermeturePinceDerriere()
             #monte le truc
             self.com.appelMonteePinceDerriere()
+            
+        
+    def goToGobeletLocal(self, point, sens):
+        self.face(point, sens)
+        self.updatePosition()
+        (x0, y0) = (self.x,self.y)
+        (x, y) = point
+        distance = dist((x0,y0), point)
+        ang = - self.theta + angle((1, 0), (x - x0, y - y0))*1800/math.pi
+        
+        (theta, L) = self.donneDonneesApproche(sens, int(distance / 10), True, ang)
+        
+        self.bouge(0,int(theta))
+        time.sleep(0.5)
+        self.bouge(int(L),0)
+        time.sleep(0.5)
+        
+        if(sens):
+            self.com.appelMonteeActionneurGobeletDevant()
+        else:
+            self.com.appelMonteeActioneurGobeletDerriere()
 
 
     def donneAngleApproche(self, sens, l, gobelet) :
